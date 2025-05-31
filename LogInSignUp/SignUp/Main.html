@@ -27,7 +27,7 @@
             width: 27%;
             height: 100vh;
             display: flex;
-
+            
             align-items: center;
             flex-direction: column;
             
@@ -35,7 +35,6 @@
             background-image: url(bg.png);
             background-size: cover;
 
-            padding-bottom: 50px;   
             
             flex-grow: 1;
             flex-basis: 200;
@@ -44,42 +43,45 @@
         .left-side img {
             width: 100%;
             height: 100vh;
-            background: linear-gradient(#f92323);
         }
 
         .right-side img {
-            width: 400px;
+            width: 600px;
             padding-bottom: 3%;
             padding-top: 10%;
         }
 
         .right-side p {
             margin-top: 50%;
-            font-size: x-large;
+            font-size: 50px;
         }
 
         .right-side h1 {
-            font-size: 300%;
+            font-size: 80px;
+            text-align: center;
         }
 
         .right-side h3 {
-            font-size: x-large;
+            font-size: 40px;
         }
 
         .button1, .button2 {
             display: inline-block;
-            width: 400px;
-            height: 100px;
-            font-size: xx-large;
+            width: 900px;
+            height: 150px;
+            font-size: 50px;
             border-radius: 20px;
             text-align: center;
-            line-height: 100px;         /* Makes the text vertically centered */
-            text-decoration: none;      /* Removes underline */
+            line-height: 150px;
+            justify-items: center;
+
+            text-decoration: none;
             box-shadow: 0 8px 8px rgba(0, 0, 0, 0.5);
             cursor: pointer;
             color: rgb(0, 0, 0);
             font-weight: bold;
 
+            
         }
 
         .button1 {
@@ -88,14 +90,10 @@
 
         .button2 {
             background: linear-gradient(to right, #240102, #f92323);
-            margin-top: 30px;
+            margin-top: 50px;
             color: white;
+            justify-content: center;
         }
-
-        h1 {
-        text-align: center;
-        }
-
 
 
 
@@ -117,8 +115,8 @@
                 <h1>Welcome to Market Area E-Complaint Portal</h1>
                 <h3>Click your destination</h3>
 
-                <a href="/Resident/residentLogin.html" class="button1" title="Resident LogIn">RESIDENT</a>
-                <a href="/Staff/staffLogin.html" class="button2" title="Staff LogIn">STAFF</a>
+                <a href="/MarketArea/Resident/residentLogin.html" class="button1" title="Resident LogIn">RESIDENT</a>
+                <a href="/MarketArea/Staff/staffLogin.html" class="button2" title="Staff LogIn">STAFF</a>
 
 
                 <p>Learn more</p>
