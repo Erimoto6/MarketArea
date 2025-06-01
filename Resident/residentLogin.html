@@ -30,12 +30,11 @@
 
             align-items: center;
             flex-direction: column;
-            
+            justify-content: center;
 
             background-image: url(bg.png);
             background-size: cover;
-
-            padding-bottom: 50px;   
+  
             
             flex-grow: 1;
             flex-basis: 200;
@@ -44,19 +43,18 @@
         .left-side img {
             width: 100%;
             height: 100vh;
-            background: linear-gradient(#f92323);
         }
 
         .right-side img {
-            width: 400px;
+            width: 600px;
             padding-bottom: 3%;
             padding-top: 10%;
         }
 
-        .right-side p {
-            margin-top: 50%;
-            font-size: x-large;
-        }
+
+
+
+
 
         .right-side h1 {
             font-size: 80px;
@@ -70,28 +68,64 @@
         
         .email-input-box {
             width: 900px;
-            height: 150px;
+            height: 130px;
             font-size: 50px;
-            padding: 20px 20px;
+            padding: 25px 20px;
             border: 2px solid #ccc;
-            border-radius: 20px;
+            border-radius: 40px;
             margin-top: 30px;
         }
 
         .password-input-box {
             width: 900px;
-            height: 150px;
+            height: 130px;
             font-size: 50px;
-            padding: 20px 20px;
+            padding: 25px 20px;
             border: 2px solid #ccc;
-            border-radius: 20px;
+            border-radius: 40px;
             margin-top: 50px;
         }
+
+        .button1 {    
+            margin-top: 3%;
+            display: inline-block;
+            width: 945px;
+            height: 170px;
+            border-radius: 40px;
+            font-size: 70px;
+            text-decoration: none;
+            text-align: center;
+            line-height: 170px;
+
+            box-shadow: 0 8px 8px rgba(0, 0, 0, 0.5);
+            cursor: pointer;
+            color: rgb(255, 255, 255);
+            font-weight: bold;
+            background-color: #800000;
+        }
+
+        .regis {
+            margin-top: 5px;
+            font-size: 33px;
+        }
+
+        .regis1 {
+            font-size: 50px;
+            margin-bottom: 10%;
+        }
+        
         
         .right-side p {
-            margin-top: 60%;
+            text-align: center;
+            margin-top: 10%;
             font-size: 50px;
+
         }
+
+        .termsCondi {
+            text-decoration: none;
+        }
+
         
 
     </style>
@@ -113,13 +147,15 @@
                 <input type="text" class="email-input-box" placeholder="Enter your email">
                 <input type="text" class="password-input-box" placeholder="Enter your password">
 
-                <a href="/MarketArea/Resident/ResidentHomepage/residentHomepage.html" class="button2" title="Log In">Log In</a>
+                <a href="/MarketArea/Resident/ResidentHomepage/residentHomepage.html" class="button1" title="Log In">Log In</a>
 
+                <p class="regis">Don't have an account?</p>
+                <a href="/MarketArea/Resident/residentSignUp.html" class="regis1">Register here!</a>
 
-                <p>Learn more</p>
+                <p>By using this service, you understood and <br> agree to the <a href="" class="termsCondi">Terms and Conditions.</a> </p>
             </div>
 
         </div>
 
     </body>
-</html>
+</html> 
