@@ -1,19 +1,175 @@
 <!DOCTYPE html>
 <html>
     <head>
-        <title>brgy</title>
+        <title>Market Area E-Complaint Portal</title>
     
-        <style>
-            body {
-                justify-content: center;
-            }
-
+    <style>
+        html, body {
+            height: 100%;
+            margin: 0;
+            overflow: hidden;
+            font-family: Arial, Helvetica, sans-serif;
             
-        </style>
-    </head>
-    
-    <body>
-        <h1>STAFF HOMEPAGE</h1>
-    </body>
+        }
 
-</html>
+        .main-container {
+            display: flex;
+            flex-wrap: wrap;
+        }
+
+        .left-side {
+            width: 73%;
+            flex-grow: 1;
+            flex-basis: 200;
+        }
+
+        .right-side {
+            width: 27%;
+            height: 100vh;
+            display: flex;
+
+            align-items: center;
+            flex-direction: column;
+            justify-content: center;
+
+            background-image: url(bg.png);
+            background-size: cover;
+  
+            
+            flex-grow: 1;
+            flex-basis: 200;
+        }
+
+        .left-side img {
+            width: 100%;
+            height: 100vh;
+        }
+
+        .right-side img {
+            width: 600px;
+            padding-bottom: 3%;
+            padding-top: 10%;
+        }
+
+
+
+
+
+
+        .right-side h1 {
+            font-size: 80px;
+            text-align: center;
+        }
+
+        .right-side h3 {
+            font-size: 50px;
+        }
+
+        
+        .email-input-box {
+            width: 900px;
+            height: 170px;
+            font-size: 50px;
+            padding: 25px 20px;
+            border: 2px solid #ccc;
+            border-radius: 40px;
+            margin-top: 30px;
+        }
+
+        .password-input-box {
+            width: 900px;
+            height: 170px;
+            font-size: 50px;
+            padding: 25px 20px;
+            border: 2px solid #ccc;
+            border-radius: 40px;
+            margin-top: 50px;
+        }
+
+        .idno-input-box {
+            width: 900px;
+            height: 170px;
+            font-size: 50px;
+            padding: 25px 20px;
+            border: 2px solid #ccc;
+            border-radius: 40px;
+            margin-top: 50px;
+        }
+
+        .button1 {    
+            margin-top: 3%;
+            display: inline-block;
+            width: 945px;
+            height: 170px;
+            border-radius: 40px;
+            font-size: 70px;
+            text-decoration: none;
+            text-align: center;
+            line-height: 170px;
+
+            box-shadow: 0 8px 8px rgba(0, 0, 0, 0.5);
+            cursor: pointer;
+            color: rgb(255, 255, 255);
+            font-weight: bold;
+            background-color: #800000;
+        }
+
+        .regis {
+            margin-top: 5px;
+            font-size: 33px;
+            margin-bottom: 20px;
+        }
+
+        .regis1 {
+            font-size: 50px;
+            margin-bottom: 10%;
+            text-decoration: none;
+
+        }
+        
+        
+        .right-side p {
+            text-align: center;
+            margin-top: 10%;
+            font-size: 50px;
+
+        }
+
+        .termsCondi {
+            text-decoration: none;
+        }
+
+        
+
+    </style>
+    </head>
+
+    <body>
+
+        <div class="main-container">
+
+            <div class="left-side">
+                <img src="arch.png">
+            </div>
+
+            <div class="right-side">
+                <img src="logo.png">
+                <h1>Welcome to Market Area E-Complaint Portal</h1>
+                <h3>Log In to your staff account</h3>
+
+                <input type="text" class="email-input-box" placeholder="Enter your email">
+                <input type="text" class="password-input-box" placeholder="Enter your password">
+                <input type="text" class="idno-input-box" placeholder="ID number">
+
+                <a href="/MarketArea/Staff/staffHomepage.html" class="button1" title="Log In">Log In</a>
+
+                <p class="regis">Don't have an account?</p>
+                <a href="/MarketArea/Staff/staffSignUp.html" class="regis1">Register here!</a>
+
+                <p>By using this service, you understood and <br> agree to the <a href="" class="termsCondi">Terms and Conditions.</a> </p>
+            </div>
+
+        </div>
+
+    </body>
+</html> 
