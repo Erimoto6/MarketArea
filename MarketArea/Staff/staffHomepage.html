@@ -1,13 +1,62 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
     <head>
-        <title>Homepage</title>
+        <meta charset="UTF-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+        <title>Staff Homepage</title>
 
+        <style>
+        .body {
+            background-color: white;
+            scroll-behavior: smooth;
+        }
+        header {
+            position: fixed;
+            width: 100%;
+            background-color: #2B3209;
+            box-sizing: border-box;
+            padding: 35px 35px;
+            display: flex;
+            align-items: center;
+            justify-content: flex-end;
+            top: 0;
+            left: 0;
+            z-index: 1000;
+        }
+
+        .heading {
+            display: flex;
+            align-items: center;
+            gap: 50px;
+
+        }
+
+        .notif, .prof {
+            height: 110px;
+        }
+        .prof {
+            border-radius: 160.5%;
+        }
         
-    </head>    
+        .name {
+            color: white;
+            font-size: 50px;
+            font-family: Verdana, Geneva, Tahoma, sans-serif;
+            padding-left: 10px;
 
+        }
+
+        </style>
+    </head>
     <body>
-        <h1>STAFF HOMEPAGE</h1>
-    </body>
+        <header>
+            <div class="heading">
+                <img class="notif" src="notifLogo.png">
+                <img class="prof" src="profileLogo.png">
+            </div>                
+                <p class="name" >Name</p>
+        </header>
+        <img src="marketareabg.png">
 
+    </body>
 </html>
