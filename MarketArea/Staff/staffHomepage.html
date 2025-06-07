@@ -6,14 +6,29 @@
         <title>Staff Homepage</title>
 
         <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;            
+        }
+        
         .body {
             background-color: white;
             scroll-behavior: smooth;
+            width: 100%;
+            height: 100%;
         }
+
+        .whole-container {
+            align-items: center;
+            display: flex;
+            flex-direction: column;
+        }
+
         header {
             position: fixed;
             width: 100%;
-            background-color: #2B3209;
+            background-color: #0B1215;
             box-sizing: border-box;
             padding: 35px 35px;
             display: flex;
@@ -22,8 +37,8 @@
             top: 0;
             left: 0;
             z-index: 1000;
+            background: linear-gradient(to left, #4B5320, #0B1215);
         }
-
         .heading {
             display: flex;
             align-items: center;
@@ -43,20 +58,121 @@
             font-size: 50px;
             font-family: Verdana, Geneva, Tahoma, sans-serif;
             padding-left: 10px;
+        }
+
+        .top-section {
+            position: relative;
+            width: 100%;
+            height: 100vh;
+            overflow: hidden;
+            margin-top: 160px;
 
         }
 
-        </style>
-    </head>
-    <body>
-        <header>
-            <div class="heading">
-                <img class="notif" src="notifLogo.png">
-                <img class="prof" src="profileLogo.png">
-            </div>                
-                <p class="name" >Name</p>
-        </header>
-        <img src="marketareabg.png">
+        .bg {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
 
-    </body>
-</html>
+        .overlay {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(0, 0, 0, 0.6);
+            z-index: 1;
+        }
+
+        .top-section img {
+            position: relative;
+            z-index: 0;
+        }
+
+        .overlay-text {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            color: white;
+            font-weight: bold;
+            z-index: 2;
+            text-align: center;
+
+
+
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 100px;
+            text-align: center; 
+        }
+
+        .logo {
+            width: 30%;
+        }
+
+        .overlay-text h2 {
+
+            font-size: 150px;
+            line-height: 1.5;
+            text-align: left;
+            margin: 0;
+        }
+
+        .text {
+            display: flex;
+            flex-direction: column;
+            gap: 10px; /* space between lines */
+            flex: 1;
+
+        }
+
+
+
+        .second-section {
+            width: 100%;
+            height: 100vh; /* same as .top-section */
+            position: relative;
+            overflow: hidden;
+        }
+
+        .whitebg {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+
+    </style>
+</head>
+<body>
+    <header>
+        <div class="heading">
+            <img class="notif" src="notifLogo.png">
+            <img class="prof" src="profileLogo.png">
+        </div>                
+        <p class="name">Name</p>
+    </header>
+
+    <div class="whole-container">
+        <div class="top-section">
+            <img class="bg" src="marketareabg.jpg" alt="Background">
+            
+            <div class="overlay"></div>
+
+            <div class="overlay-text">
+                <img class="logo" src="logo.png">
+                <div class="text">
+                    <h2>WELCOME TO BARANGAY MARKET AREA:</h2>
+                    <h2>COMPLAINT SYSTEM</h2>
+                </div>
+
+            </div>
+        </div>
+        <div class="second-section">
+            <img class="whitebg" src="whitebg.png">
+        </div>
+         
+    </div>
+</body>
