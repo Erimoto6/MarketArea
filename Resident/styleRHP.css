@@ -1,0 +1,304 @@
+.resident-homepage {
+    width: 100%;
+    min-height: 100vh;
+    background-color: #ffffff;
+    overflow-x: hidden;
+    position: relative;
+    background-image: url(bg.png);
+    background-size: cover;       /* scales the image to cover the entire container */
+    background-position: center;  /* centers the image */
+    background-repeat: no-repeat; /* prevents tiling */
+    padding: 20px;
+    align-items: center;
+    text-align: center;
+}
+
+
+.resident-homepage .overlap-group {
+    width: 100%;
+    height: auto;
+    position: relative;
+    left: 0;
+}
+
+
+.resident-homepage .rec_green {
+    position: relative;
+    width: 100%;
+    max-width: 1200px;
+    margin: 0 auto;
+    height: 645px;
+    top: 577px;
+    left: 46px;
+    box-shadow: 0px 4px 4px 5px #00000040;
+    background: linear-gradient(
+            90deg,
+            rgba(0, 0, 0, 0) 0%,
+            rgba(0, 0, 0, 0.4) 100%
+        ), linear-gradient(0deg, rgba(75, 83, 32, 1) 0%, rgba(75, 83, 32, 1) 100%);
+}
+
+.resident-homepage .rec_yellow {
+    position: relative;
+    width: 100%;
+    max-width: 1200px;
+    margin: 0 auto;
+    height: 750px;
+    top: 1000px;
+    left: 46px;
+    margin: 0 auto;
+    box-shadow: 0px 4px 4px 5px #00000040;
+    background: linear-gradient(
+            90deg,
+            rgba(189, 132, 8, 0) 0%,
+            rgba(189, 132, 8, 0.8) 100%
+        ),
+        linear-gradient(
+            0deg,
+            rgba(208, 181, 100, 1) 0%,
+            rgba(208, 181, 100, 1) 100%
+        );
+}
+
+.resident-homepage .image-2 {
+    position: absolute;
+    width: 100%;
+    height: 453px;
+    top: 0;
+    background-image: url(marketarea_img.jpg);
+    background-size: cover;
+    background-color: rgba(30, 30, 30, 0.6); /* dark gray with 60% opacity */
+    box-shadow: 0px 4px 4px #00000040;
+}
+
+
+.resident-homepage .submittrack {
+    position: absolute;
+    width: 678px;
+    top: 361px;
+    left: 35%;
+    font-family: "K2D-Regular", Helvetica;
+    font-weight: 400;
+    color: #ffffff;
+    font-size: 25;
+    text-align: center;
+    letter-spacing: 1.40px;
+    line-height: normal;
+    max-width: 90%;
+    margin: 0 auto;
+  
+}
+
+.resident-homepage .header {
+    position: absolute;
+    justify-content: space-between;
+    width: 100%;
+    height: 100px;
+    top: 0;
+    background: linear-gradient(
+            90deg,
+            rgba(0, 0, 0, 0) 0%,
+            rgba(0, 0, 0, 0.2) 100%
+        ),
+        linear-gradient(
+            90deg,
+            rgba(167, 185, 71, 1) 0%,
+            rgba(75, 83, 32, 1) 100%,
+            rgba(157, 174, 67, 1) 100%
+        );
+}
+
+.resident-homepage .market-area-logo {
+    position: absolute;
+    width: 76px;
+    height: 71px;
+    top: 12px;
+    left: 100px;
+    
+}
+
+.resident-homepage .home,
+.resident-homepage .contact,
+.resident-homepage .about_us {
+    display: flex;
+    gap: 40px;
+    flex-wrap: wrap;
+    cursor: pointer;
+    font-family: "K2D-Light", Helvetica;
+    font-weight: 300;
+}
+
+.resident-homepage .home {
+    position:absolute;
+    width: 100%;
+    top: 34px;
+    left: 70%;
+    color: #ffffff;
+    letter-spacing: 1.50px;
+    text-align: center;
+
+}
+
+.resident-homepage .contact {
+    position: absolute;
+    width: 100%;
+    top: 34px;
+    left: 75%;
+    color: #ffffff;
+    letter-spacing: 1.50px;
+}
+
+.resident-homepage .about_us {
+    position: absolute;
+    width: 100%;
+    top: 34px;
+    left: 80%; 
+    color: #ffffff;
+    letter-spacing: 1.50px;
+}
+
+.resident-homepage .barangay-market-area {
+    width: 164px;
+    top: 23px;
+    left: 200px;
+    font-family: "Bebas Neue-Regular", Helvetica;
+    font-weight: 400;
+    color: #ffffff;
+    font-size: 16px;
+    text-align: center;
+    letter-spacing: 1.60px;
+    line-height: 150%;
+    white-space: nowrap;
+}
+
+.resident-homepage .profile {
+    width: 10vw;
+    height: 10vw;
+    max-width: 70px;
+    max-height: 70px;
+    position: absolute;
+    top: 15px;
+    right: 20px;
+    border-radius: 50%;
+    background-color: #ffffff;
+    border: 1px solid;
+    border-color: #4f0001;
+}
+
+.resident-homepage .welcome {
+    position: absolute;
+    width: 722px;
+    top: 213px;
+    left: 379px;
+    text-shadow: 0px 4px 4px #00000040;
+    font-family: "Bebas Neue-Regular", Helvetica;
+    font-weight: 400;
+    color: #ffffff;
+    font-size: 40px;
+    text-align: center;
+    letter-spacing: 4.00px;
+    line-height: normal;
+    white-space: nowrap;
+}
+
+.resident-homepage .meet {
+    position: absolute;
+    width: 722px;
+    top: 2550px;
+    left: 600px;
+    font-family: "Bebas Neue-Regular", Helvetica;
+    font-weight: 400;
+    color: #000000;
+    font-size: 32px;
+    text-align: center;
+    letter-spacing: 3.20px;
+    line-height: normal;
+}
+
+.resident-homepage .line {
+    position: absolute;
+    width: 50px;
+    height: 3px;
+    top: 2246px;
+    left: 844px;
+}
+
+.resident-homepage .line-2 {
+    position: absolute;
+    width: 50px;
+    height: 3px;
+    top: 2245px;
+    left: 492px;
+}
+
+.resident-homepage .council1 {
+    position: relative;
+    width: 214px;
+    height: 196px;
+    background-color: #ffffff;
+    border-radius: 50px;
+    box-shadow: 0px 4px 4px 5px #00000040;
+    margin: 0 auto;
+    top: 1250px;
+    left: 0;
+}
+
+.resident-homepage .council2 {
+    position: relative;
+    width: 214px;
+    height: 196px;
+    background-color: #ffffff;
+    border-radius: 50px;
+    box-shadow: 0px 4px 4px 5px #00000040;
+    margin: 0 auto;
+    top: 1250px;
+    left: 0;
+}
+
+.resident-homepage .council3 {
+    position: relative;
+    width: 214px;
+    height: 196px;
+    background-color: #ffffff;
+    border-radius: 50px;
+    box-shadow: 0px 4px 4px 5px #00000040;
+    margin: 0 auto;
+    top: 1250px;
+    left: 0;
+}
+
+.resident-homepage .filecomplaint {
+    position: absolute;
+    width: 274px;
+    top: 635px;
+    left: 355px;
+    text-shadow: 0px 4px 4px #00000040;
+    font-family: "Bebas Neue-Regular", Helvetica;
+    font-weight: 400;
+    color: #ffffff;
+    font-size: 36px;
+    text-align: center;
+    letter-spacing: 3.60px;
+    line-height: normal;
+    white-space: nowrap;
+
+}
+
+.resident-homepage .mycomplaint {
+    position: absolute;
+    width: 274px;
+    top: 1413px;
+    left: 339px;
+    text-shadow: 0px 4px 4px #00000040;
+    font-family: "Bebas Neue-Regular", Helvetica;
+    font-weight: 400;
+    color: #000000;
+    font-size: 36px;
+    text-align: center;
+    letter-spacing: 3.60px;
+    line-height: normal;
+    white-space: nowrap;
+
+}
+
+
