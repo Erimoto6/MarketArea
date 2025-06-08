@@ -63,7 +63,7 @@
         .top-section {
             position: relative;
             width: 100%;
-            height: 100vh;
+            height: 80vh;
             overflow: hidden;
             margin-top: 160px;
 
@@ -94,46 +94,72 @@
             position: absolute;
             top: 50%;
             left: 50%;
-            transform: translate(-50%, -50%);
-            color: white;
-            font-weight: bold;
             z-index: 2;
-            text-align: center;
-
-
-
+            color: white;
+            transform: translate(-50%, -50%);
+            font-weight: bold;
+            
             display: flex;
             align-items: center;
             justify-content: center;
+
             gap: 100px;
-            text-align: center; 
+            text-align: center;
+
+            flex-direction: row;
         }
 
         .logo {
             width: 30%;
-        }
-
-        .overlay-text h2 {
-
-            font-size: 150px;
-            line-height: 1.5;
-            text-align: left;
-            margin: 0;
+            margin-bottom: 30px;
         }
 
         .text {
             display: flex;
             flex-direction: column;
-            gap: 10px; /* space between lines */
-            flex: 1;
-
+            align-items: center;
+            gap: 20px;
+            max-width: 100%;
         }
 
+        .overlay-text h2 {
+            font-size: 150px;
+            line-height: 1.2;
+            text-align: center;
+            margin: 0;
+            white-space: nowrap;
+        }
 
 
         .second-section {
             width: 100%;
-            height: 100vh; /* same as .top-section */
+            height: 100vh;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .bg2 {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+
+        .third-section {
+            width: 100%;
+            height: 100vh;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .whitebg {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+
+        .forth-section {
+            width: 100%;
+            height: 100vh;
             position: relative;
             overflow: hidden;
         }
@@ -152,7 +178,7 @@
             <img class="notif" src="notifLogo.png">
             <img class="prof" src="profileLogo.png">
         </div>                
-        <p class="name">Name</p>
+        <p class="name">profile</p>
     </header>
 
     <div class="whole-container">
@@ -165,14 +191,22 @@
                 <img class="logo" src="logo.png">
                 <div class="text">
                     <h2>WELCOME TO BARANGAY MARKET AREA:</h2>
-                    <h2>COMPLAINT SYSTEM</h2>
+                    <h2>E-COMPLAINT SYSTEM</h2>
                 </div>
 
             </div>
         </div>
         <div class="second-section">
+            <img class="bg2" src="bg2.jpg">
+        </div>
+
+        <div class="third-section">
             <img class="whitebg" src="whitebg.png">
         </div>
-         
+
+        <div class="forth-section">
+            <img class="whitebg" src="whitebg.png">
+        </div>
+
     </div>
 </body>
