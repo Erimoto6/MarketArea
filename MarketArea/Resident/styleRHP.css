@@ -1,302 +1,389 @@
-.resident-homepage {
-    width: 100%;
-    min-height: 100vh;
-    background-color: #ffffff;
-    overflow-x: hidden;
-    position: relative;
-    background-image: url(bg.png);
-    background-size: cover;       /* scales the image to cover the entire container */
-    background-position: center;  /* centers the image */
-    background-repeat: no-repeat; /* prevents tiling */
-    padding: 20px;
-    align-items: center;
-    text-align: center;
+.hero-img {
+  	position: absolute;
+  	width: 100%;
+  	height: 600px;
+	object-fit: cover;     /* Fills the area, no repeat, cropped if needed */
+  	object-position: center;
 }
 
-
-.resident-homepage .overlap-group {
-    width: 100%;
-    height: auto;
-    position: relative;
-    left: 0;
+.black-layer {
+  	position: absolute;
+  	top: 0px;
+  	left: 0px;
+  	box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
+  	background-color: rgba(0, 0, 0, 0.5);
+  	box-sizing: border-box;
+  	width: 100%;
+  	height: 350px;
+	top: 150px;
 }
 
-
-.resident-homepage .rec_green {
-    position: relative;
-    width: 100%;
-    max-width: 1200px;
-    margin: 0 auto;
-    height: 645px;
-    top: 577px;
-    left: 46px;
-    box-shadow: 0px 4px 4px 5px #00000040;
-    background: linear-gradient(
-            90deg,
-            rgba(0, 0, 0, 0) 0%,
-            rgba(0, 0, 0, 0.4) 100%
-        ), linear-gradient(0deg, rgba(75, 83, 32, 1) 0%, rgba(75, 83, 32, 1) 100%);
-}
-
-.resident-homepage .rec_yellow {
-    position: relative;
-    width: 100%;
-    max-width: 1200px;
-    margin: 0 auto;
-    height: 750px;
-    top: 1000px;
-    left: 46px;
-    margin: 0 auto;
-    box-shadow: 0px 4px 4px 5px #00000040;
-    background: linear-gradient(
-            90deg,
-            rgba(189, 132, 8, 0) 0%,
-            rgba(189, 132, 8, 0.8) 100%
-        ),
-        linear-gradient(
-            0deg,
-            rgba(208, 181, 100, 1) 0%,
-            rgba(208, 181, 100, 1) 100%
-        );
-}
-
-.resident-homepage .image-2 {
-    position: absolute;
-    width: 100%;
-    height: 453px;
-    top: 0;
-    background-image: url(marketarea_img.jpg);
-    background-size: cover;
-    background-color: rgba(30, 30, 30, 0.6); /* dark gray with 60% opacity */
-    box-shadow: 0px 4px 4px #00000040;
-}
-
-
-.resident-homepage .submittrack {
-    position: absolute;
-    width: 678px;
-    top: 361px;
-    left: 35%;
-    font-family: "K2D-Regular", Helvetica;
-    font-weight: 400;
-    color: #ffffff;
-    font-size: 25;
-    text-align: center;
-    letter-spacing: 1.40px;
-    line-height: normal;
-    max-width: 90%;
-    margin: 0 auto;
-
-}
-
-.resident-homepage .header {
-    position: absolute;
-    justify-content: space-between;
-    width: 100%;
-    height: 100px;
-    top: 0;
-    background: linear-gradient(
-            90deg,
-            rgba(0, 0, 0, 0) 0%,
-            rgba(0, 0, 0, 0.2) 100%
-        ),
-        linear-gradient(
-            90deg,
-            rgba(167, 185, 71, 1) 0%,
-            rgba(75, 83, 32, 1) 100%,
-            rgba(157, 174, 67, 1) 100%
-        );
-}
-
-.resident-homepage .market-area-logo {
-    position: absolute;
-    width: 76px;
-    height: 71px;
-    top: 12px;
-    left: 100px;
-
-}
-
-.resident-homepage .home,
-.resident-homepage .contact,
-.resident-homepage .about_us {
+.nav-header {
+    color: white;
+    font-family: 'Bebas Neue';
     display: flex;
+    justify-content: flex-end;
     gap: 40px;
-    flex-wrap: wrap;
-    cursor: pointer;
-    font-family: "K2D-Light", Helvetica;
+    padding: 35px 20px;
+    position: relative;
+}
+
+.home, .contact, .about-us {
+    letter-spacing: 0.1em;
     font-weight: 300;
+    cursor: pointer;
+    display: inline-block;
+    width: auto; /* Let them size naturally */
+  
 }
 
-.resident-homepage .home {
-    position:absolute;
-    width: 100%;
-    top: 34px;
-    left: 70%;
-    color: #ffffff;
-    letter-spacing: 1.50px;
-    text-align: center;
+.hero-text {
+  position: relative;
+  z-index: 2;
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  justify-content: center; /* vertical center */
+  align-items: center;     /* horizontal center */
+  text-align: center;
+  padding: 0 20px; /* add some horizontal padding on small screens */
+}
+
+.submit-and-track {
+  font-family: 'Bebas Neue', sans-serif;
+  font-size: 25px;
+  color: rgb(255, 249, 249);
+  letter-spacing: 0.05em;
+  margin: 0;
+  margin-top: 60px;
+}
+
+.welcome-to-barangay {
+  font-family: 'Bebas Neue', sans-serif;
+  font-size: 50px;
+  color: white;
+  letter-spacing: 0.05em;
+  margin-top: 250px;
 
 }
 
-.resident-homepage .contact {
+.header-gradient {
+  	position: absolute;
+  	top: 0px;
+  	background: linear-gradient(90deg, rgba(0, 0, 0, 0), rgba(0, 0, 0, 0.2)), linear-gradient(90deg, #a7b947, #4b5320 99.98%, #9dae43 99.99%);
+  	width: 100%;
+  	height: 87px;
+}
+.market-area-logo {
+  	position: absolute;
+  	top: 12px;
+  	left: 26px;
+  	border-radius: 50%;
+  	width: 68px;
+  	height: 63px;
+  	object-fit: cover;
+}
+
+
+.barangay-market-area {
+  	margin: 0;
+}
+.barangay-market-area-complain-container {
+  	position: absolute;
+  	top: 24px;
+  	left: 114px;
+  	font-size: 16px;
+  	letter-spacing: 0.1em;
+  	font-family: 'Bebas Neue';
+  	text-align: center;
+  	display: inline-block;
+  	width: 164px;
+  	height: 40px;
+}
+.profile-avatar {
+  	position: absolute;
+  	top: 24px;
+  	left: 859px;
+  	border-radius: 50%;
+  	background-color: #fff;
+  	border: 1px solid #4f0002;
+  	box-sizing: border-box;
+  	width: 46px;
+  	height: 44px;
+}
+
+.line-div-left {
+  	position: absolute;
+  	top: 2246.5px;
+  	left: 279.5px;
+  	border-top: 3px solid #000;
+  	box-sizing: border-box;
+  	width: 53px;
+  	height: 3px;
+}
+
+.line-div-right {
     position: absolute;
-    width: 100%;
-    top: 34px;
-    left: 75%;
-    color: #ffffff;
-    letter-spacing: 1.50px;
+  	top: 2246.5px;
+  	left: 614.5px;
+  	border-top: 3px solid #000;
+  	box-sizing: border-box;
+  	width: 53px;
+  	height: 3px;
 }
 
-.resident-homepage .about_us {
-    position: absolute;
-    width: 100%;
-    top: 34px;
-    left: 80%; 
-    color: #ffffff;
-    letter-spacing: 1.50px;
+/* Make sure the main container is relatively positioned */
+.complaint-box {
+  background: linear-gradient(to left, #1f2711, #495a26); /* green gradient */
+  padding: 30px;
+  width: 90%;
+  max-width: 1000px;
+  margin: 40px auto;
+  height: auto; /* adjusts to content */
+  color: rgb(0, 0, 0);
+  border-radius: 16px; /* nice rounded corners */
+  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.3); /* subtle drop shadow */
+  box-sizing: border-box;
+  position: relative;
+  z-index: 10;
+  top: 200px;
 }
 
-.resident-homepage .barangay-market-area {
-    width: 164px;
-    top: 23px;
-    left: 200px;
-    font-family: "Bebas Neue-Regular", Helvetica;
-    font-weight: 400;
-    color: #ffffff;
-    font-size: 16px;
-    text-align: center;
-    letter-spacing: 1.60px;
-    line-height: 150%;
-    white-space: nowrap;
+.steps-wrapper {
+  margin-top: 20px;
+  background-color: white;
+  border-radius: 6px;
+  padding: 0;
+  z-index: 11;
+  position: relative;
 }
 
-.resident-homepage .profile {
-    width: 10vw;
-    height: 10vw;
-    max-width: 70px;
-    max-height: 70px;
-    position: absolute;
-    top: 15px;
-    right: 20px;
-    border-radius: 50%;
-    background-color: #ffffff;
-    border: 1px solid;
-    border-color: #4f0001;
+.steps-table {
+  width: 100%;
+  border-collapse: collapse;
 }
 
-.resident-homepage .welcome {
-    position: absolute;
-    width: 722px;
-    top: 213px;
-    left: 379px;
-    text-shadow: 0px 4px 4px #00000040;
-    font-family: "Bebas Neue-Regular", Helvetica;
-    font-weight: 400;
-    color: #ffffff;
-    font-size: 40px;
-    text-align: center;
-    letter-spacing: 4.00px;
-    line-height: normal;
-    white-space: nowrap;
+.steps-table td {
+  padding: 12px;
+  border: 1px solid black;
 }
 
-.resident-homepage .meet {
-    position: absolute;
-    width: 722px;
-    top: 2550px;
-    left: 600px;
-    font-family: "Bebas Neue-Regular", Helvetica;
-    font-weight: 400;
-    color: #000000;
-    font-size: 32px;
-    text-align: center;
-    letter-spacing: 3.20px;
-    line-height: normal;
+.step-title {
+  font-weight: bold;
 }
 
-.resident-homepage .line {
-    position: absolute;
-    width: 50px;
-    height: 3px;
-    top: 2246px;
-    left: 844px;
+.status-completed {
+  color: green;
+  font-weight: bold;
+  text-align: right;
 }
 
-.resident-homepage .line-2 {
-    position: absolute;
-    width: 50px;
-    height: 3px;
-    top: 2245px;
-    left: 492px;
+.status-inprogress {
+  color: orange;
+  font-weight: bold;
+  text-align: right;
 }
 
-.resident-homepage .council1 {
-    position: relative;
-    width: 214px;
-    height: 196px;
-    background-color: #ffffff;
-    border-radius: 50px;
-    box-shadow: 0px 4px 4px 5px #00000040;
-    margin: 0 auto;
-    top: 1250px;
-    left: 0;
+.new-btn {
+  background-color: #f3d88c; 
+  color: rgb(0, 0, 0);
+  font-weight: bold;
+  border: none;
+  border-radius: 6px;
+  padding: 12px 20px;
+  font-size: 16px;
+  cursor: pointer;
+  width: 100%;
+  max-width: 300px;
+  display: block;
+  margin: 20px;
+  transition: background-color 0.3s ease;
 }
 
-.resident-homepage .council2 {
-    position: relative;
-    width: 214px;
-    height: 196px;
-    background-color: #ffffff;
-    border-radius: 50px;
-    box-shadow: 0px 4px 4px 5px #00000040;
-    margin: 0 auto;
-    top: 1250px;
-    left: 0;
+.new-btn:hover {
+  background-color: #b9a64e; /* slightly darker on hover */
 }
 
-.resident-homepage .council3 {
-    position: relative;
-    width: 214px;
-    height: 196px;
-    background-color: #ffffff;
-    border-radius: 50px;
-    box-shadow: 0px 4px 4px 5px #00000040;
-    margin: 0 auto;
-    top: 1250px;
-    left: 0;
+.submit-btn {
+  background-color: #f3d88c;
+  color: rgb(0, 0, 0);
+  font-weight: bold;
+  border: none;
+  border-radius: 6px;
+  padding: 12px 20px;
+  font-size: 16px;
+  cursor: pointer;
+  width: auto; /* allows natural size */
+  display: block;
+  margin-left: auto;  /* pushes button to the right */
+  margin-top: 30px;   /* spacing from top */
+  transition: background-color 0.3s ease;
 }
 
-.resident-homepage .filecomplaint {
-    position: absolute;
-    width: 274px;
-    top: 635px;
-    left: 355px;
-    text-shadow: 0px 4px 4px #00000040;
-    font-family: "Bebas Neue-Regular", Helvetica;
-    font-weight: 400;
-    color: #ffffff;
-    font-size: 36px;
-    text-align: center;
-    letter-spacing: 3.60px;
-    line-height: normal;
-    white-space: nowrap;
-
+.submit-btn:hover {
+  background-color: #b9a64e; /* slightly darker on hover */
 }
 
-.resident-homepage .mycomplaint {
-    position: absolute;
-    width: 274px;
-    top: 1413px;
-    left: 339px;
-    text-shadow: 0px 4px 4px #00000040;
-    font-family: "Bebas Neue-Regular", Helvetica;
-    font-weight: 400;
-    color: #000000;
-    font-size: 36px;
-    text-align: center;
-    letter-spacing: 3.60px;
-    line-height: normal;
-    white-space: nowrap;
 
+.complaint-history-container {
+  background: linear-gradient(to left, #b9883e, #daae38); /* green gradient */
+  padding: 30px;
+  width: 90%;
+  max-width: 1000px;
+  margin: 40px auto;
+  height: 550px; /* adjusts to content */
+  color: rgb(0, 0, 0);
+  border-radius: 16px; /* nice rounded corners */
+  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.3); /* subtle drop shadow */
+  box-sizing: border-box;
+  position: relative;
+  z-index: 10;
+  top: 350px;
 }
+
+.complaint-history-container h2 {
+  font-size: 27px;
+  font-weight: bold;
+  margin-bottom: 20px;
+  color: #ffffff;
+}
+
+/* Search section */
+.search-section {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  margin-bottom: 20px;
+  flex-wrap: wrap;
+}
+
+.search-input,
+.filter-input {
+  padding: 10px 20px;
+  border-radius: 25px;
+  border: 1px solid #ccc;
+  font-size: 14px;
+  flex: 1;
+  min-width: 200px;
+}
+
+.search-button {
+  background-color: #f5b400;
+  border: none;
+  border-radius: 50%;
+  width: 24px;
+  height: 24px;
+  cursor: pointer;
+}
+
+.filter-icon {
+  background-color: white;
+  border: 1px solid #ccc;
+  border-radius: 20px;
+  padding: 4px 10px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.filter-icon img {
+  width: 18px;
+  height: 18px;
+}
+
+/* Table */
+.complaint-table {
+  width: 100%;
+  border-collapse: collapse;
+  font-size: 14px;
+  text-align: left;
+  background-color: #ffffff;
+}
+
+.complaint-table thead {
+  background-color: #555;
+  color: white;
+}
+
+.complaint-table th,
+.complaint-table td {
+  padding: 12px;
+  border: 1px solid #ccc;
+}
+
+.details-button {
+  background-color: #f5b400;
+  border: none;
+  border-radius: 20px;
+  padding: 6px 16px;
+  color: black;
+  font-weight: bold;
+  cursor: pointer;
+}
+
+.details-button:hover {
+  background-color: #bb9032; /* slightly darker on hover */
+}
+
+.council-section {
+  width: 100%;
+  text-align: center;
+  margin-top: 500px;
+  position: relative; /* not absolute or fixed */
+  z-index: 29; /* makes sure it's not sitting on top unintentionally */
+}
+
+.council-header {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 15px;
+  margin-bottom: 20px;
+}
+
+.council-header hr {
+  flex: 1;
+  max-width: 100px;
+  border: none;
+  border-top: 2px solid black;
+}
+
+.council-cards {
+  display: flex;
+  justify-content: center;
+  flex-wrap: wrap;
+  gap: 30px; /* spacing between cards */
+  padding: 20px;
+}
+
+.card {
+  width: 200px;
+  height: 200px;
+  background-color: white;
+  border-radius: 20px;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+  overflow: hidden;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: flex-start;
+  transition: transform 0.2s ease;
+}
+
+.card:hover {
+  transform: scale(1.05);
+}
+
+.card img {
+  width: 100%;
+  height: 140px;
+  object-fit: cover;
+}
+
+.card p {
+  margin: 10px 0;
+  font-weight: 600;
+  font-size: 1rem;
+  text-align: center;
+}
+
