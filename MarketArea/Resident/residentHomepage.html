@@ -1,47 +1,151 @@
 <!DOCTYPE html>
 <html>
-    <head>
-        <meta name="viewport" content="width=device-width, initial-scale=1" />
-        <meta charset="utf-8" />
-        <link rel="stylesheet" href="globalsRHP.css" />
-        <link rel="stylesheet" href="styleRHP.css" />
-    </head>
-    <body>
-        <div class="resident-homepage">
-            <div class="overlap-group">
-                <!--HEADER SECTION-->
+<head>
+  	<meta charset="utf-8">
+  	<meta name="viewport" content="initial-scale=1, width=device-width">
+  	
+  	<link rel="stylesheet" href="styleRHP.css" />
+    <link rel="stylesheet" href="global.css"/>
+  	<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=K2D:wght@300;400;700;800&display=swap" />
+  	<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Bebas Neue:wght@400&display=swap" />
+  	<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;800&display=swap" />
+  	<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Teachers:wght@400&display=swap" />
+  	
+</head>
+<body>
+  	
+  	<div class="resident-homepage">
 
-                <div class="rec_green"></div>
-                <div class="rec_yellow"></div>
-                <div class="image-2"></div>
+            <!--HERO SECTION-->
+    		<img class="hero-img" alt="" src="arch.png">
+    		<div class="black-layer"></div>
 
-                <div class="header"></div>
-                <img class="market-area-logo" src="logo.png" />
-                <div class="home">Home</div>
-                <div class="contact">Contact</div>
-                <div class="about_us">About Us</div>
-                <div class="barangay-market-area">Barangay Market Area:<br>Complaint system</br></div>
-                <div class="profile"></div>
+			<section class="hero-text">
+			<div class="welcome-to-barangay">Welcome to barangay market area: complaint system </div>
+    		<div class="submit-and-track">Submit and track your concerns directly to barangay officials. Stay informed, stay heard.</div>
+			</section>
 
-                <!--HERO SECTION-->
-                <p class="welcome">Welcome to Barangay Market Area: Complaint System</p>
-                <p class="submittrack">
-                    Submit and track your concerns directly to barangay officials. Stay informed, stay heard.
-                </p>
-                <!--COUNCIL-->
-                <div class="meet">Meet our council</div>
-                <div class="council1"></div>
-                <div class="council2"></div>
-                <div class="council3"></div>
-                <!--FOOTER SECTION-->
+            <!--HEADER SECTION-->
+    		<div class="header-gradient"></div>
 
+    		<img class="market-area-logo" alt="" src="logo.png">
+    		
+			<section class="nav-header">
+    		<div class="home">Home</div>
+    		<div class="contact">Contact</div>
+    		<div class="about-us">About Us</div>
+			</section>
 
-                <!--SERVICES SECTION-->
+			<section style="color: white;">
+			<div class="barangay-market-area-complain-container">
+      			<p class="barangay-market-area">barangay market area:</p>
+      			<p class="barangay-market-area">E-Complaint system</p>
+    		</div>
+			</section>
+    		
+    		<div class="profile-avatar"></div>
+    		
+    		
+    		
 
-                <div class="filecomplaint">File a Complaint</div>
-                <div class="mycomplaint">My Complaints</div>
+        <!--FILE A COMPLAINT-->
 
+        <!-- Complaint Box -->
+        <section class="complaint-box">
+            <h2 style="color:aliceblue">FILE A COMPLAINT</h2>
+            
+            <button class="new-btn">New Complaint</button>
+
+        <!-- Spacer to push table down -->
+            <div style="height: 30px;"></div>
+
+        <!-- Step Table -->
+            <div class="steps-wrapper">
+                <table class="steps-table">
+                    <tr>
+                        <td class="step-title">Step 1: Personal Information</td>
+                        <td class="status-completed">[Completed]</td>
+                    </tr>
+                    <tr>
+                        <td class="step-title">Step 2: Complaint Details</td>
+                        <td class="status-completed">[Completed]</td>
+                    </tr>
+                    <tr>
+                        <td class="step-title">Step 3: Schedule and Additional Information</td>
+                        <td class="status-inprogress">[In Progress]</td>
+                    </tr>
+                    <tr>
+                        <td class="step-title">Step 4: Review Details</td>
+                        <td class="status-inprogress">[In Progress]</td>
+                    </tr>
+                </table>
             </div>
-        </div>
-    </body>
+
+            <button class="submit-btn">Submit</button>
+    </section>
+    		
+    		<!--MY COMPLAINTS SECTION-->
+    		<div class="complaint-history-container">
+  			<h2>MY COMPLAINTS</h2>
+
+  			<!-- Search Section -->
+  			<div class="search-section">
+    			<input type="text" placeholder="Search..." class="search-input">
+    			<button class="search-button"></button>
+    			<input type="text" placeholder="Filter" class="filter-input">
+    			<button class="filter-icon">
+      			<img src="filter-icon.png" alt="Filter" />
+    			</button>
+  			</div>
+
+  			<!-- Complaints Table -->
+  			<table class="complaint-table">
+    			<thead>
+      				<tr>
+        				<th>Date Filed</th>
+        				<th>Name</th>
+        				<th>Type of Complaint</th>
+        				<th>Status</th>
+        				<th></th>
+      				</tr>
+    			</thead>
+    			<tbody>
+      				<tr>
+        				<td><strong>03/03/25</strong></td>
+        					<td>Juan, ...</td>
+        					<td><strong>Noise</strong></td>
+        					<td>Under Review</td>
+        					<td><button class="details-button">Details</button></td>
+      				</tr>
+    			</tbody>
+  			</table>
+			</div>
+
+		<div class="council-section">
+  			<div class="council-header">
+    			<hr><h2>MEET OUR COUNCIL</h2><hr>
+  			</div>
+  			<div class="council-cards">
+    			<div class="card">
+      				<img src="https://images.unsplash.com/photo-1592194996308-7b43878e84a6?q=80&w=1974&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D" alt="Council Member 1">
+      				<p>Council Member 1</p>
+    			</div>
+    			<div class="card">
+      				<img src="https://images.unsplash.com/photo-1533738363-b7f9aef128ce?q=80&w=1935&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D" alt="Council Member 2">
+      				<p>Council Member 2</p>
+    			</div>
+    			<div class="card">
+      				<img src="https://images.unsplash.com/photo-1569591159212-b02ea8a9f239?q=80&w=1974&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D" alt="Council Member 3">
+      				<p>Council Member 3</p>
+    			</div>
+  			</div>
+		</div>
+
+
+  	</div>
+  	
+  	
+  	
+  	
+</body>
 </html>
