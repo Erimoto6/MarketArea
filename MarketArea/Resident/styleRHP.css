@@ -33,11 +33,11 @@
 
 /* Main header flex container */
 .header {
-    padding: 0px 26px 12px 26px; /* 0 top padding */
-    height: 87px;
     display: flex;
     justify-content: space-between;
     align-items: center;
+    padding: 0 26px;
+    height: 87px;
     position: relative;
     z-index: 10;
 }
@@ -75,7 +75,6 @@
     color: white;
     font-family: 'Bebas Neue';
     align-items: center;
-
 }
 
 
@@ -104,7 +103,7 @@
   color: rgb(255, 249, 249);
   letter-spacing: 0.05em;
   margin: 0;
-  margin-top: 60px;
+  margin-top: 50px;
 }
 
 .welcome-to-barangay {
@@ -112,7 +111,7 @@
   font-size: 50px;
   color: white;
   letter-spacing: 0.05em;
-  margin-top: 250px;
+  margin-top: 180px;
 
 }
 
@@ -166,7 +165,7 @@
   box-sizing: border-box;
   position: relative;
   z-index: 10;
-  top: 200px;
+  top: 300px;
 }
 
 .steps-wrapper {
