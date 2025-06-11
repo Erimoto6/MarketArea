@@ -1,331 +1,239 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-  <title>E-Complaint System</title>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Barangay Market Area: Complaint System</title>
+    <style>
+        body {
+            margin: 0;
+            font-family: 'Arial', sans-serif;
+        }
 
-  <style>
-    * {
-      margin: 0;
-      padding: 0;
-      box-sizing: border-box;
-    }
+        header {
+            background-color: #2e3b0d;
+            color: white;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 10px 30px;
+        }
 
-    html, body {
-      width: 100%;
-      height: 100%;
-      scroll-behavior: smooth;
-      background-color: white;
-    }
+        header img {
+            height: 60px;
+        }
 
-    .whole-container {
-      align-items: center;
-      display: flex;
-      flex-direction: column;
-    }
+        header nav a {
+            color: white;
+            margin-left: 20px;
+            text-decoration: none;
+        }
 
-    /* HEADER */
-    header {
-      position: fixed;
-      width: 100%;
-      padding: 10px 20px;
-      display: flex;
-      align-items: center;
-      justify-content: flex-end;
-      top: 0;
-      left: 0;
-      z-index: 1000;
-      background: linear-gradient(to left, #2B3209, #6A7337);
-    }
+        .profile-container {
+            position: relative;
+            display: inline-block;
+        }
 
-    .heading {
-      display: flex;
-      align-items: center;
-      gap: 20px;
-    }
+        .profile-circle {
+            background: #ccc;
+            border-radius: 50%;
+            width: 30px;
+            height: 30px;
+            cursor: pointer;
+        }
 
-    .notif, .prof {
-      height: 30px;
-    }
+        .dropdown-menu {
+            display: none;
+            position: absolute;
+            right: 0;
+            top: 40px;
+            background-color: white;
+            color: black;
+            min-width: 150px;
+            box-shadow: 0px 8px 16px rgba(0,0,0,0.2);
+            z-index: 1;
+            border-radius: 4px;
+        }
 
-    .prof {
-      border-radius: 50%;
-    }
+        .dropdown-menu a {
+            color: black;
+            padding: 10px;
+            display: block;
+            text-decoration: none;
+        }
 
-    .name {
-      color: white;
-      font-size: 15px;
-      font-family: Verdana, Geneva, Tahoma, sans-serif;
-      padding-left: 10px;
-    }
+        .dropdown-menu a:hover {
+            background-color: #f1f1f1;
+        }
 
-    /* TOP SECTION */
-    .top-section {
-      position: relative;
-      width: 100%;
-      height: 80vh;
-      overflow: hidden;
-      margin-top: 50px;
-    }
+        .hero {
+            position: relative;
+            height: 90vh;
+            text-align: center;
+            color: white;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            overflow: hidden;
+        }
 
-    .bg {
-      width: 100%;
-      height: 100%;
-      object-fit: cover;
-    }
+        /* Background image layer */
+        .hero::before {
+            content: "";
+            position: absolute;
+            top: 0;
+            left: 0;
+            height: 100%;
+            width: 100%;
+            background: url('marketareabg.jpg') no-repeat center center/cover;
+            z-index: 0;
+        }
 
-    .overlay {
-      position: absolute;
-      top: 0;
-      left: 0;
-      width: 100%;
-      height: 100%;
-      background-color: rgba(0, 0, 0, 0.6);
-      z-index: 1;
-    }
+        /* Black tint overlay */
+        .hero::after {
+            content: "";
+            position: absolute;
+            top: 0;
+            left: 0;
+            height: 100%;
+            width: 100%;
+            background: rgba(0, 0, 0, 0.5);
+            z-index: 1;
+        }
 
-    .top-section img {
-      position: relative;
-      z-index: 0;
-    }
+        .hero h1 {
+            font-size: 3rem;
+            font-weight: bold;
+            margin: 0;
+            margin-bottom: 2%;
+        }
 
-    .overlay-text {
-      position: absolute;
-      top: 50%;
-      left: 50%;
-      z-index: 2;
-      color: white;
-      transform: translate(-50%, -50%);
-      font-weight: bold;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      gap: 40px;
-      text-align: center;
-      flex-direction: row;
-    }
-
-    .logo {
-      width: 25%;
-    }
-
-    .text {
-      display: flex;
-      flex-direction: column;
-      align-items: center;
-      gap: 20px;
-      max-width: 100%;
-      font-family: 'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif;
-    }
-
-    .overlay-text h2 {
-      font-size: 50px;
-      line-height: 1.2;
-      text-align: center;
-      margin: 0;
-      white-space: nowrap;
-    }
-
-    /* SECOND SECTION */
-    .second-section {
-      padding: 0;
-      margin: 0;
-      text-align: center;
-      width: 100%;
-    }
-
-    .whitebgshort {
-      display: block;
-      width: 100%;
-      height: auto;
-      margin: 0;
-      padding: 0;
-      border: none;
-    }
+        .hero h1,
+        .hero p {
+            position: relative;
+            z-index: 2;
+        }
 
 
-    .whitebgshort {
-      width: 100%;
-      height: auto;
-      display: block;
-      position: relative;
-      z-index: 1;
+        /*.hero h1 {
+            font-size: 3rem;
+            font-weight: bold;
+            margin: 0;
+        }
 
+        .hero p {
+            font-size: 1.1rem;
+            margin-top: 15px;
+        }
+        */
+        footer {
+            background-color: #333;
+            color: white;
+            display: flex;
+            justify-content: space-between;
+            padding: 30px;
+            font-size: 0.9rem;
+        }
 
-    }
+        footer .footer-section {
+            max-width: 300px;
+        }
 
-    .gradient-wrapper {
-      position: relative;
-      display: block; /* change from inline-block to block */
-      width: 100%;
-      margin: 0;
-      padding: 0;
-    }
+        footer h4 {
+            margin-bottom: 10px;
+        }
 
+        footer ul {
+            list-style: none;
+            padding: 0;
+        }
 
-    .gradient-overlay {
-      position: absolute;
-      top: 0;
-      left: 0;
-      width: 100%;
-      height: 100%;
-      background: linear-gradient(to left, #2B3209, #6A7337);
-      z-index: 2;
-      pointer-events: none;
-    }
+        footer ul li {
+            margin-bottom: 8px;
+        }
 
-
-
-    /* THIRD SECTION */
-    .third-section {
-      width: 100%;
-      height: 100vh;
-      position: relative;
-      overflow: hidden;
-      background-color: rgba(0, 0, 0, 0.6);
-    }
-
-    .bg2 {
-      width: 100%;
-      height: 100%;
-      object-fit: cover;
-    }
-
-    .overlay1 {
-      position: absolute;
-      top: 0;
-      left: 0;
-      width: 100%;
-      height: 100%;
-      background-color: rgba(0, 0, 0, 0.3);
-      z-index: 1;
-    }
-
-    .button-overlay {
-      position: absolute;
-      top: 50%;
-      left: 50%;
-      transform: translate(-50%, -50%);
-      z-index: 2;
-      display: flex;
-      justify-content: space-around;
-      gap: 50px;
-    }
-
-    .button-overlay button {
-      width: 300px;
-      padding: 100px 40px;
-      font-weight: bold;
-      border: 2px solid black;
-      border-radius: 20px;
-      cursor: pointer;
-      transition: background-color 0.3s;
-      text-align: left;
-      display: flex;
-      flex-direction: column;
-      align-items: flex-start;
-    }
-
-    .button-overlay button:hover {
-      background-color: #3e4719;
-    }
-
-    .button1 {
-      background-color: #6A7337;
-      color: black;
-    }
-
-    .button2 {
-      background-color: #4B5320;
-      color: white;
-    }
-
-    .button3 {
-      background-color: #2B3209;
-      color: white;
-    }
-
-    .num1, .num2, .num3 {
-      font-size: 50px;
-    }
-
-    .text1, .text2, .text3 {
-      font-size: 20px;
-    }
-
-    .forth-section {
-      width: 100%;
-      height: 100vh;
-      position: relative;
-      overflow: hidden;
-    }
-
-    .whitebg {
-      width: 100%;
-      height: 100%;
-      object-fit: cover;
-    }
-  </style>
+        footer ul li a {
+            color: white;
+            text-decoration: none;
+        }
+    </style>
 </head>
 
 <body>
-  <header>
-    <div class="heading">
-      <img class="notif" src="notifLogo.png" alt="Notification Icon">
-      <img class="prof" src="profileLogo.png" alt="Profile Icon">
-    </div>
-    <p class="name">profile</p>
-  </header>
-
-  <div class="whole-container">
-    <!-- TOP SECTION -->
-    <div class="top-section">
-      <img class="bg" src="marketareabg.jpg" alt="Background">
-      <div class="overlay"></div>
-      <div class="overlay-text">
-        <img class="logo" src="logo.png" alt="Barangay Logo">
-        <div class="text">
-          <h2>WELCOME TO BARANGAY MARKET AREA:</h2>
-          <h2>E-COMPLAINT SYSTEM</h2>
+    <header>
+        <div style="display: flex; align-items: center;">
+            <img src="logo.png" alt="Barangay Logo">
+            <div style="margin-left: 10px;">
+                <div><strong>Barangay Market Area:</strong></div>
+                <div>Complaint System</div>
+            </div>
         </div>
-      </div>
-    </div>
+        <nav>
+            <a href="#">Manage Complaints</a>
+            <a href="#">Quick Metrics</a>
+            <div class="profile-container">
+                <div class="profile-circle" onclick="toggleDropdown()"></div>
+                <div class="dropdown-menu" id="dropdownMenu">
+                    <a href="#">Profile</a>
+                    <a href="#">Settings</a>
+                    <a href="#">Logout</a>
+                </div>
+            </div>
+        </nav>
+    </header>
 
-    <!-- SECOND SECTION -->
-    <div class="second-section">
-      <div class="gradient-wrapper">
-        <div class="gradient-overlay"></div>
-        <img class="whitebgshort" src="whitebgshort.png" alt="Second Background">
-      </div>
-    </div>
+    <section class="hero">
+        <h1>BARANGAY MARKET AREA: COMPLAINT SYSTEM</h1>
+        <p>Each complaint is a chance to make a difference. Respond with dedication and care.</p>
+    </section>
 
+    <footer>
+        <div class="footer-section">
+            <img src="logo.png" alt="Barangay Logo" style="height: 60px;"><br>
+            <p>
+                A Barangay that is God-centered, united, service-oriented,
+                inclusive, and responsive— guided by faith, integrity, and
+                accountable governance.
+            </p>
+        </div>
+        <div class="footer-section">
+            <h4>More Pages</h4>
+            <ul>
+                <li><a href="#">insert site</a></li>
+                <li><a href="#">insert site</a></li>
+                <li><a href="#">insert site</a></li>
+            </ul>
+        </div>
+        <div class="footer-section">
+            <h4>Govt. Info</h4>
+            <ul>
+                <li><a href="#">Privacy Policy</a></li>
+                <li><a href="#">Terms & Conditions</a></li>
+                <li><a href="#">FAQ</a></li>
+            </ul>
+        </div>
+    </footer>
 
+    <script>
+        function toggleDropdown() {
+            const menu = document.getElementById('dropdownMenu');
+            menu.style.display = menu.style.display === 'block' ? 'none' : 'block';
+        }
 
-    <!-- THIRD SECTION -->
-    <div class="third-section">
-      <img class="bg2" src="bg2.jpg" alt="Third Background">
-      <div class="overlay1"></div>
-      <div class="button-overlay">
-        <button class="button1">
-          <p class="num1">00</p>
-          <p class="text1">New complaints</p>
-        </button>
-        <button class="button2">
-          <p class="num2">00</p>
-          <p class="text2">In progress cases</p>
-        </button>
-        <button class="button3">
-          <p class="num3">00</p>
-          <p class="text3">Resolved cases</p>
-        </button>
-      </div>
-    </div>
-
-    <!-- FOURTH SECTION -->
-    <div class="forth-section">
-      <img class="whitebg" src="whitebg.png" alt="Fourth Background">
-    </div>
-  </div>
+        window.onclick = function(event) {
+            if (!event.target.matches('.profile-circle')) {
+                const dropdowns = document.getElementsByClassName("dropdown-menu");
+                for (let i = 0; i < dropdowns.length; i++) {
+                    let openDropdown = dropdowns[i];
+                    if (openDropdown.style.display === 'block') {
+                        openDropdown.style.display = 'none';
+                    }
+                }
+            }
+        }
+    </script>
 </body>
+
 </html>
