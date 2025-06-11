@@ -6,157 +6,151 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Barangay Market Area: Complaint System</title>
     <style>
+        /* ========== GLOBAL STYLES ========== */
         body {
-            margin: 0;
-            font-family: 'Arial', sans-serif;
+        margin: 0;
+        font-family: 'Trebuchet MS';
         }
 
+        /* ========== HEADER ========== */
         header {
-            background-color: #2e3b0d;
-            color: white;
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            padding: 10px 30px;
+        background-color: #2e3b0d;
+        color: white;
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        padding: 10px 30px;
         }
 
         header img {
-            height: 60px;
+        height: 60px;
         }
 
         header nav a {
-            color: white;
-            margin-left: 20px;
-            text-decoration: none;
+        color: white;
+        margin-left: 20px;
+        text-decoration: none;
         }
 
+        /* ========== PROFILE DROPDOWN ========== */
         .profile-container {
-            position: relative;
-            display: inline-block;
+        position: relative;
+        display: inline-block;
         }
 
         .profile-circle {
-            background: #ccc;
-            border-radius: 50%;
-            width: 30px;
-            height: 30px;
-            cursor: pointer;
+        background: #ccc;
+        border-radius: 50%;
+        width: 30px;
+        height: 30px;
+        cursor: pointer;
         }
 
         .dropdown-menu {
-            display: none;
-            position: absolute;
-            right: 0;
-            top: 40px;
-            background-color: white;
-            color: black;
-            min-width: 150px;
-            box-shadow: 0px 8px 16px rgba(0,0,0,0.2);
-            z-index: 1;
-            border-radius: 4px;
+        display: none;
+        position: absolute;
+        right: 0;
+        top: 40px;
+        background-color: white;
+        color: black;
+        min-width: 150px;
+        box-shadow: 0px 8px 16px rgba(0, 0, 0, 0.2);
+        z-index: 1;
+        border-radius: 4px;
         }
 
         .dropdown-menu a {
-            color: black;
-            padding: 10px;
-            display: block;
-            text-decoration: none;
+        color: black;
+        padding: 10px;
+        display: block;
+        text-decoration: none;
         }
 
         .dropdown-menu a:hover {
-            background-color: #f1f1f1;
+        background-color: #f1f1f1;
         }
 
+        /* ========== HERO SECTION ========== */
         .hero {
-            position: relative;
-            height: 90vh;
-            text-align: center;
-            color: white;
-            display: flex;
-            flex-direction: column;
-            justify-content: center;
-            align-items: center;
-            overflow: hidden;
+        position: relative;
+        height: 90vh;
+        text-align: center;
+        color: white;
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+        overflow: hidden;
         }
 
-        /* Background image layer */
+        /* Hero Background Image Layer */
         .hero::before {
-            content: "";
-            position: absolute;
-            top: 0;
-            left: 0;
-            height: 100%;
-            width: 100%;
-            background: url('marketareabg.jpg') no-repeat center center/cover;
-            z-index: 0;
+        content: "";
+        position: absolute;
+        top: 0;
+        left: 0;
+        height: 100%;
+        width: 100%;
+        background: url('marketareabg.jpg') no-repeat center center/cover;
+        z-index: 0;
         }
 
-        /* Black tint overlay */
+        /* Hero Black Tint Overlay */
         .hero::after {
-            content: "";
-            position: absolute;
-            top: 0;
-            left: 0;
-            height: 100%;
-            width: 100%;
-            background: rgba(0, 0, 0, 0.5);
-            z-index: 1;
+        content: "";
+        position: absolute;
+        top: 0;
+        left: 0;
+        height: 100%;
+        width: 100%;
+        background: rgba(0, 0, 0, 0.5);
+        z-index: 1;
+        }
+
+        /* Hero Text Styling */
+        .hero h1,
+        .hero p {
+        position: relative;
+        z-index: 2;
         }
 
         .hero h1 {
-            font-size: 3rem;
-            font-weight: bold;
-            margin: 0;
-            margin-bottom: 2%;
+        font-size: 3rem;
+        font-weight: bold;
+        margin: 0;
+        margin-bottom: 2%;
         }
 
-        .hero h1,
-        .hero p {
-            position: relative;
-            z-index: 2;
-        }
-
-
-        /*.hero h1 {
-            font-size: 3rem;
-            font-weight: bold;
-            margin: 0;
-        }
-
-        .hero p {
-            font-size: 1.1rem;
-            margin-top: 15px;
-        }
-        */
+        /* ========== FOOTER ========== */
         footer {
-            background-color: #333;
-            color: white;
-            display: flex;
-            justify-content: space-between;
-            padding: 30px;
-            font-size: 0.9rem;
+        background-color: #333;
+        color: white;
+        display: flex;
+        justify-content: space-between;
+        padding: 30px;
+        font-size: 0.9rem;
         }
 
         footer .footer-section {
-            max-width: 300px;
+        max-width: 300px;
         }
 
         footer h4 {
-            margin-bottom: 10px;
+        margin-bottom: 10px;
         }
 
         footer ul {
-            list-style: none;
-            padding: 0;
+        list-style: none;
+        padding: 0;
         }
 
         footer ul li {
-            margin-bottom: 8px;
+        margin-bottom: 8px;
         }
 
         footer ul li a {
-            color: white;
-            text-decoration: none;
+        color: white;
+        text-decoration: none;
         }
     </style>
 </head>
