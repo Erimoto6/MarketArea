@@ -2,232 +2,352 @@
 <html lang="en">
 
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Barangay Market Area: Complaint System</title>
-    <style>
-        /* ========== GLOBAL STYLES ========== */
-        body {
-        margin: 0;
-        font-family: 'Trebuchet MS';
-        }
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Barangay Market Area: Complaint System</title>
+  <style>
+    /* Base Reset and Fonts */
+    html {
+      scroll-behavior: smooth;
+    }
 
-        /* ========== HEADER ========== */
-        header {
-        background-color: #2e3b0d;
-        color: white;
-        display: flex;
-        justify-content: space-between;
-        align-items: center;
-        padding: 10px 30px;
-        }
+    body {
+      margin: 0;
+      font-family: 'Arial', sans-serif;
+    }
 
-        header img {
-        height: 60px;
-        }
+    /* Sticky Header Styling */
+    header {
+      position: sticky;
+      top: 0;
+      background-color: #2e3b0d;
+      color: white;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 10px 30px;
+      z-index: 1000;
+    }
 
-        header nav a {
-        color: white;
-        margin-left: 20px;
-        text-decoration: none;
-        }
+    header img {
+      height: 60px;
+      margin-right: 10px;
+    }
 
-        /* ========== PROFILE DROPDOWN ========== */
-        .profile-container {
-        position: relative;
-        display: inline-block;
-        }
+    header nav {
+      display: flex;
+      align-items: center;
+      gap: 20px;
+    }
 
-        .profile-circle {
-        background: #ccc;
-        border-radius: 50%;
-        width: 30px;
-        height: 30px;
-        cursor: pointer;
-        }
+    header nav a {
+      color: white;
+      text-decoration: none;
+      cursor: pointer;
+    }
 
-        .dropdown-menu {
-        display: none;
-        position: absolute;
-        right: 0;
-        top: 40px;
-        background-color: white;
-        color: black;
-        min-width: 150px;
-        box-shadow: 0px 8px 16px rgba(0, 0, 0, 0.2);
-        z-index: 1;
-        border-radius: 4px;
-        }
+    /* Profile Dropdown */
+    .profile-container {
+      position: relative;
+    }
 
-        .dropdown-menu a {
-        color: black;
-        padding: 10px;
-        display: block;
-        text-decoration: none;
-        }
+    .profile-circle {
+      background: #ccc;
+      border-radius: 50%;
+      width: 30px;
+      height: 30px;
+      cursor: pointer;
+    }
 
-        .dropdown-menu a:hover {
-        background-color: #f1f1f1;
-        }
+    .dropdown-menu {
+      display: none;
+      position: absolute;
+      right: 0;
+      top: 40px;
+      background-color: white;
+      color: black;
+      min-width: 170px;
+      box-shadow: 0px 8px 16px rgba(0, 0, 0, 0.2);
+      z-index: 10;
+      border-radius: 4px;
+    }
 
-        /* ========== HERO SECTION ========== */
-        .hero {
-        position: relative;
-        height: 90vh;
-        text-align: center;
-        color: white;
-        display: flex;
-        flex-direction: column;
-        justify-content: center;
-        align-items: center;
-        overflow: hidden;
-        }
+    .dropdown-menu a {
+      color: black;
+      padding: 10px;
+      display: flex;
+      align-items: center;
+      text-decoration: none;
+      gap: 10px;
+    }
 
-        /* Hero Background Image Layer */
-        .hero::before {
-        content: "";
-        position: absolute;
-        top: 0;
-        left: 0;
-        height: 100%;
-        width: 100%;
-        background: url('marketareabg.jpg') no-repeat center center/cover;
-        z-index: 0;
-        }
+    .dropdown-menu a:hover {
+      background-color: #f1f1f1;
+    }
 
-        /* Hero Black Tint Overlay */
-        .hero::after {
-        content: "";
-        position: absolute;
-        top: 0;
-        left: 0;
-        height: 100%;
-        width: 100%;
-        background: rgba(0, 0, 0, 0.5);
-        z-index: 1;
-        }
+    .dropdown-menu a img {
+      width: 20px;
+      height: 20px;
+    }
 
-        /* Hero Text Styling */
-        .hero h1,
-        .hero p {
-        position: relative;
-        z-index: 2;
-        }
+    /* Banner Section */
+    .main-banner {
+      position: relative;
+      height: 90vh;
+      text-align: center;
+      color: white;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+      overflow: hidden;
+    }
 
-        .hero h1 {
-        font-size: 3rem;
-        font-weight: bold;
-        margin: 0;
-        margin-bottom: 2%;
-        }
+    .main-banner::before {
+      content: "";
+      position: absolute;
+      top: 0;
+      left: 0;
+      height: 100%;
+      width: 100%;
+      background: url('marketareabg.jpg') no-repeat center center/cover;
+      z-index: 0;
+    }
 
-        /* ========== FOOTER ========== */
-        footer {
-        background-color: #333;
-        color: white;
-        display: flex;
-        justify-content: space-between;
-        padding: 30px;
-        font-size: 0.9rem;
-        }
+    .main-banner::after {
+      content: "";
+      position: absolute;
+      top: 0;
+      left: 0;
+      height: 100%;
+      width: 100%;
+      background: rgba(0, 0, 0, 0.5);
+      z-index: 1;
+    }
 
-        footer .footer-section {
-        max-width: 300px;
-        }
+    .main-banner h1,
+    .main-banner p,
+    .stats {
+      position: relative;
+      z-index: 2;
+    }
 
-        footer h4 {
-        margin-bottom: 10px;
-        }
+    .main-banner h1 {
+      font-size: 3rem;
+      font-weight: bold;
+      margin-bottom: 10px;
+    }
 
-        footer ul {
-        list-style: none;
-        padding: 0;
-        }
+    .main-banner p {
+      font-size: 1.1rem;
+      margin: 0 0 30px;
+    }
 
-        footer ul li {
-        margin-bottom: 8px;
-        }
+    /* Stat Box Section */
+    .stats {
+      display: flex;
+      gap: 30px;
+      margin-top: 20px;
+      flex-wrap: wrap;
+      justify-content: center;
+    }
 
-        footer ul li a {
-        color: white;
-        text-decoration: none;
-        }
-    </style>
+    .stat-box {
+      background-color: #6d8129;
+      padding: 20px 30px;
+      border-radius: 10px;
+      color: white;
+      width: 180px;
+      text-align: center;
+      box-shadow: -2px 4px 5px rgba(0, 0, 0, 0.5);
+      transition: all 0.3s ease;
+      cursor: pointer;
+      text-decoration: none;
+    }
+
+    .stat-box:hover {
+      background-color: #7e9431;
+      transform: scale(1.05);
+      box-shadow: 0px 6px 15px rgba(0, 0, 0, 0.4);
+    }
+
+    .stat-box .icon img {
+      height: 40px;
+      margin-bottom: 10px;
+      filter: drop-shadow(-2px 2px 2px rgba(0, 0, 0, 0.4));
+    }
+
+    .stat-box h3 {
+      margin: 10px 0 5px;
+      font-size: 1.1rem;
+      text-shadow: -2px 2px 2px rgba(0, 0, 0, 0.4);
+    }
+
+    .stat-box .count {
+      font-size: 1.5rem;
+      font-weight: bold;
+      text-shadow: -2px 2px 2px rgba(0, 0, 0, 0.4);
+    }
+
+    /* Footer */
+    footer {
+      background-color: #333;
+      color: white;
+      display: flex;
+      justify-content: space-between;
+      padding: 20px 30px;
+      font-size: 0.9rem;
+      flex-wrap: wrap;
+    }
+
+    footer .leftside {
+      display: flex;
+      flex-direction: row;
+      align-items: center;
+      max-width: 600px;
+      margin-top: 10px;
+    }
+
+    footer img {
+      margin-right: 25px;
+      margin-left: 10px;
+      height: 100px;
+    }
+
+    footer .footer-section1 {
+      max-width: 200px;
+      margin-right: 0;
+    }
+
+    footer .footer-section2 {
+      max-width: 200px;
+      margin-right: 100px;
+    }
+
+    footer h4 {
+      margin-bottom: 10px;
+    }
+
+    footer ul {
+      list-style: none;
+      padding: 0;
+    }
+
+    footer ul li {
+      margin-bottom: 8px;
+    }
+
+    footer ul li a {
+      color: white;
+      text-decoration: none;
+    }
+  </style>
 </head>
 
 <body>
-    <header>
-        <div style="display: flex; align-items: center;">
-            <img src="logo.png" alt="Barangay Logo">
-            <div style="margin-left: 10px;">
-                <div><strong>Barangay Market Area:</strong></div>
-                <div>Complaint System</div>
-            </div>
-        </div>
-        <nav>
-            <a href="#">Manage Complaints</a>
-            <a href="#">Quick Metrics</a>
-            <div class="profile-container">
-                <div class="profile-circle" onclick="toggleDropdown()"></div>
-                <div class="dropdown-menu" id="dropdownMenu">
-                    <a href="#">Profile</a>
-                    <a href="#">Settings</a>
-                    <a href="#">Logout</a>
-                </div>
-            </div>
-        </nav>
-    </header>
+  <header>
+    <div style="display: flex; align-items: center;">
+      <img src="logo.png" alt="Barangay Logo">
+      <div style="margin-left: 10px;">
+        <div><strong>Barangay Market Area:</strong></div>
+        <div>Complaint System</div>
+      </div>
+    </div>
 
-    <section class="hero">
-        <h1>BARANGAY MARKET AREA: COMPLAINT SYSTEM</h1>
-        <p>Each complaint is a chance to make a difference. Respond with dedication and care.</p>
-    </section>
-
-    <footer>
-        <div class="footer-section">
-            <img src="logo.png" alt="Barangay Logo" style="height: 60px;"><br>
-            <p>
-                A Barangay that is God-centered, united, service-oriented,
-                inclusive, and responsive— guided by faith, integrity, and
-                accountable governance.
-            </p>
+    <nav>
+      <a href="#" onclick="scrollToTop(event)">Home</a>
+      <a href="#">Manage Complaints</a>
+      <a href="#">Quick Metrics</a>
+      <div class="profile-container">
+        <div class="profile-circle" onclick="toggleDropdown()"></div>
+        <div class="dropdown-menu" id="dropdownMenu">
+          <a href="#"><img src="profile.png" alt="Profile Icon">Profile</a>
+          <a href="#"><img src="settings.png" alt="Settings Icon">Settings</a>
+          <a href="#"><img src="logout.png" alt="Logout Icon">Logout</a>
         </div>
-        <div class="footer-section">
-            <h4>More Pages</h4>
-            <ul>
-                <li><a href="#">insert site</a></li>
-                <li><a href="#">insert site</a></li>
-                <li><a href="#">insert site</a></li>
-            </ul>
-        </div>
-        <div class="footer-section">
-            <h4>Govt. Info</h4>
-            <ul>
-                <li><a href="#">Privacy Policy</a></li>
-                <li><a href="#">Terms & Conditions</a></li>
-                <li><a href="#">FAQ</a></li>
-            </ul>
-        </div>
-    </footer>
+      </div>
+    </nav>
+  </header>
 
-    <script>
-        function toggleDropdown() {
-            const menu = document.getElementById('dropdownMenu');
-            menu.style.display = menu.style.display === 'block' ? 'none' : 'block';
-        }
+  <section class="main-banner">
+    <h1>BARANGAY MARKET AREA: COMPLAINT SYSTEM</h1>
+    <p>Each complaint is a chance to make a difference. Respond with dedication and care.</p>
 
-        window.onclick = function(event) {
-            if (!event.target.matches('.profile-circle')) {
-                const dropdowns = document.getElementsByClassName("dropdown-menu");
-                for (let i = 0; i < dropdowns.length; i++) {
-                    let openDropdown = dropdowns[i];
-                    if (openDropdown.style.display === 'block') {
-                        openDropdown.style.display = 'none';
-                    }
-                }
-            }
-        }
-    </script>
+    <div class="stats">
+      <a href="new-complaint-frame/newcomplaint.html" class="stat-box">
+        <div class="icon">
+          <img src="new.png" alt="New Complaint Icon" />
+        </div>
+        <h3>New Complaint</h3>
+        <div class="count">00</div>
+      </a>
+      <a href="#" class="stat-box">
+        <div class="icon">
+          <img src="progress.png" alt="In Progress Icon" />
+        </div>
+        <h3>In Progress Cases</h3>
+        <div class="count">00</div>
+      </a>
+      <a href="#" class="stat-box">
+        <div class="icon">
+          <img src="resolved.png" alt="Resolved Icon" />
+        </div>
+        <h3>Resolved Cases</h3>
+        <div class="count">00</div>
+      </a>
+    </div>
+  </section>
+
+  <footer>
+    <div class="footer-section">
+      <div class="leftside">
+        <img src="logo.png" alt="Barangay Logo" /><br />
+        <p>
+          The Market Area of Sta. Rosa, Laguna is a bustling center of commerce and community activity. Known for its
+          public market, transport terminals, and small businesses, it serves as a vital hub for daily essentials,
+          local trade, and public services—connecting residents from different barangays across the city.
+        </p>
+      </div>
+    </div>
+    <div class="footer-section1">
+      <h4>More Pages</h4>
+      <ul>
+        <li><a href="https://www.facebook.com/KapitanMichaelAmbata">Brgy. Kap</a></li>
+        <li><a href="#">insert site</a></li>
+        <li><a href="https://www.facebook.com/profile.php?id=100064724497001">SK Market Area</a></li>
+      </ul>
+    </div>
+    <div class="footer-section2">
+      <h4>Govt. Info</h4>
+      <ul>
+        <li><a href="#">Privacy Policy</a></li>
+        <li><a href="#">Terms & Conditions</a></li>
+        <li><a href="#">FAQ</a></li>
+      </ul>
+    </div>
+  </footer>
+
+  <script>
+    function toggleDropdown() {
+      const menu = document.getElementById('dropdownMenu');
+      menu.style.display = menu.style.display === 'block' ? 'none' : 'block';
+    }
+
+    window.onclick = function (event) {
+      if (!event.target.closest('.profile-container')) {
+        const dropdown = document.getElementById('dropdownMenu');
+        if (dropdown) dropdown.style.display = 'none';
+      }
+    }
+
+    function scrollToTop(event) {
+      event.preventDefault();
+      window.scrollTo({
+        top: 0,
+        behavior: 'smooth'
+      });
+    }
+  </script>
 </body>
 
 </html>

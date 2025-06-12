@@ -1,0 +1,147 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>New Complaints</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      padding: 20px;
+      background-color: #f4f4f4;
+    }
+
+    .header-row {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-bottom: 15px;
+    }
+
+    .header-row h2 {
+      margin: 0;
+      color: #2e3b0d;
+    }
+
+    select {
+      padding: 5px 10px;
+      font-size: 1rem;
+    }
+
+    table {
+      width: 100%;
+      border-collapse: collapse;
+      background: white;
+      box-shadow: 0 0 10px rgba(0,0,0,0.1);
+      position: relative;
+    }
+
+    th, td {
+      padding: 12px 15px;
+      border-bottom: 1px solid #ccc;
+      text-align: left;
+      position: relative;
+      z-index: 1;
+    }
+
+    th {
+      background-color: #6d8129;
+      color: white;
+    }
+
+    tr {
+      position: relative;
+      cursor: pointer;
+    }
+
+    tr:hover {
+      background-color: #f1f1f1;
+    }
+
+    .complaint-id {
+      font-weight: bold;
+      color: #6d8129;
+    }
+
+    .row-link {
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      text-decoration: none;
+      z-index: 2;
+    }
+  </style>
+</head>
+<body>
+
+  <div class="header-row">
+    <h2>New Complaints</h2>
+    <div>
+      <label for="sort">Sort by: </label>
+      <select id="sort" onchange="sortTable()">
+        <option value="newest">Newest to Oldest</option>
+        <option value="oldest">Oldest to Newest</option>
+      </select>
+    </div>
+  </div>
+
+  <table id="complaintTable">
+    <thead>
+      <tr>
+        <th>Complaint ID</th>
+        <th>Complainant</th>
+        <th>Category</th>
+        <th>Date Filed</th>
+        <th>Brief Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td class="complaint-id">#00003</td>
+        <td>Juan Dela Cruz</td>
+        <td>Noisy Neighbor</td>
+        <td>2025-06-12</td>
+        <td>Loud music playing past midnight.</td>
+        <a class="row-link" href="complaint-00003.html"></a>
+      </tr>
+      <tr>
+        <td class="complaint-id">#00001</td>
+        <td>Maria Santos</td>
+        <td>Garbage</td>
+        <td>2025-06-10</td>
+        <td>Garbage not collected for 3 days.</td>
+        <a class="row-link" href="complaint-00001.html"></a>
+      </tr>
+      <tr>
+        <td class="complaint-id">#00002</td>
+        <td>Carlos Reyes</td>
+        <td>Street Light</td>
+        <td>2025-06-11</td>
+        <td>Broken street light on corner street.</td>
+        <a class="row-link" href="complaint-00002.html"></a>
+      </tr>
+    </tbody>
+  </table>
+
+  <script>
+    function sortTable() {
+      const table = document.getElementById("complaintTable");
+      const rows = Array.from(table.querySelectorAll("tbody tr"));
+      const sortValue = document.getElementById("sort").value;
+
+      rows.sort((a, b) => {
+        const dateA = new Date(a.cells[3].innerText);
+        const dateB = new Date(b.cells[3].innerText);
+        return sortValue === "newest" ? dateB - dateA : dateA - dateB;
+      });
+
+      const tbody = table.querySelector("tbody");
+      tbody.innerHTML = "";
+      rows.forEach(row => tbody.appendChild(row));
+    }
+  </script>
+
+</body>
+</html>
