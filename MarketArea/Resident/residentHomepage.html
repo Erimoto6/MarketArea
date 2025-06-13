@@ -42,22 +42,22 @@
 
   			<!-- Collapsible Sidebar -->
   			<div class="sidebar collapsed" id="profileSidebar">
-				<div class="sidebar-item">
+				<a href="#" class="sidebar-item">
       				<i class="icon">👤</i>
       				<span class="label">Profile</span>
-    			</div>
-    			<div class="sidebar-item">
+    			</a>
+    			<a href="#" class="sidebar-item">
       				<i class="icon">⚙️</i>
       				<span class="label">Settings</span>
-    			</div>
-    			<div class="sidebar-item">
+				</a>
+    			<a href="#" class="sidebar-item">
       				<i class="icon">🔐</i>
       				<span class="label">Account & Security</span>
-    			</div>
-    			<div class="sidebar-item">
-      				<i class="icon">⏻</i>
-      				<span class="label">Logout</span>
-    			</div>
+				</a>
+    			<a href="residentLogin.html" class="sidebar-item" id="logout-btn">
+  					<i class="icon">⏻</i>
+  					<span class="label">Logout</span>
+				</a>
   			</div>
 		</div>
 
@@ -68,7 +68,7 @@
 		<!-- HERO SECTION -->
 		<section class="hero-section">
   			<div class="background-circles">
-    			<img class="market_area_bg" src="marketareabg.jpg" alt="Background" />
+    			<div class="market_area_bg"></div>
     			<div class="green_circle"></div>
     			<div class="yellow_circle"></div>
   			</div>
@@ -77,7 +77,8 @@
     			<div class="welcome-to-barangay">
       				Welcome to barangay market area:<br> e-BLOTTER system
     			</div>
-
+			
+			<a href="complaint_form.html">
     		<button class="file_complaint_container" type="button" aria-label="File a Complaint">
   				<div class="file_complaint_button"></div>
   				<div class="file_complaint_icon"></div>
@@ -90,6 +91,7 @@
     			</div>
   				</div>
 			</button>
+			</a>
       		</div>
     		</div>
   			</div>
@@ -146,6 +148,15 @@
     const wrapper = document.querySelector('.profile-sidebar-wrapper');
     if (!wrapper.contains(e.target)) {
       sidebar.classList.remove('show');
+    }
+  });
+
+  document.getElementById('logout-btn').addEventListener('click', function (e) {
+    e.preventDefault(); // Stop the default navigation
+
+    if (confirm("Are you sure you want to log out?")) {
+      // Proceed to logout if confirmed
+      window.location.href = this.href;
     }
   });
 </script>

@@ -2,16 +2,17 @@
 /* HERO SECTION */
 .hero-section {
   position: relative;
+  min-height: 100vh;
   display: flex;
   flex-direction: column;
   align-items: flex-end; /* Align to right */
   justify-content: center;
-  height: 1055px;
+  height: auto;
   background-color: #fff;
   font-family: 'K2D', sans-serif;
   overflow: hidden;
   color: #250101;
-  padding-right: 60px; /* optional spacing from the right */
+  padding-right: 40px; /* optional spacing from the right */
   overflow: visible; /* or remove 'overflow: hidden' */
 }
 
@@ -27,10 +28,19 @@
 }
 
 .market_area_bg {
-  width: 100%;
-  height: 100%;
-  object-fit: cover;
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100vw;
+  height: 100vh;
+  background-image: url('marketarea2.jpg');
+  background-size: cover;
+  background-repeat: no-repeat;
+  background-position: center;
+  z-index: -1;
 }
+
+
 
 @keyframes circleFadeSlideIn {
   0% {
@@ -324,6 +334,14 @@
   transform-origin: top;
   transition: transform 0.3s ease;
   z-index: 999;
+}
+
+.sidebar-item,
+.sidebar-item:visited,
+.sidebar-item:active,
+.sidebar-item:hover {
+  color: white;
+  text-decoration: none;
 }
 
 .sidebar.show {
