@@ -260,7 +260,6 @@ fieldset {
     opacity: 0;
     transform: translateX(50px);
     transition: opacity 0.4s ease, transform 0.4s ease;
-   
   }
 
   .form-step.active {
