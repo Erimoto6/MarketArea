@@ -4,151 +4,151 @@
   	<meta charset="utf-8">
   	<meta name="viewport" content="initial-scale=1, width=device-width">
   	
-  	<link rel="stylesheet" href="styleRHP.css" />
-    <link rel="stylesheet" href="global.css"/>
-  	<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=K2D:wght@300;400;700;800&display=swap" />
+  	<link rel="stylesheet"  href="styleRHP.css" />
+  	<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=K2D:wght@300;500;800&display=swap" />
   	<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Bebas Neue:wght@400&display=swap" />
   	<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;800&display=swap" />
-  	<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Teachers:wght@400&display=swap" />
+  	
   	
 </head>
 <body>
-  	
-  	<div class="resident-homepage">
+  	<div class="page-container">
+  	<div class="written-complaint-appointmen">
 
 
 		<!-- HEADER SECTION -->
-			<div class="header-gradient"></div>
-
-				<header class="header">
-    				<img class="market-area-logo" alt="" src="logo.png">
-
-    				<div class="header-right">
-        				<nav class="nav-header">
-            				<div class="home">Home</div>
-            				<div class="contact">Contact</div>
-            				<div class="about-us">About Us</div>
-        				</nav>
-    				</div>
-					<div class="profile-avatar"></div>
-				</header>
-
-				<!-- TITLE SECTION -->
-			<section style="color: white;">
-   			 	<div class="barangay-market-area-complain-container">
-        			<p class="barangay-market-area">Barangay Market Area:</p>
-        			<p class="barangay-market-area">E-Complaint System</p>
+		<header class="header_gradient">
+  			<div class="header-left">
+    			<img class="market-area-logo" src="logo.png" alt="Logo" />
+    			<div class="barangay-title">
+      			<p class="barangay-market-area">barangay market area:</p>
+      			<p class="barangay-market-area">Complaint system</p>
     			</div>
-			</section>
-
-            <!--HERO SECTION-->
-    		<img class="hero-img" alt="" src="marketareabg.jpg">
-    		<div class="black-layer"></div>
-
-			<section class="hero-text">
-			<div class="welcome-to-barangay">Welcome to barangay market area: complaint system </div>
-    		<div class="submit-and-track">Submit and track your concerns directly to barangay officials. Stay informed, stay heard.</div>
-			</section>   		
-    		
-
-        <!--FILE A COMPLAINT-->
-
-        <!-- Complaint Box -->
-        <section class="complaint-box">
-            <h2 style="color:aliceblue">FILE A COMPLAINT</h2>
-            
-            <button class="new-btn">New Complaint</button>
-
-        <!-- Spacer to push table down -->
-            <div style="height: 30px;"></div>
-
-        <!-- Step Table -->
-            <div class="steps-wrapper">
-                <table class="steps-table">
-                    <tr>
-                        <td class="step-title">Step 1: Personal Information</td>
-                        <td class="status-completed">[Completed]</td>
-                    </tr>
-                    <tr>
-                        <td class="step-title">Step 2: Complaint Details</td>
-                        <td class="status-completed">[Completed]</td>
-                    </tr>
-                    <tr>
-                        <td class="step-title">Step 3: Schedule and Additional Information</td>
-                        <td class="status-inprogress">[In Progress]</td>
-                    </tr>
-                    <tr>
-                        <td class="step-title">Step 4: Review Details</td>
-                        <td class="status-inprogress">[In Progress]</td>
-                    </tr>
-                </table>
-            </div>
-
-            <button class="submit-btn">Submit</button>
-    </section>
-    		
-    		<!--MY COMPLAINTS SECTION-->
-    		<div class="complaint-history-container">
-  			<h2>MY COMPLAINTS</h2>
-
-  			<!-- Search Section -->
-  			<div class="search-section">
-    			<input type="text" placeholder="Search..." class="search-input">
-    			<button class="search-button"></button>
-    			<input type="text" placeholder="Filter" class="filter-input">
-    			<button class="filter-icon">
-      			<img src="filter-icon.png" alt="Filter" />
-    			</button>
   			</div>
 
-  			<!-- Complaints Table -->
-  			<table class="complaint-table">
-    			<thead>
-      				<tr>
-        				<th>Date Filed</th>
-        				<th>Name</th>
-        				<th>Type of Complaint</th>
-        				<th>Status</th>
-        				<th></th>
-      				</tr>
-    			</thead>
-    			<tbody>
-      				<tr>
-        				<td><strong>03/03/25</strong></td>
-        					<td>Juan, ...</td>
-        					<td><strong>Noise</strong></td>
-        					<td>Under Review</td>
-        					<td><button class="details-button">Details</button></td>
-      				</tr>
-    			</tbody>
-  			</table>
-			</div>
+  			<div class="navbar">
+  				<div class="nav-links">
+    				<a href="residentHomepage.html">Home</a>
+    				<a href="#">My Complaints</a>
+    				<a href="#">Contacts</a>
+  				</div>
 
-		<div class="council-section">
-  			<div class="council-header">
-    			<hr><h2>MEET OUR COUNCIL</h2><hr>
+  			<!-- Profile + Sidebar Wrapper -->
+			<div class="profile-sidebar-wrapper">
+  			<!-- Profile Trigger -->
+  			<div class="profile-link" id="profileTrigger">
+    			<div class="profile"></div>
   			</div>
-  			<div class="council-cards">
-    			<div class="card">
-      				<img src="https://images.unsplash.com/photo-1592194996308-7b43878e84a6?q=80&w=1974&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D" alt="Council Member 1">
-      				<p>Council Member 1</p>
+
+  			<!-- Collapsible Sidebar -->
+  			<div class="sidebar collapsed" id="profileSidebar">
+				<div class="sidebar-item">
+      				<i class="icon">👤</i>
+      				<span class="label">Profile</span>
     			</div>
-    			<div class="card">
-      				<img src="https://images.unsplash.com/photo-1533738363-b7f9aef128ce?q=80&w=1935&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D" alt="Council Member 2">
-      				<p>Council Member 2</p>
+    			<div class="sidebar-item">
+      				<i class="icon">⚙️</i>
+      				<span class="label">Settings</span>
     			</div>
-    			<div class="card">
-      				<img src="https://images.unsplash.com/photo-1569591159212-b02ea8a9f239?q=80&w=1974&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D" alt="Council Member 3">
-      				<p>Council Member 3</p>
+    			<div class="sidebar-item">
+      				<i class="icon">🔐</i>
+      				<span class="label">Account & Security</span>
+    			</div>
+    			<div class="sidebar-item">
+      				<i class="icon">⏻</i>
+      				<span class="label">Logout</span>
     			</div>
   			</div>
 		</div>
 
 
+			</div>
+		</header>
+
+		<!-- HERO SECTION -->
+		<section class="hero-section">
+  			<div class="background-circles">
+    			<img class="market_area_bg" src="marketareabg.jpg" alt="Background" />
+    			<div class="green_circle"></div>
+    			<div class="yellow_circle"></div>
+  			</div>
+
+  			<div class="hero-content">
+    			<div class="welcome-to-barangay">
+      				Welcome to barangay market area:<br> e-BLOTTER system
+    			</div>
+
+    		<button class="file_complaint_container" type="button" aria-label="File a Complaint">
+  				<div class="file_complaint_button"></div>
+  				<div class="file_complaint_icon"></div>
+  				<img class="file_complaint_iconimg" src="filing_icon.png" alt="Complaint Icon" />
+
+  				<div class="file-a-complaint-parent">
+    			<div class="file-a-complaint">File a Complaint</div>
+    			<div class="submit-and-track">
+      				Submit and track your concerns directly to barangay officials. Stay informed, stay heard.
+    			</div>
+  				</div>
+			</button>
+      		</div>
+    		</div>
+  			</div>
+		</section>
+
+
+		<!--FOOTER SECTION-->
+			<footer class="footer">
+  				<div class="footer-left">
+    				<img class="market-area-logo2" src="logo.png" alt="Barangay Logo" />
+    				<p class="a-barangay-that">
+      					A Barangay that is God-centered, united, service-oriented, inclusive, and responsive — guided by faith, integrity, and accountable governance.
+    				</p>
+  				</div>
+
+  				<div class="footer">
+  			<!-- Any left/center content here -->
+
+  			<div class="footer-right-group">
+    			<div class="footer-middle">
+      				<h4 class="footer-heading">Other Services</h4>
+      				<p class="footer-link">Insert Site</p>
+      				<p class="footer-link">Insert Site</p>
+      				<p class="footer-link">Insert Site</p>
+    			</div>
+
+    		<div class="footer-right">
+      			<h4 class="footer-heading">Gov't Info</h4>
+      			<p class="footer-link">Privacy Policy</p>
+      			<p class="footer-link">Terms & Conditions</p>
+      			<p class="footer-link">FAQ</p>
+    			</div>
+  			</div>
+		</div>
+
+			</footer>
+
   	</div>
   	
   	
   	
-  	
+</div>
+
+<script>
+  const profileTrigger = document.getElementById('profileTrigger');
+  const sidebar = document.getElementById('profileSidebar');
+
+  profileTrigger.addEventListener('click', (e) => {
+    e.preventDefault(); // prevent anchor from navigating
+    sidebar.classList.toggle('show');
+  });
+
+  document.addEventListener('click', function (e) {
+    const wrapper = document.querySelector('.profile-sidebar-wrapper');
+    if (!wrapper.contains(e.target)) {
+      sidebar.classList.remove('show');
+    }
+  });
+</script>
+
 </body>
 </html>
