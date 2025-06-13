@@ -1,131 +1,170 @@
 <!DOCTYPE html>
 <html>
-    <head>
-        <title>Market Area E-Complaint Portal</title>
-        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+<head>
+  <title>Market Area E-Complaint Portal</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-    <style>
-        html, body {
-            margin: 0;
-            padding: 0;
-            width: 100%;
-            height: 100%;
-            overflow-x: hidden;
-            font-family: Arial, Helvetica, sans-serif;
-        }
+  <style>
+    html, body {
+      margin: 0;
+      padding: 0;
+      width: 100%;
+      height: 100%;
+      overflow-x: hidden;
+      font-family: Arial, Helvetica, sans-serif;
+    }
 
-        .main-container {
-            display: flex;
-            flex-wrap: wrap;
-        }
+    .main-container {
+      display: flex;
+      flex-wrap: wrap;
+      height: 100vh;
+    }
 
-        .left-side {
-            width: 73%;
-            flex-grow: 1;
-            flex-basis: 200;
-        }
+    .left-side {
+      width: 73%;
+      flex-grow: 1;
+      flex-basis: 200;
+    }
 
-        .right-side {
-            width: 27%;
-            height: 100vh;
-            display: flex;
-            
-            align-items: center;
-            flex-direction: column;
-            justify-content: center;
+    .left-side img {
+      width: 100%;
+      height: 100vh;
+      object-fit: cover;
+    }
 
-            background-image: url(MarketArea/LogInSignUpFiles/bg.png);
-            background-size: cover;
+    .right-side {
+      width: 27%;
+      height: 100vh;
+      display: flex;
+      align-items: center;
+      flex-direction: column;
+      justify-content: center;
+      background-image: url(MarketArea/LogInSignUpFiles/bg.png);
+      background-size: cover;
+      background-position: center;
+      flex-grow: 1;
+      flex-basis: 200;
+      padding: 20px;
+      box-sizing: border-box;
+    }
 
-            
-            flex-grow: 1;
-            flex-basis: 200;
-        }
+    .right-side img {
+      width: 150px;
+      padding-bottom: 3%;
+      padding-top: 25%;
+    }
 
-        .left-side img {
-            width: 100%;
-            height: 100vh;
-        }
+    .right-side h1 {
+      font-size: 20px;
+      text-align: center;
+      font-family: 'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif;
+    }
 
-        .right-side img {
-            width: 150px;
-            padding-bottom: 3%;
-            padding-top: 25%;
-        }
+    .right-side h3 {
+      font-size: 15px;
+    }
 
-        .right-side h1 {
-            font-size: 20px;
-            text-align: center;
-            font-family: 'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif;
-        }
+    .button1, .button2 {
+      margin-top: 2%;
+      width: 80%;
+      max-width: 250px;
+      min-width: 150px;
+      padding: 15px;
+      border-radius: 40px;
+      font-size: 1.1rem;
+      text-decoration: none;
+      text-align: center;
+      box-shadow: 0 5px 8px rgba(0, 0, 0, 0.5);
+      cursor: pointer;
+      font-weight: bold;
+      box-sizing: border-box;
+    }
 
-        .right-side h3 {
-            font-size: 15px;
-            
-        }
+    .button1 {
+      background: linear-gradient(to right, #8A9A5B, #6A7337);
+      color: black;
+    }
 
-        .button1, .button2 {
-            margin-top: 2%;
+    .button2 {
+      background: linear-gradient(to right, #4B5320, #2B3209);
+      margin-top: 20px;
+      color: white;
+    }
 
-            width: 200px;
-            padding: 15px;
-            border-radius: 40px;
-            font-size: 20px;
-            text-decoration: none;
-            text-align: center;
+    .right-side .below {
+      margin-top: 35%;
+      margin-bottom: 20%;
+      font-size: 15px;
+      text-decoration: none;
+      color: black;
+      text-align: center;
+    }
 
-            display: flex;
-            box-shadow: 0 5px 8px rgba(0, 0, 0, 0.5);
-            cursor: pointer;
-            color: rgb(0, 0, 0);
-            font-weight: bold;
-        }
+    /* ✅ Mobile responsiveness */
+    @media (max-width: 768px) {
+      .main-container {
+        flex-direction: column-reverse;
+        height: auto;
+      }
 
-        .button1 {
-            background: linear-gradient(to right, #8A9A5B, #6A7337);  
-        }
+      .left-side {
+        display: none; /* Hide left-side image on small screens */
+      }
 
-        .button2 {
-            background: linear-gradient(to right, #4B5320, #2B3209);
-            margin-top: 20px;
-            color: white;
-        }
+      .right-side {
+        width: 100%;
+        height: auto;
+        padding: 40px 20px;
+        background-size: cover;
+        background-position: center;
+      }
 
-        .right-side .below {
-            margin-top: 35%;
-            margin-bottom: 20%;
-            font-size: 15px;
-            text-decoration: none;
-            color: black;
-            text-align: center;            
-        }
-        
+      .right-side img {
+        padding-top: 10%;
+        width: 120px;
+      }
 
-    </style>
-    </head>
+      .right-side h1 {
+        font-size: 1.2rem;
+      }
 
-    <body>
+      .right-side h3 {
+        font-size: 1rem;
+      }
 
-        <div class="main-container">
+      .button1, .button2 {
+        width: 90%;
+        font-size: 1rem;
+      }
 
-            <div class="left-side">
-                <img src="MarketArea/LogInSignUpFiles/arch.png">
-            </div>
+      .right-side .below {
+        margin-top: 10%;
+        font-size: 0.9rem;
+      }
+    }
+  </style>
+</head>
 
-            <div class="right-side">
-                <img src="MarketArea/LogInSignUpFiles/logo.png">
-                <h1>Welcome to Market Area E-Complaint Portal</h1>
-                <h3>Click your destination</h3>
-                
+<body>
 
-                <a href="MarketArea/Resident/residentLogin.html" class="button1" title="Resident LogIn">RESIDENT</a>
-                <a href="MarketArea/Staff/staffLogin.html" class="button2" title="Staff LogIn">STAFF</a>
+  <div class="main-container">
 
+    <div class="left-side">
+      <img src="MarketArea/LogInSignUpFiles/arch.png">
+    </div>
 
-                <p class="below">By using this service, you understood and <br> agree to the <a href="" class="termsCondi">Terms and Conditions.</a> </p>
-            </div>
+    <div class="right-side">
+      <img src="MarketArea/LogInSignUpFiles/logo.png">
+      <h1>Welcome to Market Area E-Complaint Portal</h1>
+      <h3>Click your destination</h3>
 
-        </div>
+      <a href="MarketArea/Resident/residentLogin.html" class="button1" title="Resident LogIn">RESIDENT</a>
+      <a href="MarketArea/Staff/staffLogin.html" class="button2" title="Staff LogIn">STAFF</a>
 
-    </body>
+      <p class="below">By using this service, you understood and <br> agree to the <a href="" class="termsCondi">Terms and Conditions.</a> </p>
+    </div>
+
+  </div>
+
+</body>
 </html>
