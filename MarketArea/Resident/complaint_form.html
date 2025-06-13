@@ -59,78 +59,89 @@
 
 
   <main class="form-container">
-    <form class="e-blotter-form">
-      <h2>E-Blotter Information Form</h2>
-      <p class="instruction">Fill all input fields.</p>
+  <form class="e-blotter-form" id="blotter-form"> <!-- ✅ only one form -->
+    <h2>E-Blotter Information Form</h2>
+    <p class="instruction">Fill all input fields.</p>
 
-      <div class="blotter-progress-container">
-        <div class="blotter-progress-line">
+    <div class="blotter-progress-container">
+      <div class="blotter-progress-line">
         <div class="blotter-step active">Personal Info</div>
         <div class="blotter-step">Complaint</div>
         <div class="blotter-step">Evidence</div>
-    </div>
+      </div>
     </div>
 
-      <!-- Personal Information -->
-    <form id="blotter-form">
-      <fieldset class="form-step active">
-        <legend class="section-title">Personal Information</legend>
-        <div class="row">
-          <input type="text" placeholder="Last Name">
-          <input type="text" placeholder="First Name">
-          <input type="text" placeholder="Middle Name">
-          <input type="text" placeholder="Suffix">
-          <select>
-            <option>Sex</option>
-            <option>Male</option>
-            <option>Female</option>
-          </select>
-        </div>
-        <div class="row">
-          <input type="text" placeholder="Address">
-          <input type="text" placeholder="Age">
-          <input type="text" placeholder="Occupation">
-        </div>
-        <input type="text" placeholder="Contact Number">
-      </fieldset>
+    <!-- Personal Information -->
+    <fieldset class="form-step active">
+      <legend class="section-title">Personal Information</legend>
+      <div class="row">
+        <input type="text" placeholder="Last Name">
+        <input type="text" placeholder="First Name">
+        <input type="text" placeholder="Middle Name">
+        <input type="text" placeholder="Suffix">
+        <select>
+          <option>Sex</option>
+          <option>Male</option>
+          <option>Female</option>
+        </select>
+      </div>
+      <div class="row">
+        <input type="text" placeholder="Address">
+        <input type="text" placeholder="Age">
+        <input type="text" placeholder="Occupation">
+      </div>
+      <input type="text" placeholder="Contact Number">
+    </fieldset>
 
-      <!-- Complaint Details -->
-      <fieldset class="form-step">
+    <!-- Complaint Details -->
+    <fieldset class="form-step">
         <legend class="section-title">Complaint Details</legend>
+  
         <div class="row">
-          <select>
-            <option selected disabled>Select type of complaint</option>
-            <option>Noise</option>
-            <option>Vandalism</option>
-          </select>
-          <input type="text" placeholder="Respondent">
+            <select>
+                <option selected disabled>Select type of complaint</option>
+                <option>Noise</option>
+                <option>Vandalism</option>
+            </select>
+                <input type="text" placeholder="Respondent">
         </div>
-        <div class="row">
-          <input type="date" placeholder="Date and Time of Incident">
-          <input type="text" placeholder="Location of the Incident">
-        </div>
-        <textarea placeholder="Detailed Description of the Incident"></textarea>
-      </fieldset>
 
-      <!-- Supporting Evidence -->
-      <fieldset class="form-step">
+        <div class="row">
+            <input type="date" placeholder="Date and Time of Incident">
+            <input type="text" placeholder="Location of the Incident">
+        </div>
+
+        <div class="row">
+            <textarea placeholder="Detailed Description of the Incident"></textarea>
+        </div>
+    </fieldset>
+
+
+    <!-- Supporting Evidence -->
+    <fieldset class="form-step">
         <legend class="section-title">Supporting Evidence</legend>
-        <input type="text" placeholder="Photos, videos or screenshot for evidence">
+  
         <div class="row">
-          <input type="text" placeholder="Witness (N/A if none)">
-          <input type="text" placeholder="Name">
-          <input type="text" placeholder="Contact Number">
+            <input type="text" placeholder="Photos, videos or screenshot for evidence">
         </div>
-      </fieldset>
-    </form>
 
+        <div class="row">
+            <input type="text" placeholder="Witness (N/A if none)">
+            <input type="text" placeholder="Name">
+            <input type="text" placeholder="Contact Number">
+        </div>
+    </fieldset>
+
+
+    <!-- Navigation -->
     <div class="form-nav-center">
       <button type="button" class="nav-btn prev-btn" onclick="prevStep()">Previous</button>
       <button type="button" class="nav-btn next-btn" onclick="nextStep()">Next</button>
       <button type="submit" class="submit-btn nav-btn">Submit Complaint</button>
     </div>
-    </form>
-  </main>
+  </form>
+</main>
+
 
   <!--FOOTER SECTION-->
 		<footer class="footer">
