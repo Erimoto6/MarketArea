@@ -80,10 +80,11 @@
           <input type="text" placeholder="First Name">
           <input type="text" placeholder="Middle Name">
           <input type="text" placeholder="Suffix">
-          <select>
-            <option>Sex</option>
+
+          <select name="Sex" id="Sex">
             <option>Male</option>
             <option>Female</option>
+            <option>Other</option>
           </select>
         </div>
         <div class="row">
@@ -102,6 +103,9 @@
             <option selected disabled>Select type of complaint</option>
             <option>Noise</option>
             <option>Vandalism</option>
+            <option>Neighnorhood Dispute</option>
+            <option>Unpaid Dept</option>
+            <option>Other</option>
           </select>
           <input type="text" placeholder="Respondent">
         </div>
@@ -124,6 +128,39 @@
       </fieldset>
     </form>
 
+  <!-- Terms and Conditions Checkbox (last field) -->
+  <div class="terms-container">
+    <input type="checkbox" id="terms-checkbox" required>
+    <label for="terms-checkbox">
+      I agree to the <a href="#" id="terms-link">Terms and Conditions</a>
+    </label>
+  </div>
+
+  <div id="terms-modal" style="display:none; position:fixed; top:0; left:0; width:100vw; height:100vh; background:rgba(0,0,0,0.5); z-index:9999; align-items:center; justify-content:center;">
+    <div style="background:#ffffff; padding:2rem; border-radius:8px; max-width:500px; margin:auto; position:relative;">
+      <h3>Terms and Conditions</h3>
+      <p>
+        By submitting this complaint, you agree to abide by the rules and regulations of the Barangay E-Blotter System. Your information will be kept confidential and used solely for the purpose of resolving your complaint.
+      </p>
+      <button id="close-terms-modal" style="margin-top:1rem;">Close</button>
+    </div>
+  </div>
+  <script>
+    document.getElementById('terms-link').addEventListener('click', function(e) {
+      e.preventDefault();
+      document.getElementById('terms-modal').style.display = 'flex';
+    });
+    document.getElementById('close-terms-modal').addEventListener('click', function() {
+      document.getElementById('terms-modal').style.display = 'none';
+    });
+    // Optional: close modal when clicking outside the modal content
+    document.getElementById('terms-modal').addEventListener('click', function(e) {
+      if (e.target === this) {
+        this.style.display = 'none';
+      }
+    });
+  </script>
+
     <div class="form-nav-center">
       <button type="button" class="nav-btn prev-btn" onclick="prevStep()">Previous</button>
       <button type="button" class="nav-btn next-btn" onclick="nextStep()">Next</button>
@@ -131,6 +168,7 @@
     </div>
     </form>
   </main>
+
 
   <!--FOOTER SECTION-->
 		<footer class="footer">
