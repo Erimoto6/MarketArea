@@ -81,15 +81,16 @@
           <input type="text" placeholder="Suffix">
 
           <select name="Sex" id="Sex" required>
-            <option>Male</option>
-            <option>Female</option>
-            <option>Other</option>
+          <option value="" selected disabled>Sex</option>
+          <option value="Male">Male</option>
+          <option value="Female">Female</option>
+          <option value="Other">Other</option>
           </select>
+
         </div>
         <div class="row">
           <input type="text" placeholder="Address" required>
           <input type="text" placeholder="Age" required>
-          <input type="text" placeholder="Civil Status" required>
           <input type="text" placeholder="Occupation" required>
           <input type="text" placeholder="Contact Number" required>
         </div>
@@ -122,7 +123,9 @@
         <legend class="section-title">Supporting Evidence</legend>
 
       <div class="row">
-       <input type="text" placeholder="Photos, videos or screenshot for evidence">
+       <input type="file" name="evidenceFiles" accept="image/*,video/*" multiple>
+       <label style="font-size:12px;color:#555;margin-bottom:10px;">You may select multiple images or videos.</label>
+       
        <input type="text" placeholder="Witness (N/A if none)">
        <input type="text" placeholder="Name">
        <input type="text" placeholder="Contact Number">
@@ -266,36 +269,7 @@
   // Run on page load
   updateFormSteps();
 
-
-  /* Submit Complaint Form Validation */
-  document.getElementById('blotter-form').addEventListener('submit', function(e) {
-  // Check ALL required inputs in ALL steps
-  const requiredInputs = document.querySelectorAll('[required]');
-  let incomplete = false;
-
-  requiredInputs.forEach(input => {
-    if (input.type === 'checkbox') {
-      if (!input.checked) incomplete = true;
-    } else {
-      if (input.value.trim() === '') incomplete = true;
-    }
-  });
-
-  if (incomplete) {
-    e.preventDefault();
-    document.getElementById('error-modal').style.display = 'flex';
-  }
-});
-
 </script>
-
-<div id="error-modal" class="error-modal">
-  <div class="error-modal-content">
-    <h3>Incomplete Form</h3>
-    <p>Please fill in all required fields in Personal Information and Complaint Details before submitting.</p>
-    <button id="close-error-modal">Close</button>
-  </div>
-</div>
 
 </body>
 </html>
