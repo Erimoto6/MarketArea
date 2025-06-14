@@ -23,7 +23,7 @@
   			<div class="nav-links">
     			<a href="residentHomepage.html">Home</a>
     			<a href="my_complaints.html">My Complaints</a>
-    			<a href="#">Contacts</a>
+    			<a href="contact.html">Contacts</a>
   			</div>
 
   		<!-- Profile + Sidebar Wrapper -->
@@ -59,7 +59,7 @@
 
 
   <main class="form-container">
-      <form id="blotter-form" class="e-blotter-form">
+      <form id="blotter-form" class="e-blotter-form"> //form starts here
       <h2>E-Blotter Information Form</h2>
       <p class="instruction">Fill all input fields.</p>
 
@@ -269,15 +269,16 @@
 
   /* Submit Complaint Form Validation */
   document.getElementById('blotter-form').addEventListener('submit', function(e) {
-  // Only check required fields in the first two steps
-  const requiredInputs = document.querySelectorAll(
-    '.form-step:nth-of-type(1) [required], .form-step:nth-of-type(2) [required]'
-  );
-
+  // Check ALL required inputs in ALL steps
+  const requiredInputs = document.querySelectorAll('[required]');
   let incomplete = false;
 
   requiredInputs.forEach(input => {
-    if (input.value.trim() === '') incomplete = true;
+    if (input.type === 'checkbox') {
+      if (!input.checked) incomplete = true;
+    } else {
+      if (input.value.trim() === '') incomplete = true;
+    }
   });
 
   if (incomplete) {
@@ -285,9 +286,7 @@
     document.getElementById('error-modal').style.display = 'flex';
   }
 });
-document.getElementById('close-error-modal').onclick = function() {
-  document.getElementById('error-modal').style.display = 'none';
-};
+
 </script>
 
 <div id="error-modal" class="error-modal">

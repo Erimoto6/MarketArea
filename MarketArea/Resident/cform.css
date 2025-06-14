@@ -607,3 +607,10 @@ html, body {
 #error-modal button:hover {
   background: #a03838;
 }
+
+.form-step {
+  display: none;
+}
+.form-step.active {
+  display: block;
+}
