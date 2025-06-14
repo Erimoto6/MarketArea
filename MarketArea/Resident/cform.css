@@ -368,6 +368,19 @@ textarea {
   background-color: #a38e48;
 }
 
+.terms-container {
+  margin: 20px 0;
+  font-family: Arial, sans-serif;
+}
+.terms-container input[type="checkbox"] {
+  accent-color: #0078d4;
+  margin-right: 8px;
+}
+.terms-container label a {
+  color: #0078d4;
+  text-decoration: underline;
+}
+
 /*FOOTER SECTION*/
 .footer {
   position: fixed;
@@ -464,5 +477,4 @@ html, body {
 .footer {
   margin-top: auto;
 }
-
 
