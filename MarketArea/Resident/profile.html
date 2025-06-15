@@ -1,14 +1,13 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Complaint Record</title>
-  <link rel="stylesheet" href="mycomp_details.css" />
+  <meta charset="UTF-8">
+  <title>Profile - Barangay Market Area</title>
+  <link rel="stylesheet" href="profile.css">
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600&display=swap" rel="stylesheet">
 </head>
 
 <body>
-
   <!-- HEADER SECTION -->
 		<header class="header_gradient">
   			<div class="header-left">
@@ -34,7 +33,7 @@
 
   			<!-- Collapsible Sidebar -->
   			<div class="sidebar collapsed" id="profileSidebar">
-				<a href="profile.html" class="sidebar-item">
+				<a href="#" class="sidebar-item">
       				<i class="icon">👤</i>
       				<span class="label">Profile</span>
     			</a>
@@ -55,56 +54,42 @@
 	</div>
 </header>
 
-  <main class="record-container">
-    <div class="icon-section">
-      <img src="filing_icon.png" alt="Icon" class="complaint-icon">
-      <h2>Complaint Records</h2>
+<section class="page-container">
+  <div class="profile-container">
+    <div class="sidebar_body">
+      <div class="profile-pic">
+        <label for="profileUpload">
+            <div class="circle-img" id="profilePreview"></div>
+            <div class="camera-icon">📷</div>
+        </label>
+            <input type="file" id="profileUpload" accept="image/*" style="display: none;">
+      </div>
+      <div class="sidebar-links active">
+        <span>👤</span> Personal Information
+      </div>
     </div>
 
-    <p class="filed-date"><strong>Date Filed:</strong> 03/03/25</p>
-
-    <section class="complaint-section">
-      <div class="field-block">
-        <p><strong>Name:</strong> Juan De Luna</p>
-        <p><strong>Age:</strong> 31</p>
-        <p><strong>Gender:</strong> Male</p>
-        <p><strong>Address:</strong> blablabla</p>
-        <p><strong>Contact:</strong> 09178920304</p>
-        <p><strong>Email:</strong> juandeluna@gmail.com</p>
-      </div>
-      <hr>
-
-      <div class="field-block">
-        <p><strong>Type of Complaint:</strong> Noise</p>
-        <p><strong>Date and Time of Incident:</strong> 03/02/25, 2:00am</p>
-        <p><strong>Location of Incident:</strong> rawr street, abc</p>
-        <p><strong>Description:</strong></p>
-        <div class="description-box"></div>
-      </div>
-      <hr>
-
-      <div class="field-block">
-        <p><strong>Photo, Video, or Screenshot Evidence:</strong></p>
-        <div class="evidence-grid">
-          <div class="evidence-box"></div>
-          <div class="evidence-box"></div>
-          <div class="evidence-box"></div>
+    <div class="profile-form">
+      <h2>Personal Information</h2>
+      <form>
+        <div class="form-row">
+          <input type="text" placeholder="First Name">
+          <input type="text" placeholder="Last Name">
         </div>
-      </div>
-      <hr>
-
-      <div class="field-block">
-        <p><strong>Witness Details:</strong></p>
-        <p><strong>Name:</strong></p>
-        <p><strong>Contact:</strong></p>
-      </div>
-
-      <div class="field-block">
-        <p><strong>Schedule of Appointment:</strong> Date, Time</p>
-        <p><strong>Assigned to:</strong> _____</p>
-      </div>
-    </section>
-  </main>
+        <input type="email" placeholder="Email Address">
+        <input type="text" placeholder="Address">
+        <div class="form-row">
+          <input type="text" placeholder="Contact Number">
+          <input type="date" placeholder="Date of Birth">
+        </div>
+        <div class="form-buttons">
+          <button type="button" class="discard-btn">Discard changes</button>
+          <button type="submit" class="save-btn">Save changes</button>
+        </div>
+      </form>
+    </div>
+  </div>
+</section>
 
   <!--FOOTER SECTION-->
 		<footer class="footer">
@@ -132,7 +117,8 @@
             </div>
             </footer>
 
-  <script>
+<script>
+    //settings
   const profileTrigger = document.getElementById('profileTrigger');
   const sidebar = document.getElementById('profileSidebar');
 
@@ -156,6 +142,25 @@
       window.location.href = this.href;
     }
   });
+
+  //profile pic
+
+  const fileInput = document.getElementById('profileUpload');
+  const preview = document.getElementById('profilePreview');
+
+  fileInput.addEventListener('change', function () {
+    const file = this.files[0];
+    if (file && file.type.startsWith('image/')) {
+      const reader = new FileReader();
+      reader.onload = function (e) {
+        preview.style.backgroundImage = `url('${e.target.result}')`;
+        preview.style.backgroundSize = 'cover';
+        preview.style.backgroundPosition = 'center';
+      };
+      reader.readAsDataURL(file);
+    }
+  });
+
 </script>
 
 </body>
