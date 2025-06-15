@@ -190,6 +190,17 @@
       margin: 0;
 
     }
+    
+    /* 🔸 Status dot (orange) - New Complaints only */
+    .status-dot {
+      height: 10px;
+      width: 10px;
+      border-radius: 50%;
+      display: inline-block;
+      background-color: #FFA500; /* Orange for 'New' */
+      margin-right: 8px;
+    }
+
 
     th, td {
       padding: 15px 15px 5px 15px;
@@ -358,7 +369,7 @@
     <div class="footer-section1">
       <h4>Quick Menu</h4>
       <ul>
-        <li><a href="MarketArea/Staff/staffHomepage.html">Home</a></li>
+        <li><a href="/MarketArea/Staff/staffHomepage.html">Home</a></li>
         <li><a href="#">Manage Complaint</a></li>
         <li><a href="#">Quick Metrics</a></li>
       </ul>
@@ -374,12 +385,14 @@
   </footer>
 
   <script>
+    // NEW: Added status field to each complaint
     const complaints = Array.from({ length: 15 }, (_, i) => ({
       id: i + 1,
       complainant: `Resident ${i + 1}`,
       category: ['Noise', 'Garbage', 'Other'][i % 3],
       date: new Date(Date.now() - i * 86400000).toISOString().split('T')[0],
-      description: `Complaint detail example #${i + 1}`
+      description: `Complaint detail example #${i + 1}`,
+      status: i % 3 === 0 ? 'New' : i % 3 === 1 ? 'In Progress' : 'Resolved' // NEW
     }));
 
     const tableBody = document.querySelector('#complaintTable tbody');
@@ -390,14 +403,28 @@
     let currentPage = 1;
     const complaintsPerPage = 9;
 
+    // NEW: Get color based on status
+    function getStatusDotColor(status) {
+      switch (status) {
+        case 'New': return '#FFA500'; // Orange
+        case 'In Progress': return '#4A43FF'; // Blue
+        case 'Resolved': return '#09FF00'; // Green
+        default: return '#ccc';
+      }
+    }
+
     function renderTable(data) {
       tableBody.innerHTML = '';
       const start = (currentPage - 1) * complaintsPerPage;
       const end = start + complaintsPerPage;
       data.slice(start, end).forEach(complaint => {
         const row = document.createElement('tr');
+
+        // 🔸 Add orange dot before Complaint ID
+        const statusDot = `<span class="status-dot"></span>`;
+
         row.innerHTML = `
-          <td>#${complaint.id.toString().padStart(5, '0')}</td>
+          <td>${statusDot}#${complaint.id.toString().padStart(5, '0')}</td>
           <td>${complaint.complainant}</td>
           <td>${complaint.category}</td>
           <td>${complaint.date}</td>
@@ -407,6 +434,7 @@
         tableBody.appendChild(row);
       });
     }
+
 
     function renderPagination(data) {
       const totalPages = Math.ceil(data.length / complaintsPerPage);
@@ -471,7 +499,7 @@
       }
     };
 
-
+    // Initial render
     updateTable();
   </script>
 </body>
