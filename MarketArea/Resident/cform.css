@@ -458,6 +458,15 @@ textarea {
   transition: opacity 0.2s ease;
 }
 
+/* Make footer links white and remove underline */
+.footer-link,
+.footer-link a,
+.footer-link a:visited,
+.footer-link a:active {
+  color: #fff !important;
+  text-decoration: none !important;
+}
+
 /* Left Section */
 .footer-left {
   flex: 1;

@@ -7,7 +7,7 @@ body {
   background-position: center center;
   background-size: cover;
   background-attachment: fixed; /* optional for parallax effect */
-  color: #000;
+  color: #ffffff;
   margin: 0;
   padding: 0;
   min-height: 100vh; /* ensures the background covers the whole screen */
@@ -45,6 +45,7 @@ body {
 
 .barangay-market-area {
     font-family: Trebuchet MS;
+    color: #ffffff; /* Ensure text is visible against the background */
 }
 
 .barangay-title {
@@ -264,12 +265,7 @@ body {
 
     
     
-    body {
-      background: #fffbe6;
-      font-family: 'Inter', Arial, sans-serif;
-      margin: 0;
-      padding: 0;
-    }
+/* Privacy Policy Styles */
     .policy-container {
       max-width: 600px;
       margin: 40px auto;
