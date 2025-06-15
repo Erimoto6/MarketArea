@@ -1,0 +1,126 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Complaint Form</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      padding: 30px;
+      line-height: 1.5;
+    }
+
+    .form-container {
+      max-width: 800px;
+      margin: auto;
+      border: 1px solid #ccc;
+      padding: 30px;
+    }
+
+    .row {
+      display: flex;
+      justify-content: space-between;
+    }
+
+    .photo {
+      width: 150px;
+      height: 150px;
+      object-fit: cover;
+      border: 1px solid #aaa;
+    }
+
+    .info {
+      flex: 1;
+    }
+
+    .section {
+      margin-top: 30px;
+      border-top: 1px solid #aaa;
+      padding-top: 20px;
+    }
+
+    .desc-box {
+      width: 100%;
+      height: 60px;
+      margin-top: 10px;
+      resize: none;
+      padding: 8px;
+      background-color: #eee;
+      border: 1px solid #ccc;
+      color: #444;
+    }
+
+    .desc-box:disabled {
+      background-color: #eee;
+    }
+
+    .evidence {
+      display: flex;
+      gap: 20px;
+      margin-top: 10px;
+    }
+
+    .evidence img {
+      width: 100px;
+      height: 100px;
+      object-fit: cover;
+      border: 1px solid #999;
+    }
+
+    .optional {
+      text-align: center;
+      font-style: italic;
+      margin: 20px 0 10px;
+    }
+
+    .bottom-section {
+      margin-top: 30px;
+      border-top: 1px solid #aaa;
+      padding-top: 20px;
+    }
+  </style>
+</head>
+<body>
+  <div class="form-container">
+    <div class="row">
+      <div class="info">
+        <p><strong>Date Filed:</strong> 03/03/25</p>
+        <p><strong>Name:</strong> Juan De Luna</p>
+        <p><strong>Age:</strong> 31</p>
+        <p><strong>Gender:</strong> Male</p>
+        <p><strong>Address:</strong> blablabla</p>
+        <p><strong>Contact:</strong> 09178920304</p>
+        <p><strong>Email:</strong> juandeluna@gmail.com</p>
+      </div>
+      <img src="https://via.placeholder.com/150" class="photo" alt="ID Photo">
+    </div>
+
+    <div class="section">
+      <p><strong>Type of Complaint:</strong> Noise</p>
+      <p><strong>Date and Time of Incident:</strong> 03/02/25, 2:00am</p>
+      <p><strong>Location of Incident:</strong> rawr street, abc</p>
+      <p><strong>Description:</strong></p>
+      <textarea class="desc-box" disabled>This is a description of the noise incident...</textarea>
+
+      <p><strong>Photo, Video, or Screenshot Evidence (Optional):</strong></p>
+      <div class="evidence">
+        <img src="https://via.placeholder.com/100" alt="Evidence 1">
+        <img src="https://via.placeholder.com/100" alt="Evidence 2">
+        <img src="https://via.placeholder.com/100" alt="Evidence 3">
+      </div>
+    </div>
+
+    <div class="section">
+      <p class="optional">(Optional)</p>
+      <p><strong>Witness Details:</strong></p>
+      <p><strong>Name:</strong></p>
+      <p><strong>Contact:</strong></p>
+    </div>
+
+    <div class="bottom-section">
+      <p><strong>Schedule of Appointment:</strong> Date, Time</p>
+      <p><strong>Assigned to:</strong> (staff name)</p>
+    </div>
+  </div>
+</body>
+</html>
