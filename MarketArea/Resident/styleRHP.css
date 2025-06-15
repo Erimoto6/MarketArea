@@ -480,4 +480,39 @@ html, body {
   margin-top: auto;
 }
 
+\\for settings 
+.settings-body {
+  background-image: url('marketareabg.jpg');
+  background-repeat: no-repeat;
+  background-size: cover;
+  background-position: center;
+  background-attachment: fixed; /* if you want it to stay while scrolling */
+}
+
+    .your-div {
+  position: relative;
+  background-image: url(bg.png);
+  background-size: cover;
+  background-position: center;
+}
+
+/* Add this inside the div for the overlay */
+.your-div::before {
+  content: "";
+  position: absolute;
+  top: 0; left: 0; right: 0; bottom: 0;
+  background-color: rgba(255, 255, 255, 0.6); /* ← transparency layer */
+  z-index: 1;
+   border: solid;
+   border-radius: 20;
+}
+
+/* Content inside stays visible */
+.your-div * {
+  position: relative;
+  z-index: 2;
+  margin: 20px;
+  padding: 5px;
+}
+
 
