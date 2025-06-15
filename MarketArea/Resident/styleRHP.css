@@ -453,6 +453,14 @@
 .footer-link:hover {
   opacity: 0.5;
 }
+/* Make footer links white and remove underline */
+.footer-link,
+.footer-link a,
+.footer-link a:visited,
+.footer-link a:active {
+  color: #fff !important;
+  text-decoration: none !important;
+}
 
 /* Make body take full height */
 html, body {
