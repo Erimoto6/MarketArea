@@ -1,9 +1,14 @@
-/* General Reset */
-* {
+body {
+  font-family: 'Inter', sans-serif;
+  background-image: url('marketarea2.jpg');
+  background-repeat: no-repeat;
+  background-position: center center;
+  background-size: cover;
+  background-attachment: fixed; /* optional for parallax effect */
+  color: #000;
   margin: 0;
   padding: 0;
-  box-sizing: border-box;
-  font-family: 'Trebuchet MS', sans-serif;
+  min-height: 100vh; /* ensures the background covers the whole screen */
 }
 
 /* HEADER SECTION */
@@ -40,10 +45,6 @@
   font-family: 'Bebas Neue', sans-serif;
   letter-spacing: 0.1em;
   line-height: 1.1;
-}
-
-.barangay-market-area {
-    font-family: Trebuchet MS;
 }
 
 /* Navigation links */
@@ -165,267 +166,97 @@
   cursor: pointer;
 }
 
-/* Main Content */
-.content {
-  background-image: url('marketarea2.jpg'); /* Replace with your actual image if needed */
-  background-size: cover;
-  background-position: center;
-  min-height: 100vh;
-  padding: 40px;
-}
 
-/* Complaint Header */
-@keyframes slideInLeft {
-  from {
-    transform: translateX(-100px);
-    opacity: 0;
-  }
-  to {
-    transform: translateX(0);
-    opacity: 1;
-  }
-}
-
-.complaints-header {
-  display: flex;
-  align-items: center;
-  gap: 10px;
-  margin-bottom: 20px;
-  animation: slideInLeft 0.6s ease-out;
-}
-
-.complaint-icon {
-  width: 80px;
-  height: 80px;
-  border-radius: 50%;
-  background-color: #ffffff;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  margin-right: 20px;
-  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.15);
-  text-align: center; /* optional but helps */
-  overflow: hidden;   /* avoids overflow edge cases */
-}
-
-.complaint-icon img {
-  width: 45px;
-  height: 45px;
-  object-fit: contain;
-  margin: 0;          /* remove unexpected spacing */
-  display: block;     /* avoid inline spacing issues */
-  transform: translateX(-2px); /* Adjust left/right */
-}
-
-
-
-/* Search and Filter Section */
-.controls {
-  display: flex;
-  justify-content: flex-end; /* Align to right */
-  align-items: center;
-  gap: 10px; /* space between search and filter */
-  margin-bottom: 20px;
-  flex-wrap: wrap;
-}
-
-/* Make the search bar compact and consistent */
-.search-bar {
-  padding: 13px 22px;
-  font-size: 14px;
-  border: 1px solid #ccc;
-  border-radius: 8px;
-  max-width: 350px;
-}
-
-/* Optional: Make it responsive on smaller screens */
-@media (max-width: 600px) {
-  .controls {
-    flex-direction: column;
-    align-items: flex-end;
-  }
-
-  .search-bar {
-    width: 100%;
-    max-width: 100%;
-  }
-}
-
-
-/*stack on mobile*/
-@media (max-width: 600px) {
-  .controls {
-    flex-direction: column;
-    align-items: flex-end;
-  }
-
-  .search-bar {
-    width: 100%;
-  }
-}
-
-/* Filter (burger) button styling */
-
-/* Burger (Filter) Button Styling */
-.filter-button {
-  background-color: #4b5320;
-  color: white;
-  font-size: 20px;
-  padding: 10px 16px;
-  border: none;
-  border-radius: 10px;
-  cursor: pointer;
-  font-weight: bold;
-  transition: background-color 0.3s ease;
-}
-
-.filter-button:hover {
-  background-color: #3e451b;
-}
-
-.filter-actions {
-  display: flex;
-  justify-content: space-between;
-  gap: 10px;
-  margin-top: 10px;
-}
-
-.filter-actions button {
-  flex: 1;
-  padding: 10px;
-  border: none;
-  border-radius: 8px;
-  font-weight: bold;
-  cursor: pointer;
-}
-
-.filter-actions .clear-btn {
-  background-color: #e0e0e0;
-  color: #333;
-}
-
-.filter-actions .clear-btn:hover {
-  background-color: #ccc;
-}
-
-.filter-actions button:first-child {
-  background-color: #4CAF50;
-  color: white;
-}
-
-.filter-actions button:first-child:hover {
-  background-color: #45a049;
-}
-
-/* Group spacing */
-.filter-group {
-  display: flex;
-  flex-direction: column;
-  margin-bottom: 18px;
-}
-
-/* Dropdown menu overall layout */
-#dropdownMenu {
-  display: none;
-  position: absolute;
-  right: 0;
-  top: 50px;
+.security-container {
+  max-width: 800px;
+  margin: 40px auto;
   background: white;
-  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
-  padding: 28px 24px;
+  padding: 30px;
   border-radius: 12px;
-  z-index: 100;
-  min-width: 260px;
-  flex-direction: column;
+  box-shadow: 0 0 10px rgba(0,0,0,0.1);
 }
 
-/* When dropdown is shown */
-.dropdown.show #dropdownMenu {
+h2 {
+  font-size: 24px;
+  margin-bottom: 30px;
+  color: #4b5320;
+}
+
+.section {
+  margin-bottom: 40px;
+}
+
+.section h3 {
+  font-size: 18px;
+  color: #333;
+  margin-bottom: 16px;
+}
+
+.info-group {
   display: flex;
+  flex-direction: column;
+  margin-bottom: 15px;
 }
 
+.toggle-label {
+  font-size: 13px;
+  color: #333;
+  margin-top: 6px;
+  display: flex;
+  align-items: center;
+  gap: 5px;
+  user-select: none;
+}
 
-/* Label and input styling */
-#dropdownMenu label {
-  font-size: 14px;
+label {
   font-weight: 600;
   margin-bottom: 6px;
-  color: #333;
 }
 
-#dropdownMenu input,
-#dropdownMenu select {
-  padding: 10px 12px;
-  font-size: 14px;
+input[type="email"],
+input[type="password"],
+select {
+  padding: 10px;
   border: 1px solid #ccc;
   border-radius: 8px;
-  width: 100%;
-  box-sizing: border-box;
+  font-size: 14px;
 }
 
+input[readonly] {
+  background-color: #f0f0f0;
+  color: #555;
+}
 
-/* Apply button */
-#dropdownMenu button {
-  align-self: flex-end;
+.change-password-form {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
+button[type="submit"] {
   padding: 10px 20px;
   background-color: #4b5320;
   color: white;
   border: none;
-  border-radius: 8px;
+  border-radius: 50px;
   font-weight: 600;
   cursor: pointer;
-  margin-top: 8px;
-  transition: background-color 0.2s ease;
+  margin-top: 10px;
 }
 
-#dropdownMenu button:hover {
-  background-color: #3b4119;
+button[type="submit"]:hover {
+  background-color: #3e451a;
 }
 
-
-/* Complaint Table */
-.complaints-table {
-  width: 100%;
-  background-color: white;
-  border-collapse: collapse;
-  border-radius: 10px;
-  overflow: hidden;
-  box-shadow: 0 2px 10px rgba(0,0,0,0.1);
-  margin-top: 20px; /* spacing from search bar */
+select {
+  width: 200px;
+  margin-top: 10px;
 }
 
-.complaints-table th,
-.complaints-table td {
-  padding: 15px;
-  text-align: left;
-  font-size: 16px;
-  border-bottom: 1px solid #ccc;
-}
-
-.details-btn {
-  background-color: #ffc107;
-  color: black;
-  border: none;
-  padding: 6px 14px;
-  border-radius: 20px;
-  font-weight: bold;
-  cursor: pointer;
-}
-
-.details-btn:hover {
-  background-color: #e0a800;
-}
-
-.complaints-section {
-  max-width: 1000px;
-  margin: 0 auto;
-  padding: 20px;
-}
-
+/*FOOTER SECTION*/
 /* Footer Container */
 .footer {
   display: flex;
-  padding: 30px 20px;
   justify-content: space-between;
   align-items: center;        /* vertically center all sections */
   flex-wrap: wrap;
@@ -436,9 +267,6 @@
   color: #fff;
   gap: 20px;
   height: auto;
-  width: 100%;
-  box-sizing: border-box;
-  min-height: 150px;
 }
 
 /* Left Section */

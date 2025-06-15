@@ -16,6 +16,9 @@
   overflow: visible; /* or remove 'overflow: hidden' */
 }
 
+.barangay-market-area {
+    font-family: Trebuchet MS;
+}
 
 .background-circles {
   position: absolute;
