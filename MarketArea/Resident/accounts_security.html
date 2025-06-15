@@ -1,22 +1,14 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
 <head>
-  	<meta charset="utf-8">
-  	<meta name="viewport" content="initial-scale=1, width=device-width">
-  	
-  	<link rel="stylesheet"  href="styleRHP.css" />
-  	<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=K2D:wght@300;500;800&display=swap" />
-  	<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Bebas Neue:wght@400&display=swap" />
-  	<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;800&display=swap" />
-  	
-  	
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Accounts & Security</title>
+  <link rel="stylesheet" href="acc_sec.css"/>
 </head>
 <body>
-  	<div class="page-container">
-  	<div class="written-complaint-appointmen">
 
-
-		<!-- HEADER SECTION -->
+    <!-- HEADER SECTION -->
 		<header class="header_gradient">
   			<div class="header-left">
     			<img class="market-area-logo" src="logo.png" alt="Logo" />
@@ -59,44 +51,53 @@
 				</a>
   			</div>
 		</div>
+	</div>
+</header>
 
+  <div class="security-container">
+    <h2>Account & Security Settings</h2>
 
-			</div>
-		</header>
+    <div class="section">
+      <h3>Account Information</h3>
+      <div class="info-group">
+        <label>Email Address</label>
+        <input type="email" value="your@email.com" readonly />
+      </div>
+      <div class="info-group">
+        <label>Password</label>
+        <input type="password" id="readonly-password" value="mySecret123" readonly />
+        <label class="toggle-label">
+          <input type="checkbox" onclick="toggleReadonlyPassword()" /> Show Password
+        </label>
+      </div>
+    </div>
 
-		<!-- HERO SECTION -->
-		<section class="hero-section">
-  			<div class="background-circles">
-    			<div class="market_area_bg"></div>
-    			<div class="green_circle"></div>
-    			<div class="yellow_circle"></div>
-  			</div>
+    <div class="section">
+      <h3>Change Password</h3>
+      <form class="change-password-form">
+        <input type="password" placeholder="Current Password" id="current-pass" required />
+        <input type="password" placeholder="New Password" id="new-pass" required />
+        <input type="password" placeholder="Confirm New Password" id="confirm-pass" required />
+        <label class="toggle-label">
+          <input type="checkbox" onclick="toggleChangePasswords()" /> Show Passwords
+        </label>
+        <button type="submit">Update Password</button>
+      </form>
+    </div>
 
-  			<div class="hero-content">
-    			<div class="welcome-to-barangay">
-      				Welcome to barangay market area:<br> e-BLOTTER system
-    			</div>
-			
-			<a href="complaint_form.html">
-    		<button class="file_complaint_container" type="button" aria-label="File a Complaint">
-  				<div class="file_complaint_button"></div>
-  				<div class="file_complaint_icon"></div>
-  				<img class="file_complaint_iconimg" src="filing_icon.png" alt="Complaint Icon" />
+    <div class="section">
+      <h3>Auto Logout</h3>
+      <label for="timeout">Set inactivity logout time:</label>
+      <select id="timeout">
+        <option value="5">5 minutes</option>
+        <option value="10">10 minutes</option>
+        <option value="30" selected>30 minutes</option>
+        <option value="60">1 hour</option>
+      </select>
+    </div>
+  </div>
 
-  				<div class="file-a-complaint-parent">
-    			<div class="file-a-complaint">File a Complaint</div>
-    			<div class="submit-and-track">
-      				Submit and track your concerns directly to barangay officials. Stay informed, stay heard.
-    			</div>
-  				</div>
-			</button>
-			</a>
-      		</div>
-    		</div>
-  			</div>
-		</section>
-
-		<!--FOOTER SECTION-->
+  <!--FOOTER SECTION-->
 			<footer class="footer">
   				<div class="footer-left">
     				<img class="market-area-logo2" src="logo.png" alt="Barangay Logo" />
@@ -124,17 +125,13 @@
     			</div>
   			</div>
 		</div>
+    </footer>
 
-			</footer>
+  <script>
 
-  	</div>
-  	
-  	
-  	
-</div>
+    //profile sidebar
 
-<script>
-  const profileTrigger = document.getElementById('profileTrigger');
+    const profileTrigger = document.getElementById('profileTrigger');
   const sidebar = document.getElementById('profileSidebar');
 
   profileTrigger.addEventListener('click', (e) => {
@@ -157,7 +154,19 @@
       window.location.href = this.href;
     }
   });
-</script>
 
+  //password
+    function toggleReadonlyPassword() {
+      const field = document.getElementById("readonly-password");
+      field.type = field.type === "password" ? "text" : "password";
+    }
+
+    function toggleChangePasswords() {
+      ["current-pass", "new-pass", "confirm-pass"].forEach(id => {
+        const field = document.getElementById(id);
+        field.type = field.type === "password" ? "text" : "password";
+      });
+    }
+  </script>
 </body>
 </html>
