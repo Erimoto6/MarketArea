@@ -1,8 +1,14 @@
 body {
-
   font-family: 'Inter', sans-serif;
-  background: url('marketarea2.jpg') no-repeat center center / cover;
+  background-image: url('marketarea2.jpg');
+  background-repeat: no-repeat;
+  background-position: center center;
+  background-size: cover;
+  background-attachment: fixed; /* optional for parallax effect */
   color: #000;
+  margin: 0;
+  padding: 0;
+  min-height: 100vh; /* ensures the background covers the whole screen */
 }
 
 /* HEADER SECTION */
@@ -425,7 +431,7 @@ textarea {
 
 /*FOOTER SECTION*/
 .footer {
-  position: static;
+  position: relative;
   bottom: 0;
   left: 0;
   width: 100%;
@@ -512,23 +518,21 @@ textarea {
   opacity: 0.5;
 }
 
-/* Make body take full height */
 html, body {
   height: 100%;
   margin: 0;
-}
-
-/* Page container uses column layout */
-.page-container {
   display: flex;
   flex-direction: column;
-  min-height: 100vh;
 }
 
-/* Push footer to bottom if content is short */
-.footer {
-  margin-top: auto;
+.page-container {
+  flex: 1; /* Main area takes the rest of the space */
 }
+
+.footer {
+  flex-shrink: 0;
+}
+
 
 /* Center the modal and make it overlay everything */
 #terms-modal {

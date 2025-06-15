@@ -1,0 +1,172 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Accounts & Security</title>
+  <link rel="stylesheet" href="acc_sec.css"/>
+</head>
+<body>
+
+    <!-- HEADER SECTION -->
+		<header class="header_gradient">
+  			<div class="header-left">
+    			<img class="market-area-logo" src="logo.png" alt="Logo" />
+    			<div class="barangay-title">
+      			<p class="barangay-market-area">Barangay Market Area:<br>E-Blotter System</p>
+    			</div>
+  			</div>
+
+  			<div class="navbar">
+  				<div class="nav-links">
+    				<a href="residentHomepage.html">Home</a>
+    				<a href="my_complaints.html">My Complaints</a>
+    				<a href="contact.html">Contacts</a>
+  				</div>
+
+  			<!-- Profile + Sidebar Wrapper -->
+			<div class="profile-sidebar-wrapper">
+  			<!-- Profile Trigger -->
+  			<div class="profile-link" id="profileTrigger">
+    			<div class="profile"></div>
+  			</div>
+
+  			<!-- Collapsible Sidebar -->
+  			<div class="sidebar collapsed" id="profileSidebar">
+				<a href="profile.html" class="sidebar-item">
+      				<i class="icon">👤</i>
+      				<span class="label">Profile</span>
+    			</a>
+    			<a href="#" class="sidebar-item">
+      				<i class="icon">⚙️</i>
+      				<span class="label">Settings</span>
+				</a>
+    			<a href="accounts_security.html" class="sidebar-item">
+      				<i class="icon">🔐</i>
+      				<span class="label">Account & Security</span>
+				</a>
+    			<a href="residentLogin.html" class="sidebar-item" id="logout-btn">
+  					<i class="icon">⏻</i>
+  					<span class="label">Logout</span>
+				</a>
+  			</div>
+		</div>
+	</div>
+</header>
+
+  <div class="security-container">
+    <h2>Account & Security Settings</h2>
+
+    <div class="section">
+      <h3>Account Information</h3>
+      <div class="info-group">
+        <label>Email Address</label>
+        <input type="email" value="your@email.com" readonly />
+      </div>
+      <div class="info-group">
+        <label>Password</label>
+        <input type="password" id="readonly-password" value="mySecret123" readonly />
+        <label class="toggle-label">
+          <input type="checkbox" onclick="toggleReadonlyPassword()" /> Show Password
+        </label>
+      </div>
+    </div>
+
+    <div class="section">
+      <h3>Change Password</h3>
+      <form class="change-password-form">
+        <input type="password" placeholder="Current Password" id="current-pass" required />
+        <input type="password" placeholder="New Password" id="new-pass" required />
+        <input type="password" placeholder="Confirm New Password" id="confirm-pass" required />
+        <label class="toggle-label">
+          <input type="checkbox" onclick="toggleChangePasswords()" /> Show Passwords
+        </label>
+        <button type="submit">Update Password</button>
+      </form>
+    </div>
+
+    <div class="section">
+      <h3>Auto Logout</h3>
+      <label for="timeout">Set inactivity logout time:</label>
+      <select id="timeout">
+        <option value="5">5 minutes</option>
+        <option value="10">10 minutes</option>
+        <option value="30" selected>30 minutes</option>
+        <option value="60">1 hour</option>
+      </select>
+    </div>
+  </div>
+
+  <!--FOOTER SECTION-->
+			<footer class="footer">
+  				<div class="footer-left">
+    				<img class="market-area-logo2" src="logo.png" alt="Barangay Logo" />
+    				<p class="a-barangay-that">
+      					A Barangay that is God-centered, united, service-oriented, inclusive, and responsive — guided by faith, integrity, and accountable governance.
+    				</p>
+  				</div>
+
+  				<div class="footer">
+  			<!-- Any left/center content here -->
+
+  			<div class="footer-right-group">
+    			<div class="footer-middle">
+      				<h4 class="footer-heading">Other Services</h4>
+      				<p class="footer-link">Insert Site</p>
+      				<p class="footer-link">Insert Site</p>
+      				<p class="footer-link">Insert Site</p>
+    			</div>
+
+    		<div class="footer-right">
+      			<h4 class="footer-heading">Gov't Info</h4>
+      			<p class="footer-link">Privacy Policy</p>
+      			<p class="footer-link">Terms & Conditions</p>
+      			<p class="footer-link">FAQ</p>
+    			</div>
+  			</div>
+		</div>
+    </footer>
+
+  <script>
+
+    //profile sidebar
+
+    const profileTrigger = document.getElementById('profileTrigger');
+  const sidebar = document.getElementById('profileSidebar');
+
+  profileTrigger.addEventListener('click', (e) => {
+    e.preventDefault(); // prevent anchor from navigating
+    sidebar.classList.toggle('show');
+  });
+
+  document.addEventListener('click', function (e) {
+    const wrapper = document.querySelector('.profile-sidebar-wrapper');
+    if (!wrapper.contains(e.target)) {
+      sidebar.classList.remove('show');
+    }
+  });
+
+  document.getElementById('logout-btn').addEventListener('click', function (e) {
+    e.preventDefault(); // Stop the default navigation
+
+    if (confirm("Are you sure you want to log out?")) {
+      // Proceed to logout if confirmed
+      window.location.href = this.href;
+    }
+  });
+
+  //password
+    function toggleReadonlyPassword() {
+      const field = document.getElementById("readonly-password");
+      field.type = field.type === "password" ? "text" : "password";
+    }
+
+    function toggleChangePasswords() {
+      ["current-pass", "new-pass", "confirm-pass"].forEach(id => {
+        const field = document.getElementById(id);
+        field.type = field.type === "password" ? "text" : "password";
+      });
+    }
+  </script>
+</body>
+</html>
