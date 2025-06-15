@@ -1,0 +1,159 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="initial-scale=1, width=device-width">
+
+  <title>Settings</title>
+  <link rel="stylesheet" href="styleRHP.css"/>
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=K2D:wght@300;500;800&display=swap"/>
+  	<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Bebas Neue:wght@400&display=swap"/>
+  	<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;800&display=swap"/>
+</head>
+
+  <style>
+    html {
+      scroll-behavior: smooth;
+    }
+
+    h1 {
+      text-align: center;
+      font-size: 35px;
+    }
+
+    p {
+      margin: 10px 0;
+    }
+
+    .your-div {
+      max-width: 800px;
+      margin: 0 auto;
+    }
+</style>
+  
+  <body class="settings-body">
+		<!-- HEADER SECTION -->
+		<header class="header_gradient">
+  			<div class="header-left">
+    			<img class="market-area-logo" src="logo.png" alt="Logo" />
+    			<div class="barangay-title">
+      			<p class="barangay-market-area">barangay market area:</p>
+      			<p class="barangay-market-area">Complaint system</p>
+    			</div>
+  			</div>
+
+  			<div class="navbar">
+  				<div class="nav-links">
+    				<a href="residentHomepage.html">Home</a>
+    				<a href="my_complaints.html">My Complaints</a>
+    				<a href="contact.html">Contacts</a>
+  				</div>
+
+  			<!-- Profile + Sidebar Wrapper -->
+			<div class="profile-sidebar-wrapper">
+  			<!-- Profile Trigger -->
+  			<div class="profile-link" id="profileTrigger">
+    			<div class="profile"></div>
+  			</div>
+
+  			<!-- Collapsible Sidebar -->
+  			<div class="sidebar collapsed" id="profileSidebar">
+				<a href="#" class="sidebar-item">
+      				<i class="icon">👤</i>
+      				<span class="label">Profile</span>
+    			</a>
+    			<a href="settings.html" class="sidebar-item">
+      				<i class="icon">⚙️</i>
+      				<span class="label">Settings</span>
+				</a>
+    			<a href="#" class="sidebar-item">
+      				<i class="icon">🔐</i>
+      				<span class="label">Account & Security</span>
+				</a>
+    			<a href="residentLogin.html" class="sidebar-item" id="logout-btn">
+  					<i class="icon">⏻</i>
+  					<span class="label">Logout</span>
+				</a>
+  			</div>
+		</div>
+
+			</div>
+		</header>
+
+  <div class="your-div">
+    <br>
+    <h1>Settings</h1>
+    <center><p>Here you can customize your preferences.</p></center>
+
+    <center><strong>Notification Settings</strong></center>
+<div style="text-align: center;">
+    <label><input type="checkbox" checked> Email Notifications</label><br>
+    <label><input type="checkbox"> SMS Notifications</label><br>
+    <label><input type="checkbox"> Push Notifications</label>
+  </div>
+
+  <br>
+  
+    <center><strong>Font Style Settings</strong></center>
+ <div style="text-align: center;">
+    <label><input type="radio" name="font-style" value="K2D" checked> K2D</label><br>
+    <label><input type="radio" name="font-style" value="Bebas Neue"> Bebas Neue</label><br>
+    <label><input type="radio" name="font-style" value="Inter"> Inter</label>
+  </div>
+
+  <br>
+
+    <center><strong>Language Preference</strong></center>
+ <div style="text-align: center;">
+    <select>
+      <option>English</option>
+      <option>Filipino</option>
+      <option>Cebuano</option>
+      <option>Ilocano</option>
+      <option>Hiligaynon</option>
+    </select>
+  </div>
+
+  <br>
+
+    <center><strong>Font Size Adjustment</strong></center>
+   <div style="text-align: center;">
+    <label><input type="radio" name="font-size" value="small"> Small</label><br>
+    <label><input type="radio" name="font-size" value="medium" checked> Medium</label><br>
+    <label><input type="radio" name="font-size" value="large"> Large</label>
+  </div>
+  </div>
+
+  <!--FOOTER SECTION-->
+			<footer class="footer">
+  				<div class="footer-left">
+    				<img class="market-area-logo2" src="logo.png" alt="Barangay Logo" />
+    				<p class="a-barangay-that">
+      					A Barangay that is God-centered, united, service-oriented, inclusive, and responsive — guided by faith, integrity, and accountable governance.
+    				</p>
+  				</div>
+
+  				<div class="footer">
+  			<!-- Any left/center content here -->
+
+  			<div class="footer-right-group">
+    			<div class="footer-middle">
+      				<h4 class="footer-heading">Other Services</h4>
+      				<p class="footer-link">Insert Site</p>
+      				<p class="footer-link">Insert Site</p>
+      				<p class="footer-link">Insert Site</p>
+    			</div>
+
+    		<div class="footer-right">
+      			<h4 class="footer-heading">Gov't Info</h4>
+      			<p class="footer-link">Privacy Policy</p>
+      			<p class="footer-link">Terms & Conditions</p>
+      			<p class="footer-link">FAQ</p>
+    			</div>
+  			</div>
+		</div>
+
+			</footer>
+
+</body>
+</html>
