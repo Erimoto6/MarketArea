@@ -13,7 +13,6 @@ body {
 }
 
 .settings-align {
-  background-color: #f0f0f0;
   position: relative;
   min-height: 100vh;
   display: flex;
@@ -178,7 +177,7 @@ body {
 }
 
 .settings-container {
-  background: rgba(255, 255, 255, 0.9);
+  background: rgba(255, 255, 255, 1);
   border-radius: 12px;
   box-shadow: 0 10px 25px rgba(0, 0, 0, 0.2);
   padding: 2rem 3rem;
@@ -245,6 +244,7 @@ button:hover {
   background-color: #3b4f22;
 }
 
+/*FOOTER SECTION*/
 /* Footer Container */
 .footer {
   display: flex;
@@ -344,3 +344,4 @@ html, body {
 .footer {
   margin-top: auto;
 }
+

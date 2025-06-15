@@ -9,7 +9,6 @@
 </head>
 
 <body>
-
 	<!-- HEADER SECTION -->
 		<header class="header_gradient">
   			<div class="header-left">
@@ -69,27 +68,27 @@
         <label><input type="checkbox"> Push Notifications</label>
       </fieldset>
 
-      <fieldset>
-        <legend>Font Style</legend>
-        <label><input type="radio" name="font" checked> K2D</label>
-        <label><input type="radio" name="font"> Bebas Neue</label>
-        <label><input type="radio" name="font"> Inter</label>
-      </fieldset>
+    <fieldset>
+      <legend>Font Style</legend>
+      <label><input type="radio" name="font" value="K2D" checked> K2D</label>
+      <label><input type="radio" name="font" value="Bebas Neue"> Bebas Neue</label>
+      <label><input type="radio" name="font" value="Inter"> Inter</label>
+    </fieldset>
 
-      <fieldset>
-        <legend>Language</legend>
-        <select>
-          <option>English</option>
-          <option>Filipino</option>
-        </select>
-      </fieldset>
+    <fieldset>
+      <legend>Language</legend>
+      	<select id="languageSelect">
+        	<option value="English">English</option>
+        	<option value="Filipino">Filipino</option>
+      	</select>
+    </fieldset>
 
-      <fieldset>
-        <legend>Font Size</legend>
-        <label><input type="radio" name="size"> Small</label>
-        <label><input type="radio" name="size" checked> Medium</label>
-        <label><input type="radio" name="size"> Large</label>
-      </fieldset>
+    <fieldset>
+      <legend>Font Size</legend>
+      	<label><input type="radio" name="size" value="small"> Small</label>
+      	<label><input type="radio" name="size" value="medium" checked> Medium</label>
+      	<label><input type="radio" name="size" value="large"> Large</label>
+    </fieldset>
 
       <div class="form-buttons">
         <button type="submit">Save Changes</button>
@@ -153,7 +152,35 @@
       window.location.href = this.href;
     }
   });
-</script>
+
+  // Apply settings to the page
+    function applySettings(font, size) {
+      document.body.style.fontFamily = font;
+      document.body.classList.remove('small', 'medium', 'large');
+      document.body.classList.add(size);
+    }
+
+    // Save settings
+    document.getElementById('settingsForm').addEventListener('submit', function (e) {
+      e.preventDefault();
+
+      const font = document.querySelector('input[name="font"]:checked').value;
+      const size = document.querySelector('input[name="size"]:checked').value;
+      const language = document.getElementById('languageSelect').value;
+
+      localStorage.setItem('font', font);
+      localStorage.setItem('size', size);
+      localStorage.setItem('language', language);
+
+      applySettings(font, size);
+    });
+
+    // Load on start
+    loadSettings();
+  </script>
+
+  <!-- Fonts loaded from Google Fonts -->
+  <link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Inter&family=K2D&display=swap" rel="stylesheet">
 
 </body>
 </html>
