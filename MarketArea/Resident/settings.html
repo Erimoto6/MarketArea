@@ -1,44 +1,21 @@
 <!DOCTYPE html>
-<html>
-<head>
-  <meta charset="utf-8">
-  <meta name="viewport" content="initial-scale=1, width=device-width">
+<html lang="en">
 
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
   <title>Settings</title>
-  <link rel="stylesheet" href="styleRHP.css"/>
-  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=K2D:wght@300;500;800&display=swap"/>
-  	<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Bebas Neue:wght@400&display=swap"/>
-  	<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;800&display=swap"/>
+  <link rel="stylesheet" href="settings.css" />
 </head>
 
-  <style>
-    html {
-      scroll-behavior: smooth;
-    }
+<body>
 
-    h1 {
-      text-align: center;
-      font-size: 35px;
-    }
-
-    p {
-      margin: 10px 0;
-    }
-
-    .your-div {
-      max-width: 800px;
-      margin: 0 auto;
-    }
-</style>
-  
-  <body class="settings-body">
-		<!-- HEADER SECTION -->
+	<!-- HEADER SECTION -->
 		<header class="header_gradient">
   			<div class="header-left">
     			<img class="market-area-logo" src="logo.png" alt="Logo" />
     			<div class="barangay-title">
-      			<p class="barangay-market-area">barangay market area:</p>
-      			<p class="barangay-market-area">Complaint system</p>
+      			<p class="barangay-market-area">Barangay Market Area:<br>E-Blotter System</p>
     			</div>
   			</div>
 
@@ -76,64 +53,61 @@
 				</a>
   			</div>
 		</div>
+	</div>
+	</header>
 
-			</div>
-		</header>
+<div class="settings-align">
+  <div class="settings-container">
+    <h2 class="title">Settings</h2>
+    <p class="subtitle">Customize your preferences below.</p>
 
-  <div class="your-div">
-    <br>
-    <h1>Settings</h1>
-    <center><p>You can customize your preferences.</p></center>
+    <form class="settings-form">
+      <fieldset>
+        <legend>Notification Settings</legend>
+        <label><input type="checkbox" checked> Email Notifications</label>
+        <label><input type="checkbox"> SMS Notifications</label>
+        <label><input type="checkbox"> Push Notifications</label>
+      </fieldset>
 
-    <center><strong>Notification Settings</strong></center>
-<div style="text-align: center;">
-    <label><input type="checkbox" checked> Email Notifications</label><br>
-    <label><input type="checkbox"> SMS Notifications</label><br>
-    <label><input type="checkbox"> Push Notifications</label>
+      <fieldset>
+        <legend>Font Style</legend>
+        <label><input type="radio" name="font" checked> K2D</label>
+        <label><input type="radio" name="font"> Bebas Neue</label>
+        <label><input type="radio" name="font"> Inter</label>
+      </fieldset>
+
+      <fieldset>
+        <legend>Language</legend>
+        <select>
+          <option>English</option>
+          <option>Filipino</option>
+        </select>
+      </fieldset>
+
+      <fieldset>
+        <legend>Font Size</legend>
+        <label><input type="radio" name="size"> Small</label>
+        <label><input type="radio" name="size" checked> Medium</label>
+        <label><input type="radio" name="size"> Large</label>
+      </fieldset>
+
+      <div class="form-buttons">
+        <button type="submit">Save Changes</button>
+      </div>
+    </form>
   </div>
+</div>
 
-  <br>
-
-    <center><strong>Font Style Settings</strong></center>
- <div style="text-align: center;">
-    <label><input type="radio" name="font-style" value="K2D" checked> K2D</label><br>
-    <label><input type="radio" name="font-style" value="Bebas Neue"> Bebas Neue</label><br>
-    <label><input type="radio" name="font-style" value="Inter"> Inter</label>
-  </div>
-
-  <br>
-
-    <center><strong>Language Preference</strong></center>
- <div style="text-align: center;">
-    <select>
-      <option>English</option>
-      <option>Filipino</option>
-      <option>Cebuano</option>
-      <option>Ilocano</option>
-      <option>Hiligaynon</option>
-    </select>
-  </div>
-
-  <br>
-
-    <center><strong>Font Size Adjustment</strong></center>
-   <div style="text-align: center;">
-    <label><input type="radio" name="font-size" value="small"> Small</label><br>
-    <label><input type="radio" name="font-size" value="medium" checked> Medium</label><br>
-    <label><input type="radio" name="font-size" value="large"> Large</label>
-  </div>
-  </div>
-
-  <!--FOOTER SECTION-->
-			<footer class="footer">
-  				<div class="footer-left">
-    				<img class="market-area-logo2" src="logo.png" alt="Barangay Logo" />
+	<!--FOOTER SECTION-->
+		<footer class="footer">
+  			<div class="footer-left">
+    			<img class="market-area-logo2" src="logo.png" alt="Barangay Logo" />
     				<p class="a-barangay-that">
       					A Barangay that is God-centered, united, service-oriented, inclusive, and responsive — guided by faith, integrity, and accountable governance.
     				</p>
-  				</div>
+  			</div>
 
-  				<div class="footer">
+  			<div class="footer">
   			<!-- Any left/center content here -->
 
   			<div class="footer-right-group">
@@ -146,14 +120,40 @@
 
     		<div class="footer-right">
       			<h4 class="footer-heading">Gov't Info</h4>
-      			<p class="footer-link">Privacy Policy</p>
-      			<p class="footer-link">Terms & Conditions</p>
+      			<p class="footer-link"><a href="privpolicy.html" id="footer-link"> Policy</a></p>
+      			<p class="footer-link"> <a href="term&con.html" id="footer-terms-link">Terms & Conditions</a></p>
       			<p class="footer-link">FAQ</p>
     			</div>
   			</div>
 		</div>
 
 			</footer>
+
+<script>
+  const profileTrigger = document.getElementById('profileTrigger');
+  const sidebar = document.getElementById('profileSidebar');
+
+  profileTrigger.addEventListener('click', (e) => {
+    e.preventDefault(); // prevent anchor from navigating
+    sidebar.classList.toggle('show');
+  });
+
+  document.addEventListener('click', function (e) {
+    const wrapper = document.querySelector('.profile-sidebar-wrapper');
+    if (!wrapper.contains(e.target)) {
+      sidebar.classList.remove('show');
+    }
+  });
+
+  document.getElementById('logout-btn').addEventListener('click', function (e) {
+    e.preventDefault(); // Stop the default navigation
+
+    if (confirm("Are you sure you want to log out?")) {
+      // Proceed to logout if confirmed
+      window.location.href = this.href;
+    }
+  });
+</script>
 
 </body>
 </html>

@@ -1,228 +1,26 @@
 
-/* HERO SECTION */
-.hero-section {
+body {
+  font-family: 'Inter', sans-serif;
+  background-image: url('marketarea2.jpg');
+  background-repeat: no-repeat;
+  background-position: center center;
+  background-size: cover;
+  background-attachment: fixed; /* optional for parallax effect */
+  color: #000;
+  margin: 0;
+  padding: 0;
+  min-height: 100vh; /* ensures the background covers the whole screen */
+}
+
+.settings-align {
+  background-color: #f0f0f0;
   position: relative;
   min-height: 100vh;
   display: flex;
-  flex-direction: column;
-  align-items: flex-end; /* Align to right */
+  align-items: flex-start; /* changed */
   justify-content: center;
-  height: auto;
-  background-color: #fff;
-  font-family: 'K2D', sans-serif;
-  overflow: hidden;
-  color: #250101;
-  padding-right: 40px; /* optional spacing from the right */
-  overflow: visible; /* or remove 'overflow: hidden' */
+  padding-top: 160px; /* add spacing manually */
 }
-
-.barangay-market-area {
-    font-family: Trebuchet MS;
-}
-
-.background-circles {
-  position: absolute;
-  width: 100%;
-  height: 100%;
-  z-index: 0;
-  top: 0;
-  left: 0;
-  overflow: hidden;
-}
-
-.market_area_bg {
-  position: absolute;
-  top: 0;
-  left: 0;
-  width: 100vw;
-  height: 100vh;
-  background-image: url('marketarea2.jpg');
-  background-size: cover;
-  background-repeat: no-repeat;
-  background-position: center;
-  z-index: -1;
-}
-
-
-
-@keyframes circleFadeSlideIn {
-  0% {
-    opacity: 0;
-    transform: translateX(100px) scale(0.95) rotate(0deg);
-  }
-  100% {
-    opacity: 0.5;
-    transform: translateX(0) scale(1) rotate(var(--final-rotation));
-  }
-}
-
-.green_circle, .yellow_circle {
-  position: absolute;
-  border-radius: 50%;
-  z-index: 1;
-  opacity: 0;
-}
-
-.green_circle {
-  --final-rotation: 22.7deg;
-  top: -150px;
-  right: -200px;
-  background-color: #6a7337;
-  width: 1200px;
-  height: 1500px;
-  opacity: 0.7; /* Original opacity */
-  animation: circleFadeSlideIn 1.2s ease-out forwards;
-  animation-delay: 0.3s;
-  transform: rotate(var(--final-rotation));
-}
-
-.yellow_circle {
-  --final-rotation: 80.4deg;
-  top: 700px;
-  right: 300px;
-  background-color: #d0b564;
-  width: 800px;
-  height: 970px;
-  opacity: 0.3; /* Original opacity */
-  animation: circleFadeSlideIn 1.5s ease-out forwards;
-  animation-delay: 0.6s;
-  transform: rotate(var(--final-rotation));
-}
-
-
-.hero-content {
-  z-index: 2;
-  display: flex;
-  flex-direction: column;
-  align-items: flex-end; /* content inside also aligned right */
-  gap: 40px;
-  text-align: right; /* aligns text to the right */
-  padding-right: 100px;
-}
-
-
-@keyframes fadeSlideInRight {
-  0% {
-    opacity: 0;
-    transform: translateX(50px);
-  }
-  100% {
-    opacity: 1;
-    transform: translateX(0);
-  }
-}
-
-.welcome-to-barangay {
-  font-size: 65px;
-  color: #fff;
-  font-family: 'Bebas Neue', sans-serif;
-  letter-spacing: 0.1em;
-  text-shadow: 0 4px 4px rgba(0, 0, 0, 0.25);
-  max-width: 700px;
-  word-wrap: break-word;
-  overflow-wrap: break-word;
-
-  opacity: 0; /* start hidden */
-  animation: fadeSlideInRight 1s ease-out forwards;
-  animation-delay: 0.3s; /* optional: adds a slight delay */
-}
-
-.file_complaint_container {
-  display: block;
-  position: relative;
-  width: 588px;
-  height: 134px;
-  cursor: pointer;
-  font-family: inherit;
-  background: transparent; /* Make background fully transparent */
-  box-shadow: none;
-  border: none; 
-
-  opacity: 0;
-  animation: fadeSlideInRight 1s ease-out forwards;
-  animation-delay: 1s;
-
-  transform: scale(1);
-  transition: transform 0.2s ease, box-shadow 0.2s ease;
-}
-
-/* Zoom and lift the whole button container */
-.file_complaint_container:hover {
-  transform: scale(1.05) translateY(-6px);
-  box-shadow: 0 12px 24px rgba(0, 0, 0, 0.35);
-}
-
-.file_complaint_container:hover:active {
-  transform: scale(0.97) translateY(1px);
-  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
-}
-
-/* Slight brighten effect on the visual part of the button */
-.file_complaint_button {
-  position: absolute;
-  inset: 0;
-  border-radius: 30px;
-  background: linear-gradient(
-    180deg,
-    rgba(106, 115, 55, 0),
-    rgba(106, 115, 55, 0.5)
-  ), #fefff8;
-  z-index: 0;
-  transition: transform 0.4s ease, filter 0.3s ease;
-}
-
-/* Subtle inner zoom on hover */
-.file_complaint_container:hover .file_complaint_button {
-  filter: brightness(1.08);
-  transform: scale(1.02);
-}
-
-.file_complaint_icon {
-  position: absolute;
-  top: 25px;
-  left: 16px;
-  box-shadow: 0px 4px 4px 3px rgba(0, 0, 0, 0.25);
-  border-radius: 50%;
-  background-color: #fff;
-  width: 83px;
-  height: 80px;
-  z-index: 2;
-}
-
-.file_complaint_iconimg {
-  position: absolute;
-  top: 43px;
-  left: 35px;
-  width: 44px;
-  height: 44px;
-  object-fit: cover;
-  z-index: 3;
-}
-
-.file-a-complaint-parent {
-  position: absolute;
-  top: 25px;
-  left: 109px;
-  display: flex;
-  flex-direction: column;
-  align-items: flex-start;
-  gap: 8px;
-  z-index: 2;
-}
-
-.file-a-complaint {
-  font-weight: 800;
-  letter-spacing: 0.1em;
-  font-size: 18px;
-}
-
-.submit-and-track {
-  font-size: 15px;
-  letter-spacing: 0.1em;
-  font-weight: 500;
-  color: #8a7575;
-}
-
 
 /* HEADER SECTION */
 .header_gradient {
@@ -379,7 +177,74 @@
   cursor: pointer;
 }
 
-/*FOOTER SECTION*/
+.settings-container {
+  background: rgba(255, 255, 255, 0.9);
+  border-radius: 12px;
+  box-shadow: 0 10px 25px rgba(0, 0, 0, 0.2);
+  padding: 2rem 3rem;
+  width: 500px;
+  max-width: 95%;
+}
+
+.title {
+  font-size: 1.8rem;
+  margin-bottom: 0.5rem;
+  color: #2d2d2d;
+}
+
+.subtitle {
+  font-size: 0.9rem;
+  margin-bottom: 1.5rem;
+  color: #555;
+}
+
+.settings-form fieldset {
+  border: none;
+  margin-bottom: 1.5rem;
+}
+
+.settings-form legend {
+  font-weight: 600;
+  margin-bottom: 0.6rem;
+  color: #333;
+}
+
+.settings-form label {
+  display: block;
+  margin: 5px 0;
+  font-size: 0.95rem;
+  color: #444;
+}
+
+.settings-form select {
+  padding: 6px;
+  width: 100%;
+  font-size: 0.95rem;
+  border-radius: 6px;
+  border: 1px solid #ccc;
+}
+
+.form-buttons {
+  display: flex;
+  justify-content: flex-end;
+  margin-top: 1rem;
+}
+
+button {
+  background-color: #4a5f29;
+  color: white;
+  border: none;
+  padding: 10px 18px;
+  border-radius: 6px;
+  font-size: 1rem;
+  cursor: pointer;
+  transition: background 0.3s ease;
+}
+
+button:hover {
+  background-color: #3b4f22;
+}
+
 /* Footer Container */
 .footer {
   display: flex;
@@ -479,4 +344,3 @@ html, body {
 .footer {
   margin-top: auto;
 }
-
