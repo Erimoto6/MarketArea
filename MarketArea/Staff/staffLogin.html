@@ -1,191 +1,287 @@
 <!DOCTYPE html>
 <html>
-    <head>
-        <title>Market Area E-Complaint Portal</title>
-        <meta name="viewport" content="width=device-width, initial-scale=1.0">
-        <link rel="icon" type="image/png" href="logo.png">
-        <link rel="stylesheet"  href="popup2.css"/>
-        
-    <style>
-        html, body {
-            margin: 0;
-            padding: 0;
-            width: 100%;
-            height: 100%;
-            overflow-x: hidden;
-            font-family: Arial, Helvetica, sans-serif;        
-            overflow: hidden;
-        }
+<head>
+  <title>Market Area E-Complaint Portal</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-        .main-container {
-            display: flex;
-            flex-wrap: wrap;
-        }
+  <style>
+    html, body {
+      margin: 0;
+      padding: 0;
+      width: 100%;
+      height: 100%;
+      overflow-x: hidden;
+      font-family: Arial, Helvetica, sans-serif;        
+      overflow: hidden;
+    }
 
-        .left-side {
-            width: 73%;
-            flex-grow: 1;
-            flex-basis: 200;
-        }
+    .main-container {
+      display: flex;
+      flex-wrap: wrap;
+    }
 
-        .right-side {
-            width: 27%;
-            height: 100vh;
-            display: flex;
+    .left-side {
+      width: 73%;
+      flex-grow: 1;
+    }
 
-            align-items: center;
-            flex-direction: column;
-            justify-content: center;
+    .right-side {
+      width: 27%;
+      height: 100vh;
+      display: flex;
+      align-items: center;
+      flex-direction: column;
+      justify-content: center;
+      background-image: url(files/bg.png);
+      background-size: cover;
+      flex-grow: 1;
+    }
 
-            background-image: url(files/bg.png);
-            background-size: cover;
-  
-            
-            flex-grow: 1;
-            flex-basis: 200;
-        }
+    .left-side img {
+      width: 100%;
+      height: 100vh;
+    }
 
-        .left-side img {
-            width: 100%;
-            height: 100vh;
-        }
+    .right-side img {
+      width: 150px;
+      padding-bottom: 3%;
+      padding-top: 5%;
+    }
 
-        .right-side img {
-            width: 150px;
-            padding-bottom: 3%;
-            padding-top: 5%;
-        }
+    .right-side h1 {
+      font-size: 20px;
+      text-align: center;
+      font-family: 'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif;
+    }
 
-        .right-side h1 {
-            font-size: 20px;
-            text-align: center;
-            font-family: 'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif;
-        }
+    .right-side h3 {
+      font-size: 15px;
+    }
 
-        .right-side h3 {
-            font-size: 15px;
-        }
+    .email-input-box,
+    .password-input-box,
+    .idno-input-box {
+      width: 230px;
+      font-size: 15px;
+      padding: 15px 22px;
+      border: 2px solid #ccc;
+      border-radius: 20px;
+      margin-top: 10px;
+    }
 
-        .email-input-box {
-            width: 230px;
-            font-size: 15px;
-            padding: 15px 22px;
-            border: 2px solid #ccc;
-            border-radius: 20px;
-            margin-top: 10px;
-        }
+    .button1 {    
+      margin-top: 2.5%;
+      display: inline-block;
+      width: 240px;
+      padding: 13px 18px;
+      border-radius: 20px;
+      font-size: 20px;
+      text-decoration: none;
+      text-align: center;
+      box-shadow: 0 8px 8px rgba(0, 0, 0, 0.5);
+      cursor: pointer;
+      color: rgb(255, 255, 255);
+      font-weight: bold;
+      background-color: #4B5320;
+    }
 
-        .password-input-box {
-            width: 230px;
-            font-size: 15px;
-            padding: 15px 22px;
-            border: 2px solid #ccc;
-            border-radius: 20px;
-            margin-top: 10px;
-        }
+    .regis {
+      margin-top: 5%;
+      font-size: 15px;
+      margin-bottom: 5px;
+    }
 
-        .idno-input-box {
-            width: 230px;
-            font-size: 15px;
-            padding: 15px 22px;
-            border: 2px solid #ccc;
-            border-radius: 20px;
-            margin-top: 10px;
-        }
+    .regis1 {
+      font-size: 15px;
+      text-decoration: none;
+    }
 
-        .button1 {    
-            margin-top: 2.5%;
-            display: inline-block;
-            width: 240px;
-            padding: 13px 18px;
-            border-radius: 20px;
-            font-size: 20px;
-            text-decoration: none;
-            text-align: center;
+    .below {
+      text-align: center;
+      margin-top: 13%;
+      font-size: 13px;
+    }
 
-            box-shadow: 0 8px 8px rgba(0, 0, 0, 0.5);
-            cursor: pointer;
-            color: rgb(255, 255, 255);
-            font-weight: bold;
-            background-color: #4B5320;
-        }
+    .termsCondi {
+      text-decoration: none;
+      color: #007BFF;
+      cursor: pointer;
+    }
 
-        .regis {
-            margin-top: 5%;
-            font-size: 15px;
-            margin-bottom: 5px;
-        }
+    /* =============================== */
+    /* TERMS MODAL STYLING START HERE */
+    /* =============================== */
 
-        .regis1 {
-            font-size: 15px;
-            text-decoration: none;
+    .modal {
+      display: none;
+      position: fixed;
+      z-index: 999;
+      left: 0;
+      top: 0;
+      width: 100%;
+      height: 100%;
+      overflow: auto;
+      background-color: rgba(0, 0, 0, 0.6);
+    }
 
-        }
-        
-        
-        .below {
-            text-align: center;
-            margin-top: 13%;
-            font-size: 13px;
+    .modal-content {
+      background-color: #fff;
+      margin: 5% auto;
+      padding: 0;
+      border-radius: 10px;
+      width: 80%;
+      max-width: 600px;
+      box-shadow: 0 4px 12px rgba(0, 0, 0, 0.3);
+      overflow: hidden;
+      box-sizing: border-box;
+    }
 
-        }
+    .modal-scrollable {
+        padding: 5px 20px;
+        max-height: 70vh;
+        overflow-y: auto;
+        overflow-x: hidden;
+        position: relative;
+    }
 
-        .termsCondi {
-            text-decoration: none;
-        }
+    .modal-scrollable h2 {
+      text-align: center;
+      color: #4B5320;
+      margin-top: 0px;
+    }
 
-        
+    .modal-scrollable h3 {
+      color: #BF8C00;
+      margin-top: 1em;
+    }
 
-    </style>
-    </head>
+    .close {
+        display: block;
+        text-align: right;
+        margin-right: 10px; /* 🟢 moves it to the left of the scrollbar */
+        margin-top: 0px;
+        font-size: 24px;
+        font-weight: bold;
+        color: #aaa;
+        cursor: pointer;
+    }
 
-    <body>
+    .close:hover {
+        color: black;
+    }
 
-        <div class="main-container">
 
-            <div class="left-side">
-                <img src="files/arch.png">
-            </div>
+    .close:hover,
+    .close:focus {
+      color: black;
+      text-decoration: none;
+      cursor: pointer;
+    }
 
-            <div class="right-side">
-                <img src="files/logo.png">
-                <h1>Welcome to Market Area E-Complaint Portal</h1>
-                <h3>Log In to your staff account</h3>
+    /* ============================= */
+    /* TERMS MODAL STYLING END HERE */
+    /* ============================= */
+  </style>
 
-                <input type="text" class="email-input-box" placeholder="Enter your email">
-                <input type="text" class="password-input-box" placeholder="Enter your password">
-                <input type="text" class="idno-input-box" placeholder="ID number">
+</head>
 
-                <a href="staffHomepage.html" class="button1" title="Log In">Log In</a>
+<body>
 
-                <p class="regis">Don't have an account?</p>
-                <a href="staffSignUp.html" class="regis1">Register here!</a>
+  <div class="main-container">
 
-                <p class="below">By using this service, you understood and <br> agree to the <a href="#" onclick="openModal()">Terms and Conditions.</a> </p>
-            </div>
-
-        </div>
-
-<!-- Modal Popup (Centered) -->
-<div class="modal-overlay" id="modalOverlay">
-  <div class="modal-box">
-    <div class="modal-header">
-      Terms & Conditions
-      <span class="modal-close" onclick="closeModal()">×</span>
+    <div class="left-side">
+      <img src="files/arch.png">
     </div>
-    <iframe src="TAC.html"></iframe>
+
+    <div class="right-side">
+      <img src="files/logo.png">
+      <h1>Welcome to Market Area E-Complaint Portal</h1>
+      <h3>Log In to your staff account</h3>
+
+      <input type="text" class="email-input-box" placeholder="Enter your email">
+      <input type="text" class="password-input-box" placeholder="Enter your password">
+      <input type="text" class="idno-input-box" placeholder="ID number">
+
+      <a href="staffHomepage.html" class="button1" title="Log In">Log In</a>
+
+      <p class="regis">Don't have an account?</p>
+      <a href="staffSignUp.html" class="regis1">Register here!</a>
+
+      <p class="below">
+        By using this service, you understood and <br>
+        agree to the <span class="termsCondi" onclick="openModal()">Terms and Conditions.</span>
+      </p>
+    </div>
   </div>
-</div>
 
-<script>
+  <!-- ========================= -->
+  <!-- TERMS MODAL HTML START -->
+  <!-- ========================= -->
+  <div id="termsModal" class="modal">
+    <div class="modal-content">
+    <span class="close" onclick="closeModal()">&times;</span>
+      <div class="modal-scrollable">
+        <h2>Terms and Conditions</h2>
+        <p>Welcome to the Barangay E-Blotter System. By accessing or using this system, you agree to comply with and be bound by the following terms and conditions. Please read them carefully.</p>
+
+        <h3>1. Use of the System</h3>
+        <ul>
+          <li>The E-Blotter System is intended for residents to file and track complaints within the barangay.</li>
+          <li>You must provide accurate and complete information when submitting a complaint.</li>
+          <li>Misuse of the system, including submitting false or malicious complaints, is strictly prohibited.</li>
+        </ul>
+
+        <h3>2. Privacy and Confidentiality</h3>
+        <ul>
+          <li>All personal information submitted will be kept confidential and used only for resolving complaints.</li>
+          <li>Only authorized barangay personnel have access to complaint details.</li>
+        </ul>
+
+        <h3>3. User Responsibilities</h3>
+        <ul>
+          <li>You are responsible for the accuracy of the information you provide.</li>
+          <li>You must not use the system for unlawful purposes or to harass others.</li>
+        </ul>
+
+        <h3>4. System Availability</h3>
+        <ul>
+          <li>The barangay strives to keep the system available at all times but does not guarantee uninterrupted access.</li>
+          <li>Maintenance or technical issues may cause temporary downtime.</li>
+        </ul>
+
+        <h3>5. Changes to Terms</h3>
+        <ul>
+          <li>The barangay reserves the right to update these terms at any time. Changes will be posted on this page.</li>
+        </ul>
+
+        <h3>6. Contact</h3>
+        <p>For questions or concerns, contact the Barangay Office at (012) 345-6789 or email <a href="mailto:barangayeblotter@email.com">barangayeblotter@email.com</a>.</p>
+      </div>
+    </div>
+  </div>
+  <!-- ======================= -->
+  <!-- TERMS MODAL HTML END -->
+  <!-- ======================= -->
+
+  <script>
+    // Open modal
     function openModal() {
-    document.getElementById('modalOverlay').style.display = 'flex';
-  }
+      document.getElementById("termsModal").style.display = "block";
+    }
 
-  function closeModal() {
-    document.getElementById('modalOverlay').style.display = 'none';
-  }
-</script>
+    // Close modal
+    function closeModal() {
+      document.getElementById("termsModal").style.display = "none";
+    }
 
-    </body>
-</html> 
+    // Close modal if clicking outside content
+    window.onclick = function (event) {
+      const modal = document.getElementById("termsModal");
+      if (event.target == modal) {
+        closeModal();
+      }
+    };
+  </script>
+
+</body>
+</html>
