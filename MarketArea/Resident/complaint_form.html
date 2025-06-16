@@ -71,7 +71,7 @@
 
       <!-- Personal Information -->
       <fieldset class="form-step active">
-        <legend class="section-title">Personal Information</legend>
+        <legend class="section-title">Complainant Personal Information</legend>
         <div class="row">
           <input type="text" placeholder="Last Name" required>
           <input type="text" placeholder="First Name" required>
@@ -107,12 +107,19 @@
         <option value="Unpaid Dept">Unpaid Dept</option>
         <option value="Other">Other</option>
         </select>
-          <input type="text" placeholder="Respondent" required>
-        </div>
-        <div class="row">
-          <input type="date" placeholder="Date and Time of Incident" required>
           <input type="text" placeholder="Location of the Incident" required>
         </div>
+
+        <div class="row">
+          <input type="date" placeholder="Date of Incident" required>
+          <input type="time" placeholder="Time of the Incident" required>
+        </div>
+
+        <div class="row">
+          <input type="text" placeholder="Full Name of the Respondent" required>
+          <input type="text" placeholder="Address of the Respondent" required>
+        </div>
+
         <textarea placeholder="Detailed Description of the Incident" required></textarea>
       </fieldset>
 
@@ -123,10 +130,6 @@
       <div class="row">
        <input type="file" name="evidenceFiles" accept="image/*,video/*" multiple>
        <label style="font-size:12px;color:#555;margin-bottom:10px;">You may select multiple images or videos.</label>
-       
-       <input type="text" placeholder="Witness (N/A if none)">
-       <input type="text" placeholder="Name">
-       <input type="text" placeholder="Contact Number">
        </div>
       </fieldset>
     </form>

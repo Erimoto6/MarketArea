@@ -1,0 +1,303 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <title>Barangay E-Blotter Admin Dashboard</title>
+  <style>
+/* General Styles */
+body {
+  margin: 0;
+  font-family: Arial, sans-serif;
+  background: url('YOUR-BACKGROUND-IMAGE.jpg') no-repeat center center fixed;
+  background-size: cover;
+}
+
+/* Sidebar */
+.sidebar {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 250px;
+  height: 100%;
+  background: #556b2f;
+  color: #fff;
+  padding: 20px 0;
+  overflow-y: auto;
+  transition: left 0.3s ease;
+}
+
+.sidebar .logo {
+  text-align: center;
+  margin-bottom: 20px;
+}
+
+.sidebar .logo img {
+  width: 80px;
+  border-radius: 50%;
+}
+
+.sidebar .logo h3 {
+  margin: 10px 0 0;
+  font-size: 16px;
+}
+
+.sidebar .logo p {
+  font-size: 12px;
+}
+
+.sidebar .nav-links {
+  list-style: none;
+  padding: 0;
+  margin: 20px 0 0;
+}
+
+.sidebar .nav-links li {
+  margin: 10px 0;
+}
+
+.sidebar .nav-links a {
+  color: #fff;
+  text-decoration: none;
+  display: block;
+  padding: 10px 30px;
+  transition: background 0.3s;
+}
+
+.sidebar .nav-links a:hover {
+  background: rgba(255, 255, 255, 0.1);
+}
+
+/* Topbar */
+.topbar {
+  margin-left: 250px;
+  background: #556b2f;
+  color: #fff;
+  padding: 20px;
+  display: flex;
+  justify-content: flex-end;
+  align-items: center;
+}
+
+.menu-toggle {
+  display: none;
+  font-size: 24px;
+  margin-right: auto;
+  cursor: pointer;
+}
+
+.topbar .top-right span {
+  margin-right: 20px;
+  font-size: 18px;
+}
+
+.topbar .top-right .user {
+  background: #fff;
+  color: #000;
+  padding: 8px 15px;
+  border-radius: 20px;
+}
+
+/* Main Content */
+main {
+  margin-left: 250px;
+  padding: 30px;
+  transition: margin-left 0.3s ease;
+}
+
+.greeting h2 {
+  margin: 0;
+}
+
+.greeting p {
+  margin: 5px 0 30px;
+}
+
+.overview {
+  display: flex;
+  gap: 20px;
+  flex-wrap: wrap;
+  margin-bottom: 30px;
+}
+
+.card {
+  background: #6b8e23;
+  color: #fff;
+  padding: 30px;
+  border-radius: 10px;
+  flex: 1 1 200px;
+  text-align: center;
+}
+
+.card p {
+  font-size: 30px;
+  margin: 10px 0 0;
+}
+
+.table-section {
+  overflow-x: auto;
+  background: #fff;
+  border-radius: 10px;
+  padding: 20px;
+}
+
+table {
+  width: 100%;
+  border-collapse: collapse;
+}
+
+thead {
+  background: #f0e68c;
+}
+
+th, td {
+  text-align: left;
+  padding: 12px;
+}
+
+tr:nth-child(even) {
+  background: #f9f9f9;
+}
+
+.status {
+  padding: 4px 10px;
+  border-radius: 10px;
+  color: #fff;
+}
+
+.status.ongoing {
+  background: orange;
+}
+
+.status.complete {
+  background: green;
+}
+
+.btn {
+  background: #1e90ff;
+  color: #fff;
+  padding: 6px 12px;
+  border-radius: 5px;
+  text-decoration: none;
+}
+
+/* Responsive */
+@media (max-width: 768px) {
+  .sidebar {
+    left: -250px;
+  }
+
+  .sidebar.active {
+    left: 0;
+  }
+
+  .topbar {
+    margin-left: 0;
+  }
+
+  main {
+    margin-left: 0;
+  }
+
+  .menu-toggle {
+    display: block;
+  }
+}
+
+
+  </style>
+</head>
+<body>
+
+  <!-- Sidebar -->
+  <nav class="sidebar">
+    <div class="logo">
+      <img src="logo.png" alt="Barangay Logo">
+      <h3>Barangay Market Area</h3>
+      <p>E-Blotter System</p>
+    </div>
+    <ul class="nav-links">
+      <li><a href="#">🏠 Dashboard</a></li>
+      <li><a href="#">💬 Manage Complaints</a></li>
+      <li><a href="#">📄 Blotter Reports</a></li>
+      <li><a href="#">📊 Quick Metrics</a></li>
+      <li><a href="#">⚙️ Settings</a></li>
+      <li><a href="#">🚪 Logout</a></li>
+    </ul>
+  </nav>
+
+  <!-- Header -->
+  <header class="topbar">
+    <div class="menu-toggle">&#9776;</div>
+    <div class="top-right">
+      <span>🔔</span>
+      <span>✉️</span>
+      <div class="user">Rhaenyra Targaryen ▼</div>
+    </div>
+  </header>
+
+  <!-- Main Content -->
+  <main>
+    <section class="greeting">
+      <h2>Hi, Rhaenyra</h2>
+      <p>Ready to manage today’s blotter reports?</p>
+    </section>
+
+    <section class="overview">
+      <div class="card">
+        <h4>New Complaint</h4>
+        <p>00</p>
+      </div>
+      <div class="card">
+        <h4>In Progress Cases</h4>
+        <p>00</p>
+      </div>
+      <div class="card">
+        <h4>Resolved Cases</h4>
+        <p>00</p>
+      </div>
+    </section>
+
+    <section class="table-section">
+      <table>
+        <thead>
+          <tr>
+            <th>Date Filed</th>
+            <th>Complainant</th>
+            <th>Respondent</th>
+            <th>Type of Complaint</th>
+            <th>Status</th>
+            <th>Action</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td>06/09/25</td>
+            <td>Vasquez, Ma. Elaine B.</td>
+            <td>Ackermann, Mikasa</td>
+            <td>Noise complaint</td>
+            <td><span class="status ongoing">On Going</span></td>
+            <td><a href="#" class="btn">View</a></td>
+          </tr>
+          <tr>
+            <td>06/01/25</td>
+            <td>Ackermann, Mikasa</td>
+            <td>Vasquez, Ma. Elaine B.</td>
+            <td>Property disputes</td>
+            <td><span class="status complete">Complete</span></td>
+            <td><a href="#" class="btn">View</a></td>
+          </tr>
+        </tbody>
+      </table>
+    </section>
+  </main>
+
+  <script>
+    // Toggle sidebar on mobile
+    const toggle = document.querySelector('.menu-toggle');
+    const sidebar = document.querySelector('.sidebar');
+    toggle.onclick = () => {
+      sidebar.classList.toggle('active');
+    }
+  </script>
+</body>
+</html>
