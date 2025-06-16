@@ -601,6 +601,13 @@
     // Initial render
     updateTable();
 
+    function toggleDropdown() {
+      const dropdown = document.getElementById('dropdownMenu');
+      const notif = document.getElementById('notifPopup');
+      notif.style.display = 'none'; // hide notif popup
+      dropdown.style.display = dropdown.style.display === 'block' ? 'none' : 'block';
+    }
+
     function openNotifFromDropdown(event) {
       event.preventDefault();
       document.getElementById('dropdownMenu').style.display = 'none'; // close dropdown
