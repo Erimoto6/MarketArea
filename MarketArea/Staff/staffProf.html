@@ -5,10 +5,7 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Barangay Market Area: Complaint System</title>
-  <link rel="icon" type="image/png" href="logo.png">
-  
   <style>
-    /* Base Reset and Fonts */
     html {
       scroll-behavior: smooth;
     }
@@ -18,7 +15,6 @@
       font-family: 'Arial', sans-serif;
     }
 
-    /* Sticky Header Styling */
     header {
       position: sticky;
       top: 0;
@@ -48,7 +44,6 @@
       cursor: pointer;
     }
 
-    /* Profile Dropdown */
     .profile-container {
       position: relative;
     }
@@ -92,7 +87,6 @@
       height: 20px;
     }
 
-    /* Banner Section */
     .main-banner {
       position: relative;
       height: 90vh;
@@ -128,70 +122,166 @@
     }
 
     .main-banner h1,
-    .main-banner p,
-    .stats {
+    .main-banner p {
       position: relative;
       z-index: 2;
     }
 
-    .main-banner h1 {
-      font-size: 3rem;
-      font-weight: bold;
-      margin-bottom: 10px;
-    }
-
-    .main-banner p {
-      font-size: 1.1rem;
-      margin: 0 0 30px;
-    }
-
-    /* Stat Box Section */
-    .stats {
+    .page-container {
+      position: relative;
+      z-index: 2;
+      padding: 60px 40px;
       display: flex;
-      gap: 30px;
-      margin-top: 20px;
-      flex-wrap: wrap;
+      justify-content: center;
+      width: 100%;
+    }
+
+    .profile-box {
+      background-color: white;
+      border-radius: 20px;
+      box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
+      display: flex;
+      width: 100%;
+      max-width: 1100px;
+      overflow: hidden;
+      min-height: 500px;
+    }
+
+    .sidebar_body {
+      width: 280px;
+      border-right: 1px solid #ccc;
+      background: #f8f8f8;
+      padding: 30px 20px;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+    }
+
+    .profile-pic {
+      position: relative;
+      margin-bottom: 30px;
+    }
+
+    .circle-img {
+      width: 130px;
+      height: 130px;
+      background-color: #ddd;
+      border-radius: 50%;
+      background-size: cover;
+      background-position: center;
+    }
+
+    .camera-wrapper {
+      position: absolute;
+      bottom: 5px;
+      right: 5px;
+      background: white;
+      border-radius: 50%;
+      padding: 5px;
+      border: 1px solid #ccc;
+      cursor: pointer;
+    }
+
+    .camera-icon {
+      font-size: 16px;
+    }
+
+    .tooltip-text {
+      position: absolute;
+      top: -25px;
+      right: -20px;
+      background: black;
+      color: white;
+      padding: 4px 8px;
+      border-radius: 5px;
+      font-size: 10px;
+      display: none;
+    }
+
+    .camera-wrapper:hover .tooltip-text {
+      display: block;
+    }
+
+    .sidebar-links {
+      padding: 12px 15px;
+      border-radius: 10px;
+      margin-bottom: 10px;
+      font-size: 16px;
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      cursor: pointer;
+      background-color: #fff;
+      border: 1px solid #ccc;
+      width: 100%;
+      text-align: center;
       justify-content: center;
     }
 
-    .stat-box {
-      background-color: #6d8129;
-      padding: 20px 30px;
-      border-radius: 10px;
+    .sidebar-links.active {
+      background-color: #2e3b0d;
       color: white;
-      width: 180px;
-      text-align: center;
-      box-shadow: -2px 4px 5px rgba(0, 0, 0, 0.5);
-      transition: all 0.3s ease;
+    }
+
+    .profile-form {
+      flex: 1;
+      padding: 40px;
+    }
+
+    .profile-form h2 {
+      margin-top: 0;
+      color: #2e3b0d;
+    }
+
+    form input {
+      width: 100%;
+      padding: 12px;
+      margin-bottom: 20px;
+      border: 1px solid #ccc;
+      border-radius: 8px;
+      font-size: 14px;
+    }
+
+    .form-row {
+      display: flex;
+      gap: 20px;
+    }
+
+    .form-row input {
+      flex: 1;
+    }
+
+    .form-buttons {
+      display: flex;
+      justify-content: flex-end;
+      gap: 15px;
+    }
+
+    .discard-btn,
+    .save-btn {
+      padding: 10px 20px;
+      border-radius: 8px;
+      font-size: 14px;
+      border: none;
       cursor: pointer;
-      text-decoration: none;
     }
 
-    .stat-box:hover {
-      background-color: #7e9431;
-      transform: scale(1.05);
-      box-shadow: 0px 6px 15px rgba(0, 0, 0, 0.4);
+    .discard-btn {
+      background-color: white;
+      color: #2e3b0d;
+      border: 1px solid #2e3b0d;
     }
 
-    .stat-box .icon img {
-      height: 40px;
-      margin-bottom: 10px;
-      filter: drop-shadow(-2px 2px 2px rgba(0, 0, 0, 0.4));
+    .save-btn {
+      background-color: #2e3b0d;
+      color: white;
     }
 
-    .stat-box h3 {
-      margin: 10px 0 5px;
-      font-size: 1.1rem;
-      text-shadow: -2px 2px 2px rgba(0, 0, 0, 0.4);
+    .save-btn:hover,
+    .discard-btn:hover {
+      opacity: 0.9;
     }
 
-    .stat-box .count {
-      font-size: 1.5rem;
-      font-weight: bold;
-      text-shadow: -2px 2px 2px rgba(0, 0, 0, 0.4);
-    }
-
-    /* Footer */
     footer {
       background-color: #333;
       color: white;
@@ -259,11 +349,11 @@
     <nav>
       <a href="staffHomepage.html" onclick="scrollToTop(event)">Home</a>
       <a href="manageComplaints.html">Manage Complaints</a>
-      <a href="#">Quick Metrics</a>
+      <a href="quickMetrics.html">Quick Metrics</a>
       <div class="profile-container">
         <div class="profile-circle" onclick="toggleDropdown()"></div>
         <div class="dropdown-menu" id="dropdownMenu">
-          <a href="staffProf.html"><img src="files/profile.png" alt="Profile Icon">Profile</a>
+          <a href="#"><img src="files/profile.png" alt="Profile Icon">Profile</a>
           <a href="#"><img src="files/notif.png" alt="Notifications Icon">Notifications</a>
           <a href="#"><img src="files/settings.png" alt="Settings Icon">Settings</a>
           <a href="#"><img src="files/logout.png" alt="Logout Icon">Logout</a>
@@ -273,32 +363,47 @@
   </header>
 
   <section class="main-banner">
-    <h1>BARANGAY MARKET AREA: COMPLAINT SYSTEM</h1>
-    <p>Each complaint is a chance to make a difference. Respond with dedication and care.</p>
+    <div class="page-container">
+      <div class="profile-container">
+        <div class="profile-box">
+          <div class="sidebar_body">
+            <div class="profile-pic">
+              <label for="profileUpload">
+                <div class="circle-img" id="profilePreview"></div>
+                <div class="camera-wrapper">
+                  <div class="camera-icon">📷</div>
+                  <span class="tooltip-text">Edit profile photo</span>
+                </div>
+              </label>
+              <input type="file" id="profileUpload" accept="image/*" style="display: none;">
+            </div>
+            <div class="sidebar-links active">
+              <span>👤</span> Personal Information
+            </div>
+          </div>
 
-    <div class="stats">
-      <a href="newcomplaint.html" class="stat-box">
-        <div class="icon">
-          <img src="files/new.png" alt="New Complaint Icon" />
+          <div class="profile-form">
+            <h2>Personal Information</h2>
+            <form>
+              <div class="form-row">
+                <input type="text" placeholder="First Name">
+                <input type="text" placeholder="Last Name">
+              </div>
+              <input type="email" placeholder="Email Address">
+              <input type="text" placeholder="Address">
+              <div class="form-row">
+                <input type="text" placeholder="Contact Number">
+                <input type="date" placeholder="Date of Birth">
+              </div>
+              <div class="form-buttons">
+                <button type="button" class="discard-btn">Discard changes</button>
+                <button type="submit" class="save-btn">Save changes</button>
+              </div>
+            </form>
+          </div>
         </div>
-        <h3>New Complaint</h3>
-        <div class="count">00</div>
-      </a>
-      <a href="in-progress-cases.html" class="stat-box">
-        <div class="icon">
-          <img src="files/progress.png" alt="In Progress Icon" />
-        </div>
-        <h3>In Progress Cases</h3>
-        <div class="count">00</div>
-      </a>
-      <a href="resolved-cases.html" class="stat-box">
-        <div class="icon">
-          <img src="files/resolved.png" alt="Resolved Icon" />
-        </div>
-        <h3>Resolved Cases</h3>
-        <div class="count">00</div>
-      </a>
-    </div>
+      </div>
+    </div> <!-- ✅ This closes .page-container -->
   </section>
 
   <footer>

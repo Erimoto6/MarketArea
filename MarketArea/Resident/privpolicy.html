@@ -6,6 +6,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;800&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="privpolicy.css">
+  <link rel="icon" type="image/png" href="logo.png">
 
 </head>
 <body>
@@ -121,6 +122,32 @@
             </div>
             </div>
             </footer>
+
+<script>
+  const profileTrigger = document.getElementById('profileTrigger');
+  const sidebar = document.getElementById('profileSidebar');
+
+  profileTrigger.addEventListener('click', (e) => {
+    e.preventDefault(); // prevent anchor from navigating
+    sidebar.classList.toggle('show');
+  });
+
+  document.addEventListener('click', function (e) {
+    const wrapper = document.querySelector('.profile-sidebar-wrapper');
+    if (!wrapper.contains(e.target)) {
+      sidebar.classList.remove('show');
+    }
+  });
+
+  document.getElementById('logout-btn').addEventListener('click', function (e) {
+    e.preventDefault(); // Stop the default navigation
+
+    if (confirm("Are you sure you want to log out?")) {
+      // Proceed to logout if confirmed
+      window.location.href = this.href;
+    }
+  });
+</script>
 
 </body>
 </html>
