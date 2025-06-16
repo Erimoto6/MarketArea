@@ -6,9 +6,8 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Barangay Market Area: Complaint System</title>
   <link rel="icon" type="image/png" href="logo.png">
-  
+
   <style>
-    /* Base Reset and Fonts */
     html {
       scroll-behavior: smooth;
     }
@@ -18,7 +17,7 @@
       font-family: 'Arial', sans-serif;
     }
 
-    /* Sticky Header Styling */
+    /* Header */
     header {
       position: sticky;
       top: 0;
@@ -48,7 +47,6 @@
       cursor: pointer;
     }
 
-    /* Profile Dropdown */
     .profile-container {
       position: relative;
     }
@@ -92,7 +90,7 @@
       height: 20px;
     }
 
-    /* Banner Section */
+    /* Banner */
     .main-banner {
       position: relative;
       height: 90vh;
@@ -145,7 +143,6 @@
       margin: 0 0 30px;
     }
 
-    /* Stat Box Section */
     .stats {
       display: flex;
       gap: 30px;
@@ -182,13 +179,11 @@
     .stat-box h3 {
       margin: 10px 0 5px;
       font-size: 1.1rem;
-      text-shadow: -2px 2px 2px rgba(0, 0, 0, 0.4);
     }
 
     .stat-box .count {
       font-size: 1.5rem;
       font-weight: bold;
-      text-shadow: -2px 2px 2px rgba(0, 0, 0, 0.4);
     }
 
     /* Footer */
@@ -216,18 +211,10 @@
       height: 100px;
     }
 
-    footer .footer-section1 {
-      max-width: 200px;
-      margin-right: 0;
-    }
-
-    footer .footer-section2 {
+    .footer-section1,
+    .footer-section2 {
       max-width: 200px;
       margin-right: 100px;
-    }
-
-    footer h4 {
-      margin-bottom: 10px;
     }
 
     footer ul {
@@ -243,6 +230,65 @@
       color: white;
       text-decoration: none;
     }
+
+    /* === NOTIFICATION POPUP === */
+    .notification-popup {
+      position: fixed;
+      top: 80px;
+      right: 30px;
+      width: 320px;
+      background: #fff;
+      border-radius: 10px;
+      box-shadow: 0px 8px 16px rgba(0, 0, 0, 0.2);
+      z-index: 999;
+      display: none;
+      flex-direction: column;
+      max-height: 400px;
+      overflow-y: auto;
+    }
+
+    .notification-popup .popup-header {
+      background: #2e3b0d;
+      color: white;
+      padding: 12px 16px;
+      border-top-left-radius: 10px;
+      border-top-right-radius: 10px;
+      font-weight: bold;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+
+    .notification-popup .popup-header span {
+      cursor: pointer;
+      font-size: 18px;
+    }
+
+    .notification-popup .popup-section {
+      padding: 10px 16px;
+    }
+
+    .notification-popup .popup-section h5 {
+      margin: 10px 0 5px;
+      font-size: 14px;
+      color: #888;
+    }
+
+    .notification-popup .notif-item {
+      padding: 8px 0;
+      border-bottom: 1px solid #eee;
+      font-size: 14px;
+      cursor: pointer;
+      color: #2e3b0d;
+    }
+
+    .notification-popup .notif-item:last-child {
+      border-bottom: none;
+    }
+
+    .notification-popup .notif-item:hover {
+      background-color: #f8f8f8;
+    }
   </style>
 </head>
 
@@ -257,16 +303,16 @@
     </div>
 
     <nav>
-      <a href="staffHomepage.html" onclick="scrollToTop(event)">Home</a>
+      <a href="staffHomepage.html">Home</a>
       <a href="manageComplaints.html">Manage Complaints</a>
-      <a href="#">Quick Metrics</a>
+      <a href="quickMetric.html">Quick Metrics</a>
       <div class="profile-container">
         <div class="profile-circle" onclick="toggleDropdown()"></div>
         <div class="dropdown-menu" id="dropdownMenu">
-          <a href="staffProf.html"><img src="files/profile.png" alt="Profile Icon">Profile</a>
-          <a href="#"><img src="files/notif.png" alt="Notifications Icon">Notifications</a>
-          <a href="#"><img src="files/settings.png" alt="Settings Icon">Settings</a>
-          <a href="#"><img src="files/logout.png" alt="Logout Icon">Logout</a>
+          <a href="staffProf.html"><img src="files/profile.png">Profile</a>
+          <a href="#" onclick="openNotifFromDropdown(event)"><img src="files/notif.png">Notifications</a>
+          <a href="#"><img src="files/settings.png">Settings</a>
+          <a href="#"><img src="files/logout.png">Logout</a>
         </div>
       </div>
     </nav>
@@ -275,49 +321,40 @@
   <section class="main-banner">
     <h1>BARANGAY MARKET AREA: COMPLAINT SYSTEM</h1>
     <p>Each complaint is a chance to make a difference. Respond with dedication and care.</p>
-
     <div class="stats">
       <a href="newcomplaint.html" class="stat-box">
-        <div class="icon">
-          <img src="files/new.png" alt="New Complaint Icon" />
-        </div>
+        <div class="icon"><img src="files/new.png" /></div>
         <h3>New Complaint</h3>
         <div class="count">00</div>
       </a>
       <a href="in-progress-cases.html" class="stat-box">
-        <div class="icon">
-          <img src="files/progress.png" alt="In Progress Icon" />
-        </div>
-        <h3>In Progress Cases</h3>
+        <div class="icon"><img src="files/progress.png" /></div>
+        <h3>In Progress</h3>
         <div class="count">00</div>
       </a>
       <a href="resolved-cases.html" class="stat-box">
-        <div class="icon">
-          <img src="files/resolved.png" alt="Resolved Icon" />
-        </div>
-        <h3>Resolved Cases</h3>
+        <div class="icon"><img src="files/resolved.png" /></div>
+        <h3>Resolved</h3>
         <div class="count">00</div>
       </a>
     </div>
   </section>
 
   <footer>
-    <div class="footer-section">
-      <div class="leftside">
-        <img src="files/logo.png" alt="Barangay Logo" /><br />
-        <p>
-          The Market Area of Sta. Rosa, Laguna is a bustling center of commerce and community activity. Known for its
-          public market, transport terminals, and small businesses, it serves as a vital hub for daily essentials,
-          local trade, and public services—connecting residents from different barangays across the city.
-        </p>
-      </div>
+    <div class="leftside">
+      <img src="files/logo.png" />
+      <p>
+        The Market Area of Sta. Rosa, Laguna is a bustling center of commerce and community activity. 
+        Known for its public market, transport terminals, and small businesses, it serves as a vital hub for daily 
+        essentials, local trade, and public services—connecting residents from different barangays across the city.
+      </p>
     </div>
     <div class="footer-section1">
       <h4>Quick Menu</h4>
       <ul>
-        <li><a href="staffHomepage.html">Home</a></li>
-        <li><a href="manageComplaints.html">Manage Complaint</a></li>
-        <li><a href="quickMetrics.html">Quick Metrics</a></li>
+        <li><a href="staffHomepage.html" onclick="scrollToTop(event)">Home</a></li>
+        <li><a href="manageComplaints.html">Manage Complaints</a></li>
+        <li><a href="quickMetric.html">Quick Metrics</a></li>
       </ul>
     </div>
     <div class="footer-section2">
@@ -330,25 +367,49 @@
     </div>
   </footer>
 
+  <!-- === NOTIFICATION POPUP START === -->
+  <div id="notifPopup" class="notification-popup">
+    <div class="popup-header">
+      Notifications
+      <span onclick="closeNotifPopup()">×</span>
+    </div>
+    <div class="popup-section">
+      <h5>Today</h5>
+      <div class="notif-item" onclick="alert('Go to complaint #001')">Juan dela Cruz submitted a noise complaint.</div>
+      <div class="notif-item" onclick="alert('Go to resolved complaint #002')">A case was marked as resolved.</div>
+    </div>
+    <div class="popup-section">
+      <h5>This Week</h5>
+      <div class="notif-item" onclick="alert('Go to garbage complaint #003')">Garbage issue updated by staff.</div>
+      <div class="notif-item" onclick="alert('Go to water complaint #004')">Water leak concern reopened.</div>
+    </div>
+  </div>
+  <!-- === NOTIFICATION POPUP END === -->
+
   <script>
     function toggleDropdown() {
-      const menu = document.getElementById('dropdownMenu');
-      menu.style.display = menu.style.display === 'block' ? 'none' : 'block';
+      const dropdown = document.getElementById('dropdownMenu');
+      const notif = document.getElementById('notifPopup');
+      notif.style.display = 'none'; // hide notif popup
+      dropdown.style.display = dropdown.style.display === 'block' ? 'none' : 'block';
     }
 
-    window.onclick = function (event) {
-      if (!event.target.closest('.profile-container')) {
-        const dropdown = document.getElementById('dropdownMenu');
-        if (dropdown) dropdown.style.display = 'none';
-      }
-    }
-
-    function scrollToTop(event) {
+    function openNotifFromDropdown(event) {
       event.preventDefault();
-      window.scrollTo({
-        top: 0,
-        behavior: 'smooth'
-      });
+      document.getElementById('dropdownMenu').style.display = 'none'; // close dropdown
+      document.getElementById('notifPopup').style.display = 'flex'; // open notif
+    }
+
+    function closeNotifPopup() {
+      document.getElementById('notifPopup').style.display = 'none';
+    }
+
+    // Close everything on outside click
+    window.onclick = function (e) {
+      if (!e.target.closest('.profile-container') && !e.target.closest('.notification-popup')) {
+        document.getElementById('dropdownMenu').style.display = 'none';
+        closeNotifPopup();
+      }
     }
   </script>
 </body>
