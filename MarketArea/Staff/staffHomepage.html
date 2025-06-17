@@ -378,7 +378,7 @@
     </div>
 
     <nav>
-      <a href="staffHomepage.html">Home</a>
+      <a href="staffHomepage.html" onclick="scrollToTop(event)">Home</a>
       <a href="manageComplaints.html">Manage Complaints</a>
       <a href="quickMetric.html">Quick Metrics</a>
       <div class="profile-container">
@@ -593,6 +593,13 @@
       }
     };
 
+    function scrollToTop(event) {
+      event.preventDefault();
+      window.scrollTo({
+        top: 0,
+        behavior: 'smooth'
+      });
+    }
 
     // Open modal
     function openModal() {
