@@ -458,7 +458,7 @@
           <a href="staffProf.html"><img src="files/profile.png" alt="Profile Icon" style="width: 20px; height: 20px;">Profile</a>
           <a href="#" onclick="openNotifFromDropdown(event)"><img src="files/notif.png" alt="Notifications Icon">Notifications</a>
           <a href="#"><img src="files/settings.png" alt="Settings Icon" style="width: 20px; height: 20px;">Settings</a>
-          <a href="#"><img src="files/logout.png" alt="Logout Icon" style="width: 20px; height: 20px;">Logout</a>
+          <a href="/index.html"><img src="files/logout.png" alt="Logout Icon" style="width: 20px; height: 20px;">Logout</a>
         </div>
       </div>
     </nav>
@@ -597,30 +597,19 @@
   
   
   <script>
-    // NEW: Added status field to each complaint
-    const complaints = Array.from({ length: 15 }, (_, i) => ({
-      id: i + 1,
-      complainant: `Resident ${i + 1}`,
-      category: ['Noise', 'Garbage', 'Other'][i % 3],
-      date: new Date(Date.now() - i * 86400000).toISOString().split('T')[0],
-      description: `Complaint detail example #${i + 1}`,
-      status: i % 3 === 0 ? 'New' : i % 3 === 1 ? 'In Progress' : 'Resolved' // NEW
-    }));
+    // // NEW CODE START: Load from localStorage
+    const complaints = JSON.parse(localStorage.getItem('acceptedComplaints')) || [];
 
     const tableBody = document.querySelector('#complaintTable tbody');
-    const searchInput = document.getElementById('searchInput');
-    const sortSelect = document.getElementById('sortSelect');
     const paginationControls = document.getElementById('paginationControls');
-
     let currentPage = 1;
-    const complaintsPerPage = 9;
+    const complaintsPerPage = 8;
 
-    // NEW: Get color based on status
     function getStatusDotColor(status) {
       switch (status) {
         case 'New': return '#FFA500'; // Orange
-        case 'In Progress': return '#4A43FF'; // Blue
-        case 'Resolved': return '#09FF00'; // Green
+        case 'In Progress': return '#4A43FF';
+        case 'Resolved': return '#09FF00';
         default: return '#ccc';
       }
     }
@@ -631,10 +620,7 @@
       const end = start + complaintsPerPage;
       data.slice(start, end).forEach(complaint => {
         const row = document.createElement('tr');
-
-        // 🔸 Add orange dot before Complaint ID
-        const statusDot = `<span class="status-dot"></span>`;
-
+        const statusDot = `<span class="status-dot" style="background-color:${getStatusDotColor(complaint.status)};"></span>`;
         row.innerHTML = `
           <td>${statusDot}#${complaint.id.toString().padStart(5, '0')}</td>
           <td>${complaint.complainant}</td>
@@ -645,35 +631,37 @@
         row.onclick = () => alert(`Open Complaint ID #${complaint.id}`);
         tableBody.appendChild(row);
       });
+      renderPagination(data.length);
     }
 
+    function renderPagination(totalItems) {
+      paginationControls.innerHTML = '';
+      const totalPages = Math.ceil(totalItems / complaintsPerPage);
+      if (totalPages > 1) {
+        const prevBtn = document.createElement('button');
+        prevBtn.innerText = '<';
+        prevBtn.onclick = () => {
+          if (currentPage > 1) {
+            currentPage--;
+            renderTable(complaints);
+          }
+        };
+        paginationControls.appendChild(prevBtn);
 
-    function renderPagination(data) {
-      const totalPages = Math.ceil(data.length / complaintsPerPage);
-      const prevBtn = document.getElementById('prevPageBtn');
-      const nextBtn = document.getElementById('nextPageBtn');
-      const pageInfo = document.getElementById('pageInfo');
-
-      pageInfo.textContent = `${currentPage} of ${totalPages}`;
-      prevBtn.disabled = currentPage === 1;
-      nextBtn.disabled = currentPage === totalPages;
-
-      prevBtn.onclick = () => {
-        if (currentPage > 1) {
-          currentPage--;
-          updateTable();
-        }
-      };
-
-      nextBtn.onclick = () => {
-        if (currentPage < totalPages) {
-          currentPage++;
-          updateTable();
-        }
-      };
+        const nextBtn = document.createElement('button');
+        nextBtn.innerText = '>';
+        nextBtn.onclick = () => {
+          if (currentPage < totalPages) {
+            currentPage++;
+            renderTable(complaints);
+          }
+        };
+        paginationControls.appendChild(nextBtn);
+      }
     }
 
-
+    renderTable(complaints);
+    // // NEW CODE END
     function updateTable() {
       let filtered = complaints.filter(c =>
         Object.values(c).some(val =>
@@ -757,6 +745,30 @@
         closeModal();
       }
     };    
+
+
+    /*DELETE LATER*/
+    window.onload = function () {
+      const complaintTable = document.getElementById('complaintTableBody'); // tbody
+      const complaints = JSON.parse(localStorage.getItem('complaints')) || [];
+
+      complaintTable.innerHTML = ''; // Clear before adding
+
+      complaints.forEach((comp, index) => {
+        const row = ` 
+          <tr>
+            <td>${comp.id}</td>
+            <td>${comp.complainant}</td>
+            <td>${comp.category}</td>
+            <td>${comp.dateFiled}</td>
+            <td>${comp.description}</td>
+          </tr>
+        `;
+        complaintTable.innerHTML += row;
+      });
+    };
+
+
   </script>
 </body>
 

@@ -387,7 +387,7 @@
           <a href="staffProf.html"><img src="files/profile.png">Profile</a>
           <a href="#" onclick="openNotifFromDropdown(event)"><img src="files/notif.png">Notifications</a>
           <a href="#"><img src="files/settings.png">Settings</a>
-          <a href="#"><img src="files/logout.png">Logout</a>
+          <a href="/index.html"><img src="files/logout.png">Logout</a>
         </div>
       </div>
     </nav>
@@ -508,30 +508,91 @@
   </div>
   
   <script>
+    // ==========================
+    // NOTIFICATION FUNCTIONALITY
+    // ==========================
+
+    // NEW: Load notifications from localStorage and inject into popup
+    function loadNotifications() {
+      const notifPopup = document.getElementById('notifPopup');
+      const popupSections = notifPopup.querySelectorAll('.popup-section');
+
+      // Clear existing notification items
+      popupSections.forEach(section => section.innerHTML = '');
+
+      const complaints = JSON.parse(localStorage.getItem('submittedComplaints')) || [];
+
+      const today = new Date().toISOString().split('T')[0];
+
+      // Create containers
+      const todaySection = document.createElement('div');
+      todaySection.className = 'popup-section';
+      const weekSection = document.createElement('div');
+      weekSection.className = 'popup-section';
+
+      const todayHeader = document.createElement('h5');
+      todayHeader.textContent = 'Today';
+      todaySection.appendChild(todayHeader);
+
+      const weekHeader = document.createElement('h5');
+      weekHeader.textContent = 'This Week';
+      weekSection.appendChild(weekHeader);
+
+      complaints.forEach((complaint, index) => {
+        const notifItem = document.createElement('div');
+        notifItem.className = 'notif-item';
+        notifItem.textContent = `${complaint.name} submitted a ${complaint.category.toLowerCase()} complaint.`;
+        notifItem.onclick = () => {
+          localStorage.setItem('selectedComplaintIndex', index); // Optional
+          window.location.href = 'complaintApprovalAction.html';
+        };
+
+        if (complaint.date === today) {
+          todaySection.appendChild(notifItem);
+        } else {
+          weekSection.appendChild(notifItem);
+        }
+      });
+
+      // Append generated sections
+      notifPopup.innerHTML = `
+        <div class="popup-header">
+          Notifications
+          <span onclick="closeNotifPopup()">×</span>
+        </div>
+      `;
+      notifPopup.appendChild(todaySection);
+      notifPopup.appendChild(weekSection);
+    }
+
+    // Update notification when dropdown "Notifications" is clicked
+    function openNotifFromDropdown(event) {
+      event.preventDefault();
+      document.getElementById('dropdownMenu').style.display = 'none';
+      loadNotifications(); // ✅ NEW: Load fresh notifications
+      document.getElementById('notifPopup').style.display = 'flex';
+    }
+
+    // Toggling dropdown logic stays the same
     function toggleDropdown() {
       const dropdown = document.getElementById('dropdownMenu');
       const notif = document.getElementById('notifPopup');
-      notif.style.display = 'none'; // hide notif popup
+      notif.style.display = 'none';
       dropdown.style.display = dropdown.style.display === 'block' ? 'none' : 'block';
-    }
-
-    function openNotifFromDropdown(event) {
-      event.preventDefault();
-      document.getElementById('dropdownMenu').style.display = 'none'; // close dropdown
-      document.getElementById('notifPopup').style.display = 'flex'; // open notif
     }
 
     function closeNotifPopup() {
       document.getElementById('notifPopup').style.display = 'none';
     }
 
-    // Close everything on outside click
+    // Close all on outside click
     window.onclick = function (e) {
       if (!e.target.closest('.profile-container') && !e.target.closest('.notification-popup')) {
         document.getElementById('dropdownMenu').style.display = 'none';
         closeNotifPopup();
       }
-    }
+    };
+
 
     // Open modal
     function openModal() {
