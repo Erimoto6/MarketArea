@@ -90,17 +90,18 @@
       height: 20px;
     }
 
-    /* --- RESTORED MAIN BANNER BACKGROUND IMAGE + BLACK OVERLAY --- */
     .main-banner {
-      position: relative;
-      height: 90vh;
-      text-align: center;
-      color: white;
-      display: flex;
-      flex-direction: column;
-      justify-content: center;
-      align-items: center;
-      overflow: hidden;
+        position: relative;
+        min-height: 100vh; /* 🟢 Use full screen height */
+        text-align: center;
+        color: white;
+        display: flex;
+        flex-direction: column;
+        justify-content: center; /* 🟢 Keeps it vertically centered */
+        align-items: center;
+        overflow: hidden;
+        padding: 10px 20px; /* 🟢 Adds space above and below */
+        box-sizing: border-box;
     }
 
     .main-banner::before {
@@ -123,24 +124,90 @@
       width: 100%;
       background: rgba(0, 0, 0, 0.5);
       z-index: 1;
+      padding: 60px 0;
     }
 
-    .main-banner h1,
-    .main-banner p {
+    .main-banner h2 {    
+      font-size: 50px;
+      margin: 0;
+      color: white;
       position: relative;
       z-index: 2;
-    }
-
-    .main-banner h1 {
-      font-size: 3rem;
-      font-weight: bold;
-      margin-bottom: 10px;
-    }
+      text-align: left;
+      width: 90%; 
+      margin-top: 10px;
+    }  
 
     .main-banner p {
       font-size: 1.1rem;
       margin: 0 0 30px;
     }
+
+    /* === FIXED SETTINGS PANEL STYLING START === */
+    .settings-container {
+    background: white;
+    color: #000; /* 🟢 Ensure text is visible */
+    border-radius: 15px;
+    padding: 30px;
+    width: 500px;
+    max-width: 90%;
+    z-index: 3; /* 🟢 Higher than overlay z-index (which is 1) */
+    position: relative;
+    box-shadow: 0 5px 25px rgba(0,0,0,0.3);
+    text-align: left;
+    font-family: Arial, sans-serif;
+    margin-top: 20px;
+    margin-bottom: 20px;
+
+    }
+
+    .settings-container h4 {
+    margin-top: 0px;
+    margin-bottom: 10px;
+    font-size: 1.5rem;
+    color: #444; /* 🟢 Darken headings */
+    
+    }
+
+    .setting-section {
+    margin-bottom: 20px;
+    }
+
+    .setting-section label {
+    display: block;
+    margin-top: 5px;
+    font-size: 0.95rem;
+    color: #111;
+    }
+
+    .settings-container select {
+    width: 100%;
+    padding: 6px;
+    border-radius: 5px;
+    border: 1px solid #ccc;
+    font-size: 0.95rem;
+    }
+
+    .save-button {
+    background-color: #3e4e1c;
+    color: white;
+    border: none;
+    padding: 10px 20px;
+    font-size: 0.95rem;
+    border-radius: 6px;
+    cursor: pointer;
+    }
+
+    .save-button:hover {
+    background-color: #2e3b0d;
+    }
+
+    .save-button-wrapper {
+        text-align: right;
+    }
+    /* === FIXED SETTINGS PANEL STYLING END === */
+
+
 
     /* Footer */
     footer {
@@ -223,11 +290,47 @@
     </nav>
   </header>
 
-  <!-- RESTORED MAIN BANNER (without boxes) -->
-  <section class="main-banner">
-    <h1>BARANGAY MARKET AREA: COMPLAINT SYSTEM</h1>
-    <p>Each complaint is a chance to make a difference. Respond with dedication and care.</p>
-  </section>
+    <!-- MAIN BANNER -->
+    <section class="main-banner">
+    <h2>Settings</h2>    
+    <div class="settings-container"><!-- SETTINGS CONTAINER START -->
+    <h4>Customize your preferences below.</h4>
+
+        <div class="setting-section">
+        <strong>Notification Settings</strong><br>
+        <label><input type="checkbox" checked> Email Notifications</label><br>
+        <label><input type="checkbox"> SMS Notifications</label><br>
+        <label><input type="checkbox"> Push Notifications</label>
+        </div>
+
+        <div class="setting-section">
+        <strong>Font Style</strong><br>
+        <label><input type="radio" name="fontStyle" checked> K2D</label><br>
+        <label><input type="radio" name="fontStyle"> Bebas Neue</label><br>
+        <label><input type="radio" name="fontStyle"> Inter</label>
+        </div>
+
+        <div class="setting-section">
+        <strong>Language</strong><br>
+        <select>
+            <option>English</option>
+            <option>Filipino</option>
+        </select>
+        </div>
+
+        <div class="setting-section">
+        <strong>Font Size</strong><br>
+        <label><input type="radio" name="fontSize"> Small</label><br>
+        <label><input type="radio" name="fontSize" checked> Medium</label><br>
+        <label><input type="radio" name="fontSize"> Large</label>
+        </div>
+
+        <div class="save-button-wrapper">
+            <button class="save-button">Save Changes</button>
+        </div>
+
+    </div><!-- SETTINGS CONTAINER END -->
+    </section>
 
   <footer>
     <div class="footer-section">
