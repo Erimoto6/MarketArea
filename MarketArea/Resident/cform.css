@@ -714,3 +714,107 @@ html, body {
 .form-step.active {
   display: block;
 }
+
+
+
+
+
+
+
+
+/* === Modal Overlay === */
+#terms-modal {
+  position: fixed;
+  top: 0; left: 0;
+  width: 100%; height: 100%;
+  background: rgba(0,0,0,0.5);
+  display: none; /* hidden by default */
+  justify-content: center;
+  align-items: center;
+  z-index: 1000;
+}
+
+/* === Modal Content === */
+.terms-modal-content {
+  background: #fff;
+  max-width: 600px;
+  width: 90%;
+  max-height: 80vh;
+  overflow-y: auto;
+  padding: 2rem;
+  border-radius: 8px;
+  position: relative;
+
+  /* Hide scrollbar: works for Chrome, Edge, Safari */
+  scrollbar-width: none; /* Firefox */
+  -ms-overflow-style: none;  /* IE and Edge */
+}
+
+.terms-modal-content::-webkit-scrollbar {
+  display: none; /* Chrome, Safari, Opera */
+}
+
+
+/* Terms Modal Styles - Green Palette */
+.terms-modal {
+  display: none; 
+  position: fixed; 
+  z-index: 1000; 
+  left: 0; 
+  top: 0; 
+  width: 100%; 
+  height: 100%;
+  background-color: rgba(0, 0, 0, 0.5); /* dimmed backdrop */
+  justify-content: center; 
+  align-items: center;
+}
+
+.terms-modal-content {
+  background: #ffffff;
+  border-radius: 10px;
+  max-width: 500px;
+  width: 90%;
+  padding: 2rem;
+  position: relative;
+  box-shadow: 0 0 20px rgba(0, 128, 0, 0.3);
+  border-top: 8px solid #28a745;
+}
+
+.terms-modal-content h3 {
+  margin-top: 0;
+  color: #28a745;
+}
+
+.terms-modal-content p {
+  margin: 1rem 0;
+  color: #333;
+  line-height: 1.5;
+}
+
+.close-modal {
+  position: absolute;
+  top: 15px;
+  right: 15px;
+  background: transparent;
+  border: none;
+  font-size: 1.5rem;
+  color: #28a745;
+  cursor: pointer;
+}
+
+.modal-action-btn {
+  background: #28a745;
+  color: #fff;
+  border: none;
+  padding: 0.6rem 1.5rem;
+  border-radius: 5px;
+  cursor: pointer;
+  margin-top: 1rem;
+  font-weight: 600;
+}
+
+.modal-action-btn:hover,
+.close-modal:hover {
+  background: #218838;
+  color: #fff;
+}
