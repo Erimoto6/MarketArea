@@ -158,7 +158,7 @@
   <div class="terms-container">
     <input type="checkbox" id="terms-checkbox" required>
     <label for="terms-checkbox">
-      I agree to the <a href="#" id="terms-link">Terms and Conditions</a>
+      I agree to the <a href="term&con.html" id="terms-link">Terms and Conditions</a>
     </label>
   </div>
 
@@ -192,10 +192,10 @@
 
             <div class="footer-right-group">
                 <div class="footer-middle">
-                    <h4 class="footer-heading">Other Services</h4>
-                    <p class="footer-link">Insert Site</p>
-                    <p class="footer-link">Insert Site</p>
-                    <p class="footer-link">Insert Site</p>
+              <h4 class="footer-heading">Quick Links</h4>
+      				<p class="footer-link"><a href="my_complaints.html" id="footer-link">My Complaints</a></p>
+              <p class="footer-link"><a href="contact.html" id="footer-link">Contacts</a></p>
+              <p class="footer-link"><a href="settings.html" id="footer-link">Settings</a></p>
                 </div>
 
             <div class="footer-right">
@@ -209,11 +209,9 @@
 
 
   <script>
-
-
   const profileTrigger = document.getElementById('profileTrigger');
   const sidebar = document.getElementById('profileSidebar');
- 
+
   // Terms modal logic 
   document.getElementById('terms-link').addEventListener('click', function(e) {
     e.preventDefault();
@@ -233,7 +231,7 @@
   });
 
   profileTrigger.addEventListener('click', (e) => {
-    e.preventDefault(); // prevent anchor from navigating
+    e.preventDefault();
     sidebar.classList.toggle('show');
   });
 
@@ -245,10 +243,8 @@
   });
 
   document.getElementById('logout-btn').addEventListener('click', function (e) {
-    e.preventDefault(); // Stop the default navigation
-
+    e.preventDefault();
     if (confirm("Are you sure you want to log out?")) {
-      // Proceed to logout if confirmed
       window.location.href = this.href;
     }
   });
@@ -276,6 +272,14 @@
   }
 
   function nextStep() {
+    const currentInputs = steps[currentStep].querySelectorAll('input, select, textarea');
+    for (let input of currentInputs) {
+      if (!input.checkValidity()) {
+        input.reportValidity();
+        return; // stop if an input is invalid
+      }
+    }
+
     if (currentStep < steps.length - 1) {
       currentStep++;
       updateFormSteps();
@@ -289,15 +293,45 @@
     }
   }
 
-  // Run on page load
   updateFormSteps();
 
+  const form = document.getElementById('blotter-form');
 
+  form.addEventListener('submit', function(e) {
+    e.preventDefault();
 
+    // Validate all required fields in step 0 and step 1
+    const personalInfoInputs = steps[0].querySelectorAll('input, select');
+    const complaintDetailsInputs = steps[1].querySelectorAll('input, select, textarea');
 
+    for (let input of [...personalInfoInputs, ...complaintDetailsInputs]) {
+      if (!input.checkValidity()) {
+        // If invalid, go to that step and show error
+        if (steps[0].contains(input)) {
+          currentStep = 0;
+        } else {
+          currentStep = 1;
+        }
+        updateFormSteps();
+        input.reportValidity();
+        return;
+      }
+    }
 
+    // Check Terms and Conditions
+    if (!document.getElementById('terms-checkbox').checked) {
+      alert('Please agree to the Terms and Conditions.');
+      return;
+    }
 
+    // If all valid, show success popup
+    alert('Your complaint has been submitted successfully.');
+    form.reset();
+    currentStep = 0;
+    updateFormSteps();
+  });
 </script>
+
 
 </body>
 </html>

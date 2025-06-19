@@ -333,6 +333,135 @@
       color: white;
       text-decoration: none;
     }
+
+    /* === NOTIFICATION POPUP === */
+    .notification-popup {
+      position: fixed;
+      top: 80px;
+      right: 30px;
+      width: 320px;
+      background: #fff;
+      border-radius: 10px;
+      box-shadow: 0px 8px 16px rgba(0, 0, 0, 0.2);
+      z-index: 999;
+      display: none;
+      flex-direction: column;
+      max-height: 400px;
+      overflow-y: auto;
+    }
+
+    .notification-popup .popup-header {
+      background: #2e3b0d;
+      color: white;
+      padding: 12px 16px;
+      border-top-left-radius: 10px;
+      border-top-right-radius: 10px;
+      font-weight: bold;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+
+    .notification-popup .popup-header span {
+      cursor: pointer;
+      font-size: 18px;
+    }
+
+    .notification-popup .popup-section {
+      padding: 10px 16px;
+    }
+
+    .notification-popup .popup-section h5 {
+      margin: 10px 0 5px;
+      font-size: 14px;
+      color: #888;
+    }
+
+    .notification-popup .notif-item {
+      padding: 8px 0;
+      border-bottom: 1px solid #eee;
+      font-size: 14px;
+      cursor: pointer;
+      color: #2e3b0d;
+    }
+
+    .notification-popup .notif-item:last-child {
+      border-bottom: none;
+    }
+
+    .notification-popup .notif-item:hover {
+      background-color: #f8f8f8;
+    }
+
+    /* === MODAL STYLES FOR TERMS POPUP === */
+    .modal-overlay {
+      display: none;
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background-color: rgba(0,0,0,0.6);
+      justify-content: center;
+      align-items: center;
+      z-index: 999;
+      margin-top: 50px;      
+    }
+
+    .modal-content {
+      background-color: #fff;
+      margin: 5% auto;
+      padding: 0;
+      border-radius: 10px;
+      width: 80%;
+      max-width: 600px;
+      box-shadow: 0 4px 12px rgba(0, 0, 0, 0.3);
+      overflow: hidden;
+      box-sizing: border-box;
+    }
+
+    .modal-scrollable {
+        padding: 5px 20px;
+        max-height: 70vh;
+        overflow-y: auto;
+        overflow-x: hidden;
+        position: relative;
+    }
+
+    .modal-scrollable h2 {
+      text-align: center;
+      color: #4B5320;
+      margin-top: 0px;
+    }
+
+    .modal-scrollable h3 {
+      color: #BF8C00;
+      margin-top: 1em;
+    }
+
+    .close {
+        display: block;
+        text-align: right;
+        margin-right: 10px; /* 🟢 moves it to the left of the scrollbar */
+        margin-top: 0px;
+        font-size: 24px;
+        font-weight: bold;
+        color: #aaa;
+        cursor: pointer;
+    }
+
+    .close:hover {
+        color: black;
+    }
+
+
+    .close:hover,
+    .close:focus {
+      color: black;
+      text-decoration: none;
+      cursor: pointer;
+    }    
+
   </style>
 </head>
 
@@ -347,16 +476,16 @@
     </div>
 
     <nav>
-      <a href="staffHomepage.html" onclick="scrollToTop(event)">Home</a>
+      <a href="staffHomepage.html">Home</a>
       <a href="manageComplaints.html">Manage Complaints</a>
       <a href="quickMetrics.html">Quick Metrics</a>
       <div class="profile-container">
         <div class="profile-circle" onclick="toggleDropdown()"></div>
         <div class="dropdown-menu" id="dropdownMenu">
-          <a href="#"><img src="files/profile.png" alt="Profile Icon">Profile</a>
-          <a href="#"><img src="files/notif.png" alt="Notifications Icon">Notifications</a>
+          <a href="staffProf.html"><img src="files/profile.png" alt="Profile Icon">Profile</a>
+          <a href="#"onclick="openNotifFromDropdown(event)"><img src="files/notif.png" alt="Notifications Icon">Notifications</a>
           <a href="#"><img src="files/settings.png" alt="Settings Icon">Settings</a>
-          <a href="#"><img src="files/logout.png" alt="Logout Icon">Logout</a>
+          <a href="/index.html"><img src="files/logout.png" alt="Logout Icon">Logout</a>
         </div>
       </div>
     </nav>
@@ -429,11 +558,75 @@
       <h4>Govt. Info</h4>
       <ul>
         <li><a href="#">Privacy Policy</a></li>
-        <li><a href="#">Terms & Conditions</a></li>
+        <li><a href="#" onclick="openTerms(event)">Terms & Conditions</a></li>  
         <li><a href="#">FAQ</a></li>
       </ul>
     </div>
   </footer>
+
+  <!-- === NOTIFICATION POPUP START === -->
+  <div id="notifPopup" class="notification-popup">
+    <div class="popup-header">
+      Notifications
+      <span onclick="closeNotifPopup()">×</span>
+    </div>
+    <div class="popup-section">
+      <h5>Today</h5>
+      <div class="notif-item" onclick="alert('Go to complaint #001')">Juan dela Cruz submitted a noise complaint.</div>
+      <div class="notif-item" onclick="alert('Go to resolved complaint #002')">A case was marked as resolved.</div>
+    </div>
+    <div class="popup-section">
+      <h5>This Week</h5>
+      <div class="notif-item" onclick="alert('Go to garbage complaint #003')">Garbage issue updated by staff.</div>
+      <div class="notif-item" onclick="alert('Go to water complaint #004')">Water leak concern reopened.</div>
+    </div>
+  </div>
+  <!-- === NOTIFICATION POPUP END === -->
+
+  <!-- === TERMS & CONDITIONS MODAL START === -->
+    <div id="termsModal" class="modal-overlay">
+      <div class="modal-content">
+      <span class="close" onclick="closeModal()">&times;</span>  
+        <div class="modal-scrollable">
+          <h2>Terms and Conditions</h2>
+          <p>Welcome to the Barangay E-Blotter System. By accessing or using this system, you agree to comply with and be bound by the following terms and conditions. Please read them carefully.</p>
+
+          <h3>1. Use of the System</h3>
+          <ul>
+            <li>The E-Blotter System is intended for residents to file and track complaints within the barangay.</li>
+            <li>You must provide accurate and complete information when submitting a complaint.</li>
+            <li>Misuse of the system, including submitting false or malicious complaints, is strictly prohibited.</li>
+          </ul>
+
+          <h3>2. Privacy and Confidentiality</h3>
+          <ul>
+            <li>All personal information submitted will be kept confidential and used only for resolving complaints.</li>
+            <li>Only authorized barangay personnel have access to complaint details.</li>
+          </ul>
+
+          <h3>3. User Responsibilities</h3>
+          <ul>
+            <li>You are responsible for the accuracy of the information you provide.</li>
+            <li>You must not use the system for unlawful purposes or to harass others.</li>
+          </ul>
+
+          <h3>4. System Availability</h3>
+          <ul>
+            <li>The barangay strives to keep the system available at all times but does not guarantee uninterrupted access.</li>
+            <li>Maintenance or technical issues may cause temporary downtime.</li>
+          </ul>
+
+          <h3>5. Changes to Terms</h3>
+          <ul>
+            <li>The barangay reserves the right to update these terms at any time. Changes will be posted on this page.</li>
+          </ul>
+
+          <h3>6. Contact</h3>
+          <p>For questions or concerns, contact the Barangay Office at (012) 345-6789 or email <a href="mailto:barangayeblotter@email.com">barangayeblotter@email.com</a>.</p>
+        </div>
+      </div>
+    </div>
+  <!-- === TERMS & CONDITIONS MODAL END === -->
 
   <script>
     function toggleDropdown() {
@@ -455,6 +648,52 @@
         behavior: 'smooth'
       });
     }
+
+    function toggleDropdown() {
+      const dropdown = document.getElementById('dropdownMenu');
+      const notif = document.getElementById('notifPopup');
+      notif.style.display = 'none'; // hide notif popup
+      dropdown.style.display = dropdown.style.display === 'block' ? 'none' : 'block';
+    }
+
+    function openNotifFromDropdown(event) {
+      event.preventDefault();
+      document.getElementById('dropdownMenu').style.display = 'none'; // close dropdown
+      document.getElementById('notifPopup').style.display = 'flex'; // open notif
+    }
+
+    function closeNotifPopup() {
+      document.getElementById('notifPopup').style.display = 'none';
+    }
+
+    // Close everything on outside click
+    window.onclick = function (e) {
+      if (!e.target.closest('.profile-container') && !e.target.closest('.notification-popup')) {
+        document.getElementById('dropdownMenu').style.display = 'none';
+        closeNotifPopup();
+      }
+    }
+
+    /*TERMS AND CONDITION*/
+    function openTerms(event) {
+      event.preventDefault();
+      document.getElementById('termsModal').style.display = 'flex';
+    }
+
+    function closeTerms() {
+      document.getElementById('termsModal').style.display = 'none';
+    }
+
+    // Open modal
+    function openModal() {
+      document.getElementById("termsModal").style.display = "block";
+    }
+
+    // Close modal
+    function closeModal() {
+      document.getElementById("termsModal").style.display = "none";
+    }
+
   </script>
 </body>
 

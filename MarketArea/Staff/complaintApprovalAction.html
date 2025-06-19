@@ -1,23 +1,50 @@
 <!DOCTYPE html>
 <html lang="en">
-
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Barangay Market Area: Complaint System</title>
+  <title>Complaint View - Barangay Market Area</title>
   <link rel="icon" type="image/png" href="logo.png">
 
   <style>
-    html {
-      scroll-behavior: smooth;
-    }
-
-    body {
+    /* Base Reset and Font */
+    * {
       margin: 0;
-      font-family: 'Arial', sans-serif;
+      box-sizing: border-box;
     }
 
-    /* Header */
+    html, body {
+      font-family: Arial, sans-serif;
+      height: 100%;
+      overflow-x: hidden;
+    }
+
+    /* Background Image + Overlay */
+    body::before {
+      content: "";
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background: url('files/marketareabg.jpg') no-repeat center center;
+      background-size: cover;
+      background-attachment: fixed;
+      z-index: -2;
+    }
+
+    body::after {
+      content: "";
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background-color: rgba(0, 0, 0, 0.5);
+      z-index: -1;
+    }
+
+    /* Sticky Header */
     header {
       position: sticky;
       top: 0;
@@ -90,101 +117,103 @@
       height: 20px;
     }
 
-    /* Banner */
-    .main-banner {
-      position: relative;
-      height: 90vh;
-      text-align: center;
-      color: white;
+    /* Complaint Form Styling */
+    .form-container {
+      max-width: 1000px;
+      margin: 50px auto;
+      background-color: #fff;
+      border-radius: 8px;
+      padding: 40px;
+      box-shadow: 0 0 15px rgba(0, 0, 0, 0.3);
+    }
+
+    .form-container p {
+      margin-bottom: 12px;
+    }
+
+    .row {
       display: flex;
-      flex-direction: column;
-      justify-content: center;
-      align-items: center;
-      overflow: hidden;
-    }
-
-    .main-banner::before {
-      content: "";
-      position: absolute;
-      top: 0;
-      left: 0;
-      height: 100%;
-      width: 100%;
-      background: url('files/marketareabg.jpg') no-repeat center center/cover;
-      z-index: 0;
-    }
-
-    .main-banner::after {
-      content: "";
-      position: absolute;
-      top: 0;
-      left: 0;
-      height: 100%;
-      width: 100%;
-      background: rgba(0, 0, 0, 0.5);
-      z-index: 1;
-    }
-
-    .main-banner h1,
-    .main-banner p,
-    .stats {
-      position: relative;
-      z-index: 2;
-    }
-
-    .main-banner h1 {
-      font-size: 3rem;
-      font-weight: bold;
-      margin-bottom: 10px;
-    }
-
-    .main-banner p {
-      font-size: 1.1rem;
-      margin: 0 0 30px;
-    }
-
-    .stats {
-      display: flex;
+      justify-content: space-between;
       gap: 30px;
-      margin-top: 20px;
       flex-wrap: wrap;
-      justify-content: center;
     }
 
-    .stat-box {
-      background-color: #6d8129;
-      padding: 20px 30px;
-      border-radius: 10px;
-      color: white;
-      width: 180px;
+    .photo {
+      width: 150px;
+      height: 150px;
+      object-fit: cover;
+      border: 1px solid #aaa;
+    }
+
+    .info {
+      flex: 1;
+    }
+
+    .section {
+      margin-top: 30px;
+      border-top: 1px solid #aaa;
+      padding-top: 20px;
+    }
+
+    .desc-box {
+      width: 100%;
+      height: 80px;
+      margin-top: 10px;
+      resize: none;
+      padding: 10px;
+      background-color: #eee;
+      border: 1px solid #ccc;
+      color: #444;
+    }
+
+    .evidence {
+      display: flex;
+      justify-content: center; /* center horizontally */
+      gap: 40px;
+      margin-top: 15px;
+      flex-wrap: wrap;
+    }
+
+    .evidence img {
+      width: 200px;
+      height: 200px;
+      object-fit: cover;
+      border: 1px solid #999;
+    }
+
+    .optional {
       text-align: center;
-      box-shadow: -2px 4px 5px rgba(0, 0, 0, 0.5);
-      transition: all 0.3s ease;
+      font-style: italic;
+      margin: 20px 0 10px;
+    }
+
+    .bottom-section {
+      margin-top: 30px;
+      border-top: 1px solid #aaa;
+      padding-top: 20px;
+    }
+
+
+    /* // NEW CODE START: Accept/Deny button styles */
+    .action-buttons {
+      display: flex;
+      justify-content: center;
+      margin-top: 20px;
+      gap: 20px;
+    }
+    .action-buttons button {
+      padding: 10px 20px;
+      border: none;
+      color: white;
+      background-color: #2e3b0d;
       cursor: pointer;
-      text-decoration: none;
+      border-radius: 4px;
     }
+    .action-buttons button:hover {
+      background-color: #3f5216;
+    }
+    /* // NEW CODE END */
 
-    .stat-box:hover {
-      background-color: #7e9431;
-      transform: scale(1.05);
-      box-shadow: 0px 6px 15px rgba(0, 0, 0, 0.4);
-    }
-
-    .stat-box .icon img {
-      height: 40px;
-      margin-bottom: 10px;
-      filter: drop-shadow(-2px 2px 2px rgba(0, 0, 0, 0.4));
-    }
-
-    .stat-box h3 {
-      margin: 10px 0 5px;
-      font-size: 1.1rem;
-    }
-
-    .stat-box .count {
-      font-size: 1.5rem;
-      font-weight: bold;
-    }
 
     /* Footer */
     footer {
@@ -192,7 +221,7 @@
       color: white;
       display: flex;
       justify-content: space-between;
-      padding: 13px 30px;
+      padding: 20px 30px;
       font-size: 0.9rem;
       flex-wrap: wrap;
     }
@@ -204,7 +233,7 @@
       max-width: 500px;
       margin-top: 10px;
     }
-    
+
     footer img {
       margin-right: 25px;
       margin-left: 10px;
@@ -220,7 +249,7 @@
       max-width: 200px;
       margin-right: 100px;
     }
-    
+
     footer h4 {
       margin-bottom: 10px;
     }
@@ -298,17 +327,19 @@
       background-color: #f8f8f8;
     }
 
-    .modal {
+    /* === MODAL STYLES FOR TERMS POPUP === */
+    .modal-overlay {
       display: none;
       position: fixed;
-      z-index: 999;
-      left: 0;
       top: 0;
+      left: 0;
       width: 100%;
       height: 100%;
-      overflow: auto;
-      background-color: rgba(0, 0, 0, 0.6);
-      margin-top: 50px;
+      background-color: rgba(0,0,0,0.6);
+      justify-content: center;
+      align-items: center;
+      z-index: 999;
+      margin-top: 50px;      
     }
 
     .modal-content {
@@ -364,9 +395,9 @@
       text-decoration: none;
       cursor: pointer;
     }    
+        
   </style>
 </head>
-
 <body>
   <header>
     <div style="display: flex; align-items: center;">
@@ -376,67 +407,97 @@
         <div>Complaint System</div>
       </div>
     </div>
-
     <nav>
       <a href="staffHomepage.html" onclick="scrollToTop(event)">Home</a>
       <a href="manageComplaints.html">Manage Complaints</a>
-      <a href="quickMetric.html">Quick Metrics</a>
+      <a href="quickMetrics.html">Quick Metrics</a>
       <div class="profile-container">
         <div class="profile-circle" onclick="toggleDropdown()"></div>
         <div class="dropdown-menu" id="dropdownMenu">
-          <a href="staffProf.html"><img src="files/profile.png">Profile</a>
-          <a href="#" onclick="openNotifFromDropdown(event)"><img src="files/notif.png">Notifications</a>
-          <a href="settings.html"><img src="files/settings.png">Settings</a>
-          <a href="/index.html"><img src="files/logout.png">Logout</a>
+          <a href="staffProf.html"><img src="files/profile.png" alt="Profile Icon">Profile</a>
+          <a href="#"onclick="openNotifFromDropdown(event)"><img src="files/notif.png" alt="Notifications Icon">Notifications</a>
+          <a href="settings.html"><img src="files/settings.png" alt="Settings Icon">Settings</a>
+          <a href="/index.html"><img src="files/logout.png" alt="Logout Icon">Logout</a>
         </div>
       </div>
     </nav>
   </header>
 
-  <section class="main-banner">
-    <h1>BARANGAY MARKET AREA: COMPLAINT SYSTEM</h1>
-    <p>Each complaint is a chance to make a difference. Respond with dedication and care.</p>
-    <div class="stats">
-      <a href="newcomplaint.html" class="stat-box">
-        <div class="icon"><img src="files/new.png" /></div>
-        <h3>New Complaint</h3>
-        <div class="count">00</div>
-      </a>
-      <a href="in-progress-cases.html" class="stat-box">
-        <div class="icon"><img src="files/progress.png" /></div>
-        <h3>In Progress</h3>
-        <div class="count">00</div>
-      </a>
-      <a href="resolved-cases.html" class="stat-box">
-        <div class="icon"><img src="files/resolved.png" /></div>
-        <h3>Resolved</h3>
-        <div class="count">00</div>
-      </a>
+  <div class="form-container">
+    <div class="row">
+      <div class="info">
+        <p><strong>Date Filed:</strong> 03/03/25</p>
+        <p><strong>Name:</strong> Juan De Luna</p>
+        <p><strong>Age:</strong> 31</p>
+        <p><strong>Gender:</strong> Male</p>
+        <p><strong>Address:</strong> blablabla</p>
+        <p><strong>Contact:</strong> 09178920304</p>
+        <p><strong>Email:</strong> juandeluna@gmail.com</p>
+      </div>
+      <img src="https://via.placeholder.com/150" class="photo" alt="ID Photo">
     </div>
-  </section>
+
+
+
+    <div class="section"> 
+      <p><strong>Type of Complaint:</strong> Noise</p>
+      <p><strong>Date and Time of Incident:</strong> 03/02/25, 2:00am</p>
+      <p><strong>Location of Incident:</strong> Rawr Street, ABC</p>
+      <p><strong>Description:</strong></p>
+      <textarea class="desc-box" disabled>This is a description of the noise incident...</textarea>
+
+      <p><strong>Photo, Video, or Screenshot Evidence (Optional):</strong></p>
+      <div class="evidence">
+        <img src="https://via.placeholder.com/100" alt="Evidence 1">
+        <img src="https://via.placeholder.com/100" alt="Evidence 2">
+        <img src="https://via.placeholder.com/100" alt="Evidence 3">
+      </div>
+    </div>
+
+      <div class="section">
+        <p class="optional">(Optional)</p>
+        <p><strong>Witness Details:</strong></p>
+        <p><strong>Name:</strong> </p>
+        <p><strong>Contact:</strong> </p>
+      </div>
+
+      <div class="bottom-section">
+        <p><strong>Schedule of Appointment:</strong> Date, Time</p>
+        <p><strong>Assigned to:</strong> (staff name)</p>
+      </div>
+  
+      <!-- ADD THIS BELOW YOUR <div class="bottom-section"> -->
+      <div class="action-buttons"> <!-- // NEW CODE START: Accept & Deny buttons -->
+        <button onclick="denyComplaint()">Deny</button>
+        <button onclick="acceptComplaint()">Accept</button>
+      </div> <!-- // NEW CODE END -->
+      </div>
+  </div>
+
+
 
   <footer>
-    <div class="leftside">
-      <img src="files/logo.png" />
-      <p>
-        The Market Area of Sta. Rosa, Laguna is a bustling center of commerce and community activity. 
-        Known for its public market, transport terminals, and small businesses, it serves as a vital hub for daily 
-        essentials, local trade, and public services—connecting residents from different barangays across the city.
-      </p>
+    <div class="footer-section">
+      <div class="leftside">
+        <img src="files/logo.png" alt="Barangay Logo" />
+        <p>
+          The Market Area of Sta. Rosa, Laguna is a bustling center of commerce and community activity. Known for its public market, transport terminals, and small businesses, it serves as a vital hub for daily essentials, local trade, and public services—connecting residents from different barangays across the city.
+        </p>
+      </div>
     </div>
     <div class="footer-section1">
       <h4>Quick Menu</h4>
       <ul>
-        <li><a href="staffHomepage.html" onclick="scrollToTop(event)">Home</a></li>
-        <li><a href="manageComplaints.html">Manage Complaints</a></li>
-        <li><a href="quickMetric.html">Quick Metrics</a></li>
+        <li><a href="staffHomepage.html">Home</a></li>
+        <li><a href="manageComplaints.html">Manage Complaint</a></li>
+        <li><a href="quickMetrics.html">Quick Metrics</a></li>
       </ul>
     </div>
     <div class="footer-section2">
       <h4>Govt. Info</h4>
       <ul>
         <li><a href="#">Privacy Policy</a></li>
-        <li><a href="#" class="termsCondi" onclick="openModal()">Terms & Conditions</a></li>
+        <li><a href="#" onclick="openTerms(event)">Terms & Conditions</a></li>  
         <li><a href="#">FAQ</a></li>
       </ul>
     </div>
@@ -461,12 +522,10 @@
   </div>
   <!-- === NOTIFICATION POPUP END === -->
 
-
-  <!-- === TERMS AND CONDITION ===-->
-
-  <div id="termsModal" class="modal">
+<!-- === TERMS & CONDITIONS MODAL START === -->
+  <div id="termsModal" class="modal-overlay">
     <div class="modal-content">
-    <span class="close" onclick="closeModal()">&times;</span>
+    <span class="close" onclick="closeModal()">&times;</span>  
       <div class="modal-scrollable">
         <h2>Terms and Conditions</h2>
         <p>Welcome to the Barangay E-Blotter System. By accessing or using this system, you agree to comply with and be bound by the following terms and conditions. Please read them carefully.</p>
@@ -506,99 +565,97 @@
       </div>
     </div>
   </div>
-  
+<!-- === TERMS & CONDITIONS MODAL END === -->
+
   <script>
-    // ==========================
-    // NOTIFICATION FUNCTIONALITY
-    // ==========================
-
-    // NEW: Load notifications from localStorage and inject into popup
-    function loadNotifications() {
-      const notifPopup = document.getElementById('notifPopup');
-      const popupSections = notifPopup.querySelectorAll('.popup-section');
-
-      // Clear existing notification items
-      popupSections.forEach(section => section.innerHTML = '');
-
-      const complaints = JSON.parse(localStorage.getItem('submittedComplaints')) || [];
-
-      const today = new Date().toISOString().split('T')[0];
-
-      // Create containers
-      const todaySection = document.createElement('div');
-      todaySection.className = 'popup-section';
-      const weekSection = document.createElement('div');
-      weekSection.className = 'popup-section';
-
-      const todayHeader = document.createElement('h5');
-      todayHeader.textContent = 'Today';
-      todaySection.appendChild(todayHeader);
-
-      const weekHeader = document.createElement('h5');
-      weekHeader.textContent = 'This Week';
-      weekSection.appendChild(weekHeader);
-
-      complaints.forEach((complaint, index) => {
-        const notifItem = document.createElement('div');
-        notifItem.className = 'notif-item';
-        notifItem.textContent = `${complaint.name} submitted a ${complaint.category.toLowerCase()} complaint.`;
-        notifItem.onclick = () => {
-          localStorage.setItem('selectedComplaintIndex', index); // Optional
-          window.location.href = 'complaintApprovalAction.html';
-        };
-
-        if (complaint.date === today) {
-          todaySection.appendChild(notifItem);
-        } else {
-          weekSection.appendChild(notifItem);
-        }
-      });
-
-      // Append generated sections
-      notifPopup.innerHTML = `
-        <div class="popup-header">
-          Notifications
-          <span onclick="closeNotifPopup()">×</span>
-        </div>
-      `;
-      notifPopup.appendChild(todaySection);
-      notifPopup.appendChild(weekSection);
+    function toggleDropdown() {
+      const menu = document.getElementById('dropdownMenu');
+      menu.style.display = menu.style.display === 'block' ? 'none' : 'block';
     }
 
-    // Update notification when dropdown "Notifications" is clicked
-    function openNotifFromDropdown(event) {
+    window.onclick = function (event) {
+      if (!event.target.closest('.profile-container')) {
+        const dropdown = document.getElementById('dropdownMenu');
+        if (dropdown) dropdown.style.display = 'none';
+      }
+    }
+
+    function scrollToTop(event) {
       event.preventDefault();
-      document.getElementById('dropdownMenu').style.display = 'none';
-      loadNotifications(); // ✅ NEW: Load fresh notifications
-      document.getElementById('notifPopup').style.display = 'flex';
+      window.scrollTo({ top: 0, behavior: 'smooth' });
     }
 
-    // Toggling dropdown logic stays the same
+    /*NOTIFICATION*/
     function toggleDropdown() {
       const dropdown = document.getElementById('dropdownMenu');
       const notif = document.getElementById('notifPopup');
-      notif.style.display = 'none';
+      notif.style.display = 'none'; // hide notif popup
       dropdown.style.display = dropdown.style.display === 'block' ? 'none' : 'block';
+    }
+
+    function openNotifFromDropdown(event) {
+      event.preventDefault();
+      document.getElementById('dropdownMenu').style.display = 'none'; // close dropdown
+      document.getElementById('notifPopup').style.display = 'flex'; // open notif
     }
 
     function closeNotifPopup() {
       document.getElementById('notifPopup').style.display = 'none';
     }
 
-    // Close all on outside click
+    // Close everything on outside click
     window.onclick = function (e) {
       if (!e.target.closest('.profile-container') && !e.target.closest('.notification-popup')) {
         document.getElementById('dropdownMenu').style.display = 'none';
         closeNotifPopup();
       }
-    };
+    }        
 
-    function scrollToTop(event) {
+
+    // // NEW CODE START: Accept/Deny JavaScript
+    function acceptComplaint() {
+      let complaintCounter = parseInt(localStorage.getItem('complaintCounter') || '1');
+      const complaint = {
+        id: complaintCounter, // ✅ Store the numeric ID
+        complainant: "Juan De Luna",
+        category: "Noise",
+        date: "2025-03-03",
+        description: "This is a description of the noise incident...",
+        status: "New"
+      };
+
+      let stored = JSON.parse(localStorage.getItem('acceptedComplaints')) || [];
+      stored.push(complaint);
+      localStorage.setItem('acceptedComplaints', JSON.stringify(stored));
+      alert('Complaint accepted and moved to new complaint list.');
+      window.location.href = 'newComplaint.html';
+
+      stored.push(complaint);
+      localStorage.setItem('acceptedComplaints', JSON.stringify(stored));
+
+      // ✅ NEW: Increment the counter
+      complaintCounter++;
+      localStorage.setItem('complaintCounter', complaintCounter.toString());
+
+    
+    }
+
+    function denyComplaint() {
+      alert('Complaint has been denied.');
+      window.location.href = 'staffHomepage.html'; // or wherever you want
+    }
+    // // NEW CODE END
+
+
+
+        /*TERMS AND CONDITION*/
+    function openTerms(event) {
       event.preventDefault();
-      window.scrollTo({
-        top: 0,
-        behavior: 'smooth'
-      });
+      document.getElementById('termsModal').style.display = 'flex';
+    }
+
+    function closeTerms() {
+      document.getElementById('termsModal').style.display = 'none';
     }
 
     // Open modal
@@ -611,14 +668,6 @@
       document.getElementById("termsModal").style.display = "none";
     }
 
-    // Close modal if clicking outside content
-    window.onclick = function (event) {
-      const modal = document.getElementById("termsModal");
-      if (event.target == modal) {
-        closeModal();
-      }
-    };
   </script>
 </body>
-
 </html>
