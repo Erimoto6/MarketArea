@@ -323,7 +323,7 @@
 
 .complaint-description {
   font-size: 14px;
-  color: #555;
+  color: #727272;
   margin-top: 4px;
   line-height: 1.4;
 }
@@ -366,6 +366,12 @@
     transform: translateX(0);
     opacity: 1;
   }
+}
+
+.complaint-text {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
 }
 
 
