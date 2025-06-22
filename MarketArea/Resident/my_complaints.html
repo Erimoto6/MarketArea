@@ -11,6 +11,8 @@
 </head>
 <body>
 
+   <div class="page-background"></div>
+
   <!-- HEADER SECTION -->
 	<header class="header_gradient">
   		<div class="header-left">
@@ -60,17 +62,24 @@
   <!-- Main Content Section -->
   <main class="content">
 
-    <!-- Complaint Section Header -->
+    <!-- White Vertical Stripe Background Wrapper -->
+    <div class="vertical-stripe-bg">
+
+    <!-- Complaint History Table -->
+    <div class="complaints-section">
+
+      <!-- Complaint Section Header -->
     <div class="complaints-header">
-      <div class="complaint-icon">
-            <img src="history_icon.png" alt="Complaint Icon">
-      </div>
-        <h2>My Complaints</h2>
-    </div>
+      <div class="complaint-icon animated-icon">
+       <img src="history_icon.png" alt="Complaint Icon">
+        </div>
+          <h2>My Complaints</h2>
+        </div>
+
 
     <!-- Search and Filter Controls -->
-    <div class="controls" style="display: flex; justify-content: flex-end; gap: 10px; align-items: center; margin-bottom: 20px;">
-  
+    <div class="controls">  
+      
     <!-- Search Bar -->
     <input type="text" placeholder="Search by keyword..." class="search-bar" id="search-input" oninput="applyFilters()">
 
@@ -115,33 +124,105 @@
   </div>
 </div>
 
-    <!-- Complaint History Table -->
-    <table class="complaints-table">
-      <thead>
-        <tr>
-          <th>Date Filed</th>
-          <th>Name</th>
-          <th>Type of Complaint</th>
-          <th>Status</th>
-          <th></th> <!-- for "Details" button -->
-        </tr>
-      </thead>
-      <tbody>
-        <tr>
-          <td>03/03/25</td>
-          <td></td>
-          <td>Noise</td>
-          <td>Under Review</td>
-          <td> 
-            <a href="my_comp_details.html">
-              <button class="details-btn">Details</button>
-            </a>
-          </td>
-        </tr>
-        <!-- Additional rows can go here -->
-      </tbody>
-    </table>
+  <table class="complaints-table" id="complaintsTable">
+    <thead>
+      <tr>
+        <th>Date Filed</th>
+        <th>Name</th>
+        <th>Type of Complaint</th>
+        <th>Status</th>
+        <th>Action</th>
+      </tr>
+    </thead>
+    <tbody>
+      <!-- Add multiple rows for testing pagination -->
+      <tr>
+        <td>03/03/25</td>
+        <td>Juan Dela Cruz</td>
+        <td>Noise</td>
+        <td>Under Review</td>
+        <td><button class="details-btn">View</button></td>
+      </tr>
+      <!-- Add more rows here -->
 
+      <tr>
+  <td>06/01/25</td>
+  <td>Ana Santos</td>
+  <td>Noise</td>
+  <td>Pending</td>
+  <td><button class="details-btn">View</button></td>
+</tr>
+<tr>
+  <td>06/02/25</td>
+  <td>Carlos Dizon</td>
+  <td>Littering</td>
+  <td>In Progress</td>
+  <td><button class="details-btn">View</button></td>
+</tr>
+<tr>
+  <td>06/03/25</td>
+  <td>Maria Lopez</td>
+  <td>Sanitation</td>
+  <td>Under Review</td>
+  <td><button class="details-btn">View</button></td>
+</tr>
+<tr>
+  <td>06/04/25</td>
+  <td>Ramon Cruz</td>
+  <td>Noise</td>
+  <td>Resolved</td>
+  <td><button class="details-btn">View</button></td>
+</tr>
+<tr>
+  <td>06/05/25</td>
+  <td>Joan Villanueva</td>
+  <td>Others</td>
+  <td>Pending</td>
+  <td><button class="details-btn">View</button></td>
+</tr>
+<tr>
+  <td>06/06/25</td>
+  <td>Leo Gutierrez</td>
+  <td>Sanitation</td>
+  <td>Resolved</td>
+  <td><button class="details-btn">View</button></td>
+</tr>
+<tr>
+  <td>06/07/25</td>
+  <td>Liza Trinidad</td>
+  <td>Littering</td>
+  <td>In Progress</td>
+  <td><button class="details-btn">View</button></td>
+</tr>
+<tr>
+  <td>06/08/25</td>
+  <td>Mark Rivera</td>
+  <td>Noise</td>
+  <td>Under Review</td>
+  <td><button class="details-btn">View</button></td>
+</tr>
+<tr>
+  <td>06/09/25</td>
+  <td>Jenny Alonzo</td>
+  <td>Others</td>
+  <td>Resolved</td>
+  <td><button class="details-btn">View</button></td>
+</tr>
+<tr>
+  <td>06/10/25</td>
+  <td>Patrick Salazar</td>
+  <td>Sanitation</td>
+  <td>Pending</td>
+  <td><button class="details-btn">View</button></td>
+</tr>
+
+
+    </tbody>
+  </table>
+
+  <!-- Pagination area -->
+  <div class="pagination" id="pagination"></div>
+</div>
   </main>
 
   <!-- FOOTER SECTION -->
@@ -170,91 +251,251 @@
             </div>
         </footer>
 
-  <script>
-    // profile
+        <!-- Complaint Details Modal -->
+<div id="complaintModal" class="modal-overlay">
+  <div class="modal-content">
+    <span class="close-modal">&times;</span>
 
+    <section class="complaint-section">
+      <div class="field-block">
+        <p><strong>Name:</strong> Juan De Luna</p>
+        <p><strong>Age:</strong> 31</p>
+        <p><strong>Gender:</strong> Male</p>
+        <p><strong>Address:</strong> blablabla</p>
+        <p><strong>Contact:</strong> 09178920304</p>
+        <p><strong>Email:</strong> juandeluna@gmail.com</p>
+      </div>
+      <hr>
+
+      <div class="field-block">
+        <p><strong>Type of Complaint:</strong> Noise</p>
+        <p><strong>Date and Time of Incident:</strong> 03/02/25, 2:00am</p>
+        <p><strong>Location of Incident:</strong> rawr street, abc</p>
+        <p><strong>Respondent Full Name:</strong> Jose De Luna</p>
+        <p><strong>Respondent's Address:</strong> blablabla</p>
+        <p><strong>Description:</strong></p>
+        <div class="description-box">Loud noises every night from the neighbor's party until 3am.</div>
+      </div>
+      <hr>
+
+      <div class="field-block">
+        <p><strong>Photo, Video, or Screenshot Evidence:</strong></p>
+        <div class="evidence-grid">
+          <div class="evidence-box">📷</div>
+          <div class="evidence-box">📸</div>
+          <div class="evidence-box">🎥</div>
+        </div>
+      </div>
+      <hr>
+
+      <div class="field-block">
+        <p><strong>Witness Details:</strong></p>
+        <p><strong>Name:</strong> Maria Luna</p>
+        <p><strong>Contact:</strong> 09123456789</p>
+      </div>
+
+      <div class="field-block">
+        <p><strong>Schedule of Appointment:</strong> 03/04/25, 10:00am</p>
+        <p><strong>Assigned to:</strong> Officer Santos</p>
+      </div>
+    </section>
+  </div>
+</div>
+      
+
+  <script>
+  // ===== PROFILE SIDEBAR =====
   const profileTrigger = document.getElementById('profileTrigger');
   const sidebar = document.getElementById('profileSidebar');
 
   profileTrigger.addEventListener('click', (e) => {
-    e.preventDefault(); // prevent anchor from navigating
+    e.preventDefault();
     sidebar.classList.toggle('show');
   });
 
-  document.addEventListener('click', function (e) {
+  document.addEventListener('click', (e) => {
     const wrapper = document.querySelector('.profile-sidebar-wrapper');
     if (!wrapper.contains(e.target)) {
       sidebar.classList.remove('show');
     }
   });
 
-  document.getElementById('logout-btn').addEventListener('click', function (e) {
-    e.preventDefault(); // Stop the default navigation
-
+  document.getElementById('logout-btn').addEventListener('click', (e) => {
+    e.preventDefault();
     if (confirm("Are you sure you want to log out?")) {
-      // Proceed to logout if confirmed
-      window.location.href = this.href;
+      window.location.href = e.target.href;
     }
   });
 
-  // Controls
-
+  // ===== DROPDOWN FILTER TOGGLE =====
   function toggleDropdown() {
-  const dropdownMenu = document.getElementById('dropdownMenu');
-  dropdownMenu.style.display = dropdownMenu.style.display === 'block' ? 'none' : 'block';
-}
-
-
-  // Close dropdown on outside click
-  window.addEventListener('click', function(event) {
-  const dropdown = document.querySelector('.dropdown');
-  if (!dropdown.contains(event.target)) {
-    document.getElementById('dropdownMenu').style.display = 'none';
+    const dropdownMenu = document.getElementById('dropdownMenu');
+    dropdownMenu.style.display = dropdownMenu.style.display === 'block' ? 'none' : 'block';
   }
-});
 
-
-  function applyFilters() {
-  const searchVal = document.getElementById('search-input').value.toLowerCase();
-  const dateVal = document.getElementById('filter-date').value;
-  const typeVal = document.getElementById('filter-type').value.toLowerCase();
-  const statusVal = document.getElementById('filter-status').value.toLowerCase();
-
-  const rows = document.querySelectorAll('.complaints-table tbody tr');
-
-  rows.forEach(row => {
-    const date = row.cells[0].textContent.trim();
-    const name = row.cells[1].textContent.trim().toLowerCase();
-    const type = row.cells[2].textContent.trim().toLowerCase();
-    const status = row.cells[3].textContent.trim().toLowerCase();
-
-    const matches =
-      (!dateVal || date === dateVal) &&
-      (!typeVal || type === typeVal) &&
-      (!statusVal || status === statusVal) &&
-      (
-        !searchVal ||
-        name.includes(searchVal) ||
-        type.includes(searchVal) ||
-        status.includes(searchVal)
-      );
-
-    row.style.display = matches ? '' : 'none';
+  window.addEventListener('click', (event) => {
+    const dropdown = document.querySelector('.dropdown');
+    if (!dropdown.contains(event.target)) {
+      document.getElementById('dropdownMenu').style.display = 'none';
+    }
   });
 
-  document.querySelector('.dropdown').classList.remove('show');
-}
+  // ===== TABLE PAGINATION + FILTERS =====
+  const rowsPerPage = 5;
+  let currentPage = 1;
 
-function clearFilters() {
-  document.getElementById('filter-date').value = '';
-  document.getElementById('filter-type').value = '';
-  document.getElementById('filter-status').value = '';
-  document.getElementById('search-input').value = '';
+  const table = document.getElementById("complaintsTable");
+  const tbody = table.querySelector("tbody");
+  const pagination = document.getElementById("pagination");
+  const searchInput = document.getElementById("search-input");
 
-  applyFilters();
-}
+  function getFilteredRows() {
+    const searchVal = searchInput.value.toLowerCase();
+    const dateVal = document.getElementById('filter-date').value;
+    const typeVal = document.getElementById('filter-type').value.toLowerCase();
+    const statusVal = document.getElementById('filter-status').value.toLowerCase();
 
+    const rows = Array.from(tbody.querySelectorAll("tr"));
+    return rows.filter(row => {
+      const date = row.cells[0].textContent.trim();
+      const name = row.cells[1].textContent.trim().toLowerCase();
+      const type = row.cells[2].textContent.trim().toLowerCase();
+      const status = row.cells[3].textContent.trim().toLowerCase();
 
+      return (
+        (!dateVal || date === dateVal) &&
+        (!typeVal || type === typeVal) &&
+        (!statusVal || status === statusVal) &&
+        (
+          !searchVal ||
+          name.includes(searchVal) ||
+          type.includes(searchVal) ||
+          status.includes(searchVal)
+        )
+      );
+    });
+  }
+
+  function renderTable() {
+    const rows = Array.from(tbody.querySelectorAll("tr"));
+    const filteredRows = getFilteredRows();
+
+    const start = (currentPage - 1) * rowsPerPage;
+    const end = start + rowsPerPage;
+
+    rows.forEach(row => row.style.display = "none");
+    filteredRows.slice(start, end).forEach(row => row.style.display = "table-row");
+
+    renderPagination(filteredRows.length);
+  }
+
+  function renderPagination(totalRows) {
+    pagination.innerHTML = "";
+    const pageCount = Math.ceil(totalRows / rowsPerPage);
+
+    // Previous Button
+    const prevBtn = document.createElement("button");
+    prevBtn.textContent = "← Previous";
+    prevBtn.disabled = currentPage === 1;
+    prevBtn.className = "page-btn";
+    prevBtn.addEventListener("click", () => {
+      if (currentPage > 1) {
+        currentPage--;
+        renderTable();
+      }
+    });
+    pagination.appendChild(prevBtn);
+
+    // Page Numbers
+    for (let i = 1; i <= pageCount; i++) {
+      const btn = document.createElement("button");
+      btn.textContent = i;
+      btn.className = "page-btn";
+      if (i === currentPage) btn.classList.add("active");
+      btn.addEventListener("click", () => {
+        currentPage = i;
+        renderTable();
+      });
+      pagination.appendChild(btn);
+    }
+
+    // Next Button
+    const nextBtn = document.createElement("button");
+    nextBtn.textContent = "Next →";
+    nextBtn.disabled = currentPage === pageCount;
+    nextBtn.className = "page-btn";
+    nextBtn.addEventListener("click", () => {
+      if (currentPage < pageCount) {
+        currentPage++;
+        renderTable();
+      }
+    });
+    pagination.appendChild(nextBtn);
+  }
+
+  function applyFilters() {
+    currentPage = 1;
+    renderTable();
+    document.getElementById('dropdownMenu').style.display = 'none';
+  }
+
+  function clearFilters() {
+    document.getElementById('filter-date').value = '';
+    document.getElementById('filter-type').value = '';
+    document.getElementById('filter-status').value = '';
+    searchInput.value = '';
+    applyFilters();
+  }
+
+  // Re-render table on search
+  searchInput.addEventListener("input", () => {
+    currentPage = 1;
+    renderTable();
+  });
+
+  // Initial render
+  renderTable();
+
+  document.querySelectorAll('.details-btn').forEach(btn => {
+    btn.addEventListener('click', function(e) {
+      const circle = document.createElement('span');
+      circle.classList.add('ripple');
+
+      const rect = btn.getBoundingClientRect();
+      const size = Math.max(btn.offsetWidth, btn.offsetHeight);
+      const x = e.clientX - rect.left - size / 2;
+      const y = e.clientY - rect.top - size / 2;
+
+      circle.style.width = circle.style.height = `${size}px`;
+      circle.style.left = `${x}px`;
+      circle.style.top = `${y}px`;
+
+      btn.appendChild(circle);
+
+      // Remove ripple after animation
+      setTimeout(() => circle.remove(), 600);
+    });
+  });
+
+  // Open modal
+document.querySelectorAll('.details-btn').forEach(btn => {
+  btn.addEventListener('click', () => {
+    document.getElementById('complaintModal').style.display = 'flex';
+  });
+});
+
+// Close modal
+document.querySelector('.close-modal').addEventListener('click', () => {
+  document.getElementById('complaintModal').style.display = 'none';
+});
+
+// Optional: close modal on outside click
+window.addEventListener('click', function (e) {
+  const modal = document.getElementById('complaintModal');
+  if (e.target === modal) {
+    modal.style.display = 'none';
+  }
+});
 
 </script>
 
