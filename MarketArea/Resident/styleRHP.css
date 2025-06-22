@@ -351,35 +351,7 @@
 }
 
 /* SIDEBAR MENU */
-.sidebar {
-  position: absolute;
-  top: 70px;
-  right: 0;
-  width: 220px;
-  background-color: #ffffff;
-  color: #333; /* Optional: darker text on white bg */
-  border-radius: 12px;
-  box-shadow: 0 12px 30px rgba(0, 0, 0, 0.45);
-  overflow: hidden;
-  transform: scaleY(0);
-  transform-origin: top;
-  transition: transform 0.3s ease, opacity 0.3s ease;
-  z-index: 999;
-  opacity: 0;
-}
-
-.sidebar.show {
-  transform: scaleY(1);
-  opacity: 1;
-}
-
-/* SIDEBAR ITEMS */
-.sidebar-item {
-  display: flex;
-  align-items: center;
-  padding: 14px 20px;
-}
-  /* SIDEBAR MENU */
+/* SIDEBAR MENU */
 .sidebar {
   position: absolute;
   top: 70px;
@@ -389,7 +361,7 @@
   color: #222;
   border-radius: 14px;
   box-shadow: 0 12px 30px rgba(0, 0, 0, 0.2);
-  overflow: hidden;
+  overflow: visible; /* must be visible for tooltips */
   transform: scaleY(0);
   transform-origin: top;
   transition: transform 0.3s ease, opacity 0.3s ease;
@@ -413,6 +385,7 @@
   cursor: pointer;
   transition: background 0.25s, transform 0.2s;
   border-bottom: 1px solid #eee;
+  position: relative; /* required for tooltip */
 }
 
 .sidebar-item:last-child {
@@ -424,14 +397,6 @@
   transform: translateX(4px);
   border-left: 4px solid #D0B564;
 }
-
-.sidebar a,
-.sidebar a:visited,
-.sidebar a:active {
-  color: inherit;               /* Inherit the color from parent (so it stays consistent) */
-  text-decoration: none;        /* Removes underline */
-}
-
 
 /* ICON STYLE */
 .icon {
@@ -449,6 +414,39 @@
   font-size: 15px;
   color: #333;
   font-weight: 500;
+}
+
+/* TOOLTIP */
+.sidebar-item::after {
+  content: attr(data-tooltip);
+  position: absolute;
+  bottom: 100%; /* place it above */
+  left: 50%;
+  transform: translateX(-50%) translateY(-8px); /* center it horizontally and raise it */
+  background-color: rgba(0, 0, 0, 0.85);
+  color: #fff;
+  font-size: 12px;
+  padding: 6px 10px;
+  border-radius: 6px;
+  white-space: nowrap;
+  opacity: 0;
+  pointer-events: none;
+  transition: opacity 0.2s ease, transform 0.2s ease;
+  z-index: 1000;
+}
+
+/* Show tooltip above */
+.sidebar-item:hover::after {
+  opacity: 1;
+  transform: translateX(-50%) translateY(-12px); /* slight lift effect */
+}
+
+/* LINKS RESET */
+.sidebar a,
+.sidebar a:visited,
+.sidebar a:active {
+  color: inherit;
+  text-decoration: none;
 }
 
 /* MOBILE RESPONSIVENESS */
@@ -472,7 +470,6 @@
     font-size: 14px;
   }
 }
-
 
 /*FOOTER SECTION*/
 /* Footer Container */

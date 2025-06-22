@@ -32,24 +32,25 @@
           <div class="profile"></div>
         </div>
 
-        <div class="sidebar collapsed" id="profileSidebar">
-          <a href="profile.html" class="sidebar-item">
-            <i class="icon">👤</i>
-            <span class="label">Profile</span>
-          </a>
-          <a href="settings.html" class="sidebar-item">
-            <i class="icon">⚙️</i>
-            <span class="label">Settings</span>
-          </a>
-          <a href="accounts_security.html" class="sidebar-item">
-            <i class="icon">🔐</i>
-            <span class="label">Account & Security</span>
-          </a>
-          <a href="residentLogin.html" class="sidebar-item" id="logout-btn">
-            <i class="icon">⏻</i>
-            <span class="label">Logout</span>
-          </a>
-        </div>
+        <!-- Collapsible Sidebar -->
+  			<div class="sidebar collapsed" id="profileSidebar">
+  				<a href="profile.html" class="sidebar-item" data-tooltip="View your profile">
+    				<i class="icon">👤</i>
+    				<span class="label">Profile</span>
+  				</a>
+  				<a href="settings.html" class="sidebar-item" data-tooltip="Adjust your settings">
+    				<i class="icon">⚙️</i>
+    				<span class="label">Settings</span>
+  				</a>
+  				<a href="accounts_security.html" class="sidebar-item" data-tooltip="Manage your account and privacy">
+    				<i class="icon">🔐</i>
+    				<span class="label">Account & Security</span>
+  				</a>
+  				<a href="residentLogin.html" class="sidebar-item" id="logout-btn" data-tooltip="Log out from your account">
+    				<i class="icon">⏻</i>
+    				<span class="label">Logout</span>
+  				</a>
+			</div>
       </div>
     </div>
   </header>
