@@ -59,7 +59,7 @@
   left: 0;
   width: 100vw;
   height: 100vh;
-  background-image: url('marketarea2.jpg');
+  background-image: url('market\ areabg.JPG');
   background-size: cover;
   background-repeat: no-repeat;
   background-position: center;
@@ -134,7 +134,7 @@
 }
 
 .welcome-to-barangay {
-  font-size: 65px;
+  font-size: 45px;
   color: #fff;
   font-family: 'Bebas Neue', sans-serif;
   letter-spacing: 0.1em;
