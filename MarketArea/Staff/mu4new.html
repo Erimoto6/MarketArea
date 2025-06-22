@@ -8,6 +8,14 @@
   <link rel="icon" type="image/png" href="logo.png">
   
   <style>
+body {
+  margin: 0;
+  font-family: 'Arial', sans-serif;
+  background: url('files/marketareabg.jpg') no-repeat center center fixed;
+  background-size: cover;
+}
+
+
     html {
       scroll-behavior: smooth;
     }
@@ -276,6 +284,49 @@
       border: 1px solid #ddd;
       border-radius: 5px;
       font-size: 16px;
+    }
+
+    .lupon-assignment {
+      background-color: #e8f4f8;
+      border: 2px solid #2e3b0d;
+      border-radius: 8px;
+      padding: 15px;
+      text-align: center;
+      cursor: pointer;
+      transition: all 0.3s ease;
+    }
+
+    .lupon-assignment:hover {
+      background-color: #d4edda;
+      transform: translateY(-2px);
+      box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    }
+
+    .lupon-assignment.selected {
+      background-color: #28a745;
+      color: white;
+      border-color: #28a745;
+    }
+
+    .lupon-assignment.selected .lupon-label {
+      color: white;
+    }
+
+    .lupon-assignment.selected .lupon-description {
+      color: rgba(255, 255, 255, 0.9);
+    }
+
+    .lupon-assignment .lupon-label {
+      font-weight: bold;
+      color: #2e3b0d;
+      font-size: 18px;
+      margin-bottom: 5px;
+    }
+
+    .lupon-assignment .lupon-description {
+      color: #666;
+      font-size: 14px;
+      font-style: italic;
     }
 
     .action-buttons {
@@ -626,7 +677,7 @@
   </header>
 
   <main class="main-content">
-    <a href="manageComplaints.html" class="back-button">← Back to Complaints</a>
+    <a href="newcomplaint.html" class="back-button">← Back to Complaints</a>
     
     <div class="complaint-details">
       <div class="complaint-header">
@@ -740,15 +791,11 @@
               <input type="time" id="appointmentTime" name="appointmentTime">
             </div>
             <div class="form-group">
-              <label for="assignedStaff">Assigned to (Staff Name):</label>
-              <select id="assignedStaff" name="assignedStaff">
-                <option value="">Select Staff Member</option>
-                <option value="John Doe">John Doe</option>
-                <option value="Jane Smith">Jane Smith</option>
-                <option value="Mike Johnson">Mike Johnson</option>
-                <option value="Sarah Wilson">Sarah Wilson</option>
-                <option value="Robert Brown">Robert Brown</option>
-              </select>
+              <label>Assign to:</label>
+              <div class="lupon-assignment" id="luponAssignment" onclick="toggleLuponSelection()">
+                <div class="lupon-label">LUPON</div>
+                <div class="lupon-description">Lupong Tagapamayapa (Peace Mediation Council)</div>
+              </div>
             </div>
           </div>
           
@@ -873,6 +920,8 @@
       status: "New"
     };
 
+    let isLuponSelected = false;
+
     // Function to load complaint data
     function loadComplaintData() {
       // You can modify this to get data from URL parameters or localStorage
@@ -888,25 +937,4 @@
       document.getElementById('complainantEmail').textContent = complaintData.complainantEmail;
       document.getElementById('dateFiled').textContent = complaintData.dateFiled;
       document.getElementById('complaintType').textContent = complaintData.complaintType;
-      document.getElementById('incidentDate').textContent = complaintData.incidentDate;
-      document.getElementById('incidentTime').textContent = complaintData.incidentTime;
-      document.getElementById('incidentLocation').textContent = complaintData.incidentLocation;
-      document.getElementById('complaintDescription').textContent = complaintData.description;
-      document.getElementById('witnessName').textContent = complaintData.witnessName;
-      document.getElementById('witnessContact').textContent = complaintData.witnessContact;
-      
-      // Update status badge
-      const statusBadge = document.getElementById('statusBadge');
-      statusBadge.textContent = complaintData.status;
-      statusBadge.className = `status-badge status-${complaintData.status.toLowerCase().replace(' ', '-')}`;
-    }
-
-    // Accept complaint function
-    function acceptComplaint() {
-      const appointmentDate = document.getElementById('appointmentDate').value;
-      const appointmentTime = document.getElementById('appointmentTime').value;
-      const assignedStaff = document.getElementById('assignedStaff').value;
-
-      if (!appointmentDate || !appointmentTime || !assignedStaff) {
-        alert('Please fill in all required fields: Date, Time, and Assigned Staff');
-        return;
+      document.getElementById('inc
