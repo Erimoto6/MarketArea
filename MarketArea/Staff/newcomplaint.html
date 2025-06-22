@@ -8,13 +8,27 @@
   <link rel="icon" type="image/png" href="logo.png">
   
   <style>
+body {
+  margin: 0;
+  font-family: 'Arial', sans-serif;
+  background: url('files/marketareabg.jpg') no-repeat center center fixed;
+  background-size: cover;
+}
+
+
+
     html {
       scroll-behavior: smooth;
+      height: 100%;
     }
 
     body {
       margin: 0;
       font-family: 'Arial', sans-serif;
+      background-color: #f5f5f5;
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
     }
 
     header {
@@ -89,116 +103,135 @@
       height: 20px;
     }
 
-    .main-banner {
-      position: relative;
-      height: 80vh;
-      background: url('files/marketareabg.jpg') no-repeat center center/cover;
-      display: flex;
-      flex-direction: column;
-      justify-content: flex-start;
-      align-items: center;
-      padding-top: 30px;
+    /* Main Container */
+    /* Expand the main container to use more width and height */
+.main-container {
+  max-width: 90%;
+  width: 90%;
+  min-height: 80vh;
+  margin: 20px auto;
+  padding: 40px 32px;
+  background-color: white;
+  border-radius: 8px;
+  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+  flex: 1;
+  box-sizing: border-box;
+}
+    
+    
+    /* Header Section */
+    .page-header {
+      margin-bottom: 30px;
     }
 
-    .main-banner h2 {
-      font-size: 50px;
-      margin: 0;
-      color: white;
-      position: relative;
-      z-index: 2;
-      text-align: left;
-      width: 90%; 
+    .page-title {
+      font-size: 32px;
+      font-weight: bold;
+      color: #333;
+      margin-bottom: 20px;
     }
 
-    .main-banner::after {
-      content: "";
-      position: absolute;
-      top: 0;
-      left: 0;
-      height: 100%;
-      width: 100%;
-      background: rgba(0, 0, 0, 0.6);
-      z-index: 0;
-    }
-
-    .complaint-frame {
-      position: relative;
-      z-index: 2;
-      background-color: white;
-      padding: 0px 10px 0px;
-      border-radius: 10px;
-      width: 90%;
-      max-width: 1100px;
-      box-shadow: 0 0 15px rgba(0, 0, 0, 0.4);
-    }
-
-    .complaint-header {
+    /* Controls Section */
+    .controls-section {
       display: flex;
       justify-content: space-between;
-      margin-bottom: 10px;
-      z-index: 2;
-      background-color: white;    
-      padding: 13px;
-      border-radius: 10px;  
-      line-height: 1;      
-      margin-left: 45.2%;
-    
-
+      align-items: center;
+      margin-bottom: 20px;
+      gap: 20px;
     }
 
-    .complaint-header h2 {
-      font-size: 28px;
-      font-weight: bold;
-      color: #000;
-      align-self: flex-start;
-
-    }
-
-    .controls {
-      display: flex;
-      align-items: flex-end;
-      gap: 15px;
-    }
-
-    .search-box input, .sort-box select {
-      line-height: 1.2;
-      padding: 6px 10px;
+    .search-container {
+      flex: 1;
+      max-width: 300px;
     }
 
     .search-box input {
-      padding: 5px 10px;
-      border-radius: 5px;
-      border: 1px solid #ccc;
+      width: 100%;
+      padding: 8px 12px;
+      border: 1px solid #ddd;
+      border-radius: 4px;
+      font-size: 14px;
+      box-sizing: border-box;
     }
 
-    .sort-box {
-      position: relative;
+    .sort-container {
       display: flex;
-      align-items: center;      /* Vertical alignment */
-      justify-content: center;
+      align-items: center;
+      gap: 10px;
     }
 
     .sort-box select {
-      padding: 5px 25px 5px 10px;
-      border-radius: 5px;
-      border: 1px solid #ccc;
+      padding: 8px 30px 8px 12px;
+      border: 1px solid #ddd;
+      border-radius: 4px;
       background: url('files/dropdown.png') no-repeat right 10px center;
       background-size: 12px;
       appearance: none;
+      font-size: 14px;
+      min-width: 160px;
     }
 
-    .sort-box img {
-      height: 15px;
+    .results-info {
+      color: #666;
+      font-size: 14px;
+    }
+
+    /* Table Styling */
+    .table-container {
+      background-color: white;
+      border-radius: 8px;
+      overflow: hidden;
+      box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
     }
 
     table {
       width: 100%;
       border-collapse: collapse;
       margin: 0;
-
     }
-    
-    /* 🔸 Status dot (orange) - New Complaints only */
+
+    thead {
+      background-color: #7a8b5a;
+    }
+
+    th {
+      color: white;
+      font-weight: 600;
+      text-align: left;
+      padding: 16px;
+      font-size: 14px;
+      border: none;
+    }
+
+    /* Column widths matching original structure */
+    th:nth-child(1) { width: 15%; } /* Complaint ID */
+    th:nth-child(2) { width: 20%; } /* Complainant */
+    th:nth-child(3) { width: 20%; } /* Category */
+    th:nth-child(4) { width: 15%; } /* Date Filed */
+    th:nth-child(5) { width: 30%; } /* Brief Description */
+
+    td {
+      padding: 16px;
+      text-align: left;
+      border-bottom: 1px solid #eee;
+      font-size: 14px;
+      vertical-align: middle;
+    }
+
+    tbody tr {
+      cursor: pointer;
+      transition: background-color 0.2s;
+    }
+
+    tbody tr:hover {
+      background-color: #f8f9fa;
+    }
+
+    tbody tr:last-child td {
+      border-bottom: none;
+    }
+
+    /* Status dot */
     .status-dot {
       height: 10px;
       width: 10px;
@@ -208,42 +241,30 @@
       margin-right: 8px;
     }
 
-
-    th, td {
-      padding: 15px 15px 5px 15px;
-      text-align: left;
-      border-bottom: none;
-    }
-
-    th {
-      border-bottom: 2px solid #ccc;
-      align-self: center;
-    }
-
-    tbody tr {
-      cursor: pointer;
-    }
-
-    tbody tr:hover {
-      background-color: #d1d1d1;
-    }
-
+    /* Pagination */
     .pagination {
       display: flex;
       justify-content: center;
       align-items: center;
       gap: 10px;
-
-      font-family: 'Arial', sans-serif;
-      margin-top: 10px;
-      margin-bottom: 20px;
+      margin-top: 20px;
+      padding: 20px 0;
     }
 
     .pagination button {
       background: none;
-      border: none;
-      font-size: 1.2em;
+      border: 1px solid #ddd;
+      padding: 8px 12px;
+      border-radius: 4px;
       cursor: pointer;
+      font-size: 14px;
+      transition: all 0.2s;
+    }
+
+    .pagination button:hover:not(:disabled) {
+      background-color: #007bff;
+      color: white;
+      border-color: #007bff;
     }
 
     .pagination button:disabled {
@@ -251,11 +272,13 @@
       cursor: not-allowed;
     }
 
-    .pagination button:hover {
-      background-color: #eee;
+    .page-info {
+      font-size: 14px;
+      color: #666;
+      margin: 0 10px;
     }
 
-    /* Footer */
+    /* Footer - Fixed to bottom */
     footer {
       background-color: #333;
       color: white;
@@ -264,6 +287,7 @@
       padding: 20px 30px;
       font-size: 0.9rem;
       flex-wrap: wrap;
+      margin-top: auto;
     }
 
     footer .leftside {
@@ -307,7 +331,7 @@
       color: white;
       text-decoration: none;
     }
-
+    
     /* === NOTIFICATION POPUP === */
     .notification-popup {
       position: fixed;
@@ -415,7 +439,7 @@
     .close {
         display: block;
         text-align: right;
-        margin-right: 10px; /* 🟢 moves it to the left of the scrollbar */
+        margin-right: 10px;
         margin-top: 0px;
         font-size: 24px;
         font-weight: bold;
@@ -426,7 +450,6 @@
     .close:hover {
         color: black;
     }
-
 
     .close:hover,
     .close:focus {
@@ -464,23 +487,32 @@
     </nav>
   </header>
 
-  <section class="main-banner">
-    <h2>NEW COMPLAINTS</h2>
-      <div class="complaint-header">
-      <div class="controls">
+  <div class="main-container">
+    <div class="page-header">
+      <h1 class="page-title">NEW COMPLAINTS</h1>
+    </div>
+
+    <div class="controls-section">
+      <div class="search-container">
         <div class="search-box">
-          <input type="text" id="searchInput" placeholder="Search..." />
+          <input type="text" id="searchInput" placeholder="Search complaints..." />
         </div>
+      </div>
+      
+      <div class="sort-container">
         <div class="sort-box">
           <select id="sortSelect">
             <option value="newest">Newest to Oldest</option>
             <option value="oldest">Oldest to Newest</option>
           </select>
         </div>
+        <div class="results-info" id="resultsInfo">
+          Showing 1-5 of 5 complaints
+        </div>
       </div>
     </div>
 
-    <div class="complaint-frame">
+    <div class="table-container">
       <table id="complaintTable">
         <thead>
           <tr>
@@ -493,15 +525,14 @@
         </thead>
         <tbody></tbody>
       </table>
-
-      <div class="pagination" id="paginationControls">
-        <button id="prevPageBtn">←</button>
-        <span id="pageInfo">1 of 1</span>
-        <button id="nextPageBtn">→</button>
-      </div>
-
     </div>
-  </section>
+
+    <div class="pagination" id="paginationControls">
+      <button id="prevPageBtn">←</button>
+      <span class="page-info" id="pageInfo">1 of 1</span>
+      <button id="nextPageBtn">→</button>
+    </div>
+  </div>
 
   <footer>
     <div class="footer-section">
@@ -597,13 +628,41 @@
   
   
   <script>
-    // // NEW CODE START: Load from localStorage
-    const complaints = JSON.parse(localStorage.getItem('acceptedComplaints')) || [];
+    // Sample data for demonstration since localStorage might be empty
+    const sampleComplaints = [
+      {
+        id: 1,
+        complainant: "Juan De Luna",
+        category: "Noise",
+        date: "2025-03-03",
+        description: "This is a description of the noise incident...",
+        status: "New"
+      },
+      {
+        id: 2,
+        complainant: "Maria Santos",
+        category: "Garbage",
+        date: "2025-03-02",
+        description: "Garbage collection issue in the area...",
+        status: "New"
+      }
+    ];
+
+    // Load from localStorage or use sample data
+    const complaints = JSON.parse(localStorage.getItem('acceptedComplaints')) || sampleComplaints;
 
     const tableBody = document.querySelector('#complaintTable tbody');
+    const searchInput = document.getElementById('searchInput');
+    const sortSelect = document.getElementById('sortSelect');
+    const resultsInfo = document.getElementById('resultsInfo');
     const paginationControls = document.getElementById('paginationControls');
+    const pageInfo = document.getElementById('pageInfo');
+    const prevPageBtn = document.getElementById('prevPageBtn');
+    const nextPageBtn = document.getElementById('nextPageBtn');
+    
     let currentPage = 1;
     const complaintsPerPage = 8;
+    let filteredComplaints = [...complaints];
 
     function getStatusDotColor(status) {
       switch (status) {
@@ -618,7 +677,9 @@
       tableBody.innerHTML = '';
       const start = (currentPage - 1) * complaintsPerPage;
       const end = start + complaintsPerPage;
-      data.slice(start, end).forEach(complaint => {
+      const pageData = data.slice(start, end);
+      
+      pageData.forEach(complaint => {
         const row = document.createElement('tr');
         const statusDot = `<span class="status-dot" style="background-color:${getStatusDotColor(complaint.status)};"></span>`;
         row.innerHTML = `
@@ -631,144 +692,105 @@
         row.onclick = () => alert(`Open Complaint ID #${complaint.id}`);
         tableBody.appendChild(row);
       });
-      renderPagination(data.length);
+      
+      updateResultsInfo(data.length, start + 1, Math.min(end, data.length));
+      updatePagination(data.length);
     }
 
-    function renderPagination(totalItems) {
-      paginationControls.innerHTML = '';
+    function updateResultsInfo(total, startItem, endItem) {
+      resultsInfo.textContent = `Showing ${startItem}-${endItem} of ${total} complaints`;
+    }
+
+    function updatePagination(totalItems) {
       const totalPages = Math.ceil(totalItems / complaintsPerPage);
-      if (totalPages > 1) {
-        const prevBtn = document.createElement('button');
-        prevBtn.innerText = '<';
-        prevBtn.onclick = () => {
-          if (currentPage > 1) {
-            currentPage--;
-            renderTable(complaints);
-          }
-        };
-        paginationControls.appendChild(prevBtn);
-
-        const nextBtn = document.createElement('button');
-        nextBtn.innerText = '>';
-        nextBtn.onclick = () => {
-          if (currentPage < totalPages) {
-            currentPage++;
-            renderTable(complaints);
-          }
-        };
-        paginationControls.appendChild(nextBtn);
-      }
+      pageInfo.textContent = `${currentPage} of ${totalPages}`;
+      
+      prevPageBtn.disabled = currentPage === 1;
+      nextPageBtn.disabled = currentPage === totalPages || totalPages === 0;
     }
 
-    renderTable(complaints);
-    // // NEW CODE END
     function updateTable() {
-      let filtered = complaints.filter(c =>
-        Object.values(c).some(val =>
+      // Filter complaints
+      filteredComplaints = complaints.filter(complaint =>
+        Object.values(complaint).some(val =>
           String(val).toLowerCase().includes(searchInput.value.toLowerCase())
         )
       );
 
-      filtered.sort((a, b) =>
-        sortSelect.value === 'newest'
-          ? new Date(b.date) - new Date(a.date)
-          : new Date(a.date) - new Date(b.date)
-      );
+      // Sort complaints
+      filteredComplaints.sort((a, b) => {
+        const dateA = new Date(a.date);
+        const dateB = new Date(b.date);
+        return sortSelect.value === 'newest' ? dateB - dateA : dateA - dateB;
+      });
 
-      renderTable(filtered);
-      renderPagination(filtered);
+      currentPage = 1; // Reset to first page
+      renderTable(filteredComplaints);
     }
 
-    searchInput.addEventListener('input', () => {
-      currentPage = 1;
-      updateTable();
-    });
-
-    sortSelect.addEventListener('change', () => {
-      updateTable();
-    });
-
-    function toggleDropdown() {
-      const menu = document.getElementById('dropdownMenu');
-      menu.style.display = menu.style.display === 'block' ? 'none' : 'block';
+    function viewComplaint(id) {
+      alert(`Viewing complaint #${id}`);
     }
 
-    window.onclick = function (event) {
-      if (!event.target.closest('.profile-container')) {
-        const dropdown = document.getElementById('dropdownMenu');
-        if (dropdown) dropdown.style.display = 'none';
+    // Event listeners
+    searchInput.addEventListener('input', updateTable);
+    sortSelect.addEventListener('change', updateTable);
+
+    prevPageBtn.addEventListener('click', () => {
+      if (currentPage > 1) {
+        currentPage--;
+        renderTable(filteredComplaints);
       }
-    };
+    });
 
-    // Initial render
-    updateTable();
+    nextPageBtn.addEventListener('click', () => {
+      const totalPages = Math.ceil(filteredComplaints.length / complaintsPerPage);
+      if (currentPage < totalPages) {
+        currentPage++;
+        renderTable(filteredComplaints);
+      }
+    });
 
     function toggleDropdown() {
       const dropdown = document.getElementById('dropdownMenu');
       const notif = document.getElementById('notifPopup');
-      notif.style.display = 'none'; // hide notif popup
+      notif.style.display = 'none';
       dropdown.style.display = dropdown.style.display === 'block' ? 'none' : 'block';
     }
 
     function openNotifFromDropdown(event) {
       event.preventDefault();
-      document.getElementById('dropdownMenu').style.display = 'none'; // close dropdown
-      document.getElementById('notifPopup').style.display = 'flex'; // open notif
+      document.getElementById('dropdownMenu').style.display = 'none';
+      document.getElementById('notifPopup').style.display = 'flex';
     }
 
     function closeNotifPopup() {
       document.getElementById('notifPopup').style.display = 'none';
     }
 
-    // Close everything on outside click
-    window.onclick = function (e) {
-      if (!e.target.closest('.profile-container') && !e.target.closest('.notification-popup')) {
-        document.getElementById('dropdownMenu').style.display = 'none';
-        closeNotifPopup();
-      }
-    }
-
-    // Open modal
     function openModal() {
       document.getElementById("termsModal").style.display = "block";
     }
 
-    // Close modal
     function closeModal() {
       document.getElementById("termsModal").style.display = "none";
     }
 
-    // Close modal if clicking outside content
+    // Close dropdowns and modals on outside click
     window.onclick = function (event) {
+      if (!event.target.closest('.profile-container') && !event.target.closest('.notification-popup')) {
+        document.getElementById('dropdownMenu').style.display = 'none';
+        closeNotifPopup();
+      }
+      
       const modal = document.getElementById("termsModal");
       if (event.target == modal) {
         closeModal();
       }
-    };    
-
-
-    /*DELETE LATER*/
-    window.onload = function () {
-      const complaintTable = document.getElementById('complaintTableBody'); // tbody
-      const complaints = JSON.parse(localStorage.getItem('complaints')) || [];
-
-      complaintTable.innerHTML = ''; // Clear before adding
-
-      complaints.forEach((comp, index) => {
-        const row = ` 
-          <tr>
-            <td>${comp.id}</td>
-            <td>${comp.complainant}</td>
-            <td>${comp.category}</td>
-            <td>${comp.dateFiled}</td>
-            <td>${comp.description}</td>
-          </tr>
-        `;
-        complaintTable.innerHTML += row;
-      });
     };
 
-
+    // Initialize the table
+    renderTable(filteredComplaints);
   </script>
 </body>
 
