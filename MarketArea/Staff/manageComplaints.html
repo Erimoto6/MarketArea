@@ -8,6 +8,13 @@
   <link rel="icon" type="image/png" href="logo.png">
   
   <style>
+body {
+  margin: 0;
+  font-family: 'Arial', sans-serif;
+  background: url('files/marketareabg.jpg') no-repeat center center fixed;
+  background-size: cover;
+}
+    
     html {
       scroll-behavior: smooth;
     }
@@ -92,7 +99,7 @@
     .main-banner {
       position: relative;
       height: 80vh;
-      background: url('files/marketareabg.jpg') no-repeat center center/cover;
+      background: url('marketareabg.jpg') no-repeat center center/cover;
       display: flex;
       flex-direction: column;
       justify-content: flex-start;
@@ -435,6 +442,624 @@
       cursor: pointer;
     }    
 
+
+
+
+
+    /*SECTION STYLES*/
+    /* Dashboard Section */
+    .dashboard-section {
+      padding: 40px;
+    }
+
+    /* Complaints Management Section */
+    .complaints-section {
+      background: white;
+      border-radius: 15px;
+      padding: 30px;
+      box-shadow: 0 8px 25px rgba(0,0,0,0.1);
+      margin-bottom: 40px;
+    }
+
+    .section-title {
+      font-size: 1.5rem;
+      color: #2c3e50;
+      margin-bottom: 20px;
+      display: flex;
+      align-items: center;
+      gap: 10px;
+    }
+
+    .section-title i {
+      color: #6A7337;
+    }
+
+    /* Controls */
+    .controls {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-bottom: 30px;
+      flex-wrap: wrap;
+      gap: 20px;
+    }
+
+    .controls-left {
+      display: flex;
+      gap: 15px;
+      align-items: center;
+      flex-wrap: wrap;
+    }
+
+    .search-box {
+      position: relative;
+    }
+
+    .search-box i {
+      position: absolute;
+      left: 12px;
+      top: 50%;
+      transform: translateY(-50%);
+      color: #6b7280;
+      font-size: 16px;
+    }
+
+    .search-box input {
+      padding: 12px 12px 12px 40px;
+      border: 2px solid #e5e7eb;
+      border-radius: 8px;
+      font-size: 14px;
+      width: 280px;
+      transition: all 0.3s ease;
+    }
+
+    .search-box input:focus {
+      outline: none;
+      border-color: #6A7337;
+      box-shadow: 0 0 0 3px rgba(106, 115, 55, 0.1);
+    }
+
+    .sort-box {
+      position: relative;
+    }
+
+    .sort-box select {
+      padding: 12px 40px 12px 40px;
+      border: 2px solid #e5e7eb;
+      border-radius: 8px;
+      font-size: 14px;
+      background: white;
+      cursor: pointer;
+      appearance: none;
+      min-width: 200px;
+      transition: all 0.3s ease;
+    }
+
+    .sort-box select:focus {
+      outline: none;
+      border-color: #6A7337;
+      box-shadow: 0 0 0 3px rgba(106, 115, 55, 0.1);
+    }
+
+    .sort-box i {
+      position: absolute;
+      left: 12px;
+      top: 50%;
+      transform: translateY(-50%);
+      color: #6b7280;
+      pointer-events: none;
+    }
+
+    .sort-box::after {
+      content: '\f078';
+      font-family: 'Font Awesome 6 Free';
+      font-weight: 900;
+      position: absolute;
+      right: 12px;
+      top: 50%;
+      transform: translateY(-50%);
+      color: #6b7280;
+      pointer-events: none;
+    }
+
+    .results-info {
+      font-size: 14px;
+      color: #6b7280;
+    }
+
+    /* Complaints Table */
+    .complaints-table {
+      width: 100%;
+      border-collapse: collapse;
+      margin-top: 20px;
+    }
+
+    .complaints-table th {
+      background: linear-gradient(135deg, #6A7337, #4B5320);
+      color: white;
+      padding: 15px;
+      text-align: left;
+      font-weight: 600;
+      border: none;
+    }
+
+    .complaints-table th:first-child {
+      border-top-left-radius: 10px;
+    }
+
+    .complaints-table th:last-child {
+      border-top-right-radius: 10px;
+    }
+
+    .complaints-table td {
+      padding: 15px;
+      border-bottom: 1px solid #ecf0f1;
+      transition: all 0.3s ease;
+    }
+
+    .complaints-table tr:hover td {
+      background-color: #f8f9fa;
+    }
+
+    .complaints-table tbody tr {
+      cursor: pointer;
+    }
+
+    .status-badge {
+      padding: 6px 12px;
+      border-radius: 20px;
+      font-size: 0.85rem;
+      font-weight: 600;
+      text-transform: uppercase;
+      letter-spacing: 0.5px;
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+    }
+
+    .status-ongoing {
+      background: #fff3cd;
+      color: #856404;
+    }
+
+    .status-complete {
+      background: #d4edda;
+      color: #155724;
+    }
+
+    .status-archived {
+      background: #f8d7da;
+      color: #721c24;
+    }
+
+    .status-icon {
+      font-size: 12px;
+    }
+
+    /* Action Button */
+    .action-btn {
+      background: linear-gradient(135deg, #3498db, #2980b9);
+      color: white;
+      border: none;
+      padding: 8px 16px;
+      border-radius: 8px;
+      cursor: pointer;
+      font-size: 0.9rem;
+      transition: all 0.3s ease;
+      display: flex;
+      align-items: center;
+      gap: 6px;
+    }
+
+    .action-btn:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 4px 12px rgba(52, 152, 219, 0.3);
+    }
+
+    /* Pagination */
+    .pagination {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 16px;
+      margin-top: 32px;
+      padding: 20px;
+    }
+
+    .pagination button {
+      background: white;
+      border: 2px solid #e5e7eb;
+      color: #374151;
+      padding: 12px 16px;
+      border-radius: 8px;
+      cursor: pointer;
+      transition: all 0.3s ease;
+      font-size: 14px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      min-width: 100px;
+      height: 44px;
+      font-weight: 600;
+    }
+
+    .pagination button:hover:not(:disabled) {
+      background: #6A7337;
+      border-color: #6A7337;
+      color: white;
+      transform: translateY(-2px);
+      box-shadow: 0 4px 12px rgba(106, 115, 55, 0.3);
+    }
+
+    .pagination button:disabled {
+      opacity: 0.4;
+      cursor: not-allowed;
+      transform: none;
+    }
+
+    .pagination .page-info {
+      font-size: 14px;
+      color: #6b7280;
+      font-weight: 500;
+      padding: 0 20px;
+    }
+
+
+    /* View Modal */
+    .view-modal {
+      display: none;
+      position: fixed;
+      z-index: 1000;
+      left: 0;
+      top: 0;
+      width: 100%;
+      height: 100%;
+      overflow: auto;
+      background-color: rgba(0, 0, 0, 0.6);
+      backdrop-filter: blur(5px);
+    }
+
+    .view-modal.show {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      padding: 20px;
+    }
+
+    .view-modal-content {
+      background-color: #fff;
+      border-radius: 15px;
+      width: 90%;
+      max-width: 1000px;
+      max-height: 90vh;
+      overflow-y: auto;
+      box-shadow: 0 20px 60px rgba(0, 0, 0, 0.3);
+      animation: modalSlideIn 0.3s ease;
+      position: relative;
+    }
+
+    @keyframes modalSlideIn {
+      from {
+        opacity: 0;
+        transform: translateY(-50px) scale(0.95);
+      }
+      to {
+        opacity: 1;
+        transform: translateY(0) scale(1);
+      }
+    }
+
+    .view-modal-header {
+      background: linear-gradient(135deg, #2B3209, #4B5320);
+      color: white;
+      padding: 20px 30px;
+      border-radius: 15px 15px 0 0;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+
+    .view-modal-header h2 {
+      margin: 0;
+      font-size: 1.5rem;
+      background: linear-gradient(45deg, #fff, #B8A05B);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
+    }
+
+    .view-modal-close {
+      background: rgba(255,255,255,0.1);
+      border: none;
+      color: white;
+      width: 40px;
+      height: 40px;
+      border-radius: 50%;
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 20px;
+      transition: all 0.3s ease;
+    }
+
+    .view-modal-close:hover {
+      background: rgba(255,255,255,0.2);
+      transform: rotate(90deg);
+    }
+
+    .view-modal-body {
+      padding: 30px;
+    }
+
+    /* Complaint Details Styling */
+    .complaint-details {
+      display: flex;
+      gap: 30px;
+      margin-bottom: 30px;
+      flex-wrap: wrap;
+    }
+
+    .complainant-info {
+      flex: 1;
+      min-width: 300px;
+    }
+
+    .info-row {
+      display: flex;
+      margin-bottom: 12px;
+      align-items: center;
+    }
+
+    .info-label {
+      font-weight: 600;
+      color: #2B3209;
+      min-width: 120px;
+      margin-right: 10px;
+    }
+
+    .info-value {
+      color: #374151;
+    }
+
+    .section-divider {
+      border-top: 2px solid #e5e7eb;
+      margin: 30px 0;
+      padding-top: 20px;
+    }
+
+    .section-header {
+      font-size: 1.2rem;
+      font-weight: 600;
+      color: #2B3209;
+      margin-bottom: 15px;
+      display: flex;
+      align-items: center;
+      gap: 8px;
+    }
+
+    .description-box {
+      width: 100%;
+      min-height: 80px;
+      padding: 15px;
+      border: 2px solid #e5e7eb;
+      border-radius: 8px;
+      background-color: #f9fafb;
+      color: #374151;
+      font-family: inherit;
+      resize: none;
+      margin-top: 10px;
+    }
+
+    .evidence-gallery {
+      display: flex;
+      gap: 20px;
+      margin-top: 15px;
+      flex-wrap: wrap;
+      justify-content: center;
+    }
+
+    .evidence-item {
+      width: 200px;
+      height: 200px;
+      object-fit: cover;
+      border-radius: 8px;
+      border: 2px solid #e5e7eb;
+      box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+      transition: transform 0.3s ease;
+    }
+
+    .evidence-item:hover {
+      transform: scale(1.05);
+    }
+
+    /* Status Management Section */
+    .status-management {
+      background: linear-gradient(135deg, #f8f9fa, #e9ecef);
+      border-radius: 12px;
+      padding: 25px;
+      margin-top: 30px;
+      border: 2px solid #e5e7eb;
+    }
+
+    .status-management h3 {
+      color: #2B3209;
+      margin-bottom: 20px;
+      display: flex;
+      align-items: center;
+      gap: 10px;
+    }
+
+    .current-status {
+      margin-bottom: 20px;
+      padding: 15px;
+      background: white;
+      border-radius: 8px;
+      border-left: 4px solid #6A7337;
+    }
+
+    .status-actions {
+      display: flex;
+      gap: 15px;
+      flex-wrap: wrap;
+    }
+
+    .status-btn {
+      padding: 12px 20px;
+      border: none;
+      border-radius: 8px;
+      cursor: pointer;
+      font-size: 14px;
+      font-weight: 600;
+      transition: all 0.3s ease;
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      min-width: 120px;
+      justify-content: center;
+    }
+
+    .status-btn:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 4px 12px rgba(0,0,0,0.15);
+    }
+
+    .btn-resolve {
+      background: linear-gradient(135deg, #27ae60, #229954);
+      color: white;
+    }
+
+    .btn-ongoing {
+      background: linear-gradient(135deg, #f39c12, #e67e22);
+      color: white;
+    }
+
+    .btn-archive {
+      background: linear-gradient(135deg, #95a5a6, #7f8c8d);
+      color: white;
+    }
+
+    .btn-resolve:disabled,
+    .btn-ongoing:disabled,
+    .btn-archive:disabled {
+      opacity: 0.5;
+      cursor: not-allowed;
+      transform: none;
+    }
+
+    /* Empty State */
+    .empty-state {
+      text-align: center;
+      padding: 60px 20px;
+      color: #6b7280;
+    }
+
+    .empty-state i {
+      font-size: 48px;
+      color: #d1d5db;
+      margin-bottom: 16px;
+    }
+
+    .empty-state p {
+      font-size: 16px;
+      margin-bottom: 8px;
+    }
+
+    .empty-state small {
+      font-size: 14px;
+      color: #9ca3af;
+    }
+
+    /* Responsive Design */
+    @media (max-width: 768px) {
+      .sidebar {
+        width: 100%;
+        height: auto;
+        position: relative;
+      }
+
+      .main-content {
+        margin-left: 0;
+      }
+
+      .header {
+        padding: 20px;
+      }
+
+      .header h1 {
+        font-size: 1.8rem;
+      }
+
+      .user-profile {
+        position: relative;
+        top: 20px;
+        right: 0;
+        margin-top: 20px;
+      }
+
+      .dashboard-section {
+        padding: 20px;
+      }
+
+      .controls {
+        flex-direction: column;
+        align-items: stretch;
+      }
+
+      .controls-left {
+        flex-direction: column;
+        align-items: stretch;
+      }
+
+      .search-box input,
+      .sort-box select {
+        width: 100%;
+      }
+
+      .complaints-table {
+        font-size: 0.9rem;
+      }
+
+      .complaints-table th,
+      .complaints-table td {
+        padding: 10px 8px;
+      }
+
+      .notification-popup {
+        right: 10px;
+        left: 10px;
+        width: auto;
+      }
+
+      .pagination button {
+        min-width: 80px;
+        padding: 10px 12px;
+      }
+
+      .view-modal-content {
+        width: 95%;
+        margin: 10px;
+      }
+
+      .view-modal-body {
+        padding: 20px;
+      }
+
+      .complaint-details {
+        flex-direction: column;
+        align-items: center;
+      }
+
+      .status-actions {
+        flex-direction: column;
+      }
+
+      .status-btn {
+        width: 100%;
+      }
+    }
+
+
   </style>
 </head>
 
@@ -464,44 +1089,623 @@
     </nav>
   </header>
 
-  <section class="main-banner">
-    <h2>MANAGE COMPLAINTS</h2>
-      <div class="complaint-header">
-      <div class="controls">
-        <div class="search-box">
-          <input type="text" id="searchInput" placeholder="Search..." />
+ 
+    <!-- Dashboard Section -->
+    <div class="dashboard-section">
+      <!-- Complaints Management -->
+      <div class="complaints-section">
+        <h2 class="section-title">
+          <i class="fas fa-clipboard-list"></i>
+          Complaints Management
+        </h2>
+
+        <!-- Controls -->
+        <div class="controls">
+          <div class="controls-left">
+            <div class="search-box">
+              <i class="fas fa-search"></i>
+              <input type="text" id="searchInput" placeholder="Search complaints..." />
+            </div>
+            <div class="sort-box">
+              <i class="fas fa-filter"></i>
+              <select id="sortSelect">
+                <option value="newest">Newest to Oldest</option>
+                <option value="oldest">Oldest to Newest</option>
+              </select>
+            </div>
+          </div>
+          <div class="results-info" id="resultsInfo">
+            Showing 1-5 of 5 complaints
+          </div>
         </div>
-        <div class="sort-box">
-          <select id="sortSelect">
-            <option value="newest">Newest to Oldest</option>
-            <option value="oldest">Oldest to Newest</option>
-          </select>
+
+        <!-- Complaints Table -->
+        <table class="complaints-table">
+          <thead>
+            <tr>
+              <th>Date Filed</th>
+              <th>Complainant</th>
+              <th>Respondent</th>
+              <th>Type of Complaint</th>
+              <th>Status</th>
+              <th>Action</th>
+            </tr>
+          </thead>
+          <tbody id="complaintsTableBody">
+            <!-- Table rows will be populated by JavaScript -->
+          </tbody>
+        </table>
+
+        <!-- Empty State -->
+        <div id="emptyState" class="empty-state" style="display: none;">
+          <i class="fas fa-clipboard-list"></i>
+          <p>No complaints found</p>
+          <small>Try adjusting your search criteria</small>
+        </div>
+
+        <!-- Pagination -->
+        <div class="pagination" id="pagination">
+          <button id="prevBtn" onclick="changePage(-1)">
+            <i class="fas fa-chevron-left"></i> Previous
+          </button>
+          <span class="page-info" id="pageInfo">Page 1 of 1</span>
+          <button id="nextBtn" onclick="changePage(1)">
+            Next <i class="fas fa-chevron-right"></i>
+          </button>
         </div>
       </div>
     </div>
+  </div>
 
-    <div class="complaint-frame">
-      <table id="complaintTable">
-        <thead>
-          <tr>
-            <th>Date Filed</th>
-            <th>Name</th>
-            <th>Type of Complaint</th>
-            <th>Status</th>
+  <!-- Enhanced Notification Popup -->
+  <div id="notifPopup" class="notification-popup">
+    <div class="popup-header">
+      <h4><i class="fas fa-bell"></i> Notifications</h4>
+      <button class="popup-close" onclick="closeNotifications()">×</button>
+    </div>
+    <div class="popup-content">
+      <div class="popup-section">
+        <h5>Today</h5>
+        <div id="todayNotifications">
+          <div class="notif-item" onclick="alert('Opening complaint details...')">
+            <i class="fas fa-exclamation-circle"></i>
+            <div class="notif-content">
+              <strong>Juan dela Cruz</strong> filed a complaint: <em>Noise complaint</em>
+              <div class="notif-time">2 hours ago</div>
+            </div>
+          </div>
+          <div class="notif-item" onclick="alert('Opening resolved complaint...')">
+            <i class="fas fa-check-circle"></i>
+            <div class="notif-content">
+              <strong>Complaint #123</strong> marked as resolved
+              <div class="notif-time">5 hours ago</div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="popup-section">
+        <h5>This Week</h5>
+        <div id="weekNotifications">
+          <div class="notif-item" onclick="alert('Opening complaint update...')">
+            <i class="fas fa-info-circle"></i>
+            <div class="notif-content">
+              <strong>Garbage complaint</strong> updated by staff
+              <div class="notif-time">2 days ago</div>
+            </div>
+          </div>
+          <div class="notif-item" onclick="alert('Opening water complaint...')">
+            <i class="fas fa-tint"></i>
+            <div class="notif-content">
+              <strong>Water leak concern</strong> reopened
+              <div class="notif-time">3 days ago</div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- View Complaint Modal -->
+  <div id="viewModal" class="view-modal">
+    <div class="view-modal-content">
+      <div class="view-modal-header">
+        <h2>Complaint Details</h2>
+        <button class="view-modal-close" onclick="closeViewModal()">×</button>
+      </div>
+      <div class="view-modal-body" id="viewModalBody">
+        <!-- Content will be populated by JavaScript -->
+      </div>
+    </div>
+  </div>
+
+  <script>
+    // Sample complaints data with detailed information
+    let complaints = [
+      {
+        id: 1,
+        dateFiled: '06/09/25',
+        complainant: 'Vasquez, Ma. Elaine B.',
+        respondent: 'Ackermann, Mikasa',
+        type: 'Noise complaint',
+        status: 'On Going',
+        age: 31,
+        gender: 'Female',
+        address: '123 Main Street, Barangay Market Area',
+        contact: '09178920304',
+        email: 'elaine.vasquez@gmail.com',
+        incidentDate: '06/08/25',
+        incidentTime: '2:00 AM',
+        location: 'Rawr Street, ABC',
+        description: 'Loud music and shouting from neighbor\'s house during late hours. This has been happening for several nights and is disturbing the peace of the neighborhood.',
+        witnessName: 'Juan Santos',
+        witnessContact: '09123456789',
+        assignedTo: 'Officer Rodriguez',
+        appointmentDate: '06/15/25, 10:00 AM'
+      },
+      {
+        id: 2,
+        dateFiled: '06/01/25',
+        complainant: 'Ackermann, Mikasa',
+        respondent: 'Vasquez, Ma. Elaine B.',
+        type: 'Property disputes',
+        status: 'Complete',
+        age: 28,
+        gender: 'Female',
+        address: '456 Oak Avenue, Barangay Market Area',
+        contact: '09187654321',
+        email: 'mikasa.ackermann@gmail.com',
+        incidentDate: '05/30/25',
+        incidentTime: '3:00 PM',
+        location: 'Property boundary line',
+        description: 'Dispute over property boundary lines and fence placement. Neighbor has built a fence that encroaches on my property.',
+        witnessName: 'Maria Cruz',
+        witnessContact: '09198765432',
+        assignedTo: 'Officer Martinez',
+        appointmentDate: 'Resolved on 06/05/25'
+      },
+      {
+        id: 3,
+        dateFiled: '05/28/25',
+        complainant: 'Santos, Juan Carlos',
+        respondent: 'Dela Cruz, Maria',
+        type: 'Garbage disposal',
+        status: 'Abandon',
+        age: 45,
+        gender: 'Male',
+        address: '789 Pine Street, Barangay Market Area',
+        contact: '09176543210',
+        email: 'juan.santos@gmail.com',
+        incidentDate: '05/27/25',
+        incidentTime: '6:00 AM',
+        location: 'Front of complainant\'s house',
+        description: 'Improper garbage disposal by neighbor, causing foul smell and attracting pests.',
+        witnessName: '',
+        witnessContact: '',
+        assignedTo: 'Case Closed',
+        appointmentDate: 'N/A'
+      },
+      {
+        id: 4,
+        dateFiled: '05/25/25',
+        complainant: 'Rodriguez, Ana',
+        respondent: 'Garcia, Pedro',
+        type: 'Public safety',
+        status: 'On Going',
+        age: 35,
+        gender: 'Female',
+        address: '321 Elm Street, Barangay Market Area',
+        contact: '09165432109',
+        email: 'ana.rodriguez@gmail.com',
+        incidentDate: '05/24/25',
+        incidentTime: '8:00 PM',
+        location: 'Community playground',
+        description: 'Unsafe conditions at the community playground due to broken equipment and poor lighting.',
+        witnessName: 'Carlos Lopez',
+        witnessContact: '09154321098',
+        assignedTo: 'Officer Gonzales',
+        appointmentDate: '05/30/25, 2:00 PM'
+      },
+      {
+        id: 5,
+        dateFiled: '05/20/25',
+        complainant: 'Lopez, Carmen',
+        respondent: 'Martinez, Jose',
+        type: 'Noise complaint',
+        status: 'Complete',
+        age: 42,
+        gender: 'Female',
+        address: '654 Maple Drive, Barangay Market Area',
+        contact: '09143210987',
+        email: 'carmen.lopez@gmail.com',
+        incidentDate: '05/19/25',
+        incidentTime: '11:00 PM',
+        location: 'Residential area',
+        description: 'Loud construction work during prohibited hours causing disturbance to residents.',
+        witnessName: 'Roberto Silva',
+        witnessContact: '09132109876',
+        assignedTo: 'Officer Reyes',
+        appointmentDate: 'Resolved on 05/25/25'
+      }
+    ];
+
+    let filteredComplaints = [...complaints];
+    let currentPage = 1;
+    const complaintsPerPage = 5;
+
+    // Initialize the page
+    document.addEventListener('DOMContentLoaded', function() {
+      updateTable();
+      updateResultsInfo();
+    });
+
+    // Search functionality
+    document.getElementById('searchInput').addEventListener('input', function() {
+      const searchTerm = this.value.toLowerCase();
+      filteredComplaints = complaints.filter(complaint =>
+        Object.values(complaint).some(value =>
+          String(value).toLowerCase().includes(searchTerm)
+        )
+      );
+      currentPage = 1;
+      updateTable();
+      updateResultsInfo();
+    });
+
+    // Sort functionality
+    document.getElementById('sortSelect').addEventListener('change', function() {
+      const sortOrder = this.value;
+      filteredComplaints.sort((a, b) => {
+        const dateA = new Date(a.dateFiled).getTime();
+        const dateB = new Date(b.dateFiled).getTime();
+        return sortOrder === 'newest' ? dateB - dateA : dateA - dateB;
+      });
+      updateTable();
+    });
+
+    // Update table
+    function updateTable() {
+      const tbody = document.getElementById('complaintsTableBody');
+      const emptyState = document.getElementById('emptyState');
+      const startIndex = (currentPage - 1) * complaintsPerPage;
+      const endIndex = startIndex + complaintsPerPage;
+      const currentComplaints = filteredComplaints.slice(startIndex, endIndex);
+
+      if (currentComplaints.length === 0) {
+        tbody.innerHTML = '';
+        emptyState.style.display = 'block';
+      } else {
+        emptyState.style.display = 'none';
+        tbody.innerHTML = currentComplaints.map(complaint => `
+          <tr onclick="handleComplaintClick(${complaint.id})">
+            <td>${complaint.dateFiled}</td>
+            <td>${complaint.complainant}</td>
+            <td>${complaint.respondent}</td>
+            <td>${complaint.type}</td>
+            <td>
+              <span class="status-badge status-${complaint.status.toLowerCase().replace(' ', '')}">
+                <i class="fas ${getStatusIcon(complaint.status)} status-icon"></i>
+                ${complaint.status}
+              </span>
+            </td>
+            <td onclick="event.stopPropagation();">
+              <button class="action-btn" onclick="viewComplaint(${complaint.id})" title="View Details">
+                <i class="fas fa-eye"></i> View
+              </button>
+            </td>
           </tr>
-        </thead>
+        `).join('');
+      }
 
-        <tbody></tbody>
-      </table>
+      updatePagination();
+    }
 
-      <div class="pagination" id="paginationControls">
-        <button id="prevPageBtn">←</button>
-        <span id="pageInfo">1 of 1</span>
-        <button id="nextPageBtn">→</button>
-      </div>
+    // Get status icon
+    function getStatusIcon(status) {
+      switch (status) {
+        case 'Complete': return 'fa-check-circle';
+        case 'On Going': return 'fa-clock';
+        case 'Archive': return 'fa-times-circle';
+        default: return 'fa-exclamation-circle';
+      }
+    }
 
-    </div>
-  </section>
+    // Handle complaint click
+    function handleComplaintClick(id) {
+      viewComplaint(id);
+    }
+
+    // View complaint in modal
+    function viewComplaint(id) {
+      const complaint = complaints.find(c => c.id === id);
+      if (!complaint) return;
+
+      const modalBody = document.getElementById('viewModalBody');
+      modalBody.innerHTML = `
+        <div class="complaint-details">
+          <div class="complainant-info">
+            <div class="info-row">
+              <span class="info-label">Date Filed:</span>
+              <span class="info-value">${complaint.dateFiled}</span>
+            </div>
+            <div class="info-row">
+              <span class="info-label">Name:</span>
+              <span class="info-value">${complaint.complainant}</span>
+            </div>
+            <div class="info-row">
+              <span class="info-label">Age:</span>
+              <span class="info-value">${complaint.age}</span>
+            </div>
+            <div class="info-row">
+              <span class="info-label">Gender:</span>
+              <span class="info-value">${complaint.gender}</span>
+            </div>
+            <div class="info-row">
+              <span class="info-label">Address:</span>
+              <span class="info-value">${complaint.address}</span>
+            </div>
+            <div class="info-row">
+              <span class="info-label">Contact:</span>
+              <span class="info-value">${complaint.contact}</span>
+            </div>
+            <div class="info-row">
+              <span class="info-label">Email:</span>
+              <span class="info-value">${complaint.email}</span>
+            </div>
+          </div>
+        </div>
+
+        <div class="section-divider">
+          <h3 class="section-header">
+            <i class="fas fa-exclamation-triangle"></i>
+            Incident Details
+          </h3>
+          <div class="info-row">
+            <span class="info-label">Type of Complaint:</span>
+            <span class="info-value">${complaint.type}</span>
+          </div>
+          <div class="info-row">
+            <span class="info-label">Date and Time:</span>
+            <span class="info-value">${complaint.incidentDate}, ${complaint.incidentTime}</span>
+          </div>
+          <div class="info-row">
+            <span class="info-label">Location:</span>
+            <span class="info-value">${complaint.location}</span>
+          </div>
+          <div class="info-row">
+            <span class="info-label">Respondent:</span>
+            <span class="info-value">${complaint.respondent}</span>
+          </div>
+          <div>
+            <span class="info-label">Description:</span>
+            <textarea class="description-box" readonly>${complaint.description}</textarea>
+          </div>
+          
+          <h4 style="margin-top: 20px; color: #6A7337;">Evidence (Optional):</h4>
+          <div class="evidence-gallery">
+            <img src="/placeholder.svg?height=200&width=200" class="evidence-item" alt="Evidence 1">
+            <img src="/placeholder.svg?height=200&width=200" class="evidence-item" alt="Evidence 2">
+            <img src="/placeholder.svg?height=200&width=200" class="evidence-item" alt="Evidence 3">
+          </div>
+        </div>
+
+        <div class="section-divider">
+          <h3 class="section-header">
+            <i class="fas fa-users"></i>
+            Witness Information
+          </h3>
+          <div class="info-row">
+            <span class="info-label">Witness Name:</span>
+            <span class="info-value">${complaint.witnessName || 'N/A'}</span>
+          </div>
+          <div class="info-row">
+            <span class="info-label">Witness Contact:</span>
+            <span class="info-value">${complaint.witnessContact || 'N/A'}</span>
+          </div>
+        </div>
+
+        <div class="section-divider">
+          <h3 class="section-header">
+            <i class="fas fa-calendar-alt"></i>
+            Assignment Details
+          </h3>
+          <div class="info-row">
+            <span class="info-label">Assigned to:</span>
+            <span class="info-value">${complaint.assignedTo}</span>
+          </div>
+          <div class="info-row">
+            <span class="info-label">Appointment:</span>
+            <span class="info-value">${complaint.appointmentDate}</span>
+          </div>
+        </div>
+
+        <div class="status-management">
+          <h3>
+            <i class="fas fa-cogs"></i>
+            Status Management
+          </h3>
+          <div class="current-status">
+            <strong>Current Status:</strong> 
+            <span class="status-badge status-${complaint.status.toLowerCase().replace(' ', '')}">
+              <i class="fas ${getStatusIcon(complaint.status)} status-icon"></i>
+              ${complaint.status}
+            </span>
+          </div>
+          <div class="status-actions">
+            <button class="status-btn btn-resolve" onclick="updateStatus(${complaint.id}, 'Complete')" 
+                    ${complaint.status === 'Complete' ? 'disabled' : ''}>
+              <i class="fas fa-check"></i> Mark as Resolved
+            </button>
+            <button class="status-btn btn-ongoing" onclick="updateStatus(${complaint.id}, 'On Going')" 
+                    ${complaint.status === 'On Going' ? 'disabled' : ''}>
+              <i class="fas fa-clock"></i> Mark as Ongoing
+            </button>
+            <button class="status-btn btn-archive" onclick="updateStatus(${complaint.id}, 'Archive')">
+              <i class="fas fa-archive"></i> Archive Complaint
+            </button>
+          </div>
+        </div>
+      `;
+
+      document.getElementById('viewModal').classList.add('show');
+    }
+
+    // Close view modal
+    function closeViewModal() {
+      document.getElementById('viewModal').classList.remove('show');
+    }
+
+    // Update complaint status
+    function updateStatus(id, newStatus) {
+      const complaint = complaints.find(c => c.id === id);
+      if (complaint) {
+        const oldStatus = complaint.status;
+        complaint.status = newStatus;
+        
+        // Update filtered complaints as well
+        const filteredComplaint = filteredComplaints.find(c => c.id === id);
+        if (filteredComplaint) {
+          filteredComplaint.status = newStatus;
+        }
+        
+        // Show confirmation
+        let actionText = '';
+        switch (newStatus) {
+          case 'Complete':
+            actionText = 'resolved';
+            break;
+          case 'On Going':
+            actionText = 'marked as ongoing';
+            break;
+          case 'Archive':
+            actionText = 'archived';
+            break;
+        }
+        
+        alert(`Complaint #${id} has been ${actionText}.\n\nPrevious Status: ${oldStatus}\nNew Status: ${newStatus}`);
+        
+        // Close modal and refresh table
+        closeViewModal();
+        updateTable();
+        updateResultsInfo();
+      }
+    }
+
+    // Update pagination
+    function updatePagination() {
+      const totalPages = Math.ceil(filteredComplaints.length / complaintsPerPage);
+      const prevBtn = document.getElementById('prevBtn');
+      const nextBtn = document.getElementById('nextBtn');
+      const pageInfo = document.getElementById('pageInfo');
+
+      pageInfo.textContent = `Page ${currentPage} of ${totalPages}`;
+      prevBtn.disabled = currentPage === 1;
+      nextBtn.disabled = currentPage === totalPages || totalPages === 0;
+
+      // Show/hide pagination
+      const pagination = document.getElementById('pagination');
+      pagination.style.display = totalPages <= 1 ? 'none' : 'flex';
+    }
+
+    // Change page
+    function changePage(direction) {
+      const totalPages = Math.ceil(filteredComplaints.length / complaintsPerPage);
+      const newPage = currentPage + direction;
+      
+      if (newPage >= 1 && newPage <= totalPages) {
+        currentPage = newPage;
+        updateTable();
+        updateResultsInfo();
+      }
+    }
+
+    // Update results info
+    function updateResultsInfo() {
+      const resultsInfo = document.getElementById('resultsInfo');
+      const startIndex = (currentPage - 1) * complaintsPerPage;
+      const endIndex = Math.min(startIndex + complaintsPerPage, filteredComplaints.length);
+      
+      if (filteredComplaints.length === 0) {
+        resultsInfo.textContent = 'No complaints found';
+      } else {
+        resultsInfo.textContent = `Showing ${startIndex + 1}-${endIndex} of ${filteredComplaints.length} complaints`;
+      }
+    }
+
+    // Toggle notifications
+    function toggleNotifications() {
+      const popup = document.getElementById('notifPopup');
+      const dropdown = document.getElementById('dropdownMenu');
+      
+      dropdown.classList.remove('show');
+      popup.classList.toggle('show');
+    }
+
+    // Close notifications
+    function closeNotifications() {
+      document.getElementById('notifPopup').classList.remove('show');
+    }
+
+    // Toggle dropdown
+    function toggleDropdown() {
+      const dropdown = document.getElementById('dropdownMenu');
+      const popup = document.getElementById('notifPopup');
+      
+      popup.classList.remove('show');
+      dropdown.classList.toggle('show');
+    }
+
+    // Close dropdown
+    function closeDropdown() {
+      document.getElementById('dropdownMenu').classList.remove('show');
+    }
+
+    // Logout function
+    function logout() {
+      alert('Logging out...');
+      // Add logout logic here
+    }
+
+    // Close dropdowns when clicking outside
+    document.addEventListener('click', function(event) {
+      const dropdown = document.getElementById('dropdownMenu');
+      const popup = document.getElementById('notifPopup');
+      const viewModal = document.getElementById('viewModal');
+      const profileBtn = event.target.closest('.profile-btn');
+      const notifBtn = event.target.closest('.notification-btn');
+      const popupContent = event.target.closest('.notification-popup');
+
+      if (!profileBtn && !event.target.closest('.dropdown-menu')) {
+        dropdown.classList.remove('show');
+      }
+
+      if (!notifBtn && !popupContent) {
+        popup.classList.remove('show');
+      }
+
+      // Close view modal when clicking outside
+      if (event.target === viewModal) {
+        closeViewModal();
+      }
+    });
+
+    // Keyboard shortcuts
+    document.addEventListener('keydown', function(event) {
+      // Escape key closes modals and dropdowns
+      if (event.key === 'Escape') {
+        closeViewModal();
+        closeNotifications();
+        closeDropdown();
+      }
+      
+      // Ctrl/Cmd + K focuses search
+      if ((event.ctrlKey || event.metaKey) && event.key === 'k') {
+        event.preventDefault();
+        document.getElementById('searchInput').focus();
+      }
+    });
+
+    
+  </script>
 
   <footer>
     <div class="footer-section">
@@ -604,7 +1808,7 @@
       category: ['Noise', 'Garbage', 'Other'][i % 3],
       date: new Date(Date.now() - i * 86400000).toISOString().split('T')[0],
       description: `Complaint detail example #${i + 1}`,
-      status: i % 3 === 0 ? 'Complete' : i % 3 === 1 ? 'On Going' : 'Abandon' // NEW
+      status: i % 3 === 0 ? 'Complete' : i % 3 === 1 ? 'On Going' : 'Archive' // NEW
     }));
 
     const tableBody = document.querySelector('#complaintTable tbody');
@@ -620,7 +1824,7 @@
       switch (status) {
         case 'Complete': return '#09FF00';    // Green
         case 'On Going': return '#FFA500';    // Orange
-        case 'Abandon':  return '#4A4A4A';    // Dark Gray
+        case 'Archive':  return '#4A4A4A';    // Dark Gray
         default: return '#ccc';
       }
     }
