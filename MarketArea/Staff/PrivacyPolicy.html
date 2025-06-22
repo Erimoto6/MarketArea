@@ -1,13 +1,12 @@
 <!DOCTYPE html>
 <html lang="en">
-
 <head>
-  <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Barangay Market Area: Complaint System</title>
+  <link rel="stylesheet" href="../Resident/privpolicy.css">
   <link rel="icon" type="image/png" href="logo.png">
-  
-  <style>
+
+<style>
     html {
       scroll-behavior: smooth;
     }
@@ -17,6 +16,7 @@
       font-family: 'Arial', sans-serif;
     }
 
+    /* Header */
     header {
       position: sticky;
       top: 0;
@@ -31,7 +31,7 @@
 
     header img {
       height: 60px;
-      margin-right: 13px;
+      margin-right: 10px;
     }
 
     header nav {
@@ -87,27 +87,30 @@
     .dropdown-menu a img {
       width: 20px;
       height: 20px;
-    }    
-
-    .main-banner {
-      position: relative;
-      height: 80vh;
-      background: url('files/marketareabg.jpg') no-repeat center center/cover;
-      display: flex;
-      flex-direction: column;
-      justify-content: flex-start;
-      align-items: center;
-      padding-top: 30px;
     }
 
-    .main-banner h2 {
-      font-size: 50px;
-      margin: 0;
-      color: white;
+    /* Banner */
+    .main-banner {
       position: relative;
-      z-index: 2;
-      text-align: left;
-      width: 90%; 
+      height: 90vh;
+      text-align: center;
+      color: white;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+      overflow: hidden;
+    }
+
+    .main-banner::before {
+      content: "";
+      position: absolute;
+      top: 0;
+      left: 0;
+      height: 100%;
+      width: 100%;
+      background: url('files/marketareabg.jpg') no-repeat center center/cover;
+      z-index: 0;
     }
 
     .main-banner::after {
@@ -117,150 +120,78 @@
       left: 0;
       height: 100%;
       width: 100%;
-      background: rgba(0, 0, 0, 0.6);
-      z-index: 0;
+      background: rgba(0, 0, 0, 0.5);
+      z-index: 1;
     }
 
-    .complaint-frame {
+    .main-banner h1,
+    .main-banner p,
+    .stats {
       position: relative;
       z-index: 2;
-      background-color: white;
-      padding: 0px 10px 0px;
-      border-radius: 10px;
-      width: 90%;
-      max-width: 1100px;
-      box-shadow: 0 0 15px rgba(0, 0, 0, 0.4);
     }
 
-    .complaint-header {
-      display: flex;
-      justify-content: space-between;
-      margin-bottom: 10px;
-      z-index: 2;
-      background-color: white;    
-      padding: 13px;
-      border-radius: 10px;  
-      line-height: 1;      
-      margin-left: 45.2%;
-    
-
-    }
-
-    .complaint-header h2 {
-      font-size: 28px;
+    .main-banner h1 {
+      font-size: 3rem;
       font-weight: bold;
-      color: #000;
-      align-self: flex-start;
-
+      margin-bottom: 10px;
     }
 
-    .controls {
+    .main-banner p {
+      font-size: 1.1rem;
+      margin: 0 0 30px;
+    }
+
+    .stats {
       display: flex;
-      align-items: flex-end;
-      gap: 15px;
-    }
-
-    .search-box input, .sort-box select {
-      line-height: 1.2;
-      padding: 6px 10px;
-    }
-
-    .search-box input {
-      padding: 5px 10px;
-      border-radius: 5px;
-      border: 1px solid #ccc;
-    }
-
-    .sort-box {
-      position: relative;
-      display: flex;
-      align-items: center;      /* Vertical alignment */
+      gap: 30px;
+      margin-top: 20px;
+      flex-wrap: wrap;
       justify-content: center;
     }
 
-    .sort-box select {
-      padding: 5px 25px 5px 10px;
-      border-radius: 5px;
-      border: 1px solid #ccc;
-      background: url('files/dropdown.png') no-repeat right 10px center;
-      background-size: 12px;
-      appearance: none;
-    }
-
-    .sort-box img {
-      height: 15px;
-    }
-
-    table {
-      width: 100%;
-      border-collapse: collapse;
-      margin: 0;
-
-    }
-    
-    /* 🔸 Status dot (green) - In Progress Cases only */
-    .status-dot {
-      height: 10px;
-      width: 10px;
-      border-radius: 50%;
-      display: inline-block;
-      background-color: #09FF00; /* green for 'New' */
-      margin-right: 8px;
-    }
-
-
-    th, td {
-      padding: 15px 15px 5px 15px;
-      text-align: left;
-      border-bottom: none;
-    }
-
-    th {
-      border-bottom: 2px solid #ccc;
-      align-self: center;
-    }
-
-    tbody tr {
+    .stat-box {
+      background-color: #6d8129;
+      padding: 20px 30px;
+      border-radius: 10px;
+      color: white;
+      width: 180px;
+      text-align: center;
+      box-shadow: -2px 4px 5px rgba(0, 0, 0, 0.5);
+      transition: all 0.3s ease;
       cursor: pointer;
+      text-decoration: none;
     }
 
-    tbody tr:hover {
-      background-color: #d1d1d1;
+    .stat-box:hover {
+      background-color: #7e9431;
+      transform: scale(1.05);
+      box-shadow: 0px 6px 15px rgba(0, 0, 0, 0.4);
     }
 
-    .pagination {
-      display: flex;
-      justify-content: center;
-      align-items: center;
-      gap: 10px;
-
-      font-family: 'Arial', sans-serif;
-      margin-top: 10px;
-      margin-bottom: 20px;
+    .stat-box .icon img {
+      height: 40px;
+      margin-bottom: 10px;
+      filter: drop-shadow(-2px 2px 2px rgba(0, 0, 0, 0.4));
     }
 
-    .pagination button {
-      background: none;
-      border: none;
-      font-size: 1.2em;
-      cursor: pointer;
+    .stat-box h3 {
+      margin: 10px 0 5px;
+      font-size: 1.1rem;
     }
 
-    .pagination button:disabled {
-      opacity: 0.4;
-      cursor: not-allowed;
+    .stat-box .count {
+      font-size: 1.5rem;
+      font-weight: bold;
     }
 
-    .pagination button:hover {
-      background-color: #eee;
-    }
-
+    /* Footer */
     footer {
       background-color: #333;
       color: white;
       display: flex;
       justify-content: space-between;
-      padding: 20px 30px;
+      padding: 13px 30px;
       font-size: 0.9rem;
       flex-wrap: wrap;
     }
@@ -272,7 +203,7 @@
       max-width: 500px;
       margin-top: 10px;
     }
-
+    
     footer img {
       margin-right: 25px;
       margin-left: 10px;
@@ -366,19 +297,17 @@
       background-color: #f8f8f8;
     }
 
-    /* === MODAL STYLES FOR TERMS POPUP === */
-    .modal-overlay {
+    .modal {
       display: none;
       position: fixed;
-      top: 0;
+      z-index: 999;
       left: 0;
+      top: 0;
       width: 100%;
       height: 100%;
-      background-color: rgba(0,0,0,0.6);
-      justify-content: center;
-      align-items: center;
-      z-index: 999;
-      margin-top: 50px;      
+      overflow: auto;
+      background-color: rgba(0, 0, 0, 0.6);
+      margin-top: 50px;
     }
 
     .modal-content {
@@ -434,7 +363,15 @@
       text-decoration: none;
       cursor: pointer;
     }    
-    
+
+.container {
+  max-width: 1200px;
+  margin: 0 auto; /* centers it */
+  padding: 20px;
+  background-color: #f9f9f9;
+  border-radius: 10px;
+}
+
   </style>
 </head>
 
@@ -449,76 +386,78 @@
     </div>
 
     <nav>
-      <a href="staffHomepage.html">Home</a>
+      <a href="staffHomepage.html" onclick="scrollToTop(event)">Home</a>
       <a href="manageComplaints.html">Manage Complaints</a>
       <a href="quickMetric.html">Quick Metrics</a>
       <div class="profile-container">
         <div class="profile-circle" onclick="toggleDropdown()"></div>
         <div class="dropdown-menu" id="dropdownMenu">
-          <a href="staffProf.html"><img src="files/profile.png" alt="Profile Icon" style="width: 20px; height: 20px;">Profile</a>
-          <a href="#" onclick="openNotifFromDropdown(event)"><img src="files/notif.png" alt="Notifications Icon">Notifications</a>
-          <a href="settings.html"><img src="files/settings.png" alt="Settings Icon" style="width: 20px; height: 20px;">Settings</a>
-          <a href="staffLogin.html"><img src="files/logout.png" alt="Logout Icon" style="width: 20px; height: 20px;">Logout</a>
+          <a href="staffProf.html"><img src="files/profile.png">Profile</a>
+          <a href="#" onclick="openNotifFromDropdown(event)"><img src="files/notif.png">Notifications</a>
+          <a href="settings.html"><img src="files/settings.png">Settings</a>
+          <a href="staffLogin.html"><img src="files/logout.png">Logout</a>
+
         </div>
       </div>
     </nav>
   </header>
 
-  <section class="main-banner">
-    <h2>RESOLVED CASES</h2>
-      <div class="complaint-header">
-      <div class="controls">
-        <div class="search-box">
-          <input type="text" id="searchInput" placeholder="Search..." />
-        </div>
-        <div class="sort-box">
-          <select id="sortSelect">
-            <option value="newest">Newest to Oldest</option>
-            <option value="oldest">Oldest to Newest</option>
-          </select>
-        </div>
-      </div>
-    </div>
 
-    <div class="complaint-frame">
-      <table id="complaintTable">
-        <thead>
-          <tr>
-            <th>Complaint ID</th>
-            <th>Complainant</th>
-            <th>Category</th>
-            <th>Date Filed</th>
-            <th>Brief Description</th>
-          </tr>
-        </thead>
-        <tbody></tbody>
-      </table>
-
-      <div class="pagination" id="paginationControls">
-        <button id="prevPageBtn">←</button>
-        <span id="pageInfo">1 of 1</span>
-        <button id="nextPageBtn">→</button>
-      </div>
-
-    </div>
+<div class="policy-container">
+<h2 style="text-align: center;">Privacy Policy</h2>
+    <p>
+      The Barangay E-Blotter System is committed to protecting your privacy. This Privacy Policy explains how we collect, use, and safeguard your personal information when you use our system.
+    </p>
+    <h3>Information We Collect</h3>
+    <ul>
+      <li>Personal details you provide when filing a complaint (e.g., name, address, contact number, etc.).</li>
+      <li>Details of your complaint and any supporting evidence you upload.</li>
+      <li>Technical information such as your IP address, browser type, and access times.</li>
+    </ul>
+    <h3>How We Use Your Information</h3>
+    <ul>
+      <li>To process and resolve complaints submitted through the system.</li>
+      <li>To communicate with you regarding your complaint or inquiry.</li>
+      <li>To improve our services and ensure system security.</li>
+      <li>To comply with legal obligations and government regulations.</li>
+    </ul>
+    <h3>Information Sharing</h3>
+    <p>
+      We do not share your personal information with third parties except as required by law or with your explicit consent. Your information is kept confidential and is only accessible to authorized barangay personnel.
+    </p>
+    <h3>Data Security</h3>
+    <p>
+      We implement appropriate security measures to protect your data from unauthorized access, alteration, or disclosure.
+    </p>
+    <h3>Your Rights</h3>
+    <ul>
+      <li>You may request access to your personal information.</li>
+      <li>You may request correction or deletion of your data, subject to legal requirements.</li>
+      <li>You may contact us for any privacy-related concerns.</li>
+    </ul>
+    <h3>Contact Us</h3>
+    <p>
+      If you have questions or concerns about this Privacy Policy, please contact the Barangay Office at (012) 345-6789 or email <a href="mailto:barangayeblotter@email.com">barangayeblotter@email.com</a>.
+    </p>
+    <a href="javascript:window.history.back();" class="back-link">← Back</a>
+  </div>
   </section>
+  
 
-  <footer>
-    <div class="footer-section">
-      <div class="leftside">
-        <img src="files/logo.png" alt="Barangay Logo" />
-        <p>
-          The Market Area of Sta. Rosa, Laguna is a bustling center of commerce and community activity. Known for its
-          public market, transport terminals, and small businesses, it serves as a vital hub for daily essentials,
-          local trade, and public services—connecting residents from different barangays across the city.
-        </p>
-      </div>
+   <footer>
+    <div class="leftside">
+      <img src="files/logo.png" />
+      <p>
+        The Market Area of Sta. Rosa, Laguna is a bustling center of commerce and community activity. 
+        Known for its public market, transport terminals, and small businesses, it serves as a vital hub for daily 
+        essentials, local trade, and public services—connecting residents from different barangays across the city.
+      </p>
     </div>
     <div class="footer-section1">
       <h4>Quick Menu</h4>
       <ul>
-        <li><a href="staffHomepage.html">Home</a></li>
-        <li><a href="manageComplaints.html">Manage Complaint</a></li>
+        <li><a href="staffHomepage.html" onclick="scrollToTop(event)">Home</a></li>
+        <li><a href="manageComplaints.html">Manage Complaints</a></li>
         <li><a href="quickMetric.html">Quick Metrics</a></li>
       </ul>
     </div>
@@ -526,7 +465,7 @@
       <h4>Govt. Info</h4>
       <ul>
         <li><a href="PrivacyPolicy.html">Privacy Policy</a></li>
-        <li><a href="#" onclick="openTerms(event)">Terms & Conditions</a></li>  
+        <li><a href="#" class="termsCondi" onclick="openModal()">Terms & Conditions</a></li>
         <li><a href="#">FAQ</a></li>
       </ul>
     </div>
@@ -551,10 +490,12 @@
   </div>
   <!-- === NOTIFICATION POPUP END === -->
 
-<!-- === TERMS & CONDITIONS MODAL START === -->
-  <div id="termsModal" class="modal-overlay">
+
+  <!-- === TERMS AND CONDITION ===-->
+
+  <div id="termsModal" class="modal">
     <div class="modal-content">
-    <span class="close" onclick="closeModal()">&times;</span>  
+    <span class="close" onclick="closeModal()">&times;</span>
       <div class="modal-scrollable">
         <h2>Terms and Conditions</h2>
         <p>Welcome to the Barangay E-Blotter System. By accessing or using this system, you agree to comply with and be bound by the following terms and conditions. Please read them carefully.</p>
@@ -594,160 +535,99 @@
       </div>
     </div>
   </div>
-<!-- === TERMS & CONDITIONS MODAL END === -->
-
+  
   <script>
-    // NEW: Added status field to each complaint
-    const complaints = Array.from({ length: 15 }, (_, i) => ({
-      id: i + 1,
-      complainant: `Resident ${i + 1}`,
-      category: ['Noise', 'Garbage', 'Other'][i % 3],
-      date: new Date(Date.now() - i * 86400000).toISOString().split('T')[0],
-      description: `Complaint detail example #${i + 1}`,
-      status: i % 3 === 0 ? 'New' : i % 3 === 1 ? 'In Progress' : 'Resolved' // NEW
-    }));
+    // ==========================
+    // NOTIFICATION FUNCTIONALITY
+    // ==========================
 
-    const tableBody = document.querySelector('#complaintTable tbody');
-    const searchInput = document.getElementById('searchInput');
-    const sortSelect = document.getElementById('sortSelect');
-    const paginationControls = document.getElementById('paginationControls');
+    // NEW: Load notifications from localStorage and inject into popup
+    function loadNotifications() {
+      const notifPopup = document.getElementById('notifPopup');
+      const popupSections = notifPopup.querySelectorAll('.popup-section');
 
-    let currentPage = 1;
-    const complaintsPerPage = 9;
+      // Clear existing notification items
+      popupSections.forEach(section => section.innerHTML = '');
 
-    // NEW: Get color based on status
-    function getStatusDotColor(status) {
-      switch (status) {
-        case 'New': return '#FFA500'; // Orange
-        case 'In Progress': return '#4A43FF'; // Blue
-        case 'Resolved': return '#09FF00'; // Green
-        default: return '#ccc';
-      }
-    }
+      const complaints = JSON.parse(localStorage.getItem('submittedComplaints')) || [];
 
-    function renderTable(data) {
-      tableBody.innerHTML = '';
-      const start = (currentPage - 1) * complaintsPerPage;
-      const end = start + complaintsPerPage;
-      data.slice(start, end).forEach(complaint => {
-        const row = document.createElement('tr');
+      const today = new Date().toISOString().split('T')[0];
 
-        // 🔸 Add green dot before Complaint ID
-        const statusDot = `<span class="status-dot"></span>`;
+      // Create containers
+      const todaySection = document.createElement('div');
+      todaySection.className = 'popup-section';
+      const weekSection = document.createElement('div');
+      weekSection.className = 'popup-section';
 
-        row.innerHTML = `
-          <td>${statusDot}#${complaint.id.toString().padStart(5, '0')}</td>
-          <td>${complaint.complainant}</td>
-          <td>${complaint.category}</td>
-          <td>${complaint.date}</td>
-          <td>${complaint.description}</td>
-        `;
-        row.onclick = () => alert(`Open Complaint ID #${complaint.id}`);
-        tableBody.appendChild(row);
+      const todayHeader = document.createElement('h5');
+      todayHeader.textContent = 'Today';
+      todaySection.appendChild(todayHeader);
+
+      const weekHeader = document.createElement('h5');
+      weekHeader.textContent = 'This Week';
+      weekSection.appendChild(weekHeader);
+
+      complaints.forEach((complaint, index) => {
+        const notifItem = document.createElement('div');
+        notifItem.className = 'notif-item';
+        notifItem.textContent = `${complaint.name} submitted a ${complaint.category.toLowerCase()} complaint.`;
+        notifItem.onclick = () => {
+          localStorage.setItem('selectedComplaintIndex', index); // Optional
+          window.location.href = 'complaintApprovalAction.html';
+        };
+
+        if (complaint.date === today) {
+          todaySection.appendChild(notifItem);
+        } else {
+          weekSection.appendChild(notifItem);
+        }
       });
+
+      // Append generated sections
+      notifPopup.innerHTML = `
+        <div class="popup-header">
+          Notifications
+          <span onclick="closeNotifPopup()">×</span>
+        </div>
+      `;
+      notifPopup.appendChild(todaySection);
+      notifPopup.appendChild(weekSection);
     }
 
-
-    function renderPagination(data) {
-      const totalPages = Math.ceil(data.length / complaintsPerPage);
-      const prevBtn = document.getElementById('prevPageBtn');
-      const nextBtn = document.getElementById('nextPageBtn');
-      const pageInfo = document.getElementById('pageInfo');
-
-      pageInfo.textContent = `${currentPage} of ${totalPages}`;
-      prevBtn.disabled = currentPage === 1;
-      nextBtn.disabled = currentPage === totalPages;
-
-      prevBtn.onclick = () => {
-        if (currentPage > 1) {
-          currentPage--;
-          updateTable();
-        }
-      };
-
-      nextBtn.onclick = () => {
-        if (currentPage < totalPages) {
-          currentPage++;
-          updateTable();
-        }
-      };
+    // Update notification when dropdown "Notifications" is clicked
+    function openNotifFromDropdown(event) {
+      event.preventDefault();
+      document.getElementById('dropdownMenu').style.display = 'none';
+      loadNotifications(); // ✅ NEW: Load fresh notifications
+      document.getElementById('notifPopup').style.display = 'flex';
     }
 
-
-    function updateTable() {
-      let filtered = complaints.filter(c =>
-        Object.values(c).some(val =>
-          String(val).toLowerCase().includes(searchInput.value.toLowerCase())
-        )
-      );
-
-      filtered.sort((a, b) =>
-        sortSelect.value === 'newest'
-          ? new Date(b.date) - new Date(a.date)
-          : new Date(a.date) - new Date(b.date)
-      );
-
-      renderTable(filtered);
-      renderPagination(filtered);
-    }
-
-    searchInput.addEventListener('input', () => {
-      currentPage = 1;
-      updateTable();
-    });
-
-    sortSelect.addEventListener('change', () => {
-      updateTable();
-    });
-
-    function toggleDropdown() {
-      const menu = document.getElementById('dropdownMenu');
-      menu.style.display = menu.style.display === 'block' ? 'none' : 'block';
-    }
-
-    window.onclick = function (event) {
-      if (!event.target.closest('.profile-container')) {
-        const dropdown = document.getElementById('dropdownMenu');
-        if (dropdown) dropdown.style.display = 'none';
-      }
-    };
-
-    // Initial render
-    updateTable();
-
+    // Toggling dropdown logic stays the same
     function toggleDropdown() {
       const dropdown = document.getElementById('dropdownMenu');
       const notif = document.getElementById('notifPopup');
-      notif.style.display = 'none'; // hide notif popup
+      notif.style.display = 'none';
       dropdown.style.display = dropdown.style.display === 'block' ? 'none' : 'block';
-    }
-
-    function openNotifFromDropdown(event) {
-      event.preventDefault();
-      document.getElementById('dropdownMenu').style.display = 'none'; // close dropdown
-      document.getElementById('notifPopup').style.display = 'flex'; // open notif
     }
 
     function closeNotifPopup() {
       document.getElementById('notifPopup').style.display = 'none';
     }
 
-    // Close everything on outside click
+    // Close all on outside click
     window.onclick = function (e) {
       if (!e.target.closest('.profile-container') && !e.target.closest('.notification-popup')) {
         document.getElementById('dropdownMenu').style.display = 'none';
         closeNotifPopup();
       }
-    }
+    };
 
-    /*TERMS AND CONDITION*/
-    function openTerms(event) {
+    function scrollToTop(event) {
       event.preventDefault();
-      document.getElementById('termsModal').style.display = 'flex';
-    }
-
-    function closeTerms() {
-      document.getElementById('termsModal').style.display = 'none';
+      window.scrollTo({
+        top: 0,
+        behavior: 'smooth'
+      });
     }
 
     // Open modal
@@ -760,7 +640,16 @@
       document.getElementById("termsModal").style.display = "none";
     }
 
-  </script>
-</body>
+    // Close modal if clicking outside content
+    window.onclick = function (event) {
+      const modal = document.getElementById("termsModal");
+      if (event.target == modal) {
+        closeModal();
+      }
+    };
 
+
+  </script>
+    
+</body>
 </html>

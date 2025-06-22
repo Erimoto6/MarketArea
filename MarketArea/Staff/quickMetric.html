@@ -150,11 +150,29 @@
       text-align: left;
     }
 
+<<<<<<< HEAD
     .banner-desc {
       font-size: 1rem;
       color: #7f8c8d;
       margin: 0;
       text-align: left;
+=======
+    /* --- QUICK METRICS SECTION FIXED --- */
+    .quick-metrics-container {
+      position: relative; /* ✅ overlay inside banner */
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+      background: white;
+      max-width: 900px;
+      width: 90%;
+      border-radius: 20px;
+      padding: 20px 20px;
+      box-shadow: 0 4px 20px rgba(0, 0, 0, 0.3);
+      display: flex;
+      gap: 20px;
+      z-index: 2; /* ✅ above bg + black overlay */
+>>>>>>> e732a77f39805f78f010071c2ed9ed7a5f86e173
     }
 
     /* Metrics Summary */
@@ -529,7 +547,7 @@
       <div class="profile-container">
         <div class="profile-circle" onclick="toggleDropdown()"></div>
         <div class="dropdown-menu" id="dropdownMenu">
-          <a href="staffHomepage.html"><img src="files/profile.png" alt="Profile Icon">Profile</a>
+          <a href="staffProf.html"><img src="files/profile.png" alt="Profile Icon">Profile</a>
           <a href="#"onclick="openNotifFromDropdown(event)"><img src="files/notif.png" alt="Notifications Icon">Notifications</a>
           <a href="settings.html"><img src="files/settings.png" alt="Settings Icon">Settings</a>
           <a href="staffLogin.html"><img src="files/logout.png" alt="Logout Icon">Logout</a>
@@ -608,7 +626,7 @@
     <div class="footer-section2">
       <h4>Govt. Info</h4>
       <ul>
-        <li><a href="#">Privacy Policy</a></li>
+        <li><a href="PrivacyPolicy.html">Privacy Policy</a></li>
         <li><a href="#" onclick="openTerms(event)">Terms & Conditions</a></li>  
         <li><a href="#">FAQ</a></li>
       </ul>

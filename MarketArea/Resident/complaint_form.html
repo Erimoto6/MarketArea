@@ -32,24 +32,46 @@
           <div class="profile"></div>
         </div>
 
-        <div class="sidebar collapsed" id="profileSidebar">
-          <a href="profile.html" class="sidebar-item">
-            <i class="icon">👤</i>
-            <span class="label">Profile</span>
-          </a>
-          <a href="settings.html" class="sidebar-item">
-            <i class="icon">⚙️</i>
-            <span class="label">Settings</span>
-          </a>
-          <a href="accounts_security.html" class="sidebar-item">
-            <i class="icon">🔐</i>
-            <span class="label">Account & Security</span>
-          </a>
-          <a href="residentLogin.html" class="sidebar-item" id="logout-btn">
-            <i class="icon">⏻</i>
-            <span class="label">Logout</span>
-          </a>
-        </div>
+        <!-- Collapsible Sidebar -->
+  			<div class="sidebar collapsed" id="profileSidebar">
+  				<a href="profile.html" class="sidebar-item" data-tooltip="View your profile">
+    				<i class="icon">👤</i>
+    				<span class="label">Profile</span>
+  				</a>
+				<a href="resident_notifications.html" class="sidebar-item" id="notifItem" data-tooltip="View notifications">
+  					<i class="icon">🔔</i>
+  					<span class="label">Notifications</span>
+  					<span class="notif-badge" id="notifBadge">0</span>
+				</a>
+  				<a href="settings.html" class="sidebar-item" data-tooltip="Adjust your settings">
+    				<i class="icon">⚙️</i>
+    				<span class="label">Settings</span>
+  				</a>
+  				<a href="accounts_security.html" class="sidebar-item" data-tooltip="Manage your account and privacy">
+    				<i class="icon">🔐</i>
+    				<span class="label">Account & Security</span>
+  				</a>
+  				<a href="residentLogin.html" class="sidebar-item" id="logout-btn" data-tooltip="Log out from your account">
+    				<i class="icon">⏻</i>
+    				<span class="label">Logout</span>
+  				</a>
+			</div>
+
+			<!-- Notification Popup -->
+			<div id="notificationPopup" class="notification-popup">
+  				<div class="popup-header">
+    				<strong>Notifications</strong>
+    				<button class="close-btn" onclick="hidePopup()">✖</button>
+  				</div>
+  				<ul class="notification-list" id="notificationList">
+   					<li>📝 New complaint submitted</li>
+    				<li>📢 Barangay update posted</li>
+    				<li>👤 Profile approved</li>
+  				</ul>
+				<button id="clearNotificationsBtn" class="clear-btn">Clear All</button>
+				</div>
+
+			</div>
       </div>
     </div>
   </header>
@@ -279,6 +301,82 @@
       currentStep = 0;
       updateFormSteps();
     });
+
+    //notifications
+  
+  let notifCount = 0;
+const badge = document.getElementById("notifBadge");
+const toastContainer = document.getElementById("toastContainer");
+const notifItem = document.getElementById("notifItem");
+const popup = document.getElementById("notificationPopup");
+const notificationList = document.getElementById("notificationList");
+
+// Update badge
+function updateNotificationCount(count) {
+  notifCount = count;
+  if (notifCount > 0) {
+    badge.textContent = notifCount;
+    badge.style.display = 'inline-block';
+  } else {
+    badge.textContent = '';
+    badge.style.display = 'none';
+  }
+}
+
+// Show toast
+function showToast(message) {
+  const toast = document.createElement("div");
+  toast.className = "toast";
+  toast.textContent = message;
+  toastContainer.appendChild(toast);
+
+  // Remove after 4s
+  setTimeout(() => toast.remove(), 4000);
+}
+
+// Add notification to popup list
+function addNotificationToList(message) {
+  const li = document.createElement("li");
+  li.textContent = message;
+  notificationList.prepend(li); // newest on top
+}
+
+// Simulate notifications every 5s
+setInterval(() => {
+  notifCount++;
+  const msg = `🔔 New notification #${notifCount}`;
+  updateNotificationCount(notifCount);
+  showToast(msg);
+  addNotificationToList(msg);
+}, 10000);
+
+// Toggle popup
+notifItem.addEventListener("click", function (e) {
+  e.preventDefault();
+  popup.style.display = popup.style.display === "block" ? "none" : "block";
+  updateNotificationCount(0); // optional: reset badge when opened
+});
+
+// Close popup button
+function hidePopup() {
+  popup.style.display = "none";
+}
+
+// Hide popup when clicking outside
+document.addEventListener("click", function (e) {
+  if (!popup.contains(e.target) && !notifItem.contains(e.target)) {
+    popup.style.display = "none";
+  }
+});
+
+const clearBtn = document.getElementById("clearNotificationsBtn");
+
+clearBtn.addEventListener("click", () => {
+  notificationList.innerHTML = "";       // Clears the list
+  updateNotificationCount(0);            // Resets badge
+});
+
+hidePopup(); // Add this inside the clearBtn click function
   </script>
 
 </body>
