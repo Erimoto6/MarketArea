@@ -11,6 +11,7 @@ body {
   min-height: 100vh; /* ensures the background covers the whole screen */
 }
 
+
 /* HEADER SECTION */
 .header_gradient {
   display: flex;

@@ -16,6 +16,29 @@
   overflow: visible; /* or remove 'overflow: hidden' */
 }
 
+@media (max-width: 768px) {
+  .welcome-to-barangay {
+    font-size: 38px;
+    text-align: center;
+  }
+
+  .file_complaint_container {
+    width: 90%;
+    height: auto;
+  }
+
+  .file-a-complaint-parent {
+    position: static;
+    align-items: center;
+    text-align: center;
+  }
+
+  .hero-section {
+    padding: 40px 20px;
+    align-items: center;
+  }
+}
+
 .barangay-market-area {
     font-family: Trebuchet MS;
 }
@@ -42,8 +65,6 @@
   background-position: center;
   z-index: -1;
 }
-
-
 
 @keyframes circleFadeSlideIn {
   0% {
@@ -306,6 +327,7 @@
 
 /*PROFILE SIDEBAR*/
 
+/* PROFILE SIDEBAR - BASE */
 .profile-sidebar-wrapper {
   position: relative;
   display: inline-block;
@@ -320,63 +342,86 @@
   height: 54px;
   border-radius: 50%;
   background-color: #fff;
-  border: 1px solid #4f0002;
+  border: 2px solid #4f0002;
+  transition: transform 0.2s ease;
 }
 
+.profile:hover {
+  transform: scale(1.05);
+}
+
+/* SIDEBAR MENU */
 .sidebar {
   position: absolute;
   top: 70px;
   right: 0;
-  background-color: #2c2c2c;
-  width: 200px;
-  border-radius: 8px;
-  box-shadow: 0 8px 20px rgba(0, 0, 0, 0.3);
-  color: white;
+  width: 220px;
+  background: linear-gradient(to bottom, #2c2c2c, #1e1e1e);
+  border-radius: 12px;
+  box-shadow: 0 12px 30px rgba(0, 0, 0, 0.45);
+  color: #fff;
   overflow: hidden;
   transform: scaleY(0);
   transform-origin: top;
-  transition: transform 0.3s ease;
+  transition: transform 0.3s ease, opacity 0.3s ease;
   z-index: 999;
-}
-
-.sidebar-item,
-.sidebar-item:visited,
-.sidebar-item:active,
-.sidebar-item:hover {
-  color: white;
-  text-decoration: none;
+  opacity: 0;
 }
 
 .sidebar.show {
   transform: scaleY(1);
+  opacity: 1;
 }
 
+/* SIDEBAR ITEMS */
 .sidebar-item {
   display: flex;
   align-items: center;
-  padding: 12px 16px;
+  padding: 14px 20px;
+  font-size: 15px;
+  gap: 12px;
   cursor: pointer;
-  transition: background 0.2s;
+  transition: background 0.25s, transform 0.2s;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.05);
+}
+
+.sidebar-item:last-child {
+  border-bottom: none;
 }
 
 .sidebar-item:hover {
-  background-color: #444;
+  background-color: #383838;
+  transform: translateX(3px);
 }
 
+/* ICON STYLE */
 .icon {
   font-size: 18px;
   margin-right: 10px;
+  color: #D0B564;
 }
 
+/* LABEL TEXT */
 .label {
   font-size: 14px;
+  color: #fefefe;
 }
 
+/* MOBILE RESPONSIVENESS */
+@media (max-width: 768px) {
+  .sidebar {
+    right: -20px;
+    width: 180px;
+  }
 
-/* Optional: style hover effects */
-.nav-links > div:hover {
-  text-decoration: underline;
-  cursor: pointer;
+  .sidebar-item {
+    padding: 12px 16px;
+    font-size: 14px;
+  }
+
+  .icon {
+    font-size: 16px;
+  }
 }
 
 /*FOOTER SECTION*/

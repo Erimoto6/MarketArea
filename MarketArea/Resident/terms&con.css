@@ -50,6 +50,7 @@
 body {
   font-family: 'Inter', sans-serif;
   background-image: url('marketarea2.jpg');
+  filter: brightness(0.4); /* Darkens the image */
   background-repeat: no-repeat;
   background-position: center center;
   background-size: cover;

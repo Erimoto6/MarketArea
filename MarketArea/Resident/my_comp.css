@@ -166,14 +166,23 @@
 }
 
 /* Main Content */
-/* Main Content */
 .content {
+  position: relative;
+  min-height: 100vh;
+  padding: 40px;
+  z-index: 1;
+}
+
+.content::before {
+  content: '';
+  position: absolute;
+  inset: 0;
   background-image: url('marketarea2.jpg');
   background-size: cover;
   background-position: center;
-  min-height: 100vh;
-  padding: 40px;
+  z-index: -1;
 }
+
 
 /* Complaint Header */
 @keyframes slideInLeft {
