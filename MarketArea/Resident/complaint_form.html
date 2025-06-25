@@ -631,6 +631,24 @@ function renderFileList() {
   evidenceInput.files = dataTransfer.files;
 }
 
+// red asterisk
+
+document.querySelectorAll('.form-step input[required], .form-step textarea[required], .form-step select[required]').forEach(input => {
+  input.addEventListener('input', function () {
+    const label = this.closest('label');
+    if (!label) return;
+
+    const asterisk = label.querySelector('.required');
+    if (asterisk) {
+      if (this.value.trim() !== '') {
+        asterisk.style.visibility = 'hidden';
+      } else {
+        asterisk.style.visibility = 'visible';
+      }
+    }
+  });
+});
+
 
   </script>
 
