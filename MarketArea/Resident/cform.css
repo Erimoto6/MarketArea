@@ -526,6 +526,18 @@ input[type="file"] {
   color: #333;
 }
 
+.form-col select {
+  -webkit-appearance: none;
+  -moz-appearance: none;
+  appearance: none;
+  background-color: #fff;
+  background-image: url("data:image/svg+xml;charset=US-ASCII,%3Csvg%20width%3D%2210%22%20height%3D%227%22%20viewBox%3D%220%200%2010%207%22%20fill%3D%22none%22%20xmlns%3D%22http%3A//www.w3.org/2000/svg%22%3E%3Cpath%20d%3D%22M1%201L5%205L9%201%22%20stroke%3D%22%23333%22%20stroke-width%3D%222%22/%3E%3C/svg%3E");
+  background-repeat: no-repeat;
+  background-position: right 12px center;
+  background-size: 10px 7px;
+  padding-right: 32px; /* space for dropdown arrow */
+}
+
 .form-col input,
 .form-col select {
   margin-top: 5px;
@@ -546,6 +558,12 @@ input[type="file"] {
   box-shadow: 0 0 4px rgba(106, 115, 55, 0.3);
 }
 
+.required {
+  color: red;
+  margin-left: 4px;
+  font-weight: bold;
+}
+
 
 
 .small-note {
@@ -563,23 +581,36 @@ input[type="file"] {
 
 .witness-row {
   display: flex;
-  flex-wrap: wrap;
   gap: 20px;
+  flex-wrap: wrap;
+  margin-top: 10px;
 }
 
 .witness-column {
+  flex: 1;
+  min-width: 240px;
   display: flex;
   flex-direction: column;
-  gap: 10px;
-  flex: 1;
-  min-width: 200px;
+  gap: 12px;
 }
 
 .witness-column input {
+  width: 100%;
   padding: 8px;
-  border-radius: 8px;
   border: 1px solid #ccc;
+  border-radius: 6px;
+  font-size: 14px;
+  box-sizing: border-box;
 }
+
+.label-title {
+  font-size: 13px;
+  font-weight: 500;
+  margin-bottom: 4px;
+  display: inline-block;
+  color: #333;
+}
+
 
 
 .form-step.active {
@@ -590,13 +621,10 @@ input[type="file"] {
 
 
 input, select, textarea {
-  padding: 10px;
-  border-radius: 6px;
-  border: 1px solid #ccc;
-  flex: 1;
-  min-width: 120px;
   font-family: inherit;
   font-size: 14px;
+  border-radius: 6px;
+  border: 1px solid #ccc;
 }
 
 textarea {
@@ -696,15 +724,37 @@ textarea {
   background-color: #a38e48;
 }
 
-.terms-container {
-  margin: 20px 0;
-  font-family: Arial, sans-serif;
+.terms-wrapper {
+  width: 100%;
+  display: flex;
+  justify-content: flex-end;
+  margin-top: 50px; /* ✅ Add this for spacing above */
 }
-.terms-container input[type="checkbox"] {
-  accent-color: #0078d4;
-  margin-right: 8px;
+
+.terms-align-right {
+  display: flex;
+  align-items: center;
+  justify-content: flex-end;
 }
-.terms-container label a {
+
+.terms-label {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  font-size: 14px;
+  font-weight: 500;
+  color: #333;
+  cursor: pointer;
+}
+
+.terms-label input[type="checkbox"] {
+  width: 16px;
+  height: 16px;
+  accent-color: #6a7337;
+  margin: 0;
+}
+
+.terms-label a {
   color: #0078d4;
   text-decoration: underline;
 }
@@ -727,6 +777,78 @@ textarea {
   color: #555;
   margin-bottom: 8px;
   margin-top: 10px;
+}
+
+/*additional details*/
+.word-count {
+  font-size: 12px;
+  color: #666;
+  margin-top: 4px;
+  text-align: right;
+}
+
+#ageSelect {
+  height: 36px;
+  font-size: 14px;
+  padding: 4px;
+}
+
+/*pop up success*/
+.popup-overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: rgba(0, 0, 0, 0.45);
+  display: none;
+  justify-content: center;
+  align-items: center;
+  z-index: 9999;
+}
+
+.popup-box {
+  background: #fff;
+  padding: 30px 25px;
+  border-radius: 10px;
+  text-align: center;
+  width: 90%;
+  max-width: 400px;
+  box-shadow: 0 6px 12px rgba(0,0,0,0.2);
+  font-family: inherit;
+  animation: fadeIn 0.3s ease;
+}
+
+.popup-box h3 {
+  margin: 0 0 10px;
+  color: #6a7337;
+  font-size: 20px;
+}
+
+.popup-box p {
+  margin: 0 0 20px;
+  font-size: 14px;
+  color: #444;
+}
+
+.popup-btn {
+  background-color: #6a7337;
+  color: #fff;
+  padding: 10px 18px;
+  border: none;
+  border-radius: 6px;
+  cursor: pointer;
+  font-weight: 600;
+  transition: background 0.3s;
+}
+
+.popup-btn:hover {
+  background-color: #556229;
+}
+
+@keyframes fadeIn {
+  from { transform: scale(0.95); opacity: 0; }
+  to { transform: scale(1); opacity: 1; }
 }
 
 

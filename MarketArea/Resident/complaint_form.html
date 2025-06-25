@@ -97,137 +97,235 @@
   <!-- 2-Column Group -->
   <div class="form-row">
     <div class="form-col">
-      <label>Last Name
+      <label>
+        <span class="label-title">Last Name <span class="required">*</span></span>
         <input type="text" placeholder="Last Name" required>
       </label>
     </div>
     <div class="form-col">
-      <label>First Name
+      <label>
+        <span class="label-title">First Name <span class="required">*</span></span>
         <input type="text" placeholder="First Name" required>
       </label>
     </div>
-  </div>
-
-  <div class="form-row">
-    <div class="form-col">
-      <label>Middle Name
+     <div class="form-col">
+        <label>
+        <span class="label-title">Middle Name <span class="required">*</span></span>
         <input type="text" placeholder="Middle Name" required>
       </label>
     </div>
+  </div>
+
+  <div class="form-row">
     <div class="form-col">
-      <label>Suffix
+      <label>
+        <span class="label-title">Suffix</span>
         <input type="text" placeholder="Suffix">
       </label>
     </div>
+
+    <div class="form-col">
+        <label>
+          <span class="label-title">Sex <span class="required">*</span></span>
+            <select name="Sex" id="Sex" required>
+              <option value="" selected disabled>Sex</option>
+              <option value="Male">Male</option>
+              <option value="Female">Female</option>
+              <option value="Other">Other</option>
+          </select>
+        </label>
+    </div>
+
+   <div class="form-col">
+      <label>
+        <span class="label-title">Age <span class="required">*</span></span>
+          <select id="ageSelect" name="age" required>
+            <option value="" disabled selected>Select Age</option>
+            <!-- JavaScript will append options here -->
+          </select>
+      </label>
+    </div>
+    </div>
   </div>
 
   <div class="form-row">
     <div class="form-col">
-      <label>Sex
-        <select name="Sex" id="Sex" required>
-          <option value="" selected disabled>Sex</option>
-          <option value="Male">Male</option>
-          <option value="Female">Female</option>
-          <option value="Other">Other</option>
-        </select>
-      </label>
-    </div>
-    <div class="form-col">
-      <label>Age
-        <input type="text" placeholder="Age" required>
-      </label>
-    </div>
-  </div>
-
-  <!-- Full-width row -->
-  <div class="form-row">
-    <div class="form-col full-width">
-      <label>Address
-        <input type="text" placeholder="Address" required>
-      </label>
-    </div>
-  </div>
-
-  <div class="form-row">
-    <div class="form-col">
-      <label>Occupation
-        <input type="text" placeholder="Occupation" required>
-      </label>
-    </div>
-    <div class="form-col">
-      <label>Contact Number
+      <label>
+        <span class="label-title">Contact Number <span class="required">*</span></span>
         <input type="text" placeholder="Contact Number" required>
       </label>
     </div>
+      <div class="form-col">
+        <label>
+        <span class="label-title">Address <span class="required">*</span></span>
+        <input type="text" placeholder="Address" required>
+      </label>
   </div>
 </fieldset>
 
 
-        <!-- Complaint Details -->
-        <fieldset class="form-step">
-          <legend class="section-title">Complaint Details</legend>
-          <div class="row">
-            <select required>
-              <option value="" selected disabled>Select type of complaint</option>
-              <option value="Noise">Noise</option>
-              <option value="Vandalism">Vandalism</option>
-              <option value="Neighbourhood Dispute">Neighbourhood Dispute</option>
-              <option value="Unpaid Debt">Unpaid Debt</option>
-              <option value="Other">Other</option>
-            </select>
-            <input type="text" placeholder="Location of the Incident" required>
-          </div>
-          <div class="row">
-            <input type="date" required>
-            <input type="time" required>
-          </div>
-          <div class="row">
-            <input type="text" placeholder="Full Name of the Respondent" required>
-            <input type="text" placeholder="Address of the Respondent" required>
-            <input type="text" placeholder="Contact of the Respondent" required>
-          </div>
-          <textarea placeholder="Detailed Description of the Incident" required></textarea>
-        </fieldset>
+       <!-- Complaint Details -->
+<fieldset class="form-step">
+  <legend class="section-title">Complaint Details</legend>
 
-        <!-- Supporting Evidence -->
-        <fieldset class="form-step">
-          <legend class="section-title">Supporting Evidence</legend>
-          <div class="upload-section">
-            <label for="evidenceFiles">Photos, videos or screenshots for evidence</label>
-            <input type="file" id="evidenceFiles" name="evidenceFiles" accept="image/*,video/*" multiple>
-            <p class="small-note">You may select multiple images or videos.</p>
-          </div>
-          <div class="witness-section">
-            <label>Witness (N/A if none)</label>
-            <div class="witness-row">
-              <div class="witness-column">
-                <input type="text" placeholder="Name">
-                <input type="text" placeholder="Contact Number">
-              </div>
-              <div class="witness-column">
-                <input type="text" placeholder="Name">
-                <input type="text" placeholder="Contact Number">
-              </div>
-            </div>
-          </div>
+  <div class="form-row">
+    <div class="form-col">
+      <label>
+        <span class="label-title">Type of Complaint <span class="required">*</span></span>
+          <select id="complaintType" name="complaintType" required onchange="toggleOtherInput(this)">
+            <option value="" selected disabled>Select type of complaint</option>
+            <option value="Noise">Noise</option>
+            <option value="Vandalism">Vandalism</option>
+            <option value="Neighbourhood Dispute">Neighbourhood Dispute</option>
+            <option value="Unpaid Debt">Unpaid Debt</option>
+            <option value="Other">Other</option>
+          </select>
+      </label>
+    </div>
 
-          <!-- Terms and Conditions Checkbox -->
-        <div class="terms-container">
-          <input type="checkbox" id="terms-checkbox" required>
-          <label for="terms-checkbox">
-            I agree to the <a href="term&con.html">Terms and Conditions</a>
-          </label>
-        </div>
-        </fieldset>
+    <div class="form-col" id="otherComplaintDiv" style="display: none;">
+    <label>
+      <span class="label-title">Please specify <span class="required">*</span></span>
+      <input type="text" id="otherComplaint" name="otherComplaint" placeholder="Specify complaint type">
+    </label>
+    </div>
+  </div>
 
-        <div class="form-nav-center">
-          <button type="button" class="nav-btn prev-btn" onclick="prevStep()">Previous</button>
-          <button type="button" class="nav-btn next-btn" onclick="nextStep()">Next</button>
-          <button type="submit" class="submit-btn nav-btn">Submit Complaint</button>
-        </div>
+  <div class="form-row">
+    <div class="form-col">
+      <label>
+        <span class="label-title">Location of the Incident <span class="required">*</span></span>
+        <input type="text" placeholder="Location of the Incident" required>
+      </label>
+    </div>
+    <div class="form-col">
+      <label>
+        <span class="label-title">Date of Incident <span class="required">*</span></span>
+        <input type="date" required>
+      </label>
+    </div>
+    <div class="form-col">
+      <label>
+        <span class="label-title">Time of Incident <span class="required">*</span></span>
+        <input type="time" required>
+      </label>
+    </div>
+  </div>
+
+  <div class="form-row">
+    <div class="form-col">
+      <label>
+        <span class="label-title">Full Name of the Respondent <span class="required">*</span></span>
+        <input type="text" placeholder="Full Name" required>
+      </label>
+    </div>
+    <div class="form-col">
+      <label>
+        <span class="label-title">Address of the Respondent <span class="required">*</span></span>
+        <input type="text" placeholder="Respondent Address" required>
+      </label>
+    </div>
+    <div class="form-col">
+      <label>
+        <span class="label-title">Contact of the Respondent <span class="required">*</span></span>
+        <input type="text" placeholder="Contact Number" required>
+      </label>
+    </div>
+  </div>
+
+  <div class="form-row">
+  <div class="form-col full-width">
+    <label>
+      <span class="label-title">
+        Detailed Description of the Incident <span class="required">*</span>
+      </span>
+      <textarea 
+        id="incidentDescription" 
+        placeholder="Detailed Description of the Incident" 
+        required 
+        oninput="limitWords(this, 200)"
+      ></textarea>
+      <div id="wordCount" class="word-count">0 / 200 words</div>
+    </label>
+  </div>
+</div>
+</fieldset>
+
+<!-- Supporting Evidence -->
+<fieldset class="form-step">
+  <legend class="section-title">Supporting Evidence</legend>
+
+  <!-- Evidence Upload -->
+  <div class="form-row">
+    <div class="form-col full-width">
+      <label>
+        <span class="label-title">Photos, videos or screenshots</span>
+        <input type="file" id="evidenceFiles" name="evidenceFiles" accept="image/*,video/*" multiple>
+      </label>
+      <p class="small-note">You may select multiple images or videos.</p>
+    </div>
+  </div>
+
+  <!-- Witness Section -->
+  <div class="form-row">
+    <div class="form-col full-width">
+      <span class="label-title">Witness (N/A if none)</span>
+    </div>
+  </div>
+  <div class="form-row witness-row">
+    <div class="witness-column">
+      <label>
+        <span class="label-title">Name</span>
+        <input type="text" placeholder="Name">
+      </label>
+      <label>
+        <span class="label-title">Contact Number</span>
+        <input type="text" placeholder="Contact Number">
+      </label>
+    </div>
+    <div class="witness-column">
+      <label>
+        <span class="label-title">Name</span>
+        <input type="text" placeholder="Name">
+      </label>
+      <label>
+        <span class="label-title">Contact Number</span>
+        <input type="text" placeholder="Contact Number">
+      </label>
+    </div>
+  </div>
+
+<!-- Terms and Conditions -->
+<div class="form-row terms-wrapper">
+  <div class="terms-align-right">
+    <label class="terms-label">
+      <input type="checkbox" id="terms-checkbox" required>
+      I agree to the <a href="term&con.html" target="_blank">Terms and Conditions</a>
+    </label>
+  </div>
+</div>
+</fieldset>
+
+
+<!-- Navigation Buttons -->
+<div class="form-nav-center">
+  <button type="button" class="nav-btn prev-btn" onclick="prevStep()">Previous</button>
+  <button type="button" class="nav-btn next-btn" onclick="nextStep()">Next</button>
+  <button type="submit" class="submit-btn nav-btn">Submit Complaint</button>
+</div>
+
       </form>
     </main>
   </section>
+
+  <!--Successful submit popup-->
+  <div id="successPopup" class="popup-overlay">
+  <div class="popup-box">
+    <h3>Complaint Submitted</h3>
+    <p>Your complaint has been submitted successfully.</p>
+    <button onclick="closeSuccessPopup()" class="popup-btn">OK</button>
+  </div>
+</div>
 
   <!-- FOOTER SECTION -->
   <footer class="footer">
@@ -347,11 +445,17 @@
         return;
       }
 
-      alert('Your complaint has been submitted successfully.');
-      form.reset();
-      currentStep = 0;
-      updateFormSteps();
+      document.getElementById('successPopup').style.display = 'flex';
+
     });
+    
+// close successful submit
+    function closeSuccessPopup() {
+        document.getElementById('successPopup').style.display = 'none';
+        form.reset();
+        currentStep = 0;
+        updateFormSteps();
+      }
 
     //notifications
   
@@ -428,6 +532,50 @@ clearBtn.addEventListener("click", () => {
 });
 
 hidePopup(); // Add this inside the clearBtn click function
+
+// SPECIFY COMPLAINT TYPE
+
+function toggleOtherInput(select) {
+    const otherDiv = document.getElementById('otherComplaintDiv');
+    const otherInput = document.getElementById('otherComplaint');
+    if (select.value === 'Other') {
+      otherDiv.style.display = 'block';
+      otherInput.setAttribute('required', 'required');
+    } else {
+      otherDiv.style.display = 'none';
+      otherInput.removeAttribute('required');
+      otherInput.value = '';
+    }
+  }
+
+// word limit on desc
+
+function limitWords(textarea, maxWords) {
+    const words = textarea.value.trim().split(/\s+/);
+    const wordCount = words.filter(word => word.length > 0).length;
+
+    const counter = document.getElementById('wordCount');
+    counter.textContent = `${wordCount} / ${maxWords} words`;
+
+    if (wordCount > maxWords) {
+      // Trim extra words
+      textarea.value = words.slice(0, maxWords).join(" ");
+      counter.textContent = `${maxWords} / ${maxWords} words`;
+    }
+  }
+
+  // age dropdown
+
+  document.addEventListener("DOMContentLoaded", function () {
+    const ageSelect = document.getElementById("ageSelect");
+
+    for (let i = 1; i <= 100; i++) {
+      const option = document.createElement("option");
+      option.value = i;
+      option.textContent = i;
+      ageSelect.appendChild(option);
+    }
+  });
   </script>
 
 </body>
