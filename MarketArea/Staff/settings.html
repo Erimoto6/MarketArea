@@ -6,6 +6,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Barangay Market Area: Complaint System</title>
   <link rel="stylesheet" href="settings.css" />
+    <link rel="stylesheet" href="../Resident/settings.css" />
   <link rel="icon" href="files/logo.png" type="image/png" />
  
 </head>
@@ -38,47 +39,50 @@
 
     <!-- MAIN BANNER -->
     <section class="main-banner">  
-      <div class="settings-container">
-      <h2 style="color: black; text-align: center;">Settings</h2>
-      <br>
-      <h4>Customize your preferences below.</h4>
-      <br>
+      <div class="settings-align">
+  <div class="settings-container">
+    <br>
+    <h2 class="title" style="color: black; font-size: 35px;">Settings</h2>
+    <br>
+    <p class="subtitle">Customize your preferences below.</p>
 
-          <div class="setting-section">
-          <strong>Notification Settings</strong><br>
-            <label><input type="checkbox" checked> Email Notifications</label><br>
-            <label><input type="checkbox"> SMS Notifications</label><br>
-            <label><input type="checkbox"> Push Notifications</label>
-          </div>
+    <form class="settings-form">
+      <fieldset>
+        <legend>Notification Settings</legend>
+        <label><input type="checkbox" checked> Email Notifications</label>
+        <label><input type="checkbox"> SMS Notifications</label>
+        <label><input type="checkbox"> Push Notifications</label>
+      </fieldset>
 
-          <div class="setting-section">
-          <strong>Font Style</strong><br>
-            <label><input type="radio" name="fontStyle" checked> K2D</label><br>
-            <label><input type="radio" name="fontStyle"> Bebas Neue</label><br>
-            <label><input type="radio" name="fontStyle"> Inter</label>
-          </div>
+    <fieldset>
+      <legend>Font Style</legend>
+      <label><input type="radio" name="font" value="K2D" checked> K2D</label>
+      <label><input type="radio" name="font" value="Bebas Neue"> Bebas Neue</label>
+      <label><input type="radio" name="font" value="Inter"> Inter</label>
+    </fieldset>
 
-          <div class="setting-section">
-          <strong>Language</strong><br>
-            <select>
-                <option>English</option>
-                <option>Filipino</option>
-            </select>
-          </div>
+    <fieldset>
+      <legend>Language</legend>
+      	<select id="languageSelect">
+        	<option value="English">English</option>
+        	<option value="Filipino">Filipino</option>
+      	</select>
+    </fieldset>
 
-          <div class="setting-section">
-            <strong>Font Size</strong><br>
-            <label><input type="radio" name="fontSize"> Small</label><br>
-            <label><input type="radio" name="fontSize" checked> Medium</label><br>
-            <label><input type="radio" name="fontSize"> Large</label>
-          </div>
+    <fieldset>
+      <legend>Font Size</legend>
+      	<label><input type="radio" name="size" value="small"> Small</label>
+      	<label><input type="radio" name="size" value="medium" checked> Medium</label>
+      	<label><input type="radio" name="size" value="large"> Large</label>
+    </fieldset>
 
-          <div class="save-button-wrapper">
-              <button class="save-button">Save Changes</button>
-          </div>
-
-      </div><!-- SETTINGS CONTAINER END -->
-    </section>
+      <div class="form-buttons">
+        <button type="submit">Save Changes</button>
+      </div>
+    </form>
+  </div>
+</div>
+    </section> 
 
   <footer>
     <div class="footer-section">
