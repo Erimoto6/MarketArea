@@ -641,6 +641,7 @@
 /* Complaint Table */
 .complaints-table {
   width: 100%;
+  height: auto;
   background-color: white;
   border-collapse: separate;       /* Allow rounded corners */
   border-spacing: 0;
@@ -762,7 +763,7 @@
 
 /*FOOTER SECTION*/
 .footer {
-  position: static;
+  position: relative;
   bottom: 0;
   left: 0;
   width: 100%;
