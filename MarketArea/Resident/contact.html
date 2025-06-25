@@ -364,8 +364,8 @@ html, body {
 
     /* CONTACT CONTAINER */
     .contact-container {
-      max-width: 500px;
-      width: 100%;
+      max-width: 900px;
+      width: 90%;
       margin: 60px auto;
       background: #fffffd;
       border-radius: 18px;
@@ -373,7 +373,23 @@ html, body {
       padding: 2.5rem 2rem;
       border: 1.5px solid #e7d98c;
       box-sizing: border-box;
+      transition: all 0.3s ease;
     }
+
+
+    @media (min-width: 1200px) {
+      .contact-container {
+        max-width: 1000px;
+      padding: 3rem 3rem;
+      }
+    }
+
+    @media (max-width: 600px) {
+      .contact-container {
+    padding: 2rem 1rem;
+      }
+    }
+
     .contact-container h2 {
       text-align: center;
       color: #090909;
@@ -451,6 +467,14 @@ html, body {
       font-size: 1.08rem;
     }
 
+    #messageWordCount {
+      font-size: 0.9rem;
+      color: #6a7337;
+      margin-top: -10px;
+      margin-bottom: 15px;
+      text-align: right;
+    }
+
   </style>
 </head>
 <body>
@@ -522,8 +546,8 @@ html, body {
         <label for="title">Title</label>
         <input type="title" id="title" name="title" required placeholder="Enter Title">
 
-        <label for="message">Your Message</label>
         <textarea id="message" name="message" required placeholder="Type your message here..."></textarea>
+        <div id="messageWordCount" style="text-align: right; font-size: 0.9rem; color: #666;">0 / 150 words</div>
 
         <button type="submit">Send Message</button>
       </form>
@@ -591,6 +615,25 @@ html, body {
         document.getElementById('contactSuccess').style.display = 'none';
       }, 4000);
     });
+
+    // word count
+
+    const messageTextarea = document.getElementById('message');
+const wordCounter = document.getElementById('messageWordCount');
+const maxWords = 150;
+
+messageTextarea.addEventListener('input', () => {
+  let words = messageTextarea.value.trim().split(/\s+/).filter(w => w.length > 0);
+  let wordCount = words.length;
+
+  if (wordCount > maxWords) {
+    messageTextarea.value = words.slice(0, maxWords).join(' ');
+    wordCount = maxWords;
+  }
+
+  wordCounter.textContent = `${wordCount} / ${maxWords} words`;
+});
+
   </script>
 
 </body>
