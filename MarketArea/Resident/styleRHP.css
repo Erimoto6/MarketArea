@@ -54,7 +54,7 @@
 }
 
 .market_area_bg {
-  position: absolute;
+  position: relative;
   top: 0;
   left: 0;
   width: 100vw;
@@ -66,6 +66,7 @@
   z-index: -1;
 }
 
+ 
 @keyframes circleFadeSlideIn {
   0% {
     opacity: 0;
