@@ -255,16 +255,21 @@
 <fieldset class="form-step">
   <legend class="section-title">Supporting Evidence</legend>
 
-  <!-- Evidence Upload -->
-  <div class="form-row">
-    <div class="form-col full-width">
-      <label>
-        <span class="label-title">Photos, videos or screenshots</span>
-        <input type="file" id="evidenceFiles" name="evidenceFiles" accept="image/*,video/*" multiple>
-      </label>
-      <p class="small-note">You may select multiple images or videos.</p>
-    </div>
+  
+<!-- Evidence Upload -->
+<div class="form-row">
+  <div class="form-col full-width">
+    <label class="label-title">Photos, videos or screenshots</label>
+    
+    <input type="file" id="evidenceFiles" name="evidenceFiles" accept="image/*,video/*" multiple>
+    
+    <div id="selected-files" class="file-list"></div>
+    <p class="small-note">You may select multiple images or videos.</p>
   </div>
+</div>
+
+
+
 
   <!-- Witness Section -->
   <div class="form-row">
@@ -294,9 +299,10 @@
       </label>
     </div>
   </div>
+</fieldset>
 
-<!-- Terms and Conditions -->
-<div class="form-row terms-wrapper">
+ <!-- Terms and Conditions (visually outside fieldset) -->
+<div class="form-row terms-wrapper evidence-terms" style="display: none;">
   <div class="terms-align-right">
     <label class="terms-label">
       <input type="checkbox" id="terms-checkbox" required>
@@ -304,8 +310,6 @@
     </label>
   </div>
 </div>
-</fieldset>
-
 
 <!-- Navigation Buttons -->
 <div class="form-nav-center">
@@ -383,18 +387,26 @@
     let currentStep = 0;
 
     function updateFormSteps() {
-      steps.forEach((step, index) => {
-        step.style.display = index === currentStep ? 'block' : 'none';
-      });
+  steps.forEach((step, index) => {
+    step.style.display = index === currentStep ? 'block' : 'none';
+  });
 
-      progressSteps.forEach((step, index) => {
-        step.classList.toggle('active', index === currentStep);
-      });
+  progressSteps.forEach((step, index) => {
+    step.classList.toggle('active', index === currentStep);
+  });
 
-      prevBtn.disabled = currentStep === 0;
-      nextBtn.style.display = currentStep === steps.length - 1 ? 'none' : 'inline-block';
-      submitBtn.style.display = currentStep === steps.length - 1 ? 'inline-block' : 'none';
-    }
+  prevBtn.disabled = currentStep === 0;
+  nextBtn.style.display = currentStep === steps.length - 1 ? 'none' : 'inline-block';
+  submitBtn.style.display = currentStep === steps.length - 1 ? 'inline-block' : 'none';
+
+  // Show Terms and Conditions only during Supporting Evidence step
+  const termsWrapper = document.querySelector('.evidence-terms');
+  if (currentStep === 2) { // Adjust this index based on where your Supporting Evidence step is
+    termsWrapper.style.display = 'flex';
+  } else {
+    termsWrapper.style.display = 'none';
+  }
+}
 
     function nextStep() {
       const currentInputs = steps[currentStep].querySelectorAll('input, select, textarea');
@@ -576,6 +588,48 @@ function limitWords(textarea, maxWords) {
       ageSelect.appendChild(option);
     }
   });
+
+   // File upload preview and removal
+const evidenceInput = document.getElementById('evidenceFiles');
+const fileListContainer = document.getElementById('selected-files');
+let selectedFiles = [];
+
+evidenceInput.addEventListener('change', function () {
+  selectedFiles = Array.from(this.files); // Save selected files
+  renderFileList();
+});
+
+function renderFileList() {
+  fileListContainer.innerHTML = '';
+
+  selectedFiles.forEach((file, index) => {
+    const fileItem = document.createElement('div');
+    fileItem.className = 'file-item';
+
+    const fileName = document.createElement('div');
+    fileName.className = 'file-name';
+    fileName.textContent = `📁 ${file.name}`;
+
+    const removeBtn = document.createElement('button');
+    removeBtn.className = 'remove-file';
+    removeBtn.innerHTML = '✖';
+    removeBtn.onclick = () => {
+      selectedFiles.splice(index, 1);
+      renderFileList();
+    };
+
+    fileItem.appendChild(fileName);
+    fileItem.appendChild(removeBtn);
+    fileListContainer.appendChild(fileItem);
+  });
+
+  // Sync input with updated file list
+  const dataTransfer = new DataTransfer();
+  selectedFiles.forEach(file => dataTransfer.items.add(file));
+  evidenceInput.files = dataTransfer.files;
+}
+
+
   </script>
 
 </body>
