@@ -1,0 +1,266 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Forgot Password - Market Area E-Complaint Portal</title>
+    <link rel="icon" type="image/png" href="logo.png">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <style>
+        body {
+            margin: 0;
+            padding: 0;
+            width: 100%;
+            height: 100vh;
+            font-family: Arial, Helvetica, sans-serif;
+            background-image: url('bg.png');
+            background-size: cover;
+            background-position: center;
+            background-repeat: no-repeat;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+
+        .forgot-container {
+            width: 90%;
+            max-width: 400px;
+            padding: 30px 25px;
+            background-color: rgba(255, 255, 255, 0.95);
+            border-radius: 15px;
+            box-shadow: 0 8px 20px rgba(0, 0, 0, 0.3);
+            text-align: center;
+        }
+
+        .forgot-container img {
+            width: 100px;
+            margin-bottom: 10px;
+        }
+
+        .forgot-container h1 {
+            font-size: 22px;
+            margin-bottom: 5px;
+            color: #333;
+        }
+
+        .forgot-container p {
+            font-size: 14px;
+            color: #555;
+            margin-bottom: 20px;
+        }
+
+        .email-input {
+            width: 100%;
+            padding: 12px 16px;
+            border-radius: 25px;
+            border: 1px solid #ccc;
+            margin-bottom: 15px;
+            font-size: 14px;
+            box-sizing: border-box;
+        }
+
+        .submit-button {
+            width: 100%;
+            padding: 12px;
+            border-radius: 25px;
+            background-color: #4B5320;
+            color: white;
+            font-weight: bold;
+            font-size: 16px;
+            cursor: pointer;
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.3);
+            transition: background 0.3s ease, transform 0.2s ease;
+            border: none;
+        }
+
+        .submit-button:hover {
+            background-color: #3b4218;
+            transform: translateY(-2px);
+        }
+
+        .back-link {
+            display: inline-block;
+            margin-top: 15px;
+            font-size: 14px;
+            color: #4B5320;
+            text-decoration: none;
+        }
+
+        .back-link:hover {
+            text-decoration: underline;
+        }
+
+        /* Popup Message (Shared Style) */
+        .popup-message {
+            position: fixed;
+            top: 30px;
+            left: 50%;
+            transform: translateX(-50%);
+            padding: 12px 20px;
+            border-radius: 25px;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.3);
+            color: white;
+            display: none;
+            z-index: 1000;
+            animation: fadeSlideDown 0.5s ease;
+        }
+
+        /* Success Popup (Green) */
+        .popup-success {
+            background-color: #4B5320;
+        }
+
+        /* Error Popup (Red) */
+        .popup-error {
+            background-color: #D9534F;
+        }
+
+        @keyframes fadeSlideDown {
+            from {
+                opacity: 0;
+                transform: translateX(-50%) translateY(-20px);
+            }
+            to {
+                opacity: 1;
+                transform: translateX(-50%) translateY(0);
+            }
+        }
+
+        @media (max-width: 768px) {
+            .forgot-container {
+                padding: 25px 15px;
+            }
+        }
+
+        .modal-overlay {
+  position: fixed;
+  top: 0; left: 0;
+  width: 100%; height: 100%;
+  background: rgba(0, 0, 0, 0.6);
+  display: none;
+  justify-content: center;
+  align-items: center;
+  z-index: 1000;
+}
+
+.modal-box {
+  background: #fff;
+  padding: 0;
+  border-radius: 15px;
+  width: 90%;
+  max-width: 600px;
+  height: 80vh;
+  overflow: hidden;
+  box-shadow: 0 5px 20px rgba(0,0,0,0.3);
+  display: flex;
+  flex-direction: column;
+}
+
+.modal-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 15px 20px;
+  background-color: #4B5320;
+  color: white;
+  font-size: 16px;
+  font-weight: bold;
+}
+
+.modal-close {
+  cursor: pointer;
+  font-size: 20px;
+}
+
+.modal-box iframe {
+  border: none;
+  width: 100%;
+  height: 100%;
+}
+
+    </style>
+</head>
+<body>
+
+    <div class="forgot-container">
+        <img src="logo.png" alt="Barangay Logo">
+        <h1>Forgot Password?</h1>
+        <p>Enter your registered email address and we’ll send you a password reset link.</p>
+
+        <input type="email" id="emailInput" class="email-input" placeholder="Enter your email">
+
+        <button class="submit-button" onclick="validateAndShowPopup()">Send Reset Link</button>
+
+        <a href="residentLogin.html" class="back-link">Back to Login</a>
+    </div>
+
+    <!-- Popup Message -->
+    <div class="popup-message" id="popupMessage"></div>
+
+    <!-- Modal for Mock Reset Link -->
+<div class="modal-overlay" id="resetModal">
+  <div class="modal-box">
+    <div class="modal-header">
+      <h2>Mock Reset Link</h2>
+      <span class="modal-close" onclick="closeModal()">×</span>
+    </div>
+    <iframe src="mock-reset-link.html"></iframe>
+  </div>
+</div>
+
+
+    <script>
+        function validateEmail(email) {
+            const pattern = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+            return pattern.test(email);
+        }
+
+        function validateAndShowPopup() {
+            const email = document.getElementById('emailInput').value.trim();
+            const popup = document.getElementById('popupMessage');
+
+            // Hide popup in case it was showing from previous click
+            popup.style.display = 'none';
+            popup.classList.remove('popup-error', 'popup-success');
+
+            if (email === "") {
+                popup.innerText = "Please enter your email address.";
+                popup.classList.add('popup-error');
+                popup.style.display = 'block';
+                autoHidePopup();
+                return;
+            }
+
+            if (!validateEmail(email)) {
+                popup.innerText = "Invalid email format. Please enter a valid email.";
+                popup.classList.add('popup-error');
+                popup.style.display = 'block';
+                autoHidePopup();
+                return;
+            }
+
+            popup.innerText = "Password reset link sent to your email!";
+            popup.classList.add('popup-success');
+            popup.style.display = 'block';
+            autoHidePopup();
+        }
+
+        function autoHidePopup() {
+            setTimeout(() => {
+                document.getElementById('popupMessage').style.display = 'none';
+            }, 3000);
+        }
+
+        //reset link mock up
+
+        function showMockResetLink() {
+  document.getElementById('resetModal').style.display = 'flex';
+}
+
+function closeModal() {
+  document.getElementById('resetModal').style.display = 'none';
+}
+    </script>
+
+</body>
+</html>
