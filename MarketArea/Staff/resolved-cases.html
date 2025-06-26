@@ -37,23 +37,32 @@
     </nav>
   </header>
 
-  <section class="main-banner">
-    <h2>RESOLVED CASES</h2>
-      <div class="complaint-header">
-      <div class="controls">
+  <div class="main-container">
+    <div class="page-header">
+      <h1 class="page-title">RESOLVED CASES</h1>
+    </div>
+
+    <div class="controls-section">
+      <div class="search-container">
         <div class="search-box">
-          <input type="text" id="searchInput" placeholder="Search..." />
+          <input type="text" id="searchInput" placeholder="Search complaints..." />
         </div>
+      </div>
+      
+      <div class="sort-container">
         <div class="sort-box">
           <select id="sortSelect">
             <option value="newest">Newest to Oldest</option>
             <option value="oldest">Oldest to Newest</option>
           </select>
         </div>
+        <div class="results-info" id="resultsInfo">
+          Showing 1-9 of 15 complaints
+        </div>
       </div>
     </div>
 
-    <div class="complaint-frame">
+    <div class="table-container">
       <table id="complaintTable">
         <thead>
           <tr>
@@ -62,28 +71,27 @@
             <th>Category</th>
             <th>Date Filed</th>
             <th>Brief Description</th>
+            <th>Action</th>
           </tr>
         </thead>
         <tbody></tbody>
       </table>
-
-      <div class="pagination" id="paginationControls">
-        <button id="prevPageBtn">←</button>
-        <span id="pageInfo">1 of 1</span>
-        <button id="nextPageBtn">→</button>
-      </div>
-
     </div>
-  </section>
+
+    <div class="pagination" id="paginationControls">
+      <button id="prevPageBtn">←</button>
+      <span class="page-info" id="pageInfo">1 of 1</span>
+      <button id="nextPageBtn">→</button>
+    </div>
+  </div>
 
   <footer>
     <div class="footer-section">
       <div class="leftside">
         <img src="files/logo.png" alt="Barangay Logo" />
         <p>
-          The Market Area of Sta. Rosa, Laguna is a bustling center of commerce and community activity. Known for its
-          public market, transport terminals, and small businesses, it serves as a vital hub for daily essentials,
-          local trade, and public services—connecting residents from different barangays across the city.
+          Brgy. Market Area in Sta. Rosa, Laguna is a vibrant urban community known for its public market, 
+          transport terminals, and local businesses—serving as a key center of commerce and daily activity.
         </p>
       </div>
     </div>
@@ -91,11 +99,11 @@
       <h4>Quick Menu</h4>
       <ul>
         <li><a href="staffHomepage.html">Home</a></li>
-        <li><a href="manageComplaints.html">Manage Complaint</a></li>
+        <li><a href="manageComplaints.html">Manage Complaints</a></li>
         <li><a href="quickMetric.html">Quick Metrics</a></li>
       </ul>
     </div>
-  </footer> 
+  </footer>
 
   <!-- === NOTIFICATION POPUP START === -->
   <div id="notifPopup" class="notification-popup">
@@ -116,10 +124,10 @@
   </div>
   <!-- === NOTIFICATION POPUP END === -->
 
-<!-- === TERMS & CONDITIONS MODAL START === -->
-  <div id="termsModal" class="modal-overlay">
+  <!-- === TERMS AND CONDITION ===-->
+  <div id="termsModal" class="modal">
     <div class="modal-content">
-    <span class="close" onclick="closeModal()">&times;</span>  
+    <span class="close" onclick="closeModal()">&times;</span>
       <div class="modal-scrollable">
         <h2>Terms and Conditions</h2>
         <p>Welcome to the Barangay E-Blotter System. By accessing or using this system, you agree to comply with and be bound by the following terms and conditions. Please read them carefully.</p>
@@ -159,33 +167,40 @@
       </div>
     </div>
   </div>
-<!-- === TERMS & CONDITIONS MODAL END === -->
-
+  
+  
   <script>
-    // NEW: Added status field to each complaint
-    const complaints = Array.from({ length: 15 }, (_, i) => ({
+    // Filter only resolved complaints for this page
+    const allComplaints = Array.from({ length: 15 }, (_, i) => ({
       id: i + 1,
       complainant: `Resident ${i + 1}`,
       category: ['Noise', 'Garbage', 'Other'][i % 3],
       date: new Date(Date.now() - i * 86400000).toISOString().split('T')[0],
       description: `Complaint detail example #${i + 1}`,
-      status: i % 3 === 0 ? 'New' : i % 3 === 1 ? 'In Progress' : 'Resolved' // NEW
+      status: i % 3 === 0 ? 'New' : i % 3 === 1 ? 'In Progress' : 'Resolved'
     }));
+
+    // Only show resolved complaints
+    const complaints = allComplaints.filter(complaint => complaint.status === 'Resolved');
 
     const tableBody = document.querySelector('#complaintTable tbody');
     const searchInput = document.getElementById('searchInput');
     const sortSelect = document.getElementById('sortSelect');
+    const resultsInfo = document.getElementById('resultsInfo');
     const paginationControls = document.getElementById('paginationControls');
-
+    const pageInfo = document.getElementById('pageInfo');
+    const prevPageBtn = document.getElementById('prevPageBtn');
+    const nextPageBtn = document.getElementById('nextPageBtn');
+    
     let currentPage = 1;
-    const complaintsPerPage = 9;
+    const complaintsPerPage = 8;
+    let filteredComplaints = [...complaints];
 
-    // NEW: Get color based on status
     function getStatusDotColor(status) {
       switch (status) {
         case 'New': return '#FFA500'; // Orange
-        case 'In Progress': return '#4A43FF'; // Blue
-        case 'Resolved': return '#09FF00'; // Green
+        case 'In Progress': return '#4A43FF';
+        case 'Resolved': return '#09FF00';
         default: return '#ccc';
       }
     }
@@ -194,137 +209,120 @@
       tableBody.innerHTML = '';
       const start = (currentPage - 1) * complaintsPerPage;
       const end = start + complaintsPerPage;
-      data.slice(start, end).forEach(complaint => {
+      const pageData = data.slice(start, end);
+      
+      pageData.forEach(complaint => {
         const row = document.createElement('tr');
-
-        // 🔸 Add green dot before Complaint ID
-        const statusDot = `<span class="status-dot"></span>`;
-
+        const statusDot = `<span class="status-dot" style="background-color:${getStatusDotColor(complaint.status)};"></span>`;
         row.innerHTML = `
           <td>${statusDot}#${complaint.id.toString().padStart(5, '0')}</td>
           <td>${complaint.complainant}</td>
           <td>${complaint.category}</td>
           <td>${complaint.date}</td>
           <td>${complaint.description}</td>
+          <td><button class="view-btn" onclick="viewComplaint(${complaint.id})">VIEW</button></td>
         `;
-        row.onclick = () => alert(`Open Complaint ID #${complaint.id}`);
         tableBody.appendChild(row);
       });
+      
+      updateResultsInfo(data.length, start + 1, Math.min(end, data.length));
+      updatePagination(data.length);
     }
 
+    function updateResultsInfo(total, startItem, endItem) {
+      resultsInfo.textContent = `Showing ${startItem}-${endItem} of ${total} complaints`;
+    }
 
-    function renderPagination(data) {
-      const totalPages = Math.ceil(data.length / complaintsPerPage);
-      const prevBtn = document.getElementById('prevPageBtn');
-      const nextBtn = document.getElementById('nextPageBtn');
-      const pageInfo = document.getElementById('pageInfo');
-
+    function updatePagination(totalItems) {
+      const totalPages = Math.ceil(totalItems / complaintsPerPage);
       pageInfo.textContent = `${currentPage} of ${totalPages}`;
-      prevBtn.disabled = currentPage === 1;
-      nextBtn.disabled = currentPage === totalPages;
-
-      prevBtn.onclick = () => {
-        if (currentPage > 1) {
-          currentPage--;
-          updateTable();
-        }
-      };
-
-      nextBtn.onclick = () => {
-        if (currentPage < totalPages) {
-          currentPage++;
-          updateTable();
-        }
-      };
+      
+      prevPageBtn.disabled = currentPage === 1;
+      nextPageBtn.disabled = currentPage === totalPages || totalPages === 0;
     }
-
 
     function updateTable() {
-      let filtered = complaints.filter(c =>
-        Object.values(c).some(val =>
+      // Filter complaints
+      filteredComplaints = complaints.filter(complaint =>
+        Object.values(complaint).some(val =>
           String(val).toLowerCase().includes(searchInput.value.toLowerCase())
         )
       );
 
-      filtered.sort((a, b) =>
-        sortSelect.value === 'newest'
-          ? new Date(b.date) - new Date(a.date)
-          : new Date(a.date) - new Date(b.date)
-      );
+      // Sort complaints
+      filteredComplaints.sort((a, b) => {
+        const dateA = new Date(a.date);
+        const dateB = new Date(b.date);
+        return sortSelect.value === 'newest' ? dateB - dateA : dateA - dateB;
+      });
 
-      renderTable(filtered);
-      renderPagination(filtered);
+      currentPage = 1; // Reset to first page
+      renderTable(filteredComplaints);
     }
 
-    searchInput.addEventListener('input', () => {
-      currentPage = 1;
-      updateTable();
-    });
-
-    sortSelect.addEventListener('change', () => {
-      updateTable();
-    });
-
-    function toggleDropdown() {
-      const menu = document.getElementById('dropdownMenu');
-      menu.style.display = menu.style.display === 'block' ? 'none' : 'block';
+    function viewComplaint(id) {
+      alert(`Viewing resolved complaint #${id}`);
     }
 
-    window.onclick = function (event) {
-      if (!event.target.closest('.profile-container')) {
-        const dropdown = document.getElementById('dropdownMenu');
-        if (dropdown) dropdown.style.display = 'none';
+    // Event listeners
+    searchInput.addEventListener('input', updateTable);
+    sortSelect.addEventListener('change', updateTable);
+
+    prevPageBtn.addEventListener('click', () => {
+      if (currentPage > 1) {
+        currentPage--;
+        renderTable(filteredComplaints);
       }
-    };
+    });
 
-    // Initial render
-    updateTable();
+    nextPageBtn.addEventListener('click', () => {
+      const totalPages = Math.ceil(filteredComplaints.length / complaintsPerPage);
+      if (currentPage < totalPages) {
+        currentPage++;
+        renderTable(filteredComplaints);
+      }
+    });
 
     function toggleDropdown() {
       const dropdown = document.getElementById('dropdownMenu');
       const notif = document.getElementById('notifPopup');
-      notif.style.display = 'none'; // hide notif popup
+      notif.style.display = 'none';
       dropdown.style.display = dropdown.style.display === 'block' ? 'none' : 'block';
     }
 
     function openNotifFromDropdown(event) {
       event.preventDefault();
-      document.getElementById('dropdownMenu').style.display = 'none'; // close dropdown
-      document.getElementById('notifPopup').style.display = 'flex'; // open notif
+      document.getElementById('dropdownMenu').style.display = 'none';
+      document.getElementById('notifPopup').style.display = 'flex';
     }
 
     function closeNotifPopup() {
       document.getElementById('notifPopup').style.display = 'none';
     }
 
-    // Close everything on outside click
-    window.onclick = function (e) {
-      if (!e.target.closest('.profile-container') && !e.target.closest('.notification-popup')) {
-        document.getElementById('dropdownMenu').style.display = 'none';
-        closeNotifPopup();
-      }
-    }
-
-    /*TERMS AND CONDITION*/
-    function openTerms(event) {
-      event.preventDefault();
-      document.getElementById('termsModal').style.display = 'flex';
-    }
-
-    function closeTerms() {
-      document.getElementById('termsModal').style.display = 'none';
-    }
-
-    // Open modal
     function openModal() {
       document.getElementById("termsModal").style.display = "block";
     }
 
-    // Close modal
     function closeModal() {
       document.getElementById("termsModal").style.display = "none";
     }
 
+    // Close dropdowns and modals on outside click
+    window.onclick = function (event) {
+      if (!event.target.closest('.profile-container') && !event.target.closest('.notification-popup')) {
+        document.getElementById('dropdownMenu').style.display = 'none';
+        closeNotifPopup();
+      }
+      
+      const modal = document.getElementById("termsModal");
+      if (event.target == modal) {
+        closeModal();
+      }
+    };
+
+    // Initialize the table
+    renderTable(filteredComplaints);
   </script>
 </body>
 
