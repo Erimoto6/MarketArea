@@ -85,16 +85,25 @@
     </div>
     <div class="popup-section">
       <h5>Today</h5>
-      <div class="notif-item" onclick="alert('Go to complaint #001')">Juan dela Cruz submitted a noise complaint.</div>
-      <div class="notif-item" onclick="alert('Go to resolved complaint #002')">A case was marked as resolved.</div>
+      <div class="notif-item" onclick="window.location.href='complaintApprovalAction.html'">
+        Juan Dela Cruz submitted a noise complaint.
+      </div>
+      <div class="notif-item" onclick="window.location.href='complaintApprovalAction.html'">
+        Angela Reyes submitted a sanitation complaint.
+      </div>
     </div>
     <div class="popup-section">
       <h5>This Week</h5>
-      <div class="notif-item" onclick="alert('Go to garbage complaint #003')">Garbage issue updated by staff.</div>
-      <div class="notif-item" onclick="alert('Go to water complaint #004')">Water leak concern reopened.</div>
+      <div class="notif-item" onclick="window.location.href='complaintApprovalAction.html'">
+        Carlo Santos submitted a vending complaint.
+      </div>
+      <div class="notif-item" onclick="window.location.href='complaintApprovalAction.html'">
+        Ana Lim reported a dispute with a neighbor.
+      </div>
     </div>
   </div>
   <!-- === NOTIFICATION POPUP END === -->
+
 
 
   <!-- === TERMS AND CONDITION ===-->
@@ -147,68 +156,12 @@
     // NOTIFICATION FUNCTIONALITY
     // ==========================
 
-    // NEW: Load notifications from localStorage and inject into popup
-    function loadNotifications() {
-      const notifPopup = document.getElementById('notifPopup');
-      const popupSections = notifPopup.querySelectorAll('.popup-section');
-
-      // Clear existing notification items
-      popupSections.forEach(section => section.innerHTML = '');
-
-      const complaints = JSON.parse(localStorage.getItem('submittedComplaints')) || [];
-
-      const today = new Date().toISOString().split('T')[0];
-
-      // Create containers
-      const todaySection = document.createElement('div');
-      todaySection.className = 'popup-section';
-      const weekSection = document.createElement('div');
-      weekSection.className = 'popup-section';
-
-      const todayHeader = document.createElement('h5');
-      todayHeader.textContent = 'Today';
-      todaySection.appendChild(todayHeader);
-
-      const weekHeader = document.createElement('h5');
-      weekHeader.textContent = 'This Week';
-      weekSection.appendChild(weekHeader);
-
-      complaints.forEach((complaint, index) => {
-        const notifItem = document.createElement('div');
-        notifItem.className = 'notif-item';
-        notifItem.textContent = `${complaint.name} submitted a ${complaint.category.toLowerCase()} complaint.`;
-        notifItem.onclick = () => {
-          localStorage.setItem('selectedComplaintIndex', index); // Optional
-          window.location.href = 'complaintApprovalAction.html';
-        };
-
-        if (complaint.date === today) {
-          todaySection.appendChild(notifItem);
-        } else {
-          weekSection.appendChild(notifItem);
-        }
-      });
-
-      // Append generated sections
-      notifPopup.innerHTML = `
-        <div class="popup-header">
-          Notifications
-          <span onclick="closeNotifPopup()">×</span>
-        </div>
-      `;
-      notifPopup.appendChild(todaySection);
-      notifPopup.appendChild(weekSection);
-    }
-
-    // Update notification when dropdown "Notifications" is clicked
     function openNotifFromDropdown(event) {
       event.preventDefault();
       document.getElementById('dropdownMenu').style.display = 'none';
-      loadNotifications(); // ✅ NEW: Load fresh notifications
       document.getElementById('notifPopup').style.display = 'flex';
     }
 
-    // Toggling dropdown logic stays the same
     function toggleDropdown() {
       const dropdown = document.getElementById('dropdownMenu');
       const notif = document.getElementById('notifPopup');
@@ -220,14 +173,6 @@
       document.getElementById('notifPopup').style.display = 'none';
     }
 
-    // Close all on outside click
-    window.onclick = function (e) {
-      if (!e.target.closest('.profile-container') && !e.target.closest('.notification-popup')) {
-        document.getElementById('dropdownMenu').style.display = 'none';
-        closeNotifPopup();
-      }
-    };
-
     function scrollToTop(event) {
       event.preventDefault();
       window.scrollTo({
@@ -236,24 +181,29 @@
       });
     }
 
-    // Open modal
+    // Modal functionality (Terms & Conditions)
     function openModal() {
       document.getElementById("termsModal").style.display = "block";
     }
 
-    // Close modal
     function closeModal() {
       document.getElementById("termsModal").style.display = "none";
     }
 
-    // Close modal if clicking outside content
+    // Close modal or dropdown when clicking outside
     window.onclick = function (event) {
       const modal = document.getElementById("termsModal");
       if (event.target == modal) {
         closeModal();
       }
+
+      if (!event.target.closest('.profile-container') && !event.target.closest('.notification-popup')) {
+        document.getElementById('dropdownMenu').style.display = 'none';
+        closeNotifPopup();
+      }
     };
   </script>
+
 </body>
 
 </html>
