@@ -112,13 +112,21 @@
     </div>
     <div class="popup-section">
       <h5>Today</h5>
-      <div class="notif-item" onclick="alert('Go to complaint #001')">Juan dela Cruz submitted a noise complaint.</div>
-      <div class="notif-item" onclick="alert('Go to resolved complaint #002')">A case was marked as resolved.</div>
+      <div class="notif-item" onclick="window.location.href='complaintApprovalAction.html'">
+        Juan Dela Cruz submitted a noise complaint.
+      </div>
+      <div class="notif-item" onclick="window.location.href='complaintApprovalAction.html'">
+        Angela Reyes submitted a sanitation complaint.
+      </div>
     </div>
     <div class="popup-section">
       <h5>This Week</h5>
-      <div class="notif-item" onclick="alert('Go to garbage complaint #003')">Garbage issue updated by staff.</div>
-      <div class="notif-item" onclick="alert('Go to water complaint #004')">Water leak concern reopened.</div>
+      <div class="notif-item" onclick="window.location.href='complaintApprovalAction.html'">
+        Carlo Santos submitted a vending complaint.
+      </div>
+      <div class="notif-item" onclick="window.location.href='complaintApprovalAction.html'">
+        Ana Lim reported a dispute with a neighbor.
+      </div>
     </div>
   </div>
   <!-- === NOTIFICATION POPUP END === -->
@@ -361,6 +369,58 @@
   window.addEventListener('DOMContentLoaded', () => {
     updateFilteredComplaints(); // also triggers initial render
   });
+
+    // ==========================
+    // NOTIFICATION FUNCTIONALITY
+    // ==========================
+
+    function openNotifFromDropdown(event) {
+      event.preventDefault();
+      document.getElementById('dropdownMenu').style.display = 'none';
+      document.getElementById('notifPopup').style.display = 'flex';
+    }
+
+    function toggleDropdown() {
+      const dropdown = document.getElementById('dropdownMenu');
+      const notif = document.getElementById('notifPopup');
+      notif.style.display = 'none';
+      dropdown.style.display = dropdown.style.display === 'block' ? 'none' : 'block';
+    }
+
+    function closeNotifPopup() {
+      document.getElementById('notifPopup').style.display = 'none';
+    }
+
+    function scrollToTop(event) {
+      event.preventDefault();
+      window.scrollTo({
+        top: 0,
+        behavior: 'smooth'
+      });
+    }
+
+    // Modal functionality (Terms & Conditions)
+    function openModal() {
+      document.getElementById("termsModal").style.display = "block";
+    }
+
+    function closeModal() {
+      document.getElementById("termsModal").style.display = "none";
+    }
+
+    // Close modal or dropdown when clicking outside
+    window.onclick = function (event) {
+      const modal = document.getElementById("termsModal");
+      if (event.target == modal) {
+        closeModal();
+      }
+
+      if (!event.target.closest('.profile-container') && !event.target.closest('.notification-popup')) {
+        document.getElementById('dropdownMenu').style.display = 'none';
+        closeNotifPopup();
+      }
+    };
+
   </script>
 
 </body>
