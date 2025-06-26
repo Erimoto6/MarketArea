@@ -82,6 +82,7 @@
 	</header>
 
   <!-- Main Content Section -->
+   <div class="page-container">
   <main class="content">
 
     <!-- White Vertical Stripe Background Wrapper -->
@@ -149,6 +150,7 @@
   </div>
 </div>
  
+<div class="table-wrapper">
   <table class="complaints-table" id="complaintsTable">
     <thead>
       <tr>
@@ -243,11 +245,72 @@
 
     </tbody>
   </table>
+</div>
 
   <!-- Pagination area -->
   <div class="pagination" id="pagination"></div>
 </div>
-  </main>
+
+<div id="complaintModal" class="modal-overlay">
+  <div class="modal-content">
+    <!-- Modal Header -->
+    <div class="modal-header">
+      <h2>Complaint Details</h2>
+      <span class="close-modal">&times;</span>
+    </div>
+
+    <div class="modal-body">
+      
+      <!-- SECTION: Personal Information -->
+      <h3>👤 Personal Information</h3>
+      <p><strong>Name:</strong> <span id="modalName"></span></p>
+      <p><strong>Age:</strong> <span id="modalAge"></span></p>
+      <p><strong>Gender:</strong> <span id="modalGender"></span></p>
+      <p><strong>Address:</strong> <span id="modalAddress"></span></p>
+      <p><strong>Contact:</strong> <span id="modalContact"></span></p>
+      <p><strong>Email:</strong> <span id="modalEmail"></span></p>
+      <hr>
+
+      <!-- SECTION: Complaint Details -->
+      <h3>📄 Complaint Details</h3>
+      <p><strong>Date Filed:</strong> <span id="modalDateFiled"></span></p>
+      <p><strong>Type of Complaint:</strong> <span id="modalType"></span></p>
+      <p><strong>Date and Time of Incident:</strong> <span id="modalIncidentDate"></span></p>
+      <p><strong>Location of Incident:</strong> <span id="modalLocation"></span></p>
+      <p><strong>Respondent Full Name:</strong> <span id="modalRespondent"></span></p>
+      <p><strong>Respondent Address:</strong> <span id="modalRespondentAddress"></span></p>
+      <p><strong>Description:</strong></p>
+      <div class="description-box" id="modalDescription"></div>
+      <hr>
+
+      <!-- SECTION: Supporting Evidence -->
+      <h3>📸 Supporting Evidence</h3>
+      <div class="evidence-grid" id="modalEvidence">
+        <img src="placeholder1.jpg" alt="Evidence 1">
+        <img src="placeholder2.jpg" alt="Evidence 2">
+        <img src="placeholder3.jpg" alt="Evidence 3">
+      </div>
+      <hr>
+
+      <!-- SECTION: Witness Details -->
+      <h3>👥 Witness Details</h3>
+      <p><strong>Witness Name:</strong> <span id="modalWitnessName"></span></p>
+      <p><strong>Witness Contact:</strong> <span id="modalWitnessContact"></span></p>
+      <hr>
+
+      <!-- SECTION: Complaint Status -->
+      <h3>📌 Current Status</h3>
+      <p><strong>Status:</strong> <span id="modalStatus" class="status-badge"></span></p>
+    </div>
+
+    <div class="modal-footer">
+      <button id="cancelComplaintBtn" class="cancel-complaint-btn">Cancel Complaint</button>
+    </div>
+
+  </div>
+</div>
+</div>
+</main>
 
    <!--FOOTER SECTION-->
 		<footer class="footer">
@@ -275,330 +338,257 @@
             </div>
             </footer>
 
-        <!-- Complaint Details Modal -->
-<div id="complaintModal" class="modal-overlay">
-  <div class="modal-content">
-    <!-- Header with Gradient -->
-    <div class="modal-header">
-      <h2>Blotter Form</h2>
-      <span class="close-modal">&times;</span>
-    </div>
-
-    <!-- Current Status Badge -->
-    <div class="modal-status">
-      <strong>Current Status:</strong>
-      <span class="status" id="modalStatus">Pending</span>
-    </div>
-
-    <!-- Complaint Info -->
-    <section class="complaint-section">
-      <div class="field-block">
-        <p><strong>Name:</strong> Juan De Luna</p>
-        <p><strong>Age:</strong> 31</p>
-        <p><strong>Gender:</strong> Male</p>
-        <p><strong>Address:</strong> blablabla</p>
-        <p><strong>Contact:</strong> 09178920304</p>
-        <p><strong>Email:</strong> juandeluna@gmail.com</p>
-      </div>
-      <hr>
-
-      <div class="field-block">
-        <p><strong>Type of Complaint:</strong> Noise</p>
-        <p><strong>Date and Time of Incident:</strong> 03/02/25, 2:00am</p>
-        <p><strong>Location of Incident:</strong> Rawr Street, ABC</p>
-        <p><strong>Respondent Full Name:</strong> Jose De Luna</p>
-        <p><strong>Respondent's Address:</strong> blablabla</p>
-        <p><strong>Description:</strong></p>
-        <div class="description-box">Loud noises every night from the neighbor's party until 3am.</div>
-      </div>
-      <hr>
-
-      <div class="field-block">
-        <p><strong>Photo, Video, or Screenshot Evidence:</strong></p>
-        <div class="evidence-grid">
-          <div class="evidence-box">📷</div>
-          <div class="evidence-box">📸</div>
-          <div class="evidence-box">🎥</div>
-        </div>
-      </div>
-      <hr>
-
-      <div class="field-block">
-        <p><strong>Witness Details:</strong></p>
-        <p><strong>Name:</strong> Maria Luna</p>
-        <p><strong>Contact:</strong> 09123456789</p>
-      </div>
-    </section>
-
-
-
-    <!-- Footer -->
-    <div class="modal-footer">
-      <button class="cancel-complaint-btn">Cancel Complaint</button>
-    </div>
-  </div>
-</div>
-
       
 
-  <script>
-  // ===== PROFILE SIDEBAR =====
-  const profileTrigger = document.getElementById('profileTrigger');
-  const sidebar = document.getElementById('profileSidebar');
+ <script>
+// ==== PROFILE SIDEBAR TOGGLE ====
+const profileTrigger = document.getElementById('profileTrigger');
+const sidebar = document.getElementById('profileSidebar');
 
-  profileTrigger.addEventListener('click', (e) => {
-    e.preventDefault();
-    sidebar.classList.toggle('show');
-  });
+profileTrigger.addEventListener('click', (e) => {
+  e.preventDefault();
+  sidebar.classList.toggle('show');
+});
 
-  document.addEventListener('click', (e) => {
-    const wrapper = document.querySelector('.profile-sidebar-wrapper');
-    if (!wrapper.contains(e.target)) {
-      sidebar.classList.remove('show');
-    }
-  });
-
-  document.getElementById('logout-btn').addEventListener('click', (e) => {
-    e.preventDefault();
-    if (confirm("Are you sure you want to log out?")) {
-      window.location.href = e.target.href;
-    }
-  });
-
-  // ===== DROPDOWN FILTER TOGGLE =====
-  function toggleDropdown() {
-    const dropdownMenu = document.getElementById('dropdownMenu');
-    dropdownMenu.style.display = dropdownMenu.style.display === 'block' ? 'none' : 'block';
+document.addEventListener('click', (e) => {
+  if (!document.querySelector('.profile-sidebar-wrapper').contains(e.target)) {
+    sidebar.classList.remove('show');
   }
+});
 
-  window.addEventListener('click', (event) => {
-    const dropdown = document.querySelector('.dropdown');
-    if (!dropdown.contains(event.target)) {
-      document.getElementById('dropdownMenu').style.display = 'none';
-    }
-  });
-
-  // ===== TABLE PAGINATION + FILTERS =====
-  const rowsPerPage = 5;
-  let currentPage = 1;
-
-  const table = document.getElementById("complaintsTable");
-  const tbody = table.querySelector("tbody");
-  const pagination = document.getElementById("pagination");
-  const searchInput = document.getElementById("search-input");
-
-  function getFilteredRows() {
-    const searchVal = searchInput.value.toLowerCase();
-    const dateVal = document.getElementById('filter-date').value;
-    const typeVal = document.getElementById('filter-type').value.toLowerCase();
-    const statusVal = document.getElementById('filter-status').value.toLowerCase();
-
-    const rows = Array.from(tbody.querySelectorAll("tr"));
-    return rows.filter(row => {
-      const date = row.cells[0].textContent.trim();
-      const name = row.cells[1].textContent.trim().toLowerCase();
-      const type = row.cells[2].textContent.trim().toLowerCase();
-      const status = row.cells[3].textContent.trim().toLowerCase();
-
-      return (
-        (!dateVal || date === dateVal) &&
-        (!typeVal || type === typeVal) &&
-        (!statusVal || status === statusVal) &&
-        (
-          !searchVal ||
-          name.includes(searchVal) ||
-          type.includes(searchVal) ||
-          status.includes(searchVal)
-        )
-      );
-    });
+// ==== LOGOUT CONFIRMATION ====
+document.getElementById('logout-btn').addEventListener('click', (e) => {
+  e.preventDefault();
+  if (confirm("Are you sure you want to log out?")) {
+    window.location.href = e.target.href;
   }
+});
 
-  function renderTable() {
-    const rows = Array.from(tbody.querySelectorAll("tr"));
-    const filteredRows = getFilteredRows();
+// ==== DROPDOWN FILTER TOGGLE ====
+function toggleDropdown() {
+  const dropdownMenu = document.getElementById('dropdownMenu');
+  dropdownMenu.style.display = (dropdownMenu.style.display === 'block') ? 'none' : 'block';
+}
 
-    const start = (currentPage - 1) * rowsPerPage;
-    const end = start + rowsPerPage;
-
-    rows.forEach(row => row.style.display = "none");
-    filteredRows.slice(start, end).forEach(row => row.style.display = "table-row");
-
-    renderPagination(filteredRows.length);
-  }
-
-  function renderPagination(totalRows) {
-    pagination.innerHTML = "";
-    const pageCount = Math.ceil(totalRows / rowsPerPage);
-
-    // Previous Button
-    const prevBtn = document.createElement("button");
-    prevBtn.textContent = "← Previous";
-    prevBtn.disabled = currentPage === 1;
-    prevBtn.className = "page-btn";
-    prevBtn.addEventListener("click", () => {
-      if (currentPage > 1) {
-        currentPage--;
-        renderTable();
-      }
-    });
-    pagination.appendChild(prevBtn);
-
-    // Page Numbers
-    for (let i = 1; i <= pageCount; i++) {
-      const btn = document.createElement("button");
-      btn.textContent = i;
-      btn.className = "page-btn";
-      if (i === currentPage) btn.classList.add("active");
-      btn.addEventListener("click", () => {
-        currentPage = i;
-        renderTable();
-      });
-      pagination.appendChild(btn);
-    }
-
-    // Next Button
-    const nextBtn = document.createElement("button");
-    nextBtn.textContent = "Next →";
-    nextBtn.disabled = currentPage === pageCount;
-    nextBtn.className = "page-btn";
-    nextBtn.addEventListener("click", () => {
-      if (currentPage < pageCount) {
-        currentPage++;
-        renderTable();
-      }
-    });
-    pagination.appendChild(nextBtn);
-  }
-
-  function applyFilters() {
-    currentPage = 1;
-    renderTable();
+window.addEventListener('click', (e) => {
+  if (!document.querySelector('.dropdown').contains(e.target)) {
     document.getElementById('dropdownMenu').style.display = 'none';
   }
+});
 
-  function clearFilters() {
-    document.getElementById('filter-date').value = '';
-    document.getElementById('filter-type').value = '';
-    document.getElementById('filter-status').value = '';
-    searchInput.value = '';
-    applyFilters();
-  }
+// ==== TABLE FILTER + PAGINATION ====
+const rowsPerPage = 5;
+let currentPage = 1;
+const table = document.getElementById("complaintsTable");
+const tbody = table.querySelector("tbody");
+const pagination = document.getElementById("pagination");
+const searchInput = document.getElementById("search-input");
 
-  // Re-render table on search
-  searchInput.addEventListener("input", () => {
-    currentPage = 1;
-    renderTable();
+function getFilteredRows() {
+  const searchVal = searchInput.value.toLowerCase();
+  const dateVal = document.getElementById('filter-date').value;
+  const typeVal = document.getElementById('filter-type').value.toLowerCase();
+  const statusVal = document.getElementById('filter-status').value.toLowerCase();
+
+  return Array.from(tbody.querySelectorAll("tr")).filter(row => {
+    const [date, name, type, status] = Array.from(row.cells).map(cell => cell.textContent.trim().toLowerCase());
+    return (
+      (!dateVal || date.includes(dateVal)) &&
+      (!typeVal || type.includes(typeVal)) &&
+      (!statusVal || status.includes(statusVal)) &&
+      (!searchVal || name.includes(searchVal) || type.includes(searchVal) || status.includes(searchVal))
+    );
   });
+}
 
-  // Initial render
-  renderTable();
+function renderTable() {
+  const rows = Array.from(tbody.querySelectorAll("tr"));
+  const filteredRows = getFilteredRows();
+  const start = (currentPage - 1) * rowsPerPage;
+  const end = start + rowsPerPage;
 
-  document.querySelectorAll('.details-btn').forEach(btn => {
-    btn.addEventListener('click', function(e) {
-      const circle = document.createElement('span');
-      circle.classList.add('ripple');
+  rows.forEach(row => row.style.display = "none");
+  filteredRows.slice(start, end).forEach(row => row.style.display = "table-row");
+  renderPagination(filteredRows.length);
+}
 
-      const rect = btn.getBoundingClientRect();
-      const size = Math.max(btn.offsetWidth, btn.offsetHeight);
-      const x = e.clientX - rect.left - size / 2;
-      const y = e.clientY - rect.top - size / 2;
+function renderPagination(totalRows) {
+  pagination.innerHTML = "";
+  const pageCount = Math.ceil(totalRows / rowsPerPage);
 
-      circle.style.width = circle.style.height = `${size}px`;
-      circle.style.left = `${x}px`;
-      circle.style.top = `${y}px`;
-
-      btn.appendChild(circle);
-
-      // Remove ripple after animation
-      setTimeout(() => circle.remove(), 600);
-    });
-  });
-
-  // Open modal
-const modal = document.getElementById('complaintModal');
-  const modalStatus = document.getElementById('modalStatus');
-
-  // Example data — replace with dynamic values from your table
-  const complaintData = {
-    name: 'Juan De Luna',
-    status: 'In Progress', // Could be: Pending, Under Review, In Progress, Resolved
+  const createPageBtn = (label, disabled, handler) => {
+    const btn = document.createElement("button");
+    btn.textContent = label;
+    btn.className = "page-btn";
+    btn.disabled = disabled;
+    btn.addEventListener("click", handler);
+    return btn;
   };
 
-  // Open modal with dynamic status
-  document.querySelectorAll('.details-btn').forEach(btn => {
-    btn.addEventListener('click', () => {
-      modal.style.display = 'flex';
+  pagination.appendChild(createPageBtn("← Previous", currentPage === 1, () => { currentPage--; renderTable(); }));
+  for (let i = 1; i <= pageCount; i++) {
+    const btn = createPageBtn(i, false, () => { currentPage = i; renderTable(); });
+    if (i === currentPage) btn.classList.add('active');
+    pagination.appendChild(btn);
+  }
+  pagination.appendChild(createPageBtn("Next →", currentPage === pageCount, () => { currentPage++; renderTable(); }));
+}
 
-      // Apply dynamic status class
-      const statusText = complaintData.status.trim().toLowerCase();
-      modalStatus.textContent = complaintData.status;
-      modalStatus.className = 'status'; // reset
-      modalStatus.classList.add(`status-${statusText.replace(/\s+/g, '-')}`);
+function applyFilters() {
+  currentPage = 1;
+  renderTable();
+  document.getElementById('dropdownMenu').style.display = 'none';
+}
+
+function clearFilters() {
+  document.getElementById('filter-date').value = '';
+  document.getElementById('filter-type').value = '';
+  document.getElementById('filter-status').value = '';
+  searchInput.value = '';
+  applyFilters();
+}
+
+searchInput.addEventListener("input", () => {
+  currentPage = 1;
+  renderTable();
+});
+
+renderTable();
+
+// ==== STATUS BADGE STYLING FOR TABLE ====
+document.querySelectorAll('.status').forEach(status => {
+  const text = status.textContent.trim().toLowerCase();
+  status.classList.add(`status-${text.replace(/\s+/g, '-')}`);
+});
+
+// ==== MODAL FUNCTIONALITY ====
+const modal = document.getElementById('complaintModal');
+const closeModalBtn = document.querySelector('.close-modal');
+const cancelBtn = document.getElementById('cancelComplaintBtn');
+
+const modalFields = {
+  dateFiled: document.getElementById('modalDateFiled'),
+  name: document.getElementById('modalName'),
+  age: document.getElementById('modalAge'),
+  gender: document.getElementById('modalGender'),
+  address: document.getElementById('modalAddress'),
+  contact: document.getElementById('modalContact'),
+  email: document.getElementById('modalEmail'),
+  type: document.getElementById('modalType'),
+  incidentDate: document.getElementById('modalIncidentDate'),
+  location: document.getElementById('modalLocation'),
+  respondent: document.getElementById('modalRespondent'),
+  respondentAddress: document.getElementById('modalRespondentAddress'),
+  description: document.getElementById('modalDescription'),
+  witnessName: document.getElementById('modalWitnessName'),
+  witnessContact: document.getElementById('modalWitnessContact'),
+  status: document.getElementById('modalStatus'),
+  evidenceContainer: document.getElementById('modalEvidence')
+};
+
+// Example complaint data (replace with backend data later)
+const complaintDetails = [
+  {
+    age: '31',
+    gender: 'Male',
+    address: 'blablabla',
+    contact: '09178920304',
+    email: 'juandeluna@gmail.com',
+    incidentDate: '03/02/25, 2:00 AM',
+    location: 'Rawr Street, ABC',
+    respondent: 'Jose De Luna',
+    respondentAddress: 'blablabla',
+    description: 'Loud noises every night from the neighbor\'s party until 3am.',
+    witnessName: 'Maria Luna',
+    witnessContact: '09123456789',
+    evidence: ['evidence1.jpg', 'evidence2.jpg', 'evidence3.jpg'],
+  },
+  // Add more complaint detail objects for each row...
+];
+
+document.querySelectorAll('.details-btn').forEach((btn, index) => {
+  btn.addEventListener('click', () => {
+    const row = btn.closest('tr');
+    const cells = row.querySelectorAll('td');
+    const details = complaintDetails[index] || {};
+
+    modalFields.dateFiled.textContent = cells[0].textContent.trim();
+    modalFields.name.textContent = cells[1].textContent.trim();
+    modalFields.type.textContent = cells[2].textContent.trim();
+
+    const statusText = cells[3].textContent.trim();
+    modalFields.status.textContent = statusText;
+    modalFields.status.className = 'status-badge';
+    modalFields.status.classList.add(`status-${statusText.toLowerCase().replace(/\s+/g, '-')}`);
+
+    modalFields.age.textContent = details.age || 'N/A';
+    modalFields.gender.textContent = details.gender || 'N/A';
+    modalFields.address.textContent = details.address || 'N/A';
+    modalFields.contact.textContent = details.contact || 'N/A';
+    modalFields.email.textContent = details.email || 'N/A';
+    modalFields.incidentDate.textContent = details.incidentDate || 'N/A';
+    modalFields.location.textContent = details.location || 'N/A';
+    modalFields.respondent.textContent = details.respondent || 'N/A';
+    modalFields.respondentAddress.textContent = details.respondentAddress || 'N/A';
+    modalFields.description.textContent = details.description || 'N/A';
+    modalFields.witnessName.textContent = details.witnessName || 'N/A';
+    modalFields.witnessContact.textContent = details.witnessContact || 'N/A';
+
+    // Evidence Images
+    modalFields.evidenceContainer.innerHTML = '';
+    (details.evidence || []).forEach(src => {
+      const img = document.createElement('img');
+      img.src = src;
+      img.alt = "Evidence";
+      img.className = 'evidence-image';
+      modalFields.evidenceContainer.appendChild(img);
     });
-  });
 
-  // Close modal
-  document.querySelector('.close-modal').addEventListener('click', () => {
+    // Hide cancel button for resolved status
+    cancelBtn.style.display = (statusText.toLowerCase() === 'resolved') ? 'none' : 'inline-block';
+
+    modal.style.display = 'flex';
+  });
+});
+
+closeModalBtn.addEventListener('click', () => modal.style.display = 'none');
+window.addEventListener('click', (e) => { if (e.target === modal) modal.style.display = 'none'; });
+
+cancelBtn.addEventListener('click', () => {
+  if (confirm("Are you sure you want to cancel this complaint?")) {
+    alert("Complaint has been cancelled.");
     modal.style.display = 'none';
-  });
+  }
+});
 
-  // Optional: close modal on background click
-  window.addEventListener('click', function (e) {
-    if (e.target === modal) {
-      modal.style.display = 'none';
-    }
-  });
-
-  // Cancel Complaint Button
-  document.querySelector('.cancel-complaint-btn').addEventListener('click', () => {
-    const confirmCancel = confirm("Are you sure you want to cancel this complaint?");
-    if (confirmCancel) {
-      alert("Complaint has been cancelled."); // Replace with backend update
-      modal.style.display = 'none';
-    }
-  });
-
-//notifications
-  
-  let notifCount = 0;
+// ==== NOTIFICATIONS SYSTEM ====
+let notifCount = 0;
 const badge = document.getElementById("notifBadge");
 const toastContainer = document.getElementById("toastContainer");
 const notifItem = document.getElementById("notifItem");
 const popup = document.getElementById("notificationPopup");
 const notificationList = document.getElementById("notificationList");
 
-// Update badge
 function updateNotificationCount(count) {
   notifCount = count;
-  if (notifCount > 0) {
-    badge.textContent = notifCount;
-    badge.style.display = 'inline-block';
-  } else {
-    badge.textContent = '';
-    badge.style.display = 'none';
-  }
+  badge.textContent = notifCount > 0 ? notifCount : '';
+  badge.style.display = notifCount > 0 ? 'inline-block' : 'none';
 }
 
-// Show toast
 function showToast(message) {
   const toast = document.createElement("div");
   toast.className = "toast";
   toast.textContent = message;
   toastContainer.appendChild(toast);
-
-  // Remove after 4s
   setTimeout(() => toast.remove(), 4000);
 }
 
-// Add notification to popup list
 function addNotificationToList(message) {
   const li = document.createElement("li");
   li.textContent = message;
-  notificationList.prepend(li); // newest on top
+  notificationList.prepend(li);
 }
 
-// Simulate notifications every 5s
 setInterval(() => {
   notifCount++;
   const msg = `🔔 New notification #${notifCount}`;
@@ -607,54 +597,25 @@ setInterval(() => {
   addNotificationToList(msg);
 }, 10000);
 
-// Toggle popup
-notifItem.addEventListener("click", function (e) {
+notifItem.addEventListener('click', (e) => {
   e.preventDefault();
-  popup.style.display = popup.style.display === "block" ? "none" : "block";
-  updateNotificationCount(0); // optional: reset badge when opened
+  popup.style.display = popup.style.display === 'block' ? 'none' : 'block';
+  updateNotificationCount(0);
 });
 
-// Close popup button
-function hidePopup() {
-  popup.style.display = "none";
-}
-
-// Hide popup when clicking outside
-document.addEventListener("click", function (e) {
+document.addEventListener('click', (e) => {
   if (!popup.contains(e.target) && !notifItem.contains(e.target)) {
-    popup.style.display = "none";
+    popup.style.display = 'none';
   }
 });
 
-const clearBtn = document.getElementById("clearNotificationsBtn");
-
-clearBtn.addEventListener("click", () => {
-  notificationList.innerHTML = "";       // Clears the list
-  updateNotificationCount(0);            // Resets badge
+document.getElementById('clearNotificationsBtn').addEventListener('click', () => {
+  notificationList.innerHTML = '';
+  updateNotificationCount(0);
 });
 
-hidePopup(); // Add this inside the clearBtn click function
-
-
-// table status
-
-document.querySelectorAll('.status').forEach(status => {
-    const text = status.textContent.trim().toLowerCase();
-
-    if (text === 'pending') {
-      status.classList.add('status-pending');
-    } else if (text === 'under review') {
-      status.classList.add('status-under-review');
-    } else if (text === 'in progress') {
-      status.classList.add('status-in-progress');
-    } else if (text === 'resolved') {
-      status.classList.add('status-resolved');
-    } else {
-      status.style.backgroundColor = '#999';  // default/unknown
-    }
-  });
-
 </script>
+
 
 </body>
 </html>
