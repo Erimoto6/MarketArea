@@ -236,6 +236,11 @@
             display: none !important;
         }
 
+          html, body {
+            height: auto;
+            overflow-y: auto; /* ✅ Mobile scrolling enabled */
+        }
+        
         .right-side {
             width: 100%;
             height: auto;
@@ -258,7 +263,7 @@
             align-items: center;
             flex-direction: row;   
             display: flex;                         
-            gap: 50px;
+            gap: 10px;
         }
 
         .first-name-input,

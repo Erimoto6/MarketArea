@@ -179,6 +179,27 @@
       cursor: pointer;
     }
 
+
+        /* MOBILE RESPONSIVENESS */
+    @media (max-width: 768px) {
+      .left-side {
+        display: none !important;
+      }
+
+      .right-side {
+        width: 100%;
+        height: auto;
+        padding: 30px 20px;
+        overflow-y: auto;
+        max-height: 100vh;
+      }
+
+      html, body {
+        height: auto;
+        overflow-y: auto;
+      }
+    }
+    
     /* ============================= */
     /* TERMS MODAL STYLING END HERE */
     /* ============================= */
