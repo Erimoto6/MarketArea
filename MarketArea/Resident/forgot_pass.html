@@ -90,7 +90,7 @@
             text-decoration: underline;
         }
 
-        /* Popup Message (Shared Style) */
+        /* Popup Message (Top Toast Style) */
         .popup-message {
             position: fixed;
             top: 30px;
@@ -105,12 +105,10 @@
             animation: fadeSlideDown 0.5s ease;
         }
 
-        /* Success Popup (Green) */
         .popup-success {
             background-color: #4B5320;
         }
 
-        /* Error Popup (Red) */
         .popup-error {
             background-color: #D9534F;
         }
@@ -132,51 +130,101 @@
             }
         }
 
+        /* Modal Overlay Shared Style */
         .modal-overlay {
-  position: fixed;
-  top: 0; left: 0;
-  width: 100%; height: 100%;
-  background: rgba(0, 0, 0, 0.6);
-  display: none;
-  justify-content: center;
-  align-items: center;
-  z-index: 1000;
+            position: fixed;
+            top: 0; left: 0;
+            width: 100%; height: 100%;
+            background: rgba(0, 0, 0, 0.6);
+            display: none;
+            justify-content: center;
+            align-items: center;
+            z-index: 1000;
+        }
+
+        .modal-box {
+            background: #fff;
+            padding: 0;
+            border-radius: 15px;
+            width: 90%;
+            max-width: 600px;
+            max-height: 80vh;
+            overflow: hidden;
+            box-shadow: 0 5px 20px rgba(0,0,0,0.3);
+            display: flex;
+            flex-direction: column;
+        }
+
+        .modal-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 15px 20px;
+            background-color: #4B5320;
+            color: white;
+            font-size: 16px;
+            font-weight: bold;
+        }
+
+        .modal-close {
+            cursor: pointer;
+            font-size: 20px;
+        }
+
+        .redirect-toast {
+    position: fixed;
+    bottom: 30px;
+    right: 30px;
+    background-color: #4B5320;
+    color: white;
+    padding: 14px 18px;
+    border-radius: 10px;
+    box-shadow: 0 6px 15px rgba(0, 0, 0, 0.3);
+    display: none;
+    animation: slideFadeIn 0.5s ease forwards;
+    z-index: 1000;
+    text-align: center;
 }
 
-.modal-box {
-  background: #fff;
-  padding: 0;
-  border-radius: 15px;
-  width: 90%;
-  max-width: 600px;
-  height: 80vh;
-  overflow: hidden;
-  box-shadow: 0 5px 20px rgba(0,0,0,0.3);
-  display: flex;
-  flex-direction: column;
+.redirect-toast p {
+    margin: 0 0 8px;
+    font-size: 14px;
 }
 
-.modal-header {
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  padding: 15px 20px;
-  background-color: #4B5320;
-  color: white;
-  font-size: 16px;
-  font-weight: bold;
+.redirect-toast button {
+    background-color: white;
+    color: #4B5320;
+    border: none;
+    border-radius: 5px;
+    padding: 6px 12px;
+    cursor: pointer;
+    font-size: 13px;
+    transition: background 0.3s ease;
 }
 
-.modal-close {
-  cursor: pointer;
-  font-size: 20px;
+.redirect-toast button:hover {
+    background-color: #e0e0e0;
 }
 
-.modal-box iframe {
-  border: none;
-  width: 100%;
-  height: 100%;
+.redirect-toast small {
+    display: block;
+    margin-top: 6px;
+    font-size: 12px;
+    color: #ddd;
 }
+
+@keyframes slideFadeIn {
+    from {
+        opacity: 0;
+        transform: translateY(20px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+
 
     </style>
 </head>
@@ -194,19 +242,31 @@
         <a href="residentLogin.html" class="back-link">Back to Login</a>
     </div>
 
-    <!-- Popup Message -->
+    <!-- Top Toast Popup -->
     <div class="popup-message" id="popupMessage"></div>
 
-    <!-- Modal for Mock Reset Link -->
-<div class="modal-overlay" id="resetModal">
-  <div class="modal-box">
-    <div class="modal-header">
-      <h2>Mock Reset Link</h2>
-      <span class="modal-close" onclick="closeModal()">×</span>
+    <!-- Redirect Modal Popup -->
+    <div class="modal-overlay" id="redirectModal">
+      <div class="modal-box" style="max-width: 400px; height: auto;">
+        <div class="modal-header">
+          <h2>Password Reset Link Sent</h2>
+          <span class="modal-close" onclick="closeRedirectModal()">×</span>
+        </div>
+        <div style="padding: 20px; text-align: center;">
+          <p>Click the button below to open the password reset page for demo purposes.</p>
+          <button onclick="redirectToMockReset()" style="margin-top: 10px; padding: 10px 20px; background-color: #4B5320; color: white; border: none; border-radius: 5px; cursor: pointer;">Open Reset Page</button>
+        </div>
+      </div>
     </div>
-    <iframe src="mock-reset-link.html"></iframe>
-  </div>
-</div>
+
+    <!-- Bottom-Right Redirect Toast -->
+    <!-- Bottom-Right Redirect Toast -->
+        <div class="redirect-toast" id="redirectToast">
+            <p>Password reset link sent!</p>
+                <button onclick="redirectToMockReset()">Open Reset Page</button>
+            <small style="display: block; margin-top: 5px; font-size: 12px; color: #ddd;">For demo purposes only</small>
+        </div>
+
 
 
     <script>
@@ -215,11 +275,11 @@
             return pattern.test(email);
         }
 
+
         function validateAndShowPopup() {
             const email = document.getElementById('emailInput').value.trim();
             const popup = document.getElementById('popupMessage');
 
-            // Hide popup in case it was showing from previous click
             popup.style.display = 'none';
             popup.classList.remove('popup-error', 'popup-success');
 
@@ -239,10 +299,14 @@
                 return;
             }
 
+            // Success toast popup
             popup.innerText = "Password reset link sent to your email!";
             popup.classList.add('popup-success');
             popup.style.display = 'block';
             autoHidePopup();
+
+            // Open redirect modal
+            showRedirectToast();
         }
 
         function autoHidePopup() {
@@ -251,14 +315,30 @@
             }, 3000);
         }
 
-        //reset link mock up
+        function showRedirectModal() {
+            document.getElementById('redirectModal').style.display = 'flex';
+        }
 
-        function showMockResetLink() {
-  document.getElementById('resetModal').style.display = 'flex';
+        function closeRedirectModal() {
+            document.getElementById('redirectModal').style.display = 'none';
+        }
+
+        function redirectToMockReset() {
+            window.location.href = 'reset_pass_mock.html';
+        }
+
+        function showRedirectToast() {
+    const toast = document.getElementById('redirectToast');
+    toast.style.display = 'block';
+
+    // Auto-hide after 5 seconds
+    setTimeout(() => {
+        toast.style.display = 'none';
+    }, 5000);
 }
 
-function closeModal() {
-  document.getElementById('resetModal').style.display = 'none';
+function redirectToMockReset() {
+    window.location.href = 'reset_pass_mock.html';
 }
     </script>
 
