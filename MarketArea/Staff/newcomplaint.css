@@ -96,19 +96,19 @@ body {
 
     /* Main Container */
     /* Expand the main container to use more width and height */
-.main-container {
-  max-width: 90%;
-  width: 90%;
-  min-height: 80vh;
-  margin: 20px auto;
-  padding: 40px 32px;
-  background-color: white;
-  border-radius: 8px;
-  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
-  flex: 1;
-  box-sizing: border-box;
-}
-    
+    .main-container {
+      max-width: 90%;
+      width: 90%;
+      min-height: 80vh;
+      margin: 20px auto;
+      padding: 40px 32px;
+      background-color: white;
+      border-radius: 8px;
+      box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+      flex: 1;
+      box-sizing: border-box;
+    }
+        
     
     /* Header Section */
     .page-header {
@@ -295,10 +295,6 @@ body {
       height: 100px;
     }
 
-    footer .footer-section1 {
-      max-width: 200px;
-      margin-right: 0;
-    }
 
     footer .footer-section2 {
       max-width: 200px;
