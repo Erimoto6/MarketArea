@@ -123,216 +123,248 @@
   </div>
   <!-- === NOTIFICATION POPUP END === -->
 
-  <!-- === TERMS AND CONDITION ===-->
-  <div id="termsModal" class="modal">
-    <div class="modal-content">
-    <span class="close" onclick="closeModal()">&times;</span>
-      <div class="modal-scrollable">
-        <h2>Terms and Conditions</h2>
-        <p>Welcome to the Barangay E-Blotter System. By accessing or using this system, you agree to comply with and be bound by the following terms and conditions. Please read them carefully.</p>
-
-        <h3>1. Use of the System</h3>
-        <ul>
-          <li>The E-Blotter System is intended for residents to file and track complaints within the barangay.</li>
-          <li>You must provide accurate and complete information when submitting a complaint.</li>
-          <li>Misuse of the system, including submitting false or malicious complaints, is strictly prohibited.</li>
-        </ul>
-
-        <h3>2. Privacy and Confidentiality</h3>
-        <ul>
-          <li>All personal information submitted will be kept confidential and used only for resolving complaints.</li>
-          <li>Only authorized barangay personnel have access to complaint details.</li>
-        </ul>
-
-        <h3>3. User Responsibilities</h3>
-        <ul>
-          <li>You are responsible for the accuracy of the information you provide.</li>
-          <li>You must not use the system for unlawful purposes or to harass others.</li>
-        </ul>
-
-        <h3>4. System Availability</h3>
-        <ul>
-          <li>The barangay strives to keep the system available at all times but does not guarantee uninterrupted access.</li>
-          <li>Maintenance or technical issues may cause temporary downtime.</li>
-        </ul>
-
-        <h3>5. Changes to Terms</h3>
-        <ul>
-          <li>The barangay reserves the right to update these terms at any time. Changes will be posted on this page.</li>
-        </ul>
-
-        <h3>6. Contact</h3>
-        <p>For questions or concerns, contact the Barangay Office at (012) 345-6789 or email <a href="mailto:barangayeblotter@email.com">barangayeblotter@email.com</a>.</p>
+    <!-- === VIEW COMPLAINT MODAL START === -->
+    <div id="viewModal" class="view-modal">
+      <div class="view-modal-content">
+        <div class="view-modal-header">
+          <h2>Complaint Details</h2>
+          <button class="view-modal-close" onclick="closeViewModal()">×</button>
+        </div>
+        <div class="view-modal-body" id="viewModalBody">
+          <!-- Full complaint info populated here -->
+        </div>
       </div>
     </div>
-  </div>
-  
+    <!-- === VIEW COMPLAINT MODAL END === -->
+
+
   
   <script>
-    // Sample data for demonstration since localStorage might be empty
-    const sampleComplaints = [
-      {
-        id: 1,
-        complainant: "Juan De Luna",
-        category: "Noise",
-        date: "2025-03-03",
-        description: "This is a description of the noise incident...",
-        status: "New"
-      },
-      {
-        id: 2,
-        complainant: "Maria Santos",
-        category: "Garbage",
-        date: "2025-03-02",
-        description: "Garbage collection issue in the area...",
-        status: "New"
-      }
-    ];
 
-    // Load from localStorage or use sample data
-    const complaints = JSON.parse(localStorage.getItem('acceptedComplaints')) || sampleComplaints;
+  // Sample data
+  const complaints = [
+    {
+      id: 1,
+      dateFiled: '06/12/25',
+      complainant: 'Reyes, Angela D.',
+      respondent: 'Gomez, Carlo A.',
+      type: 'Illegal vending complaint',
+      status: 'On Going',
+      age: 29,
+      gender: 'Female',
+      address: '78 Purok 5, Barangay Market Area',
+      contact: '09172345678',
+      email: 'angela.reyes@email.com',
+      incidentDate: '06/11/25',
+      incidentTime: '3:45 PM',
+      location: 'Sidewalk near Market Gate 2',
+      description: 'Unauthorized vendor occupying the pedestrian walkway, blocking foot traffic and creating safety hazards for passersby.',
+      witnessName: 'Pedro Dela Cruz',
+      witnessContact: '09981234567',
+      assignedTo: 'Officer Mendoza',
+      appointmentDate: '06/20/25, 2:00 PM'
+    },
 
-    const tableBody = document.querySelector('#complaintTable tbody');
-    const searchInput = document.getElementById('searchInput');
-    const sortSelect = document.getElementById('sortSelect');
-    const resultsInfo = document.getElementById('resultsInfo');
-    const paginationControls = document.getElementById('paginationControls');
-    const pageInfo = document.getElementById('pageInfo');
-    const prevPageBtn = document.getElementById('prevPageBtn');
-    const nextPageBtn = document.getElementById('nextPageBtn');
-    
-    let currentPage = 1;
-    const complaintsPerPage = 8;
-    let filteredComplaints = [...complaints];
-
-    function getStatusDotColor(status) {
-      switch (status) {
-        case 'New': return '#FFA500'; // Orange
-        case 'In Progress': return '#4A43FF';
-        case 'Resolved': return '#09FF00';
-        default: return '#ccc';
-      }
+    {
+      id: 2,
+      dateFiled: '06/23/25',
+      complainant: 'Santos, Miguel J.',
+      respondent: 'Fernandez, Liza M.',
+      type: 'Water leakage complaint',
+      status: 'On Going',
+      age: 38,
+      gender: 'Male',
+      address: '23 Rivera Compound, Barangay Market Area',
+      contact: '09279876543',
+      email: 'miguel.santos@email.com',
+      incidentDate: '06/22/25',
+      incidentTime: '7:15 AM',
+      location: 'Back alley behind Public Market',
+      description: 'Persistent water leakage from the respondent’s property seeping into neighboring walkways and causing slippery conditions.',
+      witnessName: 'Cynthia Villanueva',
+      witnessContact: '09156783421',
+      assignedTo: 'Officer Hernandez',
+      appointmentDate: '06/28/25, 11:30 AM'
     }
 
-    function renderTable(data) {
-      tableBody.innerHTML = '';
-      const start = (currentPage - 1) * complaintsPerPage;
-      const end = start + complaintsPerPage;
-      const pageData = data.slice(start, end);
-      
-      pageData.forEach(complaint => {
+  ];
+
+  // Globals
+  let filteredComplaints = [...complaints];
+  let currentPage = 1;
+  const complaintsPerPage = 5;
+
+  // DOM Elements
+  const searchInput = document.getElementById('searchInput');
+  const sortSelect = document.getElementById('sortSelect');
+  const resultsInfo = document.getElementById('resultsInfo');
+  const pageInfo = document.getElementById('pageInfo');
+  const prevPageBtn = document.getElementById('prevPageBtn');
+  const nextPageBtn = document.getElementById('nextPageBtn');
+
+  // Render table
+  function renderTable() {
+    const tbody = document.querySelector('#complaintTable tbody');
+    tbody.innerHTML = '';
+
+    const start = (currentPage - 1) * complaintsPerPage;
+    const end = start + complaintsPerPage;
+    const pageData = filteredComplaints.slice(start, end);
+
+    if (pageData.length === 0) {
+      tbody.innerHTML = '<tr><td colspan="5">No complaints found</td></tr>';
+    } else {
+      pageData.forEach(c => {
         const row = document.createElement('tr');
-        const statusDot = `<span class="status-dot" style="background-color:${getStatusDotColor(complaint.status)};"></span>`;
         row.innerHTML = `
-          <td>${statusDot}#${complaint.id.toString().padStart(5, '0')}</td>
-          <td>${complaint.complainant}</td>
-          <td>${complaint.category}</td>
-          <td>${complaint.date}</td>
-          <td>${complaint.description}</td>
+          <td>#${String(c.id).padStart(5, '0')}</td>
+          <td>${c.complainant}</td>
+          <td>${c.type}</td>
+          <td>${c.dateFiled}</td>
+          <td>${c.description.slice(0, 40)}...</td>
         `;
-        row.onclick = () => alert(`Open Complaint ID #${complaint.id}`);
-        tableBody.appendChild(row);
+        row.addEventListener('click', () => viewComplaint(c.id));
+        tbody.appendChild(row);
       });
-      
-      updateResultsInfo(data.length, start + 1, Math.min(end, data.length));
-      updatePagination(data.length);
     }
 
-    function updateResultsInfo(total, startItem, endItem) {
-      resultsInfo.textContent = `Showing ${startItem}-${endItem} of ${total} complaints`;
-    }
+    updateResultsInfo(filteredComplaints.length, start + 1, Math.min(end, filteredComplaints.length));
+    updatePagination(filteredComplaints.length);
+  }
 
-    function updatePagination(totalItems) {
-      const totalPages = Math.ceil(totalItems / complaintsPerPage);
-      pageInfo.textContent = `${currentPage} of ${totalPages}`;
-      
-      prevPageBtn.disabled = currentPage === 1;
-      nextPageBtn.disabled = currentPage === totalPages || totalPages === 0;
-    }
+  function updateResultsInfo(total, startItem, endItem) {
+    resultsInfo.textContent = `Showing ${startItem}-${endItem} of ${total} complaints`;
+  }
 
-    function updateTable() {
-      // Filter complaints
-      filteredComplaints = complaints.filter(complaint =>
-        Object.values(complaint).some(val =>
-          String(val).toLowerCase().includes(searchInput.value.toLowerCase())
-        )
+  function updatePagination(totalItems) {
+    const totalPages = Math.ceil(totalItems / complaintsPerPage);
+    pageInfo.textContent = `${currentPage} of ${totalPages}`;
+    prevPageBtn.disabled = currentPage === 1;
+    nextPageBtn.disabled = currentPage === totalPages || totalPages === 0;
+  }
+
+  // Search and Sort
+  function updateFilteredComplaints() {
+    const query = searchInput.value.toLowerCase().trim();
+    const sortOrder = sortSelect.value;
+
+    filteredComplaints = complaints.filter(c => {
+      const idStr = `#${String(c.id).padStart(5, '0')}`; // e.g., "#00001"
+      return (
+        idStr.toLowerCase().includes(query) ||
+        c.complainant.toLowerCase().includes(query) ||
+        c.type.toLowerCase().includes(query) ||
+        c.description.toLowerCase().includes(query)
       );
-
-      // Sort complaints
-      filteredComplaints.sort((a, b) => {
-        const dateA = new Date(a.date);
-        const dateB = new Date(b.date);
-        return sortSelect.value === 'newest' ? dateB - dateA : dateA - dateB;
-      });
-
-      currentPage = 1; // Reset to first page
-      renderTable(filteredComplaints);
-    }
-
-    function viewComplaint(id) {
-      alert(`Viewing complaint #${id}`);
-    }
-
-    // Event listeners
-    searchInput.addEventListener('input', updateTable);
-    sortSelect.addEventListener('change', updateTable);
-
-    prevPageBtn.addEventListener('click', () => {
-      if (currentPage > 1) {
-        currentPage--;
-        renderTable(filteredComplaints);
-      }
     });
 
-    nextPageBtn.addEventListener('click', () => {
-      const totalPages = Math.ceil(filteredComplaints.length / complaintsPerPage);
-      if (currentPage < totalPages) {
-        currentPage++;
-        renderTable(filteredComplaints);
-      }
+    filteredComplaints.sort((a, b) => {
+      const dateA = new Date(`20${a.dateFiled.slice(6, 8)}-${a.dateFiled.slice(0, 2)}-${a.dateFiled.slice(3, 5)}`);
+      const dateB = new Date(`20${b.dateFiled.slice(6, 8)}-${b.dateFiled.slice(0, 2)}-${b.dateFiled.slice(3, 5)}`);
+      return sortOrder === 'newest' ? dateB - dateA : dateA - dateB;
     });
 
-    function toggleDropdown() {
-      const dropdown = document.getElementById('dropdownMenu');
-      const notif = document.getElementById('notifPopup');
-      notif.style.display = 'none';
-      dropdown.style.display = dropdown.style.display === 'block' ? 'none' : 'block';
+    currentPage = 1;
+    renderTable();
+  }
+
+
+  // View complaint modal (your existing logic)
+  function viewComplaint(id) {
+    const c = complaints.find(c => c.id === id);
+    if (!c) return;
+
+    const modalBody = document.getElementById('viewModalBody');
+    modalBody.innerHTML = `
+      <h3>Complainant Information</h3>
+      <div class="section-content">
+        <p><strong>Name:</strong> ${c.complainant}</p>
+        <p><strong>Age:</strong> ${c.age}</p>
+        <p><strong>Gender:</strong> ${c.gender}</p>
+        <p><strong>Address:</strong> ${c.address}</p>
+        <p><strong>Contact:</strong> ${c.contact}</p>
+        <p><strong>Email:</strong> ${c.email}</p>
+      </div>
+      <hr>
+      <h3>Incident Details</h3>
+      <div class="section-content">
+        <p><strong>Type:</strong> ${c.type}</p>
+        <p><strong>Date/Time:</strong> ${c.incidentDate}, ${c.incidentTime}</p>
+        <p><strong>Location:</strong> ${c.location}</p>
+        <p><strong>Respondent:</strong> ${c.respondent}</p>
+        <p><strong>Description:</strong></p>
+        <div class="description-box">${c.description}</div>
+      </div>
+      <h4 style="margin-top: 20px; color: #6A7337;">Evidence (Optional):</h4>
+      <div class="section-content">
+        <div class="evidence-gallery">
+          <img src="/placeholder.svg?height=200&width=200" class="evidence-item" alt="Evidence 1">
+          <img src="/placeholder.svg?height=200&width=200" class="evidence-item" alt="Evidence 2">
+          <img src="/placeholder.svg?height=200&width=200" class="evidence-item" alt="Evidence 3">
+        </div>
+      </div>
+      <hr>
+      <h3>Witness</h3>
+      <div class="section-content">
+        <p><strong>Name:</strong> ${c.witnessName}</p>
+        <p><strong>Contact:</strong> ${c.witnessContact}</p>
+      </div>
+      <hr>
+      <h3>Assignment</h3>
+      <div class="section-content">
+        <p><strong>Assigned To:</strong> ${c.assignedTo}</p>
+        <p><strong>Appointment:</strong> ${c.appointmentDate}</p>
+      </div>
+      <hr>
+      <h3>Status</h3>
+      <p><strong>Current Status:</strong> ${c.status}</p>
+      <div class="status-buttons">
+        <button class="status-btn resolved" onclick="updateStatus(${c.id}, 'Complete')">Mark as Resolved</button>
+        <button class="status-btn ongoing" onclick="updateStatus(${c.id}, 'On Going')">Mark as Ongoing</button>
+        <button class="status-btn archive" onclick="updateStatus(${c.id}, 'Archive')">Archive</button>
+      </div>
+    `;
+
+    document.getElementById('viewModal').classList.add('show');
+  }
+
+  function updateStatus(id, newStatus) {
+    const c = complaints.find(c => c.id === id);
+    if (!c) return;
+    c.status = newStatus;
+    alert(`Status changed to ${newStatus}`);
+    closeViewModal();
+    renderTable();
+  }
+
+  function closeViewModal() {
+    document.getElementById('viewModal').classList.remove('show');
+  }
+
+  // Event listeners
+  searchInput.addEventListener('input', updateFilteredComplaints);
+  sortSelect.addEventListener('change', updateFilteredComplaints);
+
+  prevPageBtn.addEventListener('click', () => {
+    if (currentPage > 1) {
+      currentPage--;
+      renderTable();
     }
+  });
 
-    function openNotifFromDropdown(event) {
-      event.preventDefault();
-      document.getElementById('dropdownMenu').style.display = 'none';
-      document.getElementById('notifPopup').style.display = 'flex';
+  nextPageBtn.addEventListener('click', () => {
+    const totalPages = Math.ceil(filteredComplaints.length / complaintsPerPage);
+    if (currentPage < totalPages) {
+      currentPage++;
+      renderTable();
     }
+  });
 
-    function closeNotifPopup() {
-      document.getElementById('notifPopup').style.display = 'none';
-    }
-
-    function openModal() {
-      document.getElementById("termsModal").style.display = "block";
-    }
-
-    function closeModal() {
-      document.getElementById("termsModal").style.display = "none";
-    }
-
-    // Close dropdowns and modals on outside click
-    window.onclick = function (event) {
-      if (!event.target.closest('.profile-container') && !event.target.closest('.notification-popup')) {
-        document.getElementById('dropdownMenu').style.display = 'none';
-        closeNotifPopup();
-      }
-      
-      const modal = document.getElementById("termsModal");
-      if (event.target == modal) {
-        closeModal();
-      }
-    };
-
-    // Initialize the table
-    renderTable(filteredComplaints);
+  window.addEventListener('DOMContentLoaded', () => {
+    updateFilteredComplaints(); // also triggers initial render
+  });
   </script>
+
 </body>
 
 </html>
