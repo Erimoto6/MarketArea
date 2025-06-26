@@ -232,26 +232,17 @@
 
         /* --- MOBILE RESPONSIVENESS START --- */
         @media (max-width: 768px) {
-        .main-container {
-            flex-direction: column;
-        }
-
         .left-side {
-            width: 100%;
-            height: 200px;
-        }
-
-        .left-side img {
-            width: 100%;
-            height: 100%;
-            object-fit: cover;
+            display: none !important;
         }
 
         .right-side {
             width: 100%;
             height: auto;
-            padding: 30px 15px;
+            padding: 30px 20px;
             background-position: center;
+            overflow-y: auto;
+            max-height: 100vh;
         }
 
         .right-side h1 {
@@ -265,23 +256,31 @@
         .fullName {
             flex-direction: column;
             align-items: center;
+            flex-direction: row;   
+            display: flex;                         
+            gap: 50px;
         }
 
         .first-name-input,
-        .last-name-input,
+        .last-name-input {
+            width: 90%;
+            box-sizing: border-box;
+            margin: 8px 0;        
+        }
+
         .age-input-box,
         .address-input-box,
         .email-input-box,
         .pass-input-box,
         .confiPass-input-box {
-            width: 90%;
-            max-width: 900%;
+            width: 100%;
+            max-width: 100%;
             box-sizing: border-box;
             margin: 8px 0;
         }
 
         .button1 {
-            width: 100%;
+            width: 40%;
             font-size: 18px;
             margin-top: 20px;
         }
@@ -296,6 +295,7 @@
         }
         }
         /* --- MOBILE RESPONSIVENESS END --- */
+
 
     </style>
     </head>
