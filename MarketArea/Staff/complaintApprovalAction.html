@@ -65,13 +65,19 @@
     header nav {
       display: flex;
       align-items: center;
-      gap: 20px;
     }
 
     header nav a {
       color: white;
       text-decoration: none;
       cursor: pointer;
+      padding: 8px 16px;
+      border-radius: 4px;
+      transition: background-color 0.3s ease;
+    }
+
+    header nav a:hover {
+      background-color: rgba(255,255,255,0.1);
     }
 
     .profile-container {
@@ -84,6 +90,7 @@
       width: 30px;
       height: 30px;
       cursor: pointer;
+      margin-left: 10px;    
     }
 
     .dropdown-menu {
@@ -242,13 +249,9 @@
 
     footer .footer-section1 {
       max-width: 200px;
-      margin-right: 0;
-    }
-
-    footer .footer-section2 {
-      max-width: 200px;
       margin-right: 100px;
     }
+
 
     footer h4 {
       margin-bottom: 10px;
@@ -491,14 +494,6 @@
         <li><a href="staffHomepage.html">Home</a></li>
         <li><a href="manageComplaints.html">Manage Complaint</a></li>
         <li><a href="quickMetrics.html">Quick Metrics</a></li>
-      </ul>
-    </div>
-    <div class="footer-section2">
-      <h4>Govt. Info</h4>
-      <ul>
-        <li><a href="PrivacyPolicy.html">Privacy Policy</a></li>
-        <li><a href="#" onclick="openTerms(event)">Terms & Conditions</a></li>  
-        <li><a href="#">FAQ</a></li>
       </ul>
     </div>
   </footer>

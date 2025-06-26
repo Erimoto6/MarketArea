@@ -28,13 +28,19 @@
     header nav {
       display: flex;
       align-items: center;
-      gap: 20px;
     }
 
     header nav a {
       color: white;
       text-decoration: none;
       cursor: pointer;
+      padding: 8px 16px;
+      border-radius: 4px;
+      transition: background-color 0.3s ease;
+    }
+
+    header nav a:hover {
+      background-color: rgba(255,255,255,0.1);
     }
 
     .profile-container {
@@ -47,6 +53,7 @@
       width: 30px;
       height: 30px;
       cursor: pointer;
+      margin-left: 10px;
     }
 
     .dropdown-menu {
@@ -270,11 +277,6 @@
       margin-right: 25px;
       margin-left: 10px;
       height: 100px;
-    }
-
-    footer .footer-section1 {
-      max-width: 200px;
-      margin-right: 0;
     }
 
     footer .footer-section2 {

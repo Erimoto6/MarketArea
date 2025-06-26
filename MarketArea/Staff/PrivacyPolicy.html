@@ -37,14 +37,21 @@
     header nav {
       display: flex;
       align-items: center;
-      gap: 20px;
     }
 
     header nav a {
       color: white;
       text-decoration: none;
       cursor: pointer;
+      padding: 8px 16px;
+      border-radius: 4px;
+      transition: background-color 0.3s ease;
     }
+
+    header nav a:hover {
+      background-color: rgba(255,255,255,0.1);
+    }
+
 
     .profile-container {
       position: relative;
@@ -56,6 +63,7 @@
       width: 30px;
       height: 30px;
       cursor: pointer;
+      margin-left: 10px;
     }
 
     .dropdown-menu {
@@ -208,11 +216,6 @@
       margin-right: 25px;
       margin-left: 10px;
       height: 100px;
-    }
-
-    footer .footer-section1 {
-      max-width: 200px;
-      margin-right: 0;
     }
 
     footer .footer-section2 {
@@ -453,20 +456,12 @@
         essentials, local trade, and public services—connecting residents from different barangays across the city.
       </p>
     </div>
-    <div class="footer-section1">
+    <div class="footer-section2">
       <h4>Quick Menu</h4>
       <ul>
         <li><a href="staffHomepage.html" onclick="scrollToTop(event)">Home</a></li>
         <li><a href="manageComplaints.html">Manage Complaints</a></li>
         <li><a href="quickMetric.html">Quick Metrics</a></li>
-      </ul>
-    </div>
-    <div class="footer-section2">
-      <h4>Govt. Info</h4>
-      <ul>
-        <li><a href="PrivacyPolicy.html">Privacy Policy</a></li>
-        <li><a href="#" class="termsCondi" onclick="openModal()">Terms & Conditions</a></li>
-        <li><a href="#">FAQ</a></li>
       </ul>
     </div>
   </footer>
