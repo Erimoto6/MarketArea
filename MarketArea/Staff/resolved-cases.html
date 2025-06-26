@@ -6,7 +6,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Barangay Market Area: E-Blotter System</title>
   <link rel="icon" href="files/logo.png" type="image/png" />
-  <link rel="stylesheet" href="resolvedcases.css" />
+  <link rel="stylesheet" href="resolved-cases.css" />
   
   
 </head>
@@ -188,6 +188,7 @@
       status: i % 3 === 0 ? 'New' : i % 3 === 1 ? 'In Progress' : 'Resolved'
     }));
 
+<<<<<<< HEAD
     // Only show resolved complaints
     const complaints = allComplaints.filter(complaint => complaint.status === 'Resolved');
 
@@ -220,6 +221,82 @@
       const pageData = data.slice(start, end);
       
       pageData.forEach(complaint => {
+=======
+  // Sample data
+  const complaints = [
+    {
+      id: 1,
+      dateFiled: '06/16/25',
+      complainant: 'Santos, Erika J.',
+      respondent: 'Villanueva, Bryan L.',
+      type: 'Noise complaint',
+      status: 'Complete',
+      age: 34,
+      gender: 'Female',
+      address: '12 Mabuhay St., Purok 6, Brgy. Market Area',
+      contact: '09173456789',
+      email: 'erika.santos@email.com',
+      incidentDate: '06/15/25',
+      incidentTime: '11:30 PM',
+      location: 'Near Tricycle Terminal, Purok 6',
+      description: 'Loud karaoke sessions beyond curfew hours, disturbing nearby households regularly on weekends.',
+      witnessName: 'Leo Navarro',
+      witnessContact: '09081234567',
+      assignedTo: 'Officer De Leon',
+      appointmentDate: '06/23/25, 10:00 AM'
+    },
+
+    {
+      id: 2,
+      dateFiled: '06/23/25',
+      complainant: 'Santos, Miguel J.',
+      respondent: 'Fernandez, Liza M.',
+      type: 'Water leakage complaint',
+      status: 'Complete',
+      age: 38,
+      gender: 'Male',
+      address: '23 Rivera Compound, Barangay Market Area',
+      contact: '09279876543',
+      email: 'miguel.santos@email.com',
+      incidentDate: '06/22/25',
+      incidentTime: '7:15 AM',
+      location: 'Back alley behind Public Market',
+      description: 'Persistent water leakage from the respondent’s property seeping into neighboring walkways and causing slippery conditions.',
+      witnessName: 'Cynthia Villanueva',
+      witnessContact: '09156783421',
+      assignedTo: 'Officer Hernandez',
+      appointmentDate: '06/28/25, 11:30 AM'
+    }
+
+  ];
+
+  // Globals
+  let filteredComplaints = [...complaints];
+  let currentPage = 1;
+  const complaintsPerPage = 5;
+
+  // DOM Elements
+  const searchInput = document.getElementById('searchInput');
+  const sortSelect = document.getElementById('sortSelect');
+  const resultsInfo = document.getElementById('resultsInfo');
+  const pageInfo = document.getElementById('pageInfo');
+  const prevPageBtn = document.getElementById('prevPageBtn');
+  const nextPageBtn = document.getElementById('nextPageBtn');
+
+  // Render table
+  function renderTable() {
+    const tbody = document.querySelector('#complaintTable tbody');
+    tbody.innerHTML = '';
+
+    const start = (currentPage - 1) * complaintsPerPage;
+    const end = start + complaintsPerPage;
+    const pageData = filteredComplaints.slice(start, end);
+
+    if (pageData.length === 0) {
+      tbody.innerHTML = '<tr><td colspan="5">No complaints found</td></tr>';
+    } else {
+      pageData.forEach(c => {
+>>>>>>> ba45d94033662140f71af43c5746169f8b72249d
         const row = document.createElement('tr');
         const statusDot = `<span class="status-dot" style="background-color:${getStatusDotColor(complaint.status)};"></span>`;
         row.innerHTML = `
@@ -391,11 +468,15 @@
         document.getElementById('dropdownMenu').style.display = 'none';
         closeNotifPopup();
       }
+<<<<<<< HEAD
     };
 
 
 
 >>>>>>> f80412f95149c5bf532c6c29e77c21bab256b0a6
+=======
+    };  
+>>>>>>> ba45d94033662140f71af43c5746169f8b72249d
   </script>
 
 </body>
