@@ -7,11 +7,8 @@
   <title>Barangay Market Area: E-Blotter System</title>
   <link rel="icon" href="files/logo.png" type="image/png" />
   <link rel="stylesheet" href="inprogresscase.css" />
-<<<<<<< HEAD
-=======
   
   
->>>>>>> ebd020ba82d8d22bd54e45a7e83ea97dc373f24a
 </head>
 
 <body>
@@ -74,7 +71,6 @@
             <th>Category</th>
             <th>Date Filed</th>
             <th>Brief Description</th>
-            <th>Action</th>
           </tr>
         </thead>
         <tbody></tbody>
@@ -135,86 +131,6 @@
   </div>
   <!-- === NOTIFICATION POPUP END === -->
 
-<<<<<<< HEAD
-  <!-- === TERMS AND CONDITION ===-->
-  <div id="termsModal" class="modal">
-    <div class="modal-content">
-    <span class="close" onclick="closeModal()">&times;</span>
-      <div class="modal-scrollable">
-        <h2>Terms and Conditions</h2>
-        <p>Welcome to the Barangay E-Blotter System. By accessing or using this system, you agree to comply with and be bound by the following terms and conditions. Please read them carefully.</p>
-
-        <h3>1. Use of the System</h3>
-        <ul>
-          <li>The E-Blotter System is intended for residents to file and track complaints within the barangay.</li>
-          <li>You must provide accurate and complete information when submitting a complaint.</li>
-          <li>Misuse of the system, including submitting false or malicious complaints, is strictly prohibited.</li>
-        </ul>
-
-        <h3>2. Privacy and Confidentiality</h3>
-        <ul>
-          <li>All personal information submitted will be kept confidential and used only for resolving complaints.</li>
-          <li>Only authorized barangay personnel have access to complaint details.</li>
-        </ul>
-
-        <h3>3. User Responsibilities</h3>
-        <ul>
-          <li>You are responsible for the accuracy of the information you provide.</li>
-          <li>You must not use the system for unlawful purposes or to harass others.</li>
-        </ul>
-
-        <h3>4. System Availability</h3>
-        <ul>
-          <li>The barangay strives to keep the system available at all times but does not guarantee uninterrupted access.</li>
-          <li>Maintenance or technical issues may cause temporary downtime.</li>
-        </ul>
-
-        <h3>5. Changes to Terms</h3>
-        <ul>
-          <li>The barangay reserves the right to update these terms at any time. Changes will be posted on this page.</li>
-        </ul>
-
-        <h3>6. Contact</h3>
-        <p>For questions or concerns, contact the Barangay Office at (012) 345-6789 or email <a href="mailto:barangayeblotter@email.com">barangayeblotter@email.com</a>.</p>
-      </div>
-    </div>
-  </div>
-  
-  <script>
-    // Filter complaints to only show "In Progress" status
-    const allComplaints = Array.from({ length: 15 }, (_, i) => ({
-      id: i + 1,
-      complainant: `Resident ${i + 1}`,
-      category: ['Noise', 'Garbage', 'Other'][i % 3],
-      date: new Date(Date.now() - i * 86400000).toISOString().split('T')[0],
-      description: `Complaint detail example #${i + 1}`,
-      status: i % 3 === 0 ? 'New' : i % 3 === 1 ? 'In Progress' : 'Resolved'
-    }));
-
-    // Only show "In Progress" complaints
-    const complaints = allComplaints.filter(complaint => complaint.status === 'In Progress');
-
-    const tableBody = document.querySelector('#complaintTable tbody');
-    const searchInput = document.getElementById('searchInput');
-    const sortSelect = document.getElementById('sortSelect');
-    const resultsInfo = document.getElementById('resultsInfo');
-    const paginationControls = document.getElementById('paginationControls');
-    const pageInfo = document.getElementById('pageInfo');
-    const prevPageBtn = document.getElementById('prevPageBtn');
-    const nextPageBtn = document.getElementById('nextPageBtn');
-    
-    let currentPage = 1;
-    const complaintsPerPage = 8;
-    let filteredComplaints = [...complaints];
-
-    function getStatusDotColor(status) {
-      switch (status) {
-        case 'New': return '#FFA500'; // Orange
-        case 'In Progress': return '#4A43FF'; // Blue
-        case 'Resolved': return '#09FF00'; // Green
-        default: return '#ccc';
-      }
-=======
     <!-- === VIEW COMPLAINT MODAL START === -->
     <div id="viewModal" class="view-modal">
       <div class="view-modal-content">
@@ -266,20 +182,6 @@
       status: 'On Going',
       age: 41,
       gender: 'Male',
-<<<<<<< HEAD
-      address: '456 Mabini St., Barangay Market Area',
-      contact: '09278345678',
-      email: 'daniel.garcia@email.com',
-      incidentDate: '06/19/25',
-      incidentTime: '5:30 PM',
-      location: 'Near Wet Market, Zone 3',
-      description: 'Improper garbage disposal in front of residential units causing foul odor and attracting pests. The issue has persisted despite multiple warnings.',
-      witnessName: 'Melissa Cruz',
-      witnessContact: '09175678901',
-      assignedTo: 'Officer Santiago',
-      appointmentDate: '06/27/25, 9:00 AM'
->>>>>>> ebd020ba82d8d22bd54e45a7e83ea97dc373f24a
-=======
       address: 'Blk 7 Lot 15, Purok 3, Brgy. Market Area',
       contact: '09274567890',
       email: 'miguel.torres@email.com',
@@ -291,31 +193,10 @@
       witnessContact: '09431234567',
       assignedTo: 'Officer Bautista',
       appointmentDate: '06/22/25, 3:00 PM'
->>>>>>> ba45d94033662140f71af43c5746169f8b72249d
     }
 
   ];
 
-<<<<<<< HEAD
-    function renderTable(data) {
-      tableBody.innerHTML = '';
-      const start = (currentPage - 1) * complaintsPerPage;
-      const end = start + complaintsPerPage;
-      const pageData = data.slice(start, end);
-      
-      pageData.forEach(complaint => {
-        const row = document.createElement('tr');
-        const statusDot = `<span class="status-dot" style="background-color:${getStatusDotColor(complaint.status)};"></span>`;
-        row.innerHTML = `
-          <td>${statusDot}#${complaint.id.toString().padStart(5, '0')}</td>
-          <td>${complaint.complainant}</td>
-          <td>${complaint.category}</td>
-          <td>${complaint.date}</td>
-          <td>${complaint.description}</td>
-          <td><button class="view-btn" onclick="viewComplaint(${complaint.id})">VIEW</button></td>
-        `;
-        tableBody.appendChild(row);
-=======
   // Globals
   let filteredComplaints = [...complaints];
   let currentPage = 1;
@@ -352,48 +233,9 @@
         `;
         row.addEventListener('click', () => viewComplaint(c.id));
         tbody.appendChild(row);
->>>>>>> ebd020ba82d8d22bd54e45a7e83ea97dc373f24a
       });
-      
-      updateResultsInfo(data.length, start + 1, Math.min(end, data.length));
-      updatePagination(data.length);
     }
 
-<<<<<<< HEAD
-    function updateResultsInfo(total, startItem, endItem) {
-      resultsInfo.textContent = `Showing ${startItem}-${endItem} of ${total} complaints`;
-    }
-
-    function updatePagination(totalItems) {
-      const totalPages = Math.ceil(totalItems / complaintsPerPage);
-      pageInfo.textContent = `${currentPage} of ${totalPages}`;
-      
-      prevPageBtn.disabled = currentPage === 1;
-      nextPageBtn.disabled = currentPage === totalPages || totalPages === 0;
-    }
-
-    function updateTable() {
-      // Filter complaints
-      filteredComplaints = complaints.filter(complaint =>
-        Object.values(complaint).some(val =>
-          String(val).toLowerCase().includes(searchInput.value.toLowerCase())
-        )
-      );
-
-      // Sort complaints
-      filteredComplaints.sort((a, b) => {
-        const dateA = new Date(a.date);
-        const dateB = new Date(b.date);
-        return sortSelect.value === 'newest' ? dateB - dateA : dateA - dateB;
-      });
-
-      currentPage = 1; // Reset to first page
-      renderTable(filteredComplaints);
-    }
-
-    function viewComplaint(id) {
-      alert(`Viewing complaint #${id}`);
-=======
     updateResultsInfo(filteredComplaints.length, start + 1, Math.min(end, filteredComplaints.length));
     updatePagination(filteredComplaints.length);
   }
@@ -487,7 +329,7 @@
       <div class="status-buttons">
         <button class="status-btn resolved" onclick="updateStatus(${c.id}, 'Complete')">Mark as Resolved</button>
         <button class="status-btn ongoing" onclick="updateStatus(${c.id}, 'On Going')">Mark as Ongoing</button>
-        <button class="status-btn archive" onclick="updateStatus(${c.id}, 'Archive')">Archive</button>
+        <button class="status-btn abandon" onclick="updateStatus(${c.id}, 'Abandoned')">Abandoned</button>
       </div>
     `;
 
@@ -515,87 +357,20 @@
     if (currentPage > 1) {
       currentPage--;
       renderTable();
->>>>>>> ebd020ba82d8d22bd54e45a7e83ea97dc373f24a
     }
   });
 
-<<<<<<< HEAD
-    // Event listeners
-    searchInput.addEventListener('input', updateTable);
-    sortSelect.addEventListener('change', updateTable);
-
-    prevPageBtn.addEventListener('click', () => {
-      if (currentPage > 1) {
-        currentPage--;
-        renderTable(filteredComplaints);
-      }
-    });
-
-    nextPageBtn.addEventListener('click', () => {
-      const totalPages = Math.ceil(filteredComplaints.length / complaintsPerPage);
-      if (currentPage < totalPages) {
-        currentPage++;
-        renderTable(filteredComplaints);
-      }
-    });
-
-    function toggleDropdown() {
-      const dropdown = document.getElementById('dropdownMenu');
-      const notif = document.getElementById('notifPopup');
-      notif.style.display = 'none';
-      dropdown.style.display = dropdown.style.display === 'block' ? 'none' : 'block';
-    }
-
-    function openNotifFromDropdown(event) {
-      event.preventDefault();
-      document.getElementById('dropdownMenu').style.display = 'none';
-      document.getElementById('notifPopup').style.display = 'flex';
-    }
-
-    function closeNotifPopup() {
-      document.getElementById('notifPopup').style.display = 'none';
-    }
-
-    function openModal() {
-      document.getElementById("termsModal").style.display = "block";
-    }
-
-    function closeModal() {
-      document.getElementById("termsModal").style.display = "none";
-=======
   nextPageBtn.addEventListener('click', () => {
     const totalPages = Math.ceil(filteredComplaints.length / complaintsPerPage);
     if (currentPage < totalPages) {
       currentPage++;
       renderTable();
->>>>>>> ebd020ba82d8d22bd54e45a7e83ea97dc373f24a
     }
   });
 
-<<<<<<< HEAD
-    // Close dropdowns and modals on outside click
-    window.onclick = function (event) {
-      if (!event.target.closest('.profile-container') && !event.target.closest('.notification-popup')) {
-        document.getElementById('dropdownMenu').style.display = 'none';
-        closeNotifPopup();
-      }
-      
-      const modal = document.getElementById("termsModal");
-      if (event.target == modal) {
-        closeModal();
-      }
-    };
-
-    // Initialize the table
-    renderTable(filteredComplaints);
-=======
   window.addEventListener('DOMContentLoaded', () => {
     updateFilteredComplaints(); // also triggers initial render
   });
-<<<<<<< HEAD
-<<<<<<< HEAD
-=======
->>>>>>> ba45d94033662140f71af43c5746169f8b72249d
 
     // ==========================
     // NOTIFICATION FUNCTIONALITY
@@ -646,15 +421,7 @@
         document.getElementById('dropdownMenu').style.display = 'none';
         closeNotifPopup();
       }
-<<<<<<< HEAD
-    };
-
-=======
->>>>>>> ebd020ba82d8d22bd54e45a7e83ea97dc373f24a
->>>>>>> 92d64e2df1e59ccac1e90d58eab9b1a958366e3c
-=======
     };  
->>>>>>> ba45d94033662140f71af43c5746169f8b72249d
   </script>
 
 </body>
