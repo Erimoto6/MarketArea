@@ -504,6 +504,70 @@ body {
       }
     }
 
+    .custom-modal {
+  display: none;
+  position: fixed;
+  z-index: 9999;
+  left: 0;
+  top: 0;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(0, 0, 0, 0.4);
+  justify-content: center;
+  align-items: center;
+  font-family: 'Segoe UI', sans-serif;
+}
+
+.modal-content {
+  background-color: #fff;
+  border: 3px solid #556B2F;
+  padding: 25px 30px;
+  border-radius: 12px;
+  text-align: center;
+  max-width: 400px;
+  box-shadow: 0 8px 20px rgba(0,0,0,0.2);
+}
+
+.modal-content p {
+  font-size: 18px;
+  margin-bottom: 25px;
+  color: #2e3b0d;
+}
+
+.modal-buttons {
+  display: flex;
+  justify-content: center;
+  gap: 15px;
+}
+
+.confirm-btn,
+.cancel-btn {
+  padding: 10px 20px;
+  border-radius: 6px;
+  font-size: 16px;
+  cursor: pointer;
+  border: none;
+  transition: background-color 0.3s ease;
+}
+
+.confirm-btn {
+  background-color: #2e3b0d;
+  color: white;
+}
+
+.confirm-btn:hover {
+  background-color: #3c4f1a;
+}
+
+.cancel-btn {
+  background-color: #ccc;
+  color: #333;
+}
+
+.cancel-btn:hover {
+  background-color: #b2b2b2;
+}
+
   </style>
 </head>
 
@@ -527,7 +591,7 @@ body {
           <a href="staffProf.html"><img src="files/profile.png" alt="Profile Icon" style="width: 20px; height: 20px;">Profile</a>
           <a href="#" onclick="openNotifFromDropdown(event)"><img src="files/notif.png" alt="Notifications Icon">Notifications</a>
           <a href="settings.html"><img src="files/settings.png" alt="Settings Icon" style="width: 20px; height: 20px;">Settings</a>
-          <a href="staffLogin.html" onclick="return confirmLogout()"><img src="files/logout.png" alt="Logout Icon" style="width: 20px; height: 20px;">Logout</a>
+          <a href="#" onclick="return confirmLogout()"><img src="files/logout.png" alt="Logout Icon" style="width: 20px; height: 20px;">Logout</a>
         </div>
       </div>
     </nav>
@@ -651,6 +715,17 @@ body {
     </div>
   </footer>
 
+  <!-- === CUSTOM LOGOUT MODAL === -->
+<div id="logoutModal" class="custom-modal">
+  <div class="modal-content">
+    <p><strong>Are you sure you want to logout?</strong></p>
+    <div class="modal-buttons">
+      <button class="confirm-btn" onclick="confirmLogoutAction()">Yes, Logout</button>
+      <button class="cancel-btn" onclick="closeLogoutModal()">Cancel</button>
+    </div>
+  </div>
+</div>
+
   <!-- Notification Popup -->
   <div id="notifPopup" class="notification-popup">
     <div class="popup-header">
@@ -714,18 +789,18 @@ body {
   </div>
   
   <script>
-    function confirmLogout() {
-      // Ask the user for confirmation
-      const confirmation = confirm("Are you sure you want to logout?");
-      
-      if (confirmation) {
-        // Proceed to logout (redirect or function)
-        window.location.href = "logout.php"; // Replace with your actual logout page or script
-      } else {
-        // Do nothing, stay on the current page
-        alert("Logout cancelled.");
-      }
-    };
+function confirmLogout() {
+  document.getElementById('logoutModal').style.display = 'flex';
+  return false; // Prevent the <a> tag from redirecting
+}
+
+function closeLogoutModal() {
+  document.getElementById('logoutModal').style.display = 'none';
+}
+
+function confirmLogoutAction() {
+  window.location.href = "staffLogin.html"; // ✅ your original destination
+};
   </script>
   </body>
   </html>
