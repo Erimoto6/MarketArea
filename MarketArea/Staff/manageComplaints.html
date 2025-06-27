@@ -30,7 +30,7 @@
           <a href="staffProf.html"><img src="files/profile.png" alt="Profile Icon" style="width: 20px; height: 20px;">Profile</a>
           <a href="#"onclick="openNotifFromDropdown(event)"><img src="files/notif.png" alt="Notifications Icon">Notifications</a>
           <a href="settings.html"><img src="files/settings.png" alt="Settings Icon" style="width: 20px; height: 20px;">Settings</a>
-          <a href="staffLogin.html"><img src="files/logout.png" alt="Logout Icon" style="width: 20px; height: 20px;">Logout</a>
+          <a href="staffLogin.html" onclick="return confirmLogout()"><img src="files/logout.png" alt="Logout Icon" style="width: 20px; height: 20px;">Logout</a>
         </div>
       </div>
     </nav>
@@ -855,6 +855,19 @@
       if (!event.target.closest('.profile-container') && !event.target.closest('.notification-popup')) {
         document.getElementById('dropdownMenu').style.display = 'none';
         closeNotifPopup();
+      }
+    }
+    
+    function confirmLogout() {
+      // Ask the user for confirmation
+      const confirmation = confirm("Are you sure you want to logout?");
+      
+      if (confirmation) {
+        // Proceed to logout (redirect or function)
+        window.location.href = "logout.php"; // Replace with your actual logout page or script
+      } else {
+        // Do nothing, stay on the current page
+        alert("Logout cancelled.");
       }
     };
 

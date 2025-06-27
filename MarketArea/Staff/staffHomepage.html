@@ -29,9 +29,9 @@
         <div class="profile-circle" onclick="toggleDropdown()"></div>
         <div class="dropdown-menu" id="dropdownMenu">
           <a href="staffProf.html"><img src="files/profile.png">Profile</a>
-          <a href="#" onclick="openNotifFromDropdown(event)"><img src="files/notif.png">Notifications</a>
-          <a href="settings.html"><img src="files/settings.png">Settings</a>
-          <a href="staffLogin.html"><img src="files/logout.png">Logout</a>
+          <a href="#" onclick="openNotifFromDropdown(event)"><img src="files/notif.png">Notifications</a>          
+          <a href="settings.html"><img src="files/settings.png">Settings</a>          
+          <a href="staffLogin.html" onclick="return confirmLogout()"><img src="files/logout.png" alt="Logout Icon">Logout</a>
         </div>
       </div>
     </nav>
@@ -92,6 +92,7 @@
         Alberto Cruz submitted a illegal dumping complaint.
       </div>
     </div>
+
     <!--
         <div class="popup-section">
       <h5>This Week</h5>
@@ -158,9 +159,20 @@
         document.getElementById('dropdownMenu').style.display = 'none';
         closeNotifPopup();
       }
+    }
+
+    function confirmLogout() {
+      // Ask the user for confirmation
+      const confirmation = confirm("Are you sure you want to logout?");
+      
+      if (confirmation) {
+        // Proceed to logout (redirect or function)
+        window.location.href = "logout.php"; // Replace with your actual logout page or script
+      } else {
+
+        alert("Logout cancelled.");
+      }
     };
-  </script>
-
+</script>
 </body>
-
 </html>
