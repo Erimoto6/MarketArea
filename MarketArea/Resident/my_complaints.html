@@ -56,10 +56,11 @@
     				<i class="icon">🔐</i>
     				<span class="label">Account & Security</span>
   				</a>
-  				<a href="residentLogin.html" class="sidebar-item" id="logout-btn" data-tooltip="Log out from your account">
-    				<i class="icon">⏻</i>
-    				<span class="label">Logout</span>
-  				</a>
+  				<a href="#" class="sidebar-item" id="logout-btn" onclick="return confirmLogout()" data-tooltip="Log out from your account">
+            <i class="icon">⏻</i>
+            <span class="label">Logout</span>
+          </a>
+
 			</div>
 
 			<!-- Notification Popup -->
@@ -336,6 +337,18 @@
             </div>
             </div>
             </footer>
+
+<div id="logoutModal" class="custom-modal">
+  <div class="modal-content">
+    <p><strong>Are you sure you want to logout?</strong></p>
+    <div class="modal-buttons">
+      <button class="confirm-btn" onclick="confirmLogoutAction()">Yes, Logout</button>
+      <button class="cancel-btn" onclick="closeLogoutModal()">Cancel</button>
+    </div>
+  </div>
+</div>
+
+
  <script>
 // ==== PROFILE SIDEBAR TOGGLE ====
 const profileTrigger = document.getElementById('profileTrigger');
@@ -353,12 +366,18 @@ document.addEventListener('click', (e) => {
 });
 
 // ==== LOGOUT CONFIRMATION ====
-document.getElementById('logout-btn').addEventListener('click', (e) => {
-  e.preventDefault();
-  if (confirm("Are you sure you want to log out?")) {
-    window.location.href = e.target.href;
-  }
-});
+function confirmLogout() {
+  document.getElementById('logoutModal').style.display = 'flex';
+  return false; // Prevent the <a> tag from redirecting
+}
+
+function closeLogoutModal() {
+  document.getElementById('logoutModal').style.display = 'none';
+}
+
+function confirmLogoutAction() {
+  window.location.href = "residentLogin.html"; // ✅ your original destination
+};
 
 // ==== DROPDOWN FILTER TOGGLE ====
 function toggleDropdown() {

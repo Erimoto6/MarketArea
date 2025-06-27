@@ -51,10 +51,12 @@
     				<i class="icon">🔐</i>
     				<span class="label">Account & Security</span>
   				</a>
-  				<a href="residentLogin.html" class="sidebar-item" id="logout-btn" data-tooltip="Log out from your account">
-    				<i class="icon">⏻</i>
-    				<span class="label">Logout</span>
-  				</a>
+  				<a href="#" class="sidebar-item" id="logout-btn" onclick="return confirmLogout()" data-tooltip="Log out from your account">
+          <i class="icon">⏻</i>
+          <span class="label">Logout</span>
+          </a>
+
+
 			</div>
 
 			<!-- Notification Popup -->
@@ -148,6 +150,18 @@
 		</div>
     </footer>
 
+<div id="logoutModal" class="custom-modal">
+  <div class="modal-content">
+    <p><strong>Are you sure you want to logout?</strong></p>
+    <div class="modal-buttons">
+      <button class="confirm-btn" onclick="confirmLogoutAction()">Yes, Logout</button>
+      <button class="cancel-btn" onclick="closeLogoutModal()">Cancel</button>
+    </div>
+  </div>
+</div>
+
+
+
   <script>
 
     //profile sidebar
@@ -164,15 +178,6 @@
     const wrapper = document.querySelector('.profile-sidebar-wrapper');
     if (!wrapper.contains(e.target)) {
       sidebar.classList.remove('show');
-    }
-  });
-
-  document.getElementById('logout-btn').addEventListener('click', function (e) {
-    e.preventDefault(); // Stop the default navigation
-
-    if (confirm("Are you sure you want to log out?")) {
-      // Proceed to logout if confirmed
-      window.location.href = this.href;
     }
   });
 
@@ -264,6 +269,20 @@ clearBtn.addEventListener("click", () => {
 });
 
 hidePopup(); // Add this inside the clearBtn click function
+
+function confirmLogout() {
+  document.getElementById('logoutModal').style.display = 'flex';
+  return false; // Prevent the <a> tag from redirecting
+}
+
+function closeLogoutModal() {
+  document.getElementById('logoutModal').style.display = 'none';
+}
+
+function confirmLogoutAction() {
+  window.location.href = "residentLogin.html"; // ✅ your original destination
+};
+
 
   </script>
 </body>
