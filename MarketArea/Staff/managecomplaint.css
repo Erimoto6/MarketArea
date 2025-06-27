@@ -630,19 +630,19 @@ footer {
       gap: 6px;
     }
 
-    .status-ongoing {
-      background: #fff3cd;
-      color: #856404;
+    .status-inprogress {
+      background: #6f42c1;
+      color: #fdfdfd;
     }
 
-    .status-complete {
-      background: #d4edda;
-      color: #155724;
+    .status-resolved {
+      background: #5cb85c;
+      color: #ffffff;
     }
 
-    .status-archived {
-      background: #f8d7da;
-      color: #721c24;
+    .status-abandon {
+      background: #97000d;
+      color: #ffffff;
     }
 
     .status-icon {
