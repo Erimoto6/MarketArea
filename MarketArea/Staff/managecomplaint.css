@@ -308,6 +308,25 @@ body {
       text-decoration: none;
     }
 
+    /* Make body stretch full height and make content+footer layout work */
+html, body {
+  height: 100%;
+  margin: 0;
+  display: flex;
+  flex-direction: column;
+}
+
+/* Make your main content grow to fill space */
+.dashboard-section {
+  flex: 1 0 auto;
+}
+
+/* Footer stays at bottom, no matter content height */
+footer {
+  flex-shrink: 0;
+}
+
+
     /* === NOTIFICATION POPUP === */
     .notification-popup {
       position: fixed;
