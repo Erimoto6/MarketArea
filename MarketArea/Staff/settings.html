@@ -3,7 +3,7 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Account Settings</title>
+    <title>Staff Settings</title>
     <link
       rel="stylesheet"
       href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css"
@@ -38,6 +38,54 @@
         font-size: 28px;
       }
 
+      /* Profile Section */
+      .profile-section {
+        margin-bottom: 30px;
+        padding: 25px;
+        border-radius: 8px;
+        background-color: #f9f9f9;
+        border-left: 4px solid #6a7337;
+        display: flex;
+        align-items: center;
+        gap: 20px;
+      }
+
+      .profile-avatar {
+        width: 70px;
+        height: 70px;
+        border-radius: 50%;
+        background-color: #6a7337;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        font-size: 28px;
+        color: white;
+        flex-shrink: 0;
+      }
+
+      .profile-info {
+        flex: 1;
+      }
+
+      .profile-name {
+        font-size: 22px;
+        font-weight: 600;
+        margin-bottom: 5px;
+        color: #2c3e50;
+      }
+
+      .profile-role {
+        font-size: 16px;
+        color: #6a7337;
+        margin-bottom: 5px;
+        font-weight: 500;
+      }
+
+      .profile-email {
+        font-size: 14px;
+        color: #666;
+      }
+
       .settings-section {
         margin-bottom: 30px;
         padding: 20px;
@@ -70,7 +118,8 @@
         color: #555;
       }
 
-      .form-group input {
+      .form-group input,
+      .form-group select {
         width: 100%;
         padding: 10px;
         border: 1px solid #ddd;
@@ -79,9 +128,21 @@
         transition: border-color 0.3s;
       }
 
-      .form-group input:focus {
+      .form-group input:focus,
+      .form-group select:focus {
         outline: none;
         border-color: #6a7337;
+      }
+
+      .checkbox-group {
+        display: flex;
+        align-items: center;
+        margin-bottom: 10px;
+      }
+
+      .checkbox-group input[type="checkbox"] {
+        width: auto;
+        margin-right: 10px;
       }
 
       .btn {
@@ -110,8 +171,14 @@
 
       .logout-section {
         display: flex;
-        justify-content: flex-end;
+        justify-content: center;
         margin-top: 40px;
+        padding-top: 20px;
+        border-top: 1px solid #eee;
+      }
+
+      .logout-section a {
+        text-decoration: none;
       }
 
       /* Modal styles */
@@ -171,7 +238,7 @@
 
       .modal-icon {
         font-size: 40px;
-        color: #f39c12; /* Yellow-orange warning color */
+        color: #f39c12;
         margin-bottom: 15px;
         display: block;
         text-align: center;
@@ -189,18 +256,6 @@
 
       .modal-btn:hover {
         opacity: 0.9;
-      }
-
-      /* Animations */
-      @keyframes slideUp {
-        from {
-          transform: translateY(30px);
-          opacity: 0;
-        }
-        to {
-          transform: translateY(0);
-          opacity: 1;
-        }
       }
 
       /* Success message */
@@ -226,6 +281,16 @@
           opacity: 1;
         }
       }
+
+      @keyframes fadeIn {
+        from {
+          opacity: 0;
+        }
+        to {
+          opacity: 1;
+        }
+      }
+
       /* Responsive styles */
       @media (max-width: 600px) {
         .container {
@@ -240,40 +305,65 @@
         h1 {
           font-size: 24px;
         }
+
+        .profile-section {
+          padding: 20px;
+        }
+
+        .profile-name {
+          font-size: 20px;
+        }
       }
     </style>
   </head>
   <body>
     <div class="container">
-      <h1>Account Settings</h1>
+      <h1>Staff Settings</h1>
 
-      <!-- Change Username Section -->
+      <!-- Profile Section -->
+      <div class="profile-section">
+        <div class="profile-avatar">
+          <i class="fas fa-user"></i>
+        </div>
+        <div class="profile-info">
+          <div class="profile-name">John Doe</div>
+          <div class="profile-role">Staff Manager</div>
+          <div class="profile-email">john.doe@company.com</div>
+        </div>
+      </div>
+
+      <!-- Account Settings Section -->
       <div class="settings-section">
-        <h2><i class="fas fa-user"></i> Change Username</h2>
-        <form id="usernameForm">
+        <h2><i class="fas fa-user-cog"></i> Account Settings</h2>
+        
+        <form id="accountForm">
           <div class="form-group">
-            <label for="currentUsername">Current Username</label>
-            <input type="text" id="currentUsername" value="john_doe" readonly />
+            <label for="fullName">Full Name</label>
+            <input type="text" id="fullName" value="John Doe" />
           </div>
+          
           <div class="form-group">
-            <label for="newUsername">New Username</label>
-            <input
-              type="text"
-              id="newUsername"
-              placeholder="Enter new username"
-              required
-            />
+            <label for="email">Email Address</label>
+            <input type="email" id="email" value="john.doe@company.com" />
           </div>
-          <button type="submit" class="btn">Update Username</button>
-          <div id="usernameSuccess" class="success-message">
-            Username updated successfully!
+          
+          <div class="form-group">
+            <label for="phoneNumber">Phone Number</label>
+            <input type="tel" id="phoneNumber" placeholder="Enter phone number" />
+          </div>
+          
+          <button type="submit" class="btn">Update Account</button>
+          <div id="accountSuccess" class="success-message">
+            Account settings updated successfully!
           </div>
         </form>
       </div>
 
-      <!-- Change Password Section -->
+      <!-- Security Settings Section -->
       <div class="settings-section">
-        <h2><i class="fas fa-lock"></i> Change Password</h2>
+        <h2><i class="fas fa-shield-alt"></i> Security Settings</h2>
+        
+        <!-- Change Password -->
         <form id="passwordForm">
           <div class="form-group">
             <label for="currentPassword">Current Password</label>
@@ -335,27 +425,29 @@
     </div>
 
     <script>
-      // Username form submission
+      // Account form submission
       document
-        .getElementById("usernameForm")
+        .getElementById("accountForm")
         .addEventListener("submit", function (e) {
           e.preventDefault();
-          const newUsername = document.getElementById("newUsername").value;
+          
+          const formData = {
+            fullName: document.getElementById("fullName").value,
+            email: document.getElementById("email").value,
+            phoneNumber: document.getElementById("phoneNumber").value
+          };
 
           // In a real app, you would send this to your backend
-          console.log("New username:", newUsername);
+          console.log("Account settings updated:", formData);
 
           // Show success message
-          const successMsg = document.getElementById("usernameSuccess");
+          const successMsg = document.getElementById("accountSuccess");
           successMsg.style.display = "block";
 
           // Hide after 3 seconds
           setTimeout(() => {
             successMsg.style.display = "none";
           }, 3000);
-
-          // Clear form
-          this.reset();
         });
 
       // Password form submission
@@ -363,11 +455,9 @@
         .getElementById("passwordForm")
         .addEventListener("submit", function (e) {
           e.preventDefault();
-          const currentPassword =
-            document.getElementById("currentPassword").value;
+          const currentPassword = document.getElementById("currentPassword").value;
           const newPassword = document.getElementById("newPassword").value;
-          const confirmPassword =
-            document.getElementById("confirmPassword").value;
+          const confirmPassword = document.getElementById("confirmPassword").value;
 
           // Simple validation
           if (newPassword !== confirmPassword) {
@@ -377,8 +467,6 @@
 
           // In a real app, you would send this to your backend
           console.log("Password change requested");
-          console.log("Current:", currentPassword);
-          console.log("New:", newPassword);
 
           // Show success message
           const successMsg = document.getElementById("passwordSuccess");
@@ -399,7 +487,8 @@
       const confirmLogout = document.getElementById("confirmLogout");
       const cancelLogout = document.getElementById("cancelLogout");
 
-      logoutBtn.addEventListener("click", function () {
+      logoutBtn.addEventListener("click", function (e) {
+        e.preventDefault();
         logoutModal.style.display = "flex";
       });
 
@@ -411,14 +500,14 @@
         // In a real app, you would call your logout API
         console.log("User logged out");
 
-        // For demo purposes, just show an alert
+        // For demo purposes, redirect to login
         alert("You have been logged out successfully!");
-
+        
         // Close modal
         logoutModal.style.display = "none";
 
-        // In a real app, you would redirect to login page
-        // window.location.href = '/login';
+        // Redirect to login page
+        window.location.href = "staffLogin.html";
       });
 
       // Close modal when clicking outside

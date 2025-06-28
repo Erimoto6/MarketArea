@@ -4,6 +4,7 @@
   <meta charset="UTF-8">
   <title>Market Area E-Blotter Portal</title>
   <link rel="icon" type="image/png" href="logo.png">
+  <link rel="stylesheet" href="TAC.css">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
   <style>
@@ -174,47 +175,8 @@
 }
 
 
-    /* Modal Popup */
-    .modal-overlay {
-      display: none;
-      position: fixed;
-      top: 0; left: 0;
-      width: 100%; height: 100%;
-      background: rgba(0, 0, 0, 0.6);
-      justify-content: center;
-      align-items: center;
-      z-index: 1000;
-    }
+    
 
-    .modal-box {
-      background: #fff;
-      padding: 20px;
-      border-radius: 10px;
-      width: 90%;
-      max-width: 500px;
-      box-shadow: 0 5px 15px rgba(0,0,0,0.3);
-      position: relative;
-    }
-
-    .modal-header {
-      font-weight: bold;
-      margin-bottom: 10px;
-    }
-
-    .modal-close {
-      position: absolute;
-      top: 10px;
-      right: 15px;
-      cursor: pointer;
-      font-size: 18px;
-      color: #555;
-    }
-
-    iframe {
-      width: 100%;
-      height: 300px;
-      border: none;
-    }
 
     /* Animations */
     @keyframes slideDown {
@@ -237,6 +199,11 @@
       .main-container {
         flex-direction: column;
         height: auto;
+      }
+
+      .modal-box {
+      width: 90vw;
+      height: 80vh;
       }
 
       .left-side {
@@ -297,7 +264,7 @@
 
     <div class="right-side">
       <img src="logo.png" alt="Barangay Logo">
-      <h1>Welcome to Market Area E-Complaint Portal</h1>
+      <h1>Welcome to E-Complaint System</h1>
       <h3>Log In to your resident account</h3>
 
       <input type="text" class="email-input-box" placeholder="Enter your email">
@@ -325,8 +292,7 @@
   <div class="modal-overlay" id="modalOverlay">
     <div class="modal-box">
       <div class="modal-header">
-        Terms & Conditions
-        <span class="modal-close" onclick="closeModal()">×</span>
+        <span class="modal-close" onclick="closeModal()">X</span>
       </div>
       <iframe src="TAC.html"></iframe>
     </div>
