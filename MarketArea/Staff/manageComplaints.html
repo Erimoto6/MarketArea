@@ -1,42 +1,41 @@
 <!DOCTYPE html>
 <html lang="en">
-
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Barangay Market Area: E-Blotter System</title>
+  <title>E-Blotter System</title>
   <link rel="icon" href="files/logo.png" type="image/png" />
+  <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet"/>
+  <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
   <link rel="stylesheet" href="managecomplaint.css" />
-  
 </head>
 
 <body>
-  <header>
-    <div style="display: flex; align-items: center;">
-      <img src="files/logo.png" alt="Barangay Logo">
-      <div style="margin-left: 10px;">
-        <div><strong>Barangay Market Area:</strong></div>
-        <div>Complaint System</div>
+    <header>
+      <div id="brand"> <!--Header Title-->
+        <img src="files/logo.png" alt="" class="logo" /><a
+          class="brand-text"
+        ></a>
       </div>
-    </div>
-
-    <nav>
-      <a href="staffHomepage.html">Home</a>
-      <a href="manageComplaints.html" onclick="scrollToTop(event)">Manage Complaints</a>
-      <a href="quickMetric.html">Quick Metrics</a>
-      <div class="profile-container">
-        <div class="profile-circle" onclick="toggleDropdown()"></div>
-        <div class="dropdown-menu" id="dropdownMenu">
-          <a href="staffProf.html"><img src="files/profile.png" alt="Profile Icon" style="width: 20px; height: 20px;">Profile</a>
-          <a href="#"onclick="openNotifFromDropdown(event)"><img src="files/notif.png" alt="Notifications Icon">Notifications</a>
-          <a href="settings.html"><img src="files/settings.png" alt="Settings Icon" style="width: 20px; height: 20px;">Settings</a>
-          <a href="#" onclick="return confirmLogout()"><img src="files/logout.png" alt="Logout Icon" style="width: 20px; height: 20px;">Logout</a>
-        </div>
+      <nav>
+        <ul class="nav-list">
+          <li><a href="staffHomepage.html">Home</a></li>
+          <li><a href="manageComplaints.html">Manage Complaints</a></li>
+          <li><a href="#">Message</a></li>
+          <li><a href="settings.html">Settings</a></li>
+        </ul>
+      </nav>
+      <div id="hamburger-icon" onclick="toggleMobileMenu(this)">
+        <div class="bar1"></div>
+        <div class="bar2"></div>
+        <div class="bar3"></div>
       </div>
-    </nav>
-  </header>
+      <ul class="mobile-menu">
+        <li><a href="#top">Dashboard</a></li>
+        <li><a href="settings.html">Settings</a></li>
+      </ul>
+    </header>
 
- 
     <!-- Dashboard Section -->
     <div class="dashboard-section">
       <!-- Complaints Management -->
@@ -660,7 +659,7 @@
       updateTable();
     });
 
-    function toggleDropdown() {
+    function toggleDropdown1() {
       const menu = document.getElementById('dropdownMenu');
       menu.style.display = menu.style.display === 'block' ? 'none' : 'block';
     }
@@ -864,6 +863,27 @@ function confirmLogoutAction() {
   window.location.href = "staffLogin.html"; // ✅ your original destination
 };
 
+  function toggleMobileMenu(menu) {
+    menu.classList.toggle("open"); // toggles hamburger animation
+    document.querySelector(".mobile-menu").classList.toggle("open"); // toggles mobile menu display
+  }
+  function toggleDropdown() {
+    const menu = document.getElementById("dropdownMenu");
+    menu.style.display = menu.style.display === "block" ? "none" : "block";
+  }
+
+// highlighted nav
+
+    document.addEventListener('DOMContentLoaded', function() {
+    const currentUrl = window.location.href;
+    const navLinks = document.querySelectorAll('.nav-list a');
+
+    navLinks.forEach(link => {
+      if (currentUrl.includes(link.getAttribute('href'))) {
+        link.classList.add('active');
+      }
+    });
+  });
   </script>
 </body>
 
