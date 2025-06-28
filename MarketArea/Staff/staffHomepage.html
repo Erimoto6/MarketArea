@@ -11,7 +11,7 @@
   </head>
 
 
-  
+   
 </head>
 
   <body>
@@ -27,7 +27,6 @@
           <li><a href="manageComplaints.html">Manage Complaints</a></li>
           <li><a href="#">Message</a></li>
           <li><a href="settings.html">Settings</a></li>
-            </ul>
         </ul>
       </nav>
       <div id="hamburger-icon" onclick="toggleMobileMenu(this)">
@@ -270,6 +269,19 @@
           behavior: "smooth",
         });
       }
+
+      // highlighted nav
+
+       document.addEventListener('DOMContentLoaded', function() {
+    const currentUrl = window.location.href;
+    const navLinks = document.querySelectorAll('.nav-list a');
+
+    navLinks.forEach(link => {
+      if (currentUrl.includes(link.getAttribute('href'))) {
+        link.classList.add('active');
+      }
+    });
+  });
     </script>
   </body>
 </html>
