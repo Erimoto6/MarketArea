@@ -7,7 +7,7 @@
   <link rel="icon" href="files/logo.png" type="image/png" />
   <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet"/>
   <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
-  <link rel="stylesheet" href="managecomplaint.css" />
+  <link rel="stylesheet" href="archive.css" />
 </head>
 
 <body>
@@ -51,31 +51,37 @@
 
         <!-- Controls -->
         <div class="controls">
-          <div class="controls-left">
-            <div class="search-box">
-              <i class="fas fa-search"></i>
-              <input type="text" id="searchInput" placeholder="Search complaints..." />
+            <div class="controls-left">
+                <div class="search-box">
+                    <i class="fas fa-search"></i>
+                    <input type="text" id="searchInput" placeholder="Search complaints..." />
+                </div>
+                <div class="sort-box">
+                <i class="fas fa-filter"></i>
+                    <select id="sortSelect">
+                        <option value="newest">Newest to Oldest</option>
+                        <option value="oldest">Oldest to Newest</option>
+                    </select>
+                </div>
             </div>
-            <div class="sort-box">
-              <i class="fas fa-filter"></i>
-              <select id="sortSelect">
-                <option value="newest">Newest to Oldest</option>
-                <option value="oldest">Oldest to Newest</option>
-              </select>
-            </div>
-          </div>
-          <div class="results-info" id="resultsInfo">
+
+            <div class="results-info" id="resultsInfo">
             Showing 1-5 of 5 complaints
-          </div>
+            </div>
 
-        <div class="archive-button">
-          <a href="archive.html" class="status-btn btn-archive">
-            <i class="fas fa-folder"></i> Archive Folder
-          </a>
+            <div class="button-left">
+            
+            <button class="status-btn btn-restore" onclick="restoreComplaint(1)"> 
+            <i class="fa fa-undo"></i> Restore Complaint
+            </button>
 
-          <button class="status-btn btn-archive" onclick="archiveSelectedComplaints()">
-            <i class="fas fa-box-archive"></i> Archive
-          </button>
+            <a href="manageComplaints.html" class="status-btn btn-restore">
+            <i class="fa fa-folder"></i> Complaint
+            </a>
+
+            <button class="status-btn btn-delete" onclick="deleteSelectedArchivedComplaints()">
+            <i class="fas fa-trash"></i> Delete
+            </button>
 
         </div>  
       </div>
@@ -84,18 +90,18 @@
 
 
         <!-- Complaints Table -->
-        <table class="complaints-table">
-          <thead>
+      <table class="complaints-table">
+        <thead>
             <tr>
-              <th>Date Filed</th>
-              <th>Complainant</th>
-              <th>Respondent</th>
-              <th>Type of Complaint</th>
-              <th>Status</th>
-              <th>Action</th>
+                <th>Date Filed</th>
+                <th>Complainant</th>
+                <th>Respondent</th>
+                <th>Type of Complaint</th>
+                <th>Status</th>
+                <th>Action</th> <!-- Checkbox for restore/delete -->
             </tr>
-          </thead>
-          <tbody id="complaintsTableBody">
+        </thead>
+          <tbody id="archiveTableBody">
             <!-- Table rows will be populated by JavaScript -->
           </tbody>
         </table>
@@ -182,142 +188,55 @@
 
   
   <script>
-    // Sample complaints data with detailed information
-    let complaints = [
-      {
-        id: 1,
-        dateFiled: '06/09/25',
-        complainant: 'Vasquez, Ma. Elaine B.',
-        respondent: 'Ackermann, Mikasa',
-        type: 'Noise complaint',
-        status: 'On going',
-        age: 31,
-        gender: 'Female',
-        address: '123 Main Street, Barangay Market Area',
-        contact: '09178920304',
-        email: 'elaine.vasquez@gmail.com',
-        incidentDate: '06/08/25',
-        incidentTime: '2:00 AM',
-        location: 'Rawr Street, ABC',
-        description: 'Loud music and shouting from neighbor\'s house during late hours. This has been happening for several nights and is disturbing the peace of the neighborhood.',
-        witnessName: 'Juan Santos',
-        witnessContact: '09123456789',
-        assignedTo: 'Officer Rodriguez',
-        appointmentDate: '06/15/25, 10:00 AM'
-      },
-      {
-        id: 2,
-        dateFiled: '06/01/25',
-        complainant: 'Ackermann, Mikasa',
-        respondent: 'Vasquez, Ma. Elaine B.',
-        type: 'Property disputes',
-        status: 'Resolved',
-        age: 28,
-        gender: 'Female',
-        address: '456 Oak Avenue, Barangay Market Area',
-        contact: '09187654321',
-        email: 'mikasa.ackermann@gmail.com',
-        incidentDate: '05/30/25',
-        incidentTime: '3:00 PM',
-        location: 'Property boundary line',
-        description: 'Dispute over property boundary lines and fence placement. Neighbor has built a fence that encroaches on my property.',
-        witnessName: 'Maria Cruz',
-        witnessContact: '09198765432',
-        assignedTo: 'Officer Martinez',
-        appointmentDate: 'Resolved on 06/05/25'
-      },
-      {
-        id: 3,
-        dateFiled: '05/28/25',
-        complainant: 'Santos, Juan Carlos',
-        respondent: 'Dela Cruz, Maria',
-        type: 'Garbage disposal',
-        status: 'Abandoned',
-        age: 45,
-        gender: 'Male',
-        address: '789 Pine Street, Barangay Market Area',
-        contact: '09176543210',
-        email: 'juan.santos@gmail.com',
-        incidentDate: '05/27/25',
-        incidentTime: '6:00 AM',
-        location: 'Front of complainant\'s house',
-        description: 'Improper garbage disposal by neighbor, causing foul smell and attracting pests.',
-        witnessName: '',
-        witnessContact: '',
-        assignedTo: 'Case Closed',
-        appointmentDate: 'N/A'
-      },
-      {
-        id: 4,
-        dateFiled: '05/25/25',
-        complainant: 'Rodriguez, Ana',
-        respondent: 'Garcia, Pedro',
-        type: 'Public safety',
-        status: 'On going',
-        age: 35,
-        gender: 'Female',
-        address: '321 Elm Street, Barangay Market Area',
-        contact: '09165432109',
-        email: 'ana.rodriguez@gmail.com',
-        incidentDate: '05/24/25',
-        incidentTime: '8:00 PM',
-        location: 'Community playground',
-        description: 'Unsafe conditions at the community playground due to broken equipment and poor lighting.',
-        witnessName: 'Carlos Lopez',
-        witnessContact: '09154321098',
-        assignedTo: 'Officer Gonzales',
-        appointmentDate: '05/30/25, 2:00 PM'
-      },
-      {
-        id: 5,
-        dateFiled: '05/20/25',
-        complainant: 'Lopez, Carmen',
-        respondent: 'Martinez, Jose',
-        type: 'Noise complaint',
-        status: 'Resolved',
-        age: 42,
-        gender: 'Female',
-        address: '654 Maple Drive, Barangay Market Area',
-        contact: '09143210987',
-        email: 'carmen.lopez@gmail.com',
-        incidentDate: '05/19/25',
-        incidentTime: '11:00 PM',
-        location: 'Residential area',
-        description: 'Loud construction work during prohibited hours causing disturbance to residents.',
-        witnessName: 'Roberto Silva',
-        witnessContact: '09132109876',
-        assignedTo: 'Officer Reyes',
-        appointmentDate: 'Resolved on 05/25/25'
-      },
-      {
-        id: 6,
-        dateFiled: '06/09/25',
-        complainant: 'Vasquez, Ma. Elaine B.',
-        respondent: 'Ackermann, Mikasa',
-        type: 'Noise complaint',
-        status: 'On going',
-        age: 31,
-        gender: 'Female',
-        address: '123 Main Street, Barangay Market Area',
-        contact: '09178920304',
-        email: 'elaine.vasquez@gmail.com',
-        incidentDate: '06/08/25',
-        incidentTime: '2:00 AM',
-        location: 'Rawr Street, ABC',
-        description: 'Loud music and shouting from neighbor\'s house during late hours. This has been happening for several nights and is disturbing the peace of the neighborhood.',
-        witnessName: 'Juan Santos',
-        witnessContact: '09123456789',
-        assignedTo: 'Officer Rodriguez',
-        appointmentDate: '06/15/25, 10:00 AM'
-      }
-    ];
+    
 
-    // Remove archived from visible complaints
-    const archivedIds = JSON.parse(localStorage.getItem('archivedIds') || '[]');
-    complaints = complaints.filter(c => !archivedIds.includes(String(c.id)));
+// Get current archived complaints from localStorage
+const archivedComplaints = JSON.parse(localStorage.getItem('archivedComplaints') || '[]');
+
+// Push selected complaints to it
+selectedIds.forEach(id => {
+  const complaint = complaints.find(c => String(c.id) === id);
+  if (complaint && !archivedComplaints.some(ac => ac.id === complaint.id)) {
+    archivedComplaints.push(complaint);
+  }
+});
+
+// Save updated archive list
+localStorage.setItem('archivedComplaints', JSON.stringify(archivedComplaints));
 
 
+
+    const allComplaints = JSON.parse(localStorage.getItem('complaints') || '[]');
+
+    // Filter complaints that are archived and not deleted
+    const complaints = allComplaints.filter(c =>
+    archivedIds.has(String(c.id)) && !deletedIds.has(String(c.id))
+    );
+
+
+// Load archived complaint data
+const archivedData = JSON.parse(localStorage.getItem('archivedComplaints') || '[]');
+const deletedIds = new Set(JSON.parse(localStorage.getItem('deletedIds') || '[]'));
+
+// Get ?ids=1,2,3 from the URL
+const params = new URLSearchParams(window.location.search);
+const idString = params.get('ids');
+const queryArchivedIds = idString ? idString.split(',') : [];
+
+// Filter only archived complaints that match the query and aren’t deleted
+const complaintsToShow = archivedData.filter(c =>
+  queryArchivedIds.includes(String(c.id)) && !deletedIds.has(String(c.id))
+);
+
+    // Filter complaints to show only archived and not deleted
+    const filtered = complaints.filter(c => 
+    archivedIds.has(String(c.id)) && !deletedIds.has(String(c.id))
+    );
+
+
+    // Then initialize filtered list (for search/sort)
     let filteredComplaints = [...complaints];
+
     let currentPage = 1;
     const complaintsPerPage = 5;
 
@@ -353,7 +272,7 @@
 
     // Update table
     function updateTable() {
-      const tbody = document.getElementById('complaintsTableBody');
+      const tbody = document.getElementById('archiveTableBody');
       const emptyState = document.getElementById('emptyState');
       const startIndex = (currentPage - 1) * complaintsPerPage;
       const endIndex = startIndex + complaintsPerPage;
@@ -381,7 +300,7 @@
                 <button class="action-btn" onclick="viewComplaint(${complaint.id})" title="View Details">
                   <i class="fas fa-eye"></i> View
                 </button>
-                <input type="checkbox" class="complaint-checkbox" data-id="${complaint.id}" title="Select for archive" />
+                <input type="checkbox" class="complaint-checkbox" data-id="${complaint.id}" />
               </div>
             </td>
 
@@ -715,8 +634,20 @@
       }
     });
 
+    //arr arr
+        searchInput.addEventListener('input', () => {
+      currentPage = 1;
+      updateTable();
+    });
 
+    sortSelect.addEventListener('change', () => {
+      updateTable();
+    });
 
+    function toggleDropdown1() {
+      const menu = document.getElementById('dropdownMenu');
+      menu.style.display = menu.style.display === 'block' ? 'none' : 'block';
+    }
 
     window.onclick = function (event) {
       if (!event.target.closest('.profile-container')) {
@@ -733,6 +664,12 @@
       });
     }    
 
+    function toggleDropdown() {
+      const dropdown = document.getElementById('dropdownMenu');
+      const notif = document.getElementById('notifPopup');
+      notif.style.display = 'none'; // hide notif popup
+      dropdown.style.display = dropdown.style.display === 'block' ? 'none' : 'block';
+    }
 
     function openNotifFromDropdown(event) {
       event.preventDefault();
@@ -762,6 +699,15 @@
       document.getElementById('termsModal').style.display = 'none';
     }
 
+    // Open modal
+    function openModal() {
+      document.getElementById("termsModal").style.display = "block";
+    }
+
+    // Close modal
+    function closeModal() {
+      document.getElementById("termsModal").style.display = "none";
+    }
 
     
     searchInput.addEventListener('input', () => {
@@ -925,41 +871,82 @@ function confirmLogoutAction() {
   });
 
   //ARCHIVE BUTTON
-  function archiveSelectedComplaints() {
+function archiveSelectedComplaints() {
+  const checkboxes = document.querySelectorAll('.complaint-checkbox:checked');
+  const selectedIds = Array.from(checkboxes).map(cb => cb.getAttribute('data-id'));
+
+  if (selectedIds.length === 0) {
+    alert("Please select at least one complaint to archive.");
+    return;
+  }
+
+  // ✅ Update localStorage with archived IDs
+  let archivedIds = JSON.parse(localStorage.getItem('archivedIds') || '[]');
+  selectedIds.forEach(id => {
+    if (!archivedIds.includes(id)) {
+      archivedIds.push(id);
+    }
+  });
+  localStorage.setItem('archivedIds', JSON.stringify(archivedIds));
+
+  // ✅ Optionally, remove them from the active complaint list in localStorage
+  let complaints = JSON.parse(localStorage.getItem('complaints') || '[]');
+  complaints = complaints.filter(c => !selectedIds.includes(String(c.id)));
+  localStorage.setItem('complaints', JSON.stringify(complaints));
+
+  alert("Selected complaints have been archived.");
+
+  // ✅ Refresh table (if your table is dynamic)
+  location.reload(); // This will reload the page so the archived items disappear from the list
+}
+
+  //restore complaint
+    function restoreComplaint(id) {
+    let archivedIds = JSON.parse(localStorage.getItem('archivedIds') || '[]');
+    archivedIds = archivedIds.filter(cid => cid != id);
+    localStorage.setItem('archivedIds', JSON.stringify(archivedIds));
+
+    alert(`Complaint #${id} has been restored to Manage Complaints.`);
+    location.reload(); // Refresh to update the archive table
+    }
+
+
+    //delete button
+    function deleteSelectedArchivedComplaints() {
     const checkboxes = document.querySelectorAll('.complaint-checkbox:checked');
     const selectedIds = Array.from(checkboxes).map(cb => cb.getAttribute('data-id'));
 
     if (selectedIds.length === 0) {
-      alert("Please select at least one complaint to archive.");
-      return;
+        alert("Please select at least one complaint to delete.");
+        return;
     }
 
-    // ✅ Store archived IDs in localStorage
-    const archived = JSON.parse(localStorage.getItem('archivedIds') || '[]');
+    if (!confirm("Are you sure you want to delete the selected complaint(s)?")) return;
+
+    // Get current archive and deleted ID lists
+    let archivedIds = JSON.parse(localStorage.getItem('archivedIds') || '[]');
+    let deletedIds = JSON.parse(localStorage.getItem('deletedIds') || '[]');
+
+    // Move selected IDs from archive to deleted
     selectedIds.forEach(id => {
-      if (!archived.includes(id)) archived.push(id);
-    });
-    localStorage.setItem('archivedIds', JSON.stringify(archived));
-
-    // ✅ Redirect to archive page with IDs in query string
-    const queryString = '?ids=' + selectedIds.join(',');
-    window.location.href = 'archive.html' + queryString;
-  }
-
-
-  fetch('complaints.json')
-    .then(res => res.json())
-    .then(data => {
-      complaints = data;
-      filteredComplaints = [...complaints];
-      updateTable();
-      updateResultsInfo();
+        // Remove from archived
+        archivedIds = archivedIds.filter(aid => aid !== id);
+        // Add to deleted if not already there
+        if (!deletedIds.includes(id)) {
+        deletedIds.push(id);
+        }
     });
 
+    // Save updated arrays
+    localStorage.setItem('archivedIds', JSON.stringify(archivedIds));
+    localStorage.setItem('deletedIds', JSON.stringify(deletedIds));
 
-  localStorage.setItem('complaints', JSON.stringify(complaints));
+    alert("Selected complaints have been deleted from the archive.");
+    location.reload();
+    }
 
-
+    restoreComplaint(id)
+    deleteSelectedArchivedComplaints()
 
   </script>
 </body>
