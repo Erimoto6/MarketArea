@@ -669,7 +669,7 @@ font-size: 14px;
 color: #6b7280;
 }
 
-.archive-button {
+.button-left {
   display: flex; 
   justify-content: flex-end; 
   align-items: center; 
@@ -677,9 +677,21 @@ color: #6b7280;
   gap: 20px; 
 }
 
-.archive-button a {
+.button-left a {
   text-decoration: none;
 }
+
+
+.btn-restore {
+    background: linear-gradient(135deg, #260677, #08003b);
+    color: white;
+}
+
+.btn-delete {
+    background: linear-gradient(135deg, #770606, #3b0000);
+    color: white;
+}
+
 
 /* Complaints Table */
 .complaints-table {
