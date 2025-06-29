@@ -83,6 +83,11 @@
         gap: 20px;
       }
 
+      .profile-avatar-container {
+        position: relative;
+        flex-shrink: 0;
+      }
+
       .profile-avatar {
         width: 70px;
         height: 70px;
@@ -93,7 +98,46 @@
         justify-content: center;
         font-size: 28px;
         color: white;
-        flex-shrink: 0;
+        overflow: hidden;
+        position: relative;
+      }
+
+      .profile-avatar img {
+        width: 100%;
+        height: 100%;
+        object-fit: cover;
+        border-radius: 50%;
+        position: absolute;
+        top: 0;
+        left: 0;
+      }
+
+      .profile-picture-upload {
+        position: absolute;
+        bottom: -5px;
+        right: -5px;
+        width: 25px;
+        height: 25px;
+        border-radius: 50%;
+        background-color: #6a7337;
+        border: 2px solid white;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        cursor: pointer;
+        font-size: 10px;
+        color: white;
+        transition: all 0.3s ease;
+        box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
+      }
+
+      .profile-picture-upload:hover {
+        background-color: #4b5320;
+        transform: scale(1.1);
+      }
+
+      .profile-picture-input {
+        display: none;
       }
 
       .profile-info {
@@ -142,6 +186,7 @@
 
       .form-group {
         margin-bottom: 15px;
+        position: relative;
       }
 
       .form-group label {
@@ -165,6 +210,30 @@
       .form-group select:focus {
         outline: none;
         border-color: #6a7337;
+      }
+
+      /* Password input with eye icon */
+      .password-input-container {
+        position: relative;
+      }
+
+      .password-input-container input {
+        padding-right: 40px;
+      }
+
+      .password-toggle {
+        position: absolute;
+        right: 10px;
+        top: 50%;
+        transform: translateY(-50%);
+        cursor: pointer;
+        color: #666;
+        font-size: 16px;
+        transition: color 0.3s;
+      }
+
+      .password-toggle:hover {
+        color: #6a7337;
       }
 
       .checkbox-group {
@@ -291,6 +360,15 @@
         opacity: 0.9;
       }
 
+      /* Validation modal styles */
+      .validation-modal .modal-icon {
+        color: #e74c3c;
+      }
+
+      .validation-modal .modal-btn-confirm {
+        background-color: #6a7337;
+      }
+
       /* Success message */
       .success-message {
         display: none;
@@ -301,6 +379,16 @@
         border-radius: 4px;
         text-align: center;
         animation: fadeIn 0.5s;
+      }
+
+      /* Form validation error styles */
+      .form-group input.error {
+        border-color: #e74c3c;
+        background-color: #fdf2f2;
+      }
+
+      .form-group input.error:focus {
+        border-color: #e74c3c;
       }
 
       /* Animations */
@@ -369,8 +457,15 @@
 
       <!-- Profile Section -->
       <div class="profile-section">
-        <div class="profile-avatar">
-          <i class="fas fa-user"></i>
+        <div class="profile-avatar-container">
+          <div class="profile-avatar" id="profileAvatar">
+            <i class="fas fa-user" id="profileIcon"></i>
+            <img id="profileImage" style="display: none;" alt="Profile Picture">
+          </div>
+          <div class="profile-picture-upload" onclick="document.getElementById('profilePictureInput').click()">
+            <i class="fas fa-camera"></i>
+          </div>
+          <input type="file" id="profilePictureInput" class="profile-picture-input" accept="image/*">
         </div>
         <div class="profile-info">
           <div class="profile-name">John Doe</div>
@@ -414,30 +509,39 @@
         <form id="passwordForm">
           <div class="form-group">
             <label for="currentPassword">Current Password</label>
-            <input
-              type="password"
-              id="currentPassword"
-              placeholder="Enter current password"
-              required
-            />
+            <div class="password-input-container">
+              <input
+                type="password"
+                id="currentPassword"
+                placeholder="Enter current password"
+                required
+              />
+              <i class="fas fa-eye password-toggle" onclick="togglePassword('currentPassword')"></i>
+            </div>
           </div>
           <div class="form-group">
             <label for="newPassword">New Password</label>
-            <input
-              type="password"
-              id="newPassword"
-              placeholder="Enter new password"
-              required
-            />
+            <div class="password-input-container">
+              <input
+                type="password"
+                id="newPassword"
+                placeholder="Enter new password"
+                required
+              />
+              <i class="fas fa-eye password-toggle" onclick="togglePassword('newPassword')"></i>
+            </div>
           </div>
           <div class="form-group">
             <label for="confirmPassword">Confirm New Password</label>
-            <input
-              type="password"
-              id="confirmPassword"
-              placeholder="Confirm new password"
-              required
-            />
+            <div class="password-input-container">
+              <input
+                type="password"
+                id="confirmPassword"
+                placeholder="Confirm new password"
+                required
+              />
+              <i class="fas fa-eye password-toggle" onclick="togglePassword('confirmPassword')"></i>
+            </div>
           </div>
           <button type="submit" class="btn">Update Password</button>
           <div id="passwordSuccess" class="success-message">
@@ -471,7 +575,63 @@
       </div>
     </div>
 
+    <!-- Validation Modal -->
+    <div id="validationModal" class="modal validation-modal">
+      <div class="modal-content">
+        <i class="fa-solid fa-circle-exclamation modal-icon"></i>
+        <h3 id="validationTitle">Validation Error</h3>
+        <p id="validationMessage">Please fix the errors and try again.</p>
+        <div class="modal-buttons">
+          <button id="validationOk" class="modal-btn modal-btn-confirm">
+            OK
+          </button>
+        </div>
+      </div>
+    </div>
+
     <script>
+      // Profile picture upload functionality
+      document.getElementById('profilePictureInput').addEventListener('change', function(e) {
+        const file = e.target.files[0];
+        if (file) {
+          // Validate file type
+          if (!file.type.startsWith('image/')) {
+            showValidationModal("Invalid File Type", "Please select a valid image file (JPG, PNG, GIF, etc.)");
+            this.value = ''; // Clear the input
+            return;
+          }
+
+          // Validate file size (5MB limit)
+          const maxSize = 5 * 1024 * 1024; // 5MB in bytes
+          if (file.size > maxSize) {
+            showValidationModal("File Too Large", "Please select an image smaller than 5MB");
+            this.value = ''; // Clear the input
+            return;
+          }
+
+          const reader = new FileReader();
+          reader.onload = function(e) {
+            const profileImage = document.getElementById('profileImage');
+            const profileIcon = document.getElementById('profileIcon');
+            
+            // Set the image source and show it
+            profileImage.src = e.target.result;
+            profileImage.style.display = 'block';
+            
+            // Hide the default icon
+            profileIcon.style.display = 'none';
+
+            console.log('Profile picture updated successfully');
+          };
+          
+          reader.onerror = function() {
+            showValidationModal("Upload Error", "There was an error reading the image file. Please try again.");
+          };
+          
+          reader.readAsDataURL(file);
+        }
+      });
+
       // Back button functionality
       function goBack() {
         // You can customize this to go to a specific page
@@ -482,16 +642,113 @@
         // window.location.href = 'dashboard.html';
       }
 
+      // Password toggle functionality
+      function togglePassword(fieldId) {
+        const field = document.getElementById(fieldId);
+        const icon = field.nextElementSibling;
+        
+        if (field.type === 'password') {
+          field.type = 'text';
+          icon.classList.remove('fa-eye');
+          icon.classList.add('fa-eye-slash');
+        } else {
+          field.type = 'password';
+          icon.classList.remove('fa-eye-slash');
+          icon.classList.add('fa-eye');
+        }
+      }
+
+      // Validation functions
+      function validateEmail(email) {
+        const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+        return emailRegex.test(email);
+      }
+
+      function validatePhone(phone) {
+        const phoneRegex = /^[\+]?[1-9][\d]{0,15}$/;
+        return phoneRegex.test(phone.replace(/[\s\-\(\)]/g, ''));
+      }
+
+      function validatePassword(password) {
+        // At least 8 characters, one uppercase, one lowercase, one number
+        const passwordRegex = /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)[a-zA-Z\d@$!%*?&]{8,}$/;
+        return passwordRegex.test(password);
+      }
+
+      function showValidationModal(title, message, errorFields = []) {
+        // Clear previous error styling
+        document.querySelectorAll('.form-group input').forEach(input => {
+          input.classList.remove('error');
+        });
+
+        // Add error styling to specific fields
+        errorFields.forEach(fieldId => {
+          const field = document.getElementById(fieldId);
+          if (field) {
+            field.classList.add('error');
+          }
+        });
+
+        // Show modal
+        document.getElementById('validationTitle').textContent = title;
+        document.getElementById('validationMessage').textContent = message;
+        document.getElementById('validationModal').style.display = 'flex';
+      }
+
+      function closeValidationModal() {
+        document.getElementById('validationModal').style.display = 'none';
+        // Clear error styling
+        document.querySelectorAll('.form-group input').forEach(input => {
+          input.classList.remove('error');
+        });
+      }
+
       // Account form submission
       document
         .getElementById("accountForm")
         .addEventListener("submit", function (e) {
           e.preventDefault();
           
+          const fullName = document.getElementById("fullName").value.trim();
+          const email = document.getElementById("email").value.trim();
+          const phoneNumber = document.getElementById("phoneNumber").value.trim();
+          
+          let errors = [];
+          let errorFields = [];
+
+          // Validate full name
+          if (!fullName) {
+            errors.push("Full name is required");
+            errorFields.push("fullName");
+          } else if (fullName.length < 2) {
+            errors.push("Full name must be at least 2 characters");
+            errorFields.push("fullName");
+          }
+
+          // Validate email
+          if (!email) {
+            errors.push("Email is required");
+            errorFields.push("email");
+          } else if (!validateEmail(email)) {
+            errors.push("Please enter a valid email address");
+            errorFields.push("email");
+          }
+
+          // Validate phone number (optional but must be valid if provided)
+          if (phoneNumber && !validatePhone(phoneNumber)) {
+            errors.push("Please enter a valid phone number");
+            errorFields.push("phoneNumber");
+          }
+
+          if (errors.length > 0) {
+            showValidationModal("Account Settings Error", errors.join("\n"), errorFields);
+            return;
+          }
+
           const formData = {
-            fullName: document.getElementById("fullName").value,
-            email: document.getElementById("email").value,
-            phoneNumber: document.getElementById("phoneNumber").value
+            fullName: fullName,
+            email: email,
+            phoneNumber: phoneNumber
           };
 
           // In a real app, you would send this to your backend
@@ -516,9 +773,41 @@
           const newPassword = document.getElementById("newPassword").value;
           const confirmPassword = document.getElementById("confirmPassword").value;
 
-          // Simple validation
-          if (newPassword !== confirmPassword) {
-            alert("Passwords don't match!");
+          let errors = [];
+          let errorFields = [];
+
+          // Validate current password
+          if (!currentPassword) {
+            errors.push("Current password is required");
+            errorFields.push("currentPassword");
+          }
+
+          // Validate new password
+          if (!newPassword) {
+            errors.push("New password is required");
+            errorFields.push("newPassword");
+          } else if (!validatePassword(newPassword)) {
+            errors.push("New password must be at least 8 characters with uppercase, lowercase, and number");
+            errorFields.push("newPassword");
+          }
+
+          // Validate confirm password
+          if (!confirmPassword) {
+            errors.push("Please confirm your new password");
+            errorFields.push("confirmPassword");
+          } else if (newPassword !== confirmPassword) {
+            errors.push("Passwords don't match");
+            errorFields.push("newPassword", "confirmPassword");
+          }
+
+          // Check if new password is same as current
+          if (currentPassword && newPassword && currentPassword === newPassword) {
+            errors.push("New password must be different from current password");
+            errorFields.push("newPassword");
+          }
+
+          if (errors.length > 0) {
+            showValidationModal("Password Change Error", errors.join("\n"), errorFields);
             return;
           }
 
@@ -567,11 +856,24 @@
         window.location.href = "staffLogin.html";
       });
 
-      // Close modal when clicking outside
+      // Validation modal OK button
+      document.getElementById("validationOk").addEventListener("click", closeValidationModal);
+
+      // Close modals when clicking outside
       window.addEventListener("click", function (e) {
         if (e.target === logoutModal) {
           logoutModal.style.display = "none";
         }
+        if (e.target === document.getElementById("validationModal")) {
+          closeValidationModal();
+        }
+      });
+
+      // Clear error styling when user starts typing
+      document.querySelectorAll('.form-group input').forEach(input => {
+        input.addEventListener('input', function() {
+          this.classList.remove('error');
+        });
       });
     </script>
   </body>
