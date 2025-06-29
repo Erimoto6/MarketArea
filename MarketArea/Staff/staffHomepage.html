@@ -21,7 +21,7 @@
         <ul class="nav-list">
           <li><a href="staffHomepage.html">Home</a></li>
           <li><a href="manageComplaints.html">Manage Complaints</a></li>
-          <li><a href="#">Message</a></li>
+          <li><a href="Message.html">Message</a></li>
           <li><a href="settings.html">Settings</a></li>
         </ul>
       </nav>
@@ -67,9 +67,9 @@
         <!-- Metrics Charts -->
         <div class="metrics-charts">
           <div class="chart-box">
-            <h3>Number of Complaints Over Time</h3>
+            <h3>Complaint Status Overview</h3>
             <div class="chart-container">
-              <canvas id="complaintsLineChart"></canvas>
+              <canvas id="complaintsStatusChart"></canvas>
             </div>
           </div>
           <div class="chart-box">
@@ -98,46 +98,28 @@
       });
 
       function initializeCharts() {
-        // Line Chart for Complaints Over Time
-        const lineCtx = document
-          .getElementById("complaintsLineChart")
+        // Status Chart for Complaint Status (Pending, In Progress, Resolved) - Updated with green palette
+        const statusCtx = document
+          .getElementById("complaintsStatusChart")
           .getContext("2d");
-        new Chart(lineCtx, {
+        new Chart(statusCtx, {
           type: "bar",
           data: {
-            labels: [
-              "Jan",
-              "Feb",
-              "Mar",
-              "Apr",
-              "May",
-              "Jun",
-              "Jul",
-              "Aug",
-              "Sep",
-              "Oct",
-              "Nov",
-              "Dec",
-            ],
+            labels: ["Pending", "In Progress", "Resolved"],
             datasets: [
               {
                 label: "Number of Complaints",
-                data: [12, 19, 8, 15, 22, 18, 10, 14, 11, 17, 9, 13], // Example data
+                data: [8, 5, 12], // Example data: 8 pending, 5 in progress, 12 resolved
                 backgroundColor: [
-                  "rgba(106, 115, 55, 0.8)",
-                  "rgba(184, 160, 91, 0.8)",
-                  "rgba(75, 83, 32, 0.8)",
-                  "rgba(138, 148, 86, 0.8)",
-                  "rgba(27, 33, 9, 0.8)",
-                  "rgba(106, 115, 55, 0.5)",
-                  "rgba(184, 160, 91, 0.6)",
-                  "rgba(75, 83, 32, 0.7)",
-                  "rgba(138, 148, 86, 0.6)",
-                  "rgba(27, 33, 9, 0.7)",
-                  "rgba(106, 115, 55, 0.4)",
-                  "rgba(184, 160, 91, 0.5)",
+                  "rgba(184, 160, 91, 0.8)",   // Light olive for Pending
+                  "rgba(138, 148, 86, 0.8)",   // Medium olive for In Progress
+                  "rgba(106, 115, 55, 0.8)"    // Dark olive for Resolved
                 ],
-                borderColor: "#6A7337",
+                borderColor: [
+                  "#B8A05B",  // Light olive border
+                  "#8A9456",  // Medium olive border
+                  "#6A7337"   // Dark olive border
+                ],
                 borderWidth: 2,
                 borderRadius: 8,
                 borderSkipped: false,
@@ -168,6 +150,7 @@
                 },
                 ticks: {
                   color: "#7f8c8d",
+                  stepSize: 1, // Show whole numbers only
                 },
               },
               x: {
@@ -268,17 +251,16 @@
       }
 
       // highlighted nav
+      document.addEventListener('DOMContentLoaded', function() {
+        const currentUrl = window.location.href;
+        const navLinks = document.querySelectorAll('.nav-list a');
 
-       document.addEventListener('DOMContentLoaded', function() {
-    const currentUrl = window.location.href;
-    const navLinks = document.querySelectorAll('.nav-list a');
-
-    navLinks.forEach(link => {
-      if (currentUrl.includes(link.getAttribute('href'))) {
-        link.classList.add('active');
-      }
-    });
-  });
+        navLinks.forEach(link => {
+          if (currentUrl.includes(link.getAttribute('href'))) {
+            link.classList.add('active');
+          }
+        });
+      });
     </script>
   </body>
 </html>
