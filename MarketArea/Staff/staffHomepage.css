@@ -1,10 +1,8 @@
-
-      /* Base Reset and Fonts */
-
 * {
   box-sizing: border-box;
   margin: 0;
   padding: 0;
+
 }
 
 html {
@@ -185,25 +183,30 @@ nav .nav-list {
   font-weight: 500;
 }
 
-/* Main Content Wrapper */
+/* Main Content Wrapper - centers the dashboard */
 .main-content {
-  padding: 40px 20px;
+  min-height: 100vh;
   display: flex;
-  justify-content: center;
-  align-items: flex-start;
-  margin-top: 40px;
+  justify-content: center;  /* Center horizontally */
+  align-items: center;      /* Center vertically */
+  padding: 20px;
+  box-sizing: border-box;
+  background-size: cover;
+  background-position: center;
 }
 
-/* Quick Metrics Container - Compact Section Like Image */
+/* Quick Metrics Container - wider and slightly taller */
 .quick-metrics-container {
   background: rgba(255, 255, 255, 0.95);
   backdrop-filter: blur(5px);
   border-radius: 10px;
-  padding: 30px;
+  padding: 40px; /* Slightly more padding */
   box-shadow: 0 8px 25px rgba(0, 0, 0, 0.15);
   width: 100%;
-  max-width: 1400px;
-  margin: 0 auto;
+  max-width: 1600px; /* ← Increased from 1400px to 1600px */
+  display: flex;
+  flex-direction: column;
+  gap: 40px; /* More space between sections */
 }
 
 .banner-header {
@@ -211,7 +214,7 @@ nav .nav-list {
 }
 
 .banner-header h2 {
-  font-size: 2rem;
+  font-size: 3rem;
   color: #2c3e50;
   margin-bottom: 10px;
   font-weight: 900;
@@ -279,6 +282,7 @@ nav .nav-list {
   display: grid;
   grid-template-columns: repeat(auto-fit, minmax(400px, 1fr));
   gap: 25px;
+  flex: 1; /* Allow charts to grow vertically */
 }
 
 .chart-box {
@@ -288,8 +292,11 @@ nav .nav-list {
   box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
   transition: all 0.3s ease;
   min-height: 350px;
+  height: 100%;  /* ← Add this */
   max-width: 100%;
   overflow: hidden;
+  display: flex;
+  flex-direction: column;
 }
 
 .chart-box:hover {
@@ -308,10 +315,11 @@ nav .nav-list {
 
 .chart-container {
   position: relative;
-  height: 280px;
+  flex: 1;  /* ← Chart expands to fill parent */
   width: 100%;
   margin-top: 15px;
 }
+
 
 .chart-box canvas {
   position: absolute !important;
