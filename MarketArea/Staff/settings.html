@@ -369,6 +369,15 @@
         background-color: #6a7337;
       }
 
+      /* Confirmation modal styles */
+      .modal .modal-icon.fa-circle-question {
+        color: #3498db;
+      }
+
+      .modal .modal-icon.fa-shield-alt {
+        color: #e67e22;
+      }
+
       /* Success message */
       .success-message {
         display: none;
@@ -589,6 +598,40 @@
       </div>
     </div>
 
+    <!-- Confirmation Modal for Account Settings -->
+    <div id="accountConfirmModal" class="modal">
+      <div class="modal-content">
+        <i class="fa-solid fa-circle-question modal-icon"></i>
+        <h3>Confirm Account Update</h3>
+        <p>Are you sure you want to update your account settings?</p>
+        <div class="modal-buttons">
+          <button id="confirmAccountUpdate" class="modal-btn modal-btn-confirm">
+            Yes, Update
+          </button>
+          <button id="cancelAccountUpdate" class="modal-btn modal-btn-cancel">
+            Cancel
+          </button>
+        </div>
+      </div>
+    </div>
+
+    <!-- Confirmation Modal for Security Settings -->
+    <div id="securityConfirmModal" class="modal">
+      <div class="modal-content">
+        <i class="fa-solid fa-shield-alt modal-icon"></i>
+        <h3>Confirm Password Change</h3>
+        <p>Are you sure you want to change your password? This action cannot be undone.</p>
+        <div class="modal-buttons">
+          <button id="confirmPasswordUpdate" class="modal-btn modal-btn-confirm">
+            Yes, Change Password
+          </button>
+          <button id="cancelPasswordUpdate" class="modal-btn modal-btn-cancel">
+            Cancel
+          </button>
+        </div>
+      </div>
+    </div>
+
     <script>
       // Profile picture upload functionality
       document.getElementById('profilePictureInput').addEventListener('change', function(e) {
@@ -703,6 +746,10 @@
         });
       }
 
+      // Store form data temporarily for confirmation
+      let pendingAccountUpdate = null;
+      let pendingPasswordUpdate = null;
+
       // Account form submission
       document
         .getElementById("accountForm")
@@ -745,23 +792,15 @@
             return;
           }
 
-          const formData = {
+          // Store data for confirmation
+          pendingAccountUpdate = {
             fullName: fullName,
             email: email,
             phoneNumber: phoneNumber
           };
 
-          // In a real app, you would send this to your backend
-          console.log("Account settings updated:", formData);
-
-          // Show success message
-          const successMsg = document.getElementById("accountSuccess");
-          successMsg.style.display = "block";
-
-          // Hide after 3 seconds
-          setTimeout(() => {
-            successMsg.style.display = "none";
-          }, 3000);
+          // Show confirmation modal
+          document.getElementById("accountConfirmModal").style.display = "flex";
         });
 
       // Password form submission
@@ -811,20 +850,14 @@
             return;
           }
 
-          // In a real app, you would send this to your backend
-          console.log("Password change requested");
+          // Store data for confirmation
+          pendingPasswordUpdate = {
+            currentPassword: currentPassword,
+            newPassword: newPassword
+          };
 
-          // Show success message
-          const successMsg = document.getElementById("passwordSuccess");
-          successMsg.style.display = "block";
-
-          // Hide after 3 seconds
-          setTimeout(() => {
-            successMsg.style.display = "none";
-          }, 3000);
-
-          // Clear form
-          this.reset();
+          // Show confirmation modal
+          document.getElementById("securityConfirmModal").style.display = "flex";
         });
 
       // Logout functionality
@@ -859,6 +892,65 @@
       // Validation modal OK button
       document.getElementById("validationOk").addEventListener("click", closeValidationModal);
 
+      // Account confirmation modal handlers
+      document.getElementById("confirmAccountUpdate").addEventListener("click", function() {
+        if (pendingAccountUpdate) {
+          // In a real app, you would send this to your backend
+          console.log("Account settings updated:", pendingAccountUpdate);
+
+          // Show success message
+          const successMsg = document.getElementById("accountSuccess");
+          successMsg.style.display = "block";
+
+          // Hide after 3 seconds
+          setTimeout(() => {
+            successMsg.style.display = "none";
+          }, 3000);
+
+          // Clear pending data
+          pendingAccountUpdate = null;
+        }
+        
+        // Close modal
+        document.getElementById("accountConfirmModal").style.display = "none";
+      });
+
+      document.getElementById("cancelAccountUpdate").addEventListener("click", function() {
+        pendingAccountUpdate = null;
+        document.getElementById("accountConfirmModal").style.display = "none";
+      });
+
+      // Security confirmation modal handlers
+      document.getElementById("confirmPasswordUpdate").addEventListener("click", function() {
+        if (pendingPasswordUpdate) {
+          // In a real app, you would send this to your backend
+          console.log("Password change requested");
+
+          // Show success message
+          const successMsg = document.getElementById("passwordSuccess");
+          successMsg.style.display = "block";
+
+          // Hide after 3 seconds
+          setTimeout(() => {
+            successMsg.style.display = "none";
+          }, 3000);
+
+          // Clear form
+          document.getElementById("passwordForm").reset();
+
+          // Clear pending data
+          pendingPasswordUpdate = null;
+        }
+        
+        // Close modal
+        document.getElementById("securityConfirmModal").style.display = "none";
+      });
+
+      document.getElementById("cancelPasswordUpdate").addEventListener("click", function() {
+        pendingPasswordUpdate = null;
+        document.getElementById("securityConfirmModal").style.display = "none";
+      });
+
       // Close modals when clicking outside
       window.addEventListener("click", function (e) {
         if (e.target === logoutModal) {
@@ -866,6 +958,14 @@
         }
         if (e.target === document.getElementById("validationModal")) {
           closeValidationModal();
+        }
+        if (e.target === document.getElementById("accountConfirmModal")) {
+          pendingAccountUpdate = null;
+          document.getElementById("accountConfirmModal").style.display = "none";
+        }
+        if (e.target === document.getElementById("securityConfirmModal")) {
+          pendingPasswordUpdate = null;
+          document.getElementById("securityConfirmModal").style.display = "none";
         }
       });
 
