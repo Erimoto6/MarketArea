@@ -174,7 +174,7 @@
         complainant: 'Vasquez, Ma. Elaine B.',
         respondent: 'Ackermann, Mikasa',
         type: 'Noise complaint',
-        status: 'In Progress',
+        status: 'Ongoing',
         age: 31,
         gender: 'Female',
         address: '123 Main Street, Barangay Market Area',
@@ -195,7 +195,7 @@
         complainant: 'Ackermann, Mikasa',
         respondent: 'Vasquez, Ma. Elaine B.',
         type: 'Property disputes',
-        status: 'Resolved',
+        status: 'Complete',
         age: 28,
         gender: 'Female',
         address: '456 Oak Avenue, Barangay Market Area',
@@ -216,7 +216,7 @@
         complainant: 'Santos, Juan Carlos',
         respondent: 'Dela Cruz, Maria',
         type: 'Garbage disposal',
-        status: 'Abandon',
+        status: 'Abandoned',
         age: 45,
         gender: 'Male',
         address: '789 Pine Street, Barangay Market Area',
@@ -237,7 +237,7 @@
         complainant: 'Rodriguez, Ana',
         respondent: 'Garcia, Pedro',
         type: 'Public safety',
-        status: 'In Progress',
+        status: 'Ongoing',
         age: 35,
         gender: 'Female',
         address: '321 Elm Street, Barangay Market Area',
@@ -258,7 +258,7 @@
         complainant: 'Lopez, Carmen',
         respondent: 'Martinez, Jose',
         type: 'Noise complaint',
-        status: 'Resolved',
+        status: 'Complete',
         age: 42,
         gender: 'Female',
         address: '654 Maple Drive, Barangay Market Area',
@@ -351,7 +351,8 @@
       switch (status) {
         case 'Complete': return 'fa-check-circle';
         case 'On Going': return 'fa-clock';
-        case 'Archive': return 'fa-times-circle';
+        case 'Archive': return 'fa-trash';
+        case 'Archive': return 'fa-times-circle';        
         default: return 'fa-exclamation-circle';
       }
     }
@@ -368,7 +369,19 @@
 
       const modalBody = document.getElementById('viewModalBody');
       modalBody.innerHTML = `
+
+        <div class="current-status">
+          <strong>Current Status:</strong> 
+          <span class="status-badge status-${complaint.status.toLowerCase().replace(' ', '')}">
+            <i class="fas ${getStatusIcon(complaint.status)} status-icon"></i>
+            ${complaint.status}
+          </span>
+        </div>
+
         <div class="complaint-details">
+
+
+
           <div class="complainant-info">
             <div class="info-row">
               <span class="info-label">Date Filed:</span>
@@ -470,25 +483,28 @@
             <i class="fas fa-cogs"></i>
             Status Management
           </h3>
-          <div class="current-status">
-            <strong>Current Status:</strong> 
-            <span class="status-badge status-${complaint.status.toLowerCase().replace(' ', '')}">
-              <i class="fas ${getStatusIcon(complaint.status)} status-icon"></i>
-              ${complaint.status}
-            </span>
-          </div>
+
           <div class="status-actions">
+            
             <button class="status-btn btn-resolve" onclick="updateStatus(${complaint.id}, 'Complete')" 
                     ${complaint.status === 'Complete' ? 'disabled' : ''}>
               <i class="fas fa-check"></i> Mark as Resolved
             </button>
+            
             <button class="status-btn btn-ongoing" onclick="updateStatus(${complaint.id}, 'On Going')" 
                     ${complaint.status === 'On Going' ? 'disabled' : ''}>
               <i class="fas fa-clock"></i> Mark as Ongoing
             </button>
+            
+            <button class="status-btn btn-abandoned" onclick="updateStatus(${complaint.id}, 'Abandoned')"
+                    ${complaint.status === 'Abandoned' ? 'disabled' : ''}>
+              <i class="fas fa-trash"></i> Abandoned Complaint
+            </button>
+
             <button class="status-btn btn-archive" onclick="updateStatus(${complaint.id}, 'Archive')">
               <i class="fas fa-archive"></i> Archive Complaint
             </button>
+
           </div>
         </div>
       `;
