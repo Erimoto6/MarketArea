@@ -189,7 +189,7 @@ nav .nav-list {
   display: flex;
   justify-content: center;  /* Center horizontally */
   align-items: center;      /* Center vertically */
-  padding: 20px;
+  padding: 80px 50px 40px;
   box-sizing: border-box;
   background-size: cover;
   background-position: center;
