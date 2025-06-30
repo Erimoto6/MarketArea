@@ -52,6 +52,11 @@ body.modal-open::-webkit-scrollbar {
   line-height: 1.1;
 }
 
+.barangay-market-area {
+    font-family: Trebuchet MS;
+    font-weight: 700;
+}
+
 /* Navigation section */
 .navbar {
     display: flex;

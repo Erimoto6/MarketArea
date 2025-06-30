@@ -42,7 +42,7 @@
 
 .barangay-market-area {
     font-family: Trebuchet MS;
-    font-weight: 900;
+    font-weight: 700;
 }
 
 .background-circles {
@@ -332,7 +332,7 @@
     transform: scaleX(0); /* Start with no width */
     transform-origin: center; /* Scale from center */
 }
-
+ 
 /* Hover states */
 .nav-links a:hover {
     background: rgba(255, 255, 255, 0.1);
