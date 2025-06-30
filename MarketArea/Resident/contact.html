@@ -68,49 +68,93 @@ body {
 }
 
 /* Navigation links */
-.navbar {
-  display: flex;
-  justify-content: space-between;
-  align-items: center; /* Vertically centers all children including .profile */
-  padding: 0 40px;
-}
+/* Navigation links */
+  /* Navigation section */
+        .navbar {
+            display: flex;
+            align-items: center;
+            padding: 0;
+            margin: 0;
+        }
 
-.nav-links {
-  display: flex;
-  padding-right: 50px;
-  gap: 40px;
-  font-weight: 300;
-  letter-spacing: 0.1em;
-  font-size: 18px;
-  color: #fff;
-  font-family: Trebuchet MS;
-}
+        .nav-links {
+            display: flex;
+            padding-right: 50px;
+            gap: 40px;
+            font-weight: 400;
+            letter-spacing: 0.1em;
+            font-size: 18px;
+            color: #fff;
+            font-family: 'Trebuchet MS', sans-serif;
+        }
 
-.nav-links a {
-  position: relative;
-  color: white; /* or any color you want */
-  text-decoration: none;
-  transition: color 0.3s ease;
-}
+        /* NAVIGATION LINKS WITH ACTIVE STATE */
+        .nav-links a {
+            position: relative;
+            color: white;
+            text-decoration: none;
+            padding: 8px 16px;
+            border-radius: 6px;
+            transition: all 0.3s ease;
+            display: inline-block;
+            font-weight: 500;
+        }
 
-.nav-links a::after {
-  content: "";
-  position: absolute;
-  bottom: -4px;
-  left: 0;
-  width: 0%;
-  height: 2px;
-  background-color: white; /* underline color */
-  transition: width 0.3s ease;
-}
+        /* Underline effect */
+        .nav-links a::after {
+            content: "";
+            position: absolute;
+            bottom: 2px;
+            left: 50%;
+            width: 0;
+            height: 2px;
+            background: linear-gradient(90deg, #D0B564, #f4e09b);
+            transition: all 0.3s ease;
+            transform: translateX(-50%);
+            border-radius: 2px;
+        }
 
-.nav-links a:hover {
-  color: #D0B564; /* optional: change link color on hover */
-}
+        /* Hover states */
+        .nav-links a:hover {
+            background-color: #71873f;
+            color: ;
+            background: rgba(255, 255, 255, 0.1);
+            transform: translateY(-2px);
+            text-shadow: 0 2px 4px rgba(0, 0, 0, 0.3);
+            box-shadow: 0 0 15px rgba(208, 181, 100, 0.3);
+        }
 
-.nav-links a:hover::after {
-  width: 100%;
-}
+        .nav-links a:hover::after {
+            width: 80%;
+        }
+
+        /* ACTIVE STATE - stays highlighted when clicked */
+        .nav-links a.active {
+            background-color: #71873f;
+            color: ;
+            background: rgba(255, 255, 255, 0.15);
+            text-shadow: 0 2px 4px rgba(0, 0, 0, 0.3);
+            box-shadow: 0 0 12px rgba(208, 181, 100, 0.4);
+        }
+
+        .nav-links a.active::after {
+            width: 100%;
+            height: 3px;
+            background: linear-gradient(90deg, #D0B564, #f4e09b);
+        }
+
+        /* Keep active state even on hover */
+        .nav-links a.active:hover {
+            transform: translateY(-1px);
+            box-shadow: 0 0 18px rgba(208, 181, 100, 0.5);
+        }
+
+        /* Pressed state */
+        .nav-links a:active {
+            transform: translateY(0);
+            background: rgba(255, 255, 255, 0.2);
+        }
+
 
 /*PROFILE SIDEBAR*/
 
@@ -966,7 +1010,7 @@ button a {
   			<div class="nav-links">
     			<a href="residentHomepage.html">Home</a>
     			<a href="my_complaints.html">My Complaints</a>
-    			<a href="contact.html">Contacts</a>
+    			<a href="contact.html" class="active">Contacts</a>
   			</div>
 
   		<!-- Profile + Sidebar Wrapper -->
