@@ -659,3 +659,30 @@
         justify-content: center;
       }
     }
+
+    /* Back Button Style */
+.back-link {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-right: 12px;
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+  background-color: #eee;
+  border: 1px solid #ccc;
+  text-decoration: none;
+  cursor: pointer;
+  transition: background-color 0.3s;
+}
+
+.back-link:hover {
+  background-color: #ddd;
+}
+
+.back-icon {
+  font-size: 20px;
+  font-weight: bold;
+  color: #333;
+  user-select: none;
+}
