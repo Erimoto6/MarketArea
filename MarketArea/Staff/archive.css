@@ -290,18 +290,10 @@ tbody tr:hover {
 
 .pagination {
   display: flex;
-  justify-content: center;
   align-items: center;
-  gap: 10px;
-
-  font-family: 'Arial', sans-serif;
-
-  /* Tighter margins */
-  margin-top: 0;
-  margin-bottom: 0;
-
-  /* Optional: reduce padding if parent container adds extra space */
-  padding: 0;
+  justify-content: center;
+  gap: 16px;
+  margin-top: 19px;
 }
 
 .pagination button {
@@ -652,6 +644,11 @@ color: #6b7280;
 
 
 .btn-restore {
+    background: linear-gradient(135deg, #5cb85c, #39cb39);
+    color: white;
+}
+
+.btn-complaint {
     background: linear-gradient(135deg, #3c59d7, #0b29b1);
     color: white;
 }

@@ -1,12 +1,14 @@
+html, body {
+  overflow: hidden;
+
+}
+
+
 body {
   margin: 0;
   font-family: "Trebuchet MS", sans-serif;
   background: url('files/marketareabg1.jpg') no-repeat center center fixed;
   background-size: cover;
-}
-
-html {
-  scroll-behavior: smooth;
 }
 
 /* Sticky Header Styling */
@@ -323,198 +325,17 @@ tbody tr:hover {
   background-color: #eee;
 }
 
-footer {
-  background-color: #333;
-  color: white;
-  display: flex;
-  justify-content: space-between;
-  padding: 20px 30px;
-  font-size: 0.9rem;
-  flex-wrap: wrap;
-}
-
-footer .leftside {
-  display: flex;
-  flex-direction: row;
-  align-items: center;
-  max-width: 500px;
-  margin-top: 10px;
-}
-
-footer img {
-  margin-right: 25px;
-  margin-left: 10px;
-  height: 100px;
-}
-
-
-footer .footer-section2 {
-  max-width: 200px;
-  margin-right: 100px;
-}
-
-footer h4 {
-  margin-bottom: 10px;
-}
-
-footer ul {
-  list-style: none;
-  padding: 0;
-}
-
-footer ul li {
-  margin-bottom: 8px;
-}
-
-footer ul li a {
-  color: white;
-  text-decoration: none;
-}
-
 
 /* Make your main content grow to fill space */
 .dashboard-section {
   flex: 1 0 auto;
-  margin-top: 4%;
-  margin-bottom: 0%;
+  margin-top: 2%;
 }
 
 /* Footer stays at bottom, no matter content height */
 footer {
   flex-shrink: 0;
 }
-
-
-/* === NOTIFICATION POPUP === */
-.notification-popup {
-position: fixed;
-top: 80px;
-right: 30px;
-width: 320px;
-background: #fff;
-border-radius: 10px;
-box-shadow: 0px 8px 16px rgba(0, 0, 0, 0.2);
-z-index: 999;
-display: none;
-flex-direction: column;
-max-height: 400px;
-overflow-y: auto;
-}
-
-.notification-popup .popup-header {
-background: #2e3b0d;
-color: white;
-padding: 12px 16px;
-border-top-left-radius: 10px;
-border-top-right-radius: 10px;
-font-weight: bold;
-display: flex;
-justify-content: space-between;
-align-items: center;
-}
-
-.notification-popup .popup-header span {
-cursor: pointer;
-font-size: 18px;
-}
-
-.notification-popup .popup-section {
-padding: 10px 16px;
-}
-
-.notification-popup .popup-section h5 {
-margin: 10px 0 5px;
-font-size: 14px;
-color: #888;
-}
-
-.notification-popup .notif-item {
-padding: 8px 0;
-border-bottom: 1px solid #eee;
-font-size: 14px;
-cursor: pointer;
-color: #2e3b0d;
-}
-
-.notification-popup .notif-item:last-child {
-border-bottom: none;
-}
-
-.notification-popup .notif-item:hover {
-background-color: #f8f8f8;
-}
-
-/* === MODAL STYLES FOR TERMS POPUP === */
-.modal-overlay {
-display: none;
-position: fixed;
-top: 0;
-left: 0;
-width: 100%;
-height: 100%;
-background-color: rgba(0,0,0,0.6);
-justify-content: center;
-align-items: center;
-z-index: 999;
-margin-top: 50px;      
-}
-
-.modal-content {
-background-color: #fff;
-margin: 5% auto;
-padding: 0;
-border-radius: 10px;
-width: 80%;
-max-width: 600px;
-box-shadow: 0 4px 12px rgba(0, 0, 0, 0.3);
-overflow: hidden;
-box-sizing: border-box;
-}
-
-.modal-scrollable {
-  padding: 5px 20px;
-  max-height: 70vh;
-  overflow-y: auto;
-  overflow-x: hidden;
-  position: relative;
-}
-
-.modal-scrollable h2 {
-text-align: center;
-color: #4B5320;
-margin-top: 0px;
-}
-
-.modal-scrollable h3 {
-color: #BF8C00;
-margin-top: 1em;
-}
-
-.close {
-  display: block;
-  text-align: right;
-  margin-right: 10px; /* 🟢 moves it to the left of the scrollbar */
-  margin-top: 0px;
-  font-size: 24px;
-  font-weight: bold;
-  color: #aaa;
-  cursor: pointer;
-}
-
-.close:hover {
-  color: black;
-}
-
-
-.close:hover,
-.close:focus {
-color: black;
-text-decoration: none;
-cursor: pointer;
-}    
-
-
-
 
 
 /*SECTION STYLES*/
@@ -527,9 +348,9 @@ padding: 50px;
 .complaints-section {
 background: white;
 border-radius: 15px;
-padding: 30px;
+padding: 20px;
 box-shadow: 0 8px 25px rgba(0,0,0,0.1);
-margin-bottom: 40px;
+margin-bottom: 1px;
 }
 
 .section-title {
@@ -754,8 +575,7 @@ display: flex;
 align-items: center;
 justify-content: center;
 gap: 16px;
-margin-top: 32px;
-padding: 20px;
+margin-top: 19px;
 }
 
 .pagination button {
@@ -1059,7 +879,7 @@ color: white;
 }
 
 .btn-archive {
-background: linear-gradient(135deg, #260677, #08003b);
+background: linear-gradient(135deg, #3c59d7, #0b29b1);
 color: white;
 }
 

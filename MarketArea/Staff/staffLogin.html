@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8">
   <title>Market Area E-Blotter Portal</title>
-  <link rel="icon" type="image/png" href="logo.png">
+  <link rel="icon" type="image/png" href="files/logo.png">
   <link rel="stylesheet" href="TAC.css">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
@@ -13,9 +13,8 @@
       padding: 0;
       width: 100%;
       height: 100%;
-      overflow-x: hidden;
-      font-family: Arial, Helvetica, sans-serif;
-      background-image: url('files/bg.png');
+      overflow: hidden;
+      font-family: "Trebuchet MS", sans-serif;
       background-size: cover;
       background-position: center;
       background-repeat: no-repeat;
@@ -24,26 +23,31 @@
     .main-container {
       display: flex;
       flex-wrap: wrap;
+      min-height: 100vh;
     }
 
     .left-side {
       width: 73%;
       flex-grow: 1;
       flex-basis: 200px;
+
     }
 
     .right-side {
       width: 27%;
       max-width: 600px;
-      height: auto;
-      min-height: 450px;
-      margin: auto;
+      height: 100vh;
+      margin: 0;
       display: flex;
       flex-direction: column;
       align-items: center;
       justify-content: center;
       padding: 30px 20px;
       animation: fadeIn 1s ease-in;
+      background-image: url('files/bg.png'); 
+      box-sizing: border-box;    
+      max-height: 100vh;
+      overflow: hidden;
     }
 
     .left-side img {
@@ -53,21 +57,20 @@
     }
 
     .right-side img {
-      width: 150px;
-      padding-bottom: 3%;
-      padding-top: 5%;
+      width: 190px;
+      padding-bottom: 5%;
+      margin-top: 5px;
       animation: slideDown 1s ease;
     }
 
     .right-side h1 {
       font-size: 20px;
-      text-align: center;
-      margin-bottom: 10px;
+      margin-bottom: 30px;
     }
 
     .right-side h3 {
       font-size: 15px;
-      margin-bottom: 20px;
+      margin: 0;
     }
 
     .email-input-box,
@@ -118,13 +121,9 @@
       max-width: 260px;
     }
 
-    .regis {
-      margin-top: 50px;
-    }
     
     .regis1, .forgot-password-link {
       font-size: 14px;
-      margin-top: 10px;
       text-decoration: none;
       color: #4B5320;
     }
@@ -135,10 +134,14 @@
 
     .below {
       text-align: center;
-      font-size: 12px;
-      margin-top: 30px;
+      font-size: 13px;
+      margin-top: 60px;
+      font-family: Arial, Helvetica, sans-serif;
     }
 
+    .below a {
+      text-decoration: none;
+    }
     .auth-links {
       text-align: center;
       margin-top: 25px;
