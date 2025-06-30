@@ -61,43 +61,62 @@
 		</div>
 	</div>
 </header>
-
-<section class="page-container">
-  <div class="profile-container">
-    <div class="sidebar_body">
-      <div class="profile-pic">
-        <label for="profileUpload">
-            <div class="circle-img" id="profilePreview"></div>
-              <div class="camera-wrapper">
-                <div class="camera-icon">📷</div>
-                <span class="tooltip-text">Edit profile photo</span>
-              </div>
-        </label>
-            <input type="file" id="profileUpload" accept="image/*" style="display: none;">
+ 
+ <section class="page-container">
+    <div class="profile-container">
+      <div class="sidebar_body">
+        <div class="profile-pic">
+          <div class="circle-img">JD</div>
+          <div class="camera-wrapper">
+            <div class="camera-icon">📷</div>
+          </div>
+        </div>
+        <div class="sidebar-links">
+          <span>👤</span> Personal Information
+        </div>
       </div>
-      <div class="sidebar-links active">
-        <span>👤</span> Personal Information
+
+      <div class="profile-form">
+        <h2>Personal Information</h2>
+        
+        <div class="info-grid">
+          <div class="info-row">
+            <div class="info-field" data-field="firstName">
+              <div class="info-label">First Name</div>
+              <div class="info-value">Juan</div>
+            </div>
+            <div class="info-field" data-field="lastName">
+              <div class="info-label">Last Name</div>
+              <div class="info-value">Dela Cruz</div>
+            </div>
+          </div>
+          
+          <div class="info-field email">
+            <div class="info-label">Email Address</div>
+            <div class="info-value">juandelacruz@gmail.com</div>
+          </div>
+          
+          <div class="info-field address" data-field="address">
+            <div class="info-label">Address</div>
+            <div class="info-value">Brgy. Market Area, Lipa City, Batangas</div>
+          </div>
+        </div>
+
+        <div class="action-buttons">
+          <a href="change_email.html" class="btn btn-secondary">
+            ✉️ Change Email
+          </a>
+          <button id="editProfileBtn" class="btn btn-primary">✏️ Edit Profile</button>
+
+          <div class="action-buttons edit-mode-buttons" style="display: none;">
+            <button id="saveProfileBtn" class="btn btn-success">💾 Save</button>
+            <button id="cancelEditBtn" class="btn btn-secondary">❌ Cancel</button>
+          </div>
+
+        </div>
       </div>
     </div>
-
-    <div class="profile-form">
-      <h2>Personal Information</h2>
-      <form>
-        <div class="form-row">
-          <input type="text" placeholder="First Name" value="Juan">
-          <input type="text" placeholder="Last Name" value="Dela Cruz">
-        </div>
-        <input type="email" placeholder="Email Address" value="juandelacruz@gmail.com" readonly>
-        <input type="text" placeholder="Address" value="Brgy. Market Area">
-        <div class="form-buttons">
-          <button type="button" class="discard-btn"><a href="change_email.html">Change Email Address</a></button>
-          <button type="button" class="discard-btn">Discard changes</button>
-          <button type="submit" class="save-btn">Save changes</button>
-        </div>
-      </form>
-    </div>
-  </div>
-</section>
+  </section>
 
   <!--FOOTER SECTION-->
 		<footer class="footer">
