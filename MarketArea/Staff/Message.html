@@ -14,127 +14,108 @@
       }
 
       body {
-        font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-        background:url(files/mabg.jpg) no-repeat center center fixed;
+        margin: 0;
+        font-family: "Trebuchet MS", sans-serif;
+        background: url('files/marketareabg.jpg') no-repeat center center fixed;
+        background-size: cover;
+      }
+          
+      html {
+        scroll-behavior: smooth;
       }
 
-      /* Header Styles - Made Smaller */
+      /* Sticky Header Styling */
+      header a {
+        text-decoration: none;
+      }
+
       header {
-        background:  linear-gradient(90deg, #4b5320, #2b3209);
-        box-shadow: 0 2px 8px rgba(0, 0, 0, 0.15);
-        position: sticky;
-        top: 0;
-        z-index: 1000;
-        padding: 0 2rem;
+        padding: 0 20px;
+        background: linear-gradient(90deg, #4b5320, #2b3209);
         height: 60px;
         display: flex;
-        align-items: center;
         justify-content: space-between;
+        position: fixed;
+        top: 0;
+        left: 0;
+        width: 100%;
+        box-shadow: 0 4px 8px rgba(0, 0, 0, 0.3);
+        z-index: 9999;
       }
 
       #brand {
+        font-weight: bold;
+        font-size: 20px;
         display: flex;
         align-items: center;
-        gap: 12px;
       }
 
-      .logo {
+      #brand a {
+        color: white;
+        margin-left: 10px;
+      }
+
+      #brand img.logo {
         height: 50px;
         width: auto;
       }
 
-      .brand-text {
-        font-size: 1.4rem;
-        font-weight: 700;
-        color: white;
-        text-decoration: none;
+      .brand-text::after {
+        content: "Barangay Market Area: Complaint System";
       }
 
-      nav {
-        flex: 1;
-        display: flex;
-        justify-content: flex-end;
-        margin: 40px;
-      }
+      /* === Navigation Bar Styles === */
 
-      .nav-list {
-        display: flex;
+      nav .nav-list {
         list-style: none;
-        gap: 0;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        height: 100%;
+        margin: 0;
+        padding: 0;
       }
 
       .nav-list li {
-        position: relative;
         margin: 0 10px;
+        position: relative;
       }
 
-      nav a {
-  padding: 8px 12px;
-  text-decoration: none;
-  border-radius: 8px;
-  color: white;
-  border-radius: 4px;
-  transition: background-color 0.2s ease, transform 0.2s ease;
-  display: inline-block; 
-}
+      .nav-list li a {
+        display: inline-block;
+        padding: 10px 18px;
+        font-family: "Verdana", sans-serif;
+        font-size: 15px;
+        color: white;
+        text-decoration: none;
+        border-radius: 6px;
+        transition: all 0.3s ease;
+      }
 
-/* Hover Effect - Light Green + Scale */
-.nav-list li a:hover {
-  background-color: #71873f;
-  transform: scale(1.05);
-  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
-  color: white;
-}
+      /* Hover Effect - Light Green + Scale */
+      .nav-list li a:hover {
+        background-color: #71873f;
+        transform: scale(1.05);
+        box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
+        color: white;
+      }
 
-/* Active Page Link */
-.nav-list li a.active {
-  background: linear-gradient(90deg, #6a7337, #4b5320);
-  font-weight: bold;
-  color: white;
-  border-radius: 8px;
-  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.25);
-  transform: scale(1.05);
-}
+      /* Active Page Link */
+      .nav-list li a.active {
+        background: linear-gradient(90deg, #6a7337, #4b5320);
+        font-weight: bold;
+        color: white;
+        border-radius: 8px;
+        box-shadow: 0 4px 12px rgba(0, 0, 0, 0.25);
+        transform: scale(1.05);
+      }
 
-/* Active Page Link + Hover */
-.nav-list li a.active:hover {
-  background: linear-gradient(90deg, #7e8c4d, #5a642c);
-  transform: scale(1.08);
-  box-shadow: 0 6px 16px rgba(0, 0, 0, 0.3);
-}
-
-nav ul {
-  list-style: none;
-  display: flex;
-  align-items: center;
-  gap: 20px;
-  padding: 0;
-  margin: 0;
-}
-
-nav ul li a {
-  padding: 10px 15px;
-  text-decoration: none;
-  color: white;
-  font-weight: normal;
-  display: inline-block;
-  vertical-align: middle;
-  height: 100%;
-}
-
-nav ul li a.active {
-  background-color: #4d5c20; /* dark olive for active state */
-  border-radius: 5px;
-}
-
-
-
- .nav-list a.active:hover {
-  background-color: #71873f; /* or any slightly different shade */
-  transform: scale(1.10);
-  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.25);
-  color: rgba(255, 255, 255, 0.8);
-}
+      /* Active Page Link + Hover */
+      .nav-list li a.active:hover {
+        background: linear-gradient(90deg, #7e8c4d, #5a642c);
+        transform: scale(1.08);
+        box-shadow: 0 6px 16px rgba(0, 0, 0, 0.3);
+      }
 
 
       #hamburger-icon {
@@ -582,15 +563,16 @@ nav ul li a.active {
   <body>
     <!-- Header -->
     <header>
-      <div id="brand">
-        <img src="files/logo.png" alt="" class="logo" />
-        <a class="brand-text">Barangay Market Area: Complaint System</a>
+      <div id="brand"> <!--Header Title-->
+        <img src="files/logo.png" alt="" class="logo" /><a
+          class="brand-text"
+        ></a>
       </div>
       <nav>
         <ul class="nav-list">
           <li><a href="staffHomepage.html">Home</a></li>
           <li><a href="manageComplaints.html">Manage Complaints</a></li>
-          <li><a href="Message.html" class="active">Message</a></li>
+          <li><a href="Message.html">Message</a></li>
           <li><a href="settings.html">Settings</a></li>
         </ul>
       </nav>
@@ -602,7 +584,7 @@ nav ul li a.active {
       <ul class="mobile-menu">
           <li><a href="staffHomepage.html">Home</a></li>
           <li><a href="manageComplaints.html">Manage Complaints</a></li>
-          <li><a href="Message.html" class="active">Message</a></li>
+          <li><a href="Message.html">Message</a></li>
           <li><a href="settings.html">Settings</a></li>
       </ul>
     </header>

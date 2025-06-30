@@ -1,11 +1,10 @@
-
 body {
   margin: 0;
   font-family: "Trebuchet MS", sans-serif;
   background: url('files/marketareabg.jpg') no-repeat center center fixed;
   background-size: cover;
 }
-    
+
 html {
   scroll-behavior: smooth;
 }
@@ -182,38 +181,6 @@ nav .nav-list {
 }
 
 
-.main-banner {
-  position: relative;
-  height: 80vh;
-  background: url('marketareabg.jpg') no-repeat center center/cover;
-  display: flex;
-  flex-direction: column;
-  justify-content: flex-start;
-  align-items: center;
-  padding-top: 30px;
-}
-
-.main-banner h2 {
-  font-size: 50px;
-  margin: 0;
-  color: white;
-  position: relative;
-  z-index: 2;
-  text-align: left;
-  width: 95%; 
-}
-
-.main-banner::after {
-  content: "";
-  position: absolute;
-  top: 0;
-  left: 0;
-  height: 100%;
-  width: 100%;
-  background: rgba(0, 0, 0, 0.6);
-  z-index: 0;
-}
-
 .complaint-frame {
   position: relative;
   z-index: 2;
@@ -328,8 +295,13 @@ tbody tr:hover {
   gap: 10px;
 
   font-family: 'Arial', sans-serif;
-  margin-top: 10px;
-  margin-bottom: 20px;
+
+  /* Tighter margins */
+  margin-top: 0;
+  margin-bottom: 0;
+
+  /* Optional: reduce padding if parent container adds extra space */
+  padding: 0;
 }
 
 .pagination button {
@@ -337,6 +309,9 @@ tbody tr:hover {
   border: none;
   font-size: 1.2em;
   cursor: pointer;
+  padding: 4px 8px; /* Keep it small */
+  border-radius: 4px;
+  transition: background-color 0.2s;
 }
 
 .pagination button:disabled {
@@ -396,18 +371,12 @@ footer ul li a {
   text-decoration: none;
 }
 
-/* Make body stretch full height and make content+footer layout work */
-html, body {
-  height: 100%;
-  margin: 0;
-  display: flex;
-  flex-direction: column;
-}
 
 /* Make your main content grow to fill space */
 .dashboard-section {
   flex: 1 0 auto;
-  margin-top: 5%;
+  margin-top: 4%;
+  margin-bottom: 0%;
 }
 
 /* Footer stays at bottom, no matter content height */
@@ -551,7 +520,7 @@ cursor: pointer;
 /*SECTION STYLES*/
 /* Dashboard Section */
 .dashboard-section {
-padding: 40px;
+padding: 50px;
 }
 
 /* Complaints Management Section */
@@ -566,7 +535,7 @@ margin-bottom: 40px;
 .section-title {
 font-size: 1.5rem;
 color: #2c3e50;
-margin-bottom: 20px;
+margin-bottom: 10px;
 display: flex;
 align-items: center;
 gap: 10px;
@@ -685,7 +654,6 @@ color: #6b7280;
 .complaints-table {
 width: 100%;
 border-collapse: collapse;
-margin-top: 20px;
 }
 
 .complaints-table th {
