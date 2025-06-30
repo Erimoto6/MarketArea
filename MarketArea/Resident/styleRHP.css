@@ -287,9 +287,9 @@
 /* Navigation links */
 .navbar {
   display: flex;
-  justify-content: space-between;
   align-items: center; /* Vertically centers all children including .profile */
-  padding: 0 40px;
+  padding: 0;
+  margin: 0;
 }
 
 .nav-links {
@@ -328,16 +328,6 @@
 .nav-links a:hover::after {
   width: 100%;
 }
-
-.nav-links a.active {
-  color: #D0B564;
-}
-
-.nav-links a.active::after {
-  width: 100%;
-  background-color: #D0B564;
-}
-
 
 /*PROFILE SIDEBAR*/
 
@@ -806,7 +796,7 @@ html, body {
             transform: scale(0.9);
             transition: transform 0.3s ease;
             position: relative;
-            font-family: Verdana;
+            font-family: sans-serif;
         }
 
         .out-custom-modal.show .out-modal-content {
@@ -917,3 +907,4 @@ html, body {
                 width: 100%;
             }
         }
+

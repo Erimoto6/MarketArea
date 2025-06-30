@@ -32,7 +32,7 @@
     				<a href="my_complaints.html">My Complaints</a>
     				<a href="contact.html">Contacts</a>
   				</div>
-  
+ 
   			<!-- Profile + Sidebar Wrapper -->
 			<div class="profile-sidebar-wrapper">
   			<!-- Profile Trigger -->
@@ -46,7 +46,7 @@
     				<i class="icon">⚙️</i>
     				<span class="label">Settings</span>
   				</a>
-  				<a href="#" class="sidebar-item" id="logout-btn" onclick="return showLogoutConfirmation()" data-tooltip="Log out from your account">
+  				<a href="#" class="sidebar-item" id="logout-btn" onclick="return confirmLogout()" data-tooltip="Log out from your account">
                     <i class="icon">🚪</i>
                     <span class="label">Logout</span>
                 </a>
@@ -81,7 +81,7 @@
 
   			<div class="hero-content">
     			<div class="welcome-to-barangay">
-      				Welcome to Barangay Market Area:<br> E-BLOTTER System
+      				Welcome to barangay market area:<br> E-BLOTTER system
     			</div>
 			
 			<a href="complaint_form.html">
@@ -117,8 +117,8 @@
 				<div style="text-align: center; margin-bottom: 60px;">
 					<h2 style="
 						font-family: Trebuchet MS;
-						font-size: clamp(2.5rem, 5vw, 4rem);
 						font-weight: 900;
+						font-size: clamp(2.5rem, 5vw, 4rem);
 						color: #2b3209;
 						margin-bottom: 20px;
 						letter-spacing: 3px;
@@ -170,6 +170,7 @@
 					<!-- Subtitle -->
 					<p style="
 						font-size: 1rem;
+						font-family: sans-serif;
 						color: #4b5320;
 						max-width: 600px;
 						margin: 0 auto;
@@ -179,7 +180,6 @@
 						border-radius: 10px;
 						border: 1px solid rgba(106, 115, 55, 0.1);
 						box-shadow: 0 2px 8px rgba(0,0,0,0.05);
-						font-family: sans-serif;
 					">
 						Digitalizing community reporting through digital innovation and transparency
 					</p>
@@ -219,7 +219,7 @@
 						</div>
 						
 						<h3 style="
-							font-family: sans-serif;
+							font-family: Trebuchet MS;
 							font-size: 1.5rem;
 							font-weight: 700;
 							color: #2b3209;
@@ -263,7 +263,7 @@
 						</div>
 						
 						<h3 style="
-							font-family: sans-serif;
+							font-family: Trebuchet MS;
 							font-size: 1.5rem;
 							font-weight: 700;
 							color: #2b3209;
@@ -285,8 +285,9 @@
 									font-weight: bold;
 									margin-right: 15px;
 									flex-shrink: 0;
+									font-family: sans-serif;
 								">1</span>
-								<span style="color: #2b3209; font-size: 0.9rem; font-family: sans-serif;">Create your account and log in</span>
+								<span style="color: #2b3209; font-size: 0.9rem;font-family: sans-serif">Create your account and log in</span>
 							</div>
 							<div style="display: flex; align-items: center; margin-bottom: 12px;">
 								<span style="
@@ -302,8 +303,9 @@
 									font-weight: bold;
 									margin-right: 15px;
 									flex-shrink: 0;
+									font-family: sans-serif;
 								">2</span>
-								<span style="color: #2b3209; font-size: 0.9rem; font-family: sans-serif;">Fill out the complaint form with details</span>
+								<span style="color: #2b3209; font-size: 0.9rem;font-family: sans-serif">Fill out the complaint form with details</span>
 							</div>
 							<div style="display: flex; align-items: center; margin-bottom: 12px;">
 								<span style="
@@ -319,8 +321,9 @@
 									font-weight: bold;
 									margin-right: 15px;
 									flex-shrink: 0;
+									font-family: sans-serif;
 								">3</span>
-								<span style="color: #2b3209; font-size: 0.9rem; font-family: sans-serif;">Submit and receive confirmation</span>
+								<span style="color: #2b3209; font-size: 0.9rem;font-family: sans-serif">Submit and receive confirmation</span>
 							</div>
 							<div style="display: flex; align-items: center;">
 								<span style="
@@ -336,8 +339,9 @@
 									font-weight: bold;
 									margin-right: 15px;
 									flex-shrink: 0;
+									font-family: sans-serif;
 								">4</span>
-								<span style="color: #2b3209; font-size: 0.9rem; font-family: sans-serif;">Track your complaint status online</span>
+								<span style="color: #2b3209; font-size: 0.9rem;font-family: sans-serif">Track your complaint status online</span>
 							</div>
 						</div>
 					</div>
@@ -375,11 +379,11 @@
 							<span style="font-size: 20px; color: white;">🏘️</span>
 						</div>
 						<h4 style="
-							font-family: sans-serif;
-							font-size: 1.1rem;
-							font-weight: 700;
+							font-size: 1.2rem;
+							font-weight: 900;
 							color: #2b3209;
 							margin-bottom: 8px;
+							font-family: Trebuchet MS;
 						">Community Issues</h4>
 						<p style="color: #4b5320; font-size: 0.85rem; line-height: 1.4; font-family: sans-serif;">
 							Report neighborhood concerns, disputes, and community-related problems.
@@ -421,33 +425,21 @@
   	</div>
   	
   	<!-- Toast Container -->
-	<div id="toastContainer" class="toast-container"></div>	
+	<div id="toastContainer" class="toast-container"></div>
+
+  	
 </div>
 
-<!-- Enhanced Logout Modal -->
-    <div id="logoutConfirmModal" class="out-custom-modal">
-        <div class="out-modal-content">
-            <button class="close-out-btn" onclick="hideLogoutModal()" aria-label="Close">&times;</button>
-            
-            <div class="out-modal-icon">
-                <span>🚪</span>
-            </div>
-            
-            <h2 class="out-modal-title">Confirm Logout</h2>
-            <p class="out-modal-message">
-                Are you sure you want to logout? You will need to sign in again to access your account.
-            </p>
-            
-            <div class="out-modal-buttons">
-                <button class="out-btn out-btn-cancel" onclick="hideLogoutModal()">
-                    Cancel
-                </button>
-                <button class="out-btn out-btn-confirm" onclick="proceedWithLogout()">
-                    Yes, Logout
-                </button>
-            </div>
-        </div>
+<div id="logoutModal" class="custom-modal">
+  <div class="modal-content">
+    <p><strong>Are you sure you want to logout?</strong></p>
+    <div class="modal-buttons">
+      <button class="confirm-btn" onclick="confirmLogoutAction()">Yes, Logout</button>
+      <button class="cancel-btn" onclick="closeLogoutModal()">Cancel</button>
     </div>
+  </div>
+</div> 
+
 
 <script>
   const profileTrigger = document.getElementById('profileTrigger');
@@ -477,112 +469,6 @@ function closeLogoutModal() {
 function confirmLogoutAction() {
   window.location.href = "residentLogin.html"; // ✅ your original destination
 };
-
-// ==== ENHANCED LOGOUT CONFIRMATION ====
-        
-        function showLogoutConfirmation() {
-            const logoutModal = document.getElementById('logoutConfirmModal');
-            logoutModal.style.display = 'flex';
-            
-            // Add show class after a brief delay for smooth animation
-            setTimeout(() => {
-                logoutModal.classList.add('show');
-            }, 10);
-            
-            // Prevent body scroll when modal is open
-            document.body.style.overflow = 'hidden';
-            
-            // Focus trap for accessibility
-            trapFocus(logoutModal);
-            
-            return false; // Prevent the <a> tag from redirecting
-        }
-
-        function hideLogoutModal() {
-            const logoutModal = document.getElementById('logoutConfirmModal');
-            logoutModal.classList.remove('show');
-            
-            // Hide modal after animation completes
-            setTimeout(() => {
-                logoutModal.style.display = 'none';
-                document.body.style.overflow = ''; // Restore body scroll
-            }, 300);
-        }
-
-        function proceedWithLogout() {
-            // Show loading state
-            const confirmBtn = document.querySelector('.out-btn-confirm');
-            const originalText = confirmBtn.textContent;
-            confirmBtn.textContent = 'Logging out...';
-            confirmBtn.disabled = true;
-            
-            // Simulate logout process (replace with your actual logout logic)
-            setTimeout(() => {
-                // Redirect to login page
-                window.location.href = "residentLogin.html";
-            }, 1000);
-        }
-
-        // Enhanced Features
-        
-        // Close modal when clicking outside
-        document.getElementById('logoutConfirmModal').addEventListener('click', function(e) {
-            if (e.target === this) {
-                hideLogoutModal();
-            }
-        });
-
-        // Close modal with Escape key
-        document.addEventListener('keydown', function(e) {
-            if (e.key === 'Escape') {
-                hideLogoutModal();
-            }
-        });
-
-        // Focus trap for accessibility
-        function trapFocus(logoutModal) {
-            const focusableElements = logoutModal.querySelectorAll(
-                'button, [href], input, select, textarea, [tabindex]:not([tabindex="-1"])'
-            );
-            const firstElement = focusableElements[0];
-            const lastElement = focusableElements[focusableElements.length - 1];
-
-            logoutModal.addEventListener('keydown', function(e) {
-                if (e.key === 'Tab') {
-                    if (e.shiftKey) {
-                        if (document.activeElement === firstElement) {
-                            lastElement.focus();
-                            e.preventDefault();
-                        }
-                    } else {
-                        if (document.activeElement === lastElement) {
-                            firstElement.focus();
-                            e.preventDefault();
-                        }
-                    }
-                }
-            });
-
-            // Focus first element
-            firstElement.focus();
-        }
-
-        // Optional: Auto-close after inactivity
-        let logoutInactivityTimer;
-        
-        function resetLogoutInactivityTimer() {
-            clearTimeout(logoutInactivityTimer);
-            logoutInactivityTimer = setTimeout(() => {
-                if (document.getElementById('logoutConfirmModal').style.display === 'flex') {
-                    hideLogoutModal();
-                }
-            }, 30000); // Auto-close after 30 seconds of inactivity
-        }
-
-        // Reset timer on user interaction
-        ['mousedown', 'mousemove', 'keypress', 'scroll', 'touchstart'].forEach(event => {
-            document.addEventListener(event, resetLogoutInactivityTimer, true);
-        });
 
   //notifications
   
@@ -660,56 +546,6 @@ clearBtn.addEventListener("click", () => {
 
 hidePopup(); // Add this inside the clearBtn click function
 
-// active nav
-        function setActiveNav() {
-            // Get current page from URL
-            const currentPage = window.location.pathname.split('/').pop().replace('.html', '');
-            
-            // Remove active class from all nav links
-            const navLinks = document.querySelectorAll('.nav-links a');
-            navLinks.forEach(link => link.classList.remove('active'));
-            
-            // Add active class to current page link
-            const activeLink = document.querySelector(`[data-page="${currentPage}"]`);
-            if (activeLink) {
-                activeLink.classList.add('active');
-            }
-        }
-
-        // Alternative method using href matching
-        function setActiveNavByHref() {
-            const navLinks = document.querySelectorAll('.nav-links a');
-            const currentPath = window.location.pathname;
-            
-            navLinks.forEach(link => {
-                link.classList.remove('active');
-                // Check if the link href matches current path
-                if (link.getAttribute('href') === currentPath.split('/').pop()) {
-                    link.classList.add('active');
-                }
-            });
-        }
-
-		// active navigation
-
-		document.addEventListener("DOMContentLoaded", function() {
-  const navLinks = document.querySelectorAll('.nav-links a');
-  const currentPage = window.location.pathname.split("/").pop().toLowerCase();
-
-  navLinks.forEach(link => {
-    const linkPage = link.getAttribute('href').toLowerCase();
-
-    // If the current page matches the link href filename, set it active
-    if (currentPage === linkPage) {
-      link.classList.add('active');
-    }
-
-    // Optional: If user is on root (like localhost/), make Home active
-    if ((currentPage === "" || currentPage === "index.html") && linkPage.includes("residenthomepage.html")) {
-      link.classList.add('active');
-    }
-  });
-});
 
 </script>
 
