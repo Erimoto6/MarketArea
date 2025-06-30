@@ -48,21 +48,16 @@ body {
 }
 
 .market-area-logo {
-   width: 80px;
-  height: 80px;
+  width: 70px;
+  height: 70px;
   object-fit: cover;
   border-radius: 50%;
   margin-right: 20px;
 }
 
-.barangay-market-area {
-    font-family: Trebuchet MS;
-    font-weight: 900;
-}
-
 .barangay-title {
   font-size: 24px;
-  font-family: 'Bebas Neue', sans-serif;
+  font-family: Trebuchet MS;
   letter-spacing: 0.1em;
   line-height: 1.1;
 }
@@ -70,9 +65,9 @@ body {
 /* Navigation links */
 .navbar {
   display: flex;
-  justify-content: space-between;
   align-items: center; /* Vertically centers all children including .profile */
-  padding: 0 40px;
+  padding: 0;
+  margin: 0;
 }
 
 .nav-links {
@@ -136,8 +131,6 @@ body {
 .profile:hover {
   transform: scale(1.05);
 }
-
-/* SIDEBAR MENU */
 /* SIDEBAR MENU */
 .sidebar {
   position: absolute;
@@ -258,132 +251,6 @@ body {
   }
 }
 
-/* notification */
-
-.notif-badge {
-  background-color: #D32F2F;
-  color: #fff;
-  font-size: 11px;
-  font-weight: 600;
-  padding: 2px 6px;
-  border-radius: 50px;
-  margin-left: auto;
-  display: inline-block;
-  min-width: 20px;
-  text-align: center;
-  line-height: 1.3;
-}
-
-.notification-popup {
-  position: absolute;
-  top: 70px;
-  right: 260px;
-  width: 280px;
-  background: #fff;
-  color: #333;
-  border-radius: 12px;
-  box-shadow: 0 8px 20px rgba(0, 0, 0, 0.3);
-  padding: 16px;
-  z-index: 1001;
-  display: none;
-  font-family: 'K2D', sans-serif;
-}
-
-.popup-header {
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  margin-bottom: 12px;
-  font-size: 16px;
-}
-
-.close-btn {
-  background: none;
-  border: none;
-  font-size: 16px;
-  cursor: pointer;
-}
-
-.notification-list {
-  list-style: none;
-  padding: 0;
-  margin: 0;
-  font-size: 14px;
-  max-height: 300px;
-  overflow-y: auto;
-}
-
-.notification-list li {
-  padding: 8px 0;
-  border-bottom: 1px solid #eee;
-}
-
-.notification-list li:last-child {
-  border-bottom: none;
-}
-
-.clear-btn {
-  margin-top: 10px;
-  padding: 8px 12px;
-  background-color: #d0b564;
-  color: #222;
-  border: none;
-  border-radius: 6px;
-  font-size: 13px;
-  cursor: pointer;
-  transition: background 0.3s;
-}
-
-.clear-btn:hover {
-  background-color: #bfa24e;
-}
-
-
-/* Toast container */
-.toast-container {
-  position: fixed;
-  bottom: 20px;
-  right: 20px;
-  z-index: 9999;
-  display: flex;
-  flex-direction: column;
-  gap: 12px;
-}
-
-/* Individual toast */
-.toast {
-  background-color: #4b5320;
-  color: #fff;
-  padding: 12px 18px;
-  border-radius: 8px;
-  min-width: 220px;
-  font-size: 14px;
-  box-shadow: 0 6px 20px rgba(0, 0, 0, 0.3);
-  animation: slideIn 0.4s ease, fadeOut 0.5s ease 3.5s forwards;
-  position: relative;
-  opacity: 1;
-}
-
-/* Slide in from bottom */
-@keyframes slideIn {
-  from {
-    transform: translateY(50px);
-    opacity: 0;
-  }
-  to {
-    transform: translateY(0);
-    opacity: 1;
-  }
-}
-
-/* Fade out animation */
-@keyframes fadeOut {
-  to {
-    opacity: 0;
-    transform: translateY(20px);
-  }
-}
-
 
 /*FOOTER SECTION*/
 .footer {
@@ -499,7 +366,7 @@ html, body {
       background: #fffffd;
       border-radius: 18px;
       box-shadow: 0 8px 32px rgba(44,62,80,0.13);
-      padding: 2.5rem 2rem;
+      padding: 2.2rem 2rem;
       border: 1.5px solid #e7d98c;
       box-sizing: border-box;
       transition: all 0.3s ease;
@@ -521,11 +388,12 @@ html, body {
 
     .contact-container h2 {
       text-align: center;
-      color: #090909;
+      color: #4b5228;
       margin-bottom: 1.5rem;
-      font-size: 2rem;
+      font-size: 3rem;
       letter-spacing: 1px;
     }
+    
     .contact-info {
       margin-bottom: 2rem;
       font-size: 1.08rem;
@@ -988,21 +856,6 @@ button a {
           </a>
 
 			</div>
-
-      <!-- Notification Popup -->
-			<div id="notificationPopup" class="notification-popup">
-  				<div class="popup-header">
-    				<strong>Notifications</strong>
-    				<button class="close-btn" onclick="hidePopup()">✖</button>
-  				</div>
-  				<ul class="notification-list" id="notificationList">
-   					<li>📝 New complaint submitted</li>
-    				<li>📢 Barangay update posted</li>
-    				<li>👤 Profile approved</li>
-  				</ul>
-				<button id="clearNotificationsBtn" class="clear-btn">Clear All</button>
-				</div>
-
 		</div>
 		</div>
 		</header>

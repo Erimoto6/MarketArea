@@ -12,106 +12,110 @@
     }
 
     /* HEADER SECTION */
-    .header_gradient {
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-      background: linear-gradient(90deg, rgba(0, 0, 0, 0), rgba(0, 0, 0, 0.2)),
-                  linear-gradient(90deg, #4b5320, #2b3209);
-      width: 100%;
-      height: 100px;
-      padding: 0 40px;
-      box-sizing: border-box;
-      z-index: 10;
-      color: white;
-    }
+.header_gradient {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  background: linear-gradient(90deg, rgba(0, 0, 0, 0), rgba(0, 0, 0, 0.2)),
+              linear-gradient(90deg, #4b5320, #2b3209);
+  width: 100%;
+  height: 100px;
+  padding: 0 40px;
+  box-sizing: border-box;
+  z-index: 10;
+  color: white;
+}
 
-    .header-left {
-      display: flex;
-      align-items: center;
-    }
+/* Left section: logo + title */
+.header-left {
+  display: flex;
+  align-items: center;
+}
 
-    .market-area-logo {
-      width: 97px;
-      height: 93px;
-      object-fit: cover;
-      border-radius: 50%;
-      margin-right: 20px;
-    }
+.market-area-logo {
+  width: 70px;
+  height: 70px;
+  object-fit: cover;
+  border-radius: 50%;
+  margin-right: 20px;
+}
 
-    .barangay-title {
-      font-size: 24px;
-      font-family: Trebuchet MS;
-      font-weight: 900;
-      letter-spacing: 0.1em;
-      line-height: 1.1;
-    }
+.barangay-title {
+  font-size: 24px;
+  font-family: Trebuchet MS;
+  letter-spacing: 0.1em;
+  line-height: 1.1;
+}
 
-    .navbar {
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-      padding: 0 40px;
-    }
+/* Navigation links */
+.navbar {
+  display: flex;
+  align-items: center; /* Vertically centers all children including .profile */
+  padding: 0;
+  margin: 0;
+}
 
-    .nav-links {
-      display: flex;
-      padding-right: 50px;
-      gap: 40px;
-      font-weight: 300;
-      letter-spacing: 0.1em;
-      font-size: 18px;
-      color: #fff;
-    }
+.nav-links {
+  display: flex;
+  padding-right: 50px;
+  gap: 40px;
+  font-weight: 300;
+  letter-spacing: 0.1em;
+  font-size: 18px;
+  color: #fff;
+  font-family: Trebuchet MS;
+}
 
-    .nav-links a {
-      position: relative;
-      color: white;
-      text-decoration: none;
-      transition: color 0.3s ease;
-    }
+.nav-links a {
+  position: relative;
+  color: white; /* or any color you want */
+  text-decoration: none;
+  transition: color 0.3s ease;
+}
 
-    .nav-links a::after {
-      content: "";
-      position: absolute;
-      bottom: -4px;
-      left: 0;
-      width: 0%;
-      height: 2px;
-      background-color: white;
-      transition: width 0.3s ease;
-    }
+.nav-links a::after {
+  content: "";
+  position: absolute;
+  bottom: -4px;
+  left: 0;
+  width: 0%;
+  height: 2px;
+  background-color: white; /* underline color */
+  transition: width 0.3s ease;
+}
 
-    .nav-links a:hover {
-      color: #D0B564;
-    }
+.nav-links a:hover {
+  color: #D0B564; /* optional: change link color on hover */
+}
 
-    .nav-links a:hover::after {
-      width: 100%;
-    }
+.nav-links a:hover::after {
+  width: 100%;
+}
 
-    /* PROFILE SIDEBAR */
-    .profile-sidebar-wrapper {
-      position: relative;
-      display: inline-block;
-    }
+/*PROFILE SIDEBAR*/
 
-    .profile-link {
-      cursor: pointer;
-    }
+/* PROFILE SIDEBAR - BASE */
+.profile-sidebar-wrapper {
+  position: relative;
+  display: inline-block;
+}
 
-    .profile {
-      width: 45px;
-      height: 45px;
-      border-radius: 50%;
-      background-color: #fff;
-      border: 2px solid #4f0002;
-      transition: transform 0.2s ease;
-    }
+.profile-link {
+  cursor: pointer;
+}
 
-    .profile:hover {
-      transform: scale(1.05);
-    }
+.profile {
+  width: 45px;
+  height: 45px;
+  border-radius: 50%;
+  background-color: #fff;
+  border: 2px solid #4f0002;
+  transition: transform 0.2s ease;
+}
+
+.profile:hover {
+  transform: scale(1.05);
+}
 
     .sidebar {
       position: absolute;
