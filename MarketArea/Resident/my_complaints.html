@@ -39,25 +39,12 @@
 
   	<!-- Collapsible Sidebar -->
   			<div class="sidebar collapsed" id="profileSidebar">
-  				<a href="profile.html" class="sidebar-item" data-tooltip="View your profile">
-    				<i class="icon">👤</i>
-    				<span class="label">Profile</span>
-  				</a>
-				<a href="resident_notifications.html" class="sidebar-item" id="notifItem" data-tooltip="View notifications">
-  					<i class="icon">🔔</i>
-  					<span class="label">Notifications</span>
-  					<span class="notif-badge" id="notifBadge">0</span>
-				</a>
-  				<a href="settings.html" class="sidebar-item" data-tooltip="Adjust your settings">
+        <a href="accounts_security.html" class="sidebar-item" data-tooltip="Adjust your settings">
     				<i class="icon">⚙️</i>
     				<span class="label">Settings</span>
-  				</a>
-  				<a href="accounts_security.html" class="sidebar-item" data-tooltip="Manage your account and privacy">
-    				<i class="icon">🔐</i>
-    				<span class="label">Account & Security</span>
-  				</a>
-  				<a href="#" class="sidebar-item" id="logout-btn" onclick="return confirmLogout()" data-tooltip="Log out from your account">
-            <i class="icon">⏻</i>
+  			</a>
+  				<a href="residentLogin.html" class="sidebar-item" id="logout-btn" onclick="return showLogoutConfirmation()" data-tooltip="Log out from your account">
+            <i class="icon">🚪</i>
             <span class="label">Logout</span>
           </a>
 
@@ -84,73 +71,69 @@
 
   <!-- Main Content Section -->
   <main class="content">
+    <div class="content-inner">
 
-    <!-- White Vertical Stripe Background Wrapper -->
-    <div class="vertical-stripe-bg">
+<!-- Complaint History Table Section -->
+<div class="complaints-section">
 
-    <!-- Complaint History Table -->
-    <div class="complaints-section">
-
-    <div class="complaints-header">
-      <div class="complaint-icon animated-icon">
-        <img src="history_icon.png" alt="Complaint Icon">
-      </div>
-
-      <div class="complaint-text">
-        <h2>My Complaints</h2>
-        <p class="complaint-description">View all your submitted complaints here, including details and updates on their status.</p>
-      </div>
+  <!-- Header -->
+  <div class="complaints-header">
+    <div class="complaint-icon animated-icon">
+      <img src="history_icon.png" alt="Complaint Icon">
     </div>
-
- 
-    <!-- Search and Filter Controls -->
-    <div class="controls">  
-      
-    <!-- Search Bar -->
-    <input type="text" placeholder="Search by keyword..." class="search-bar" id="search-input" oninput="applyFilters()">
-
-    <!-- Burger icon as dropdown toggle -->
-    <div class="dropdown" style="position: relative;">
-        <button class="filter-button" onclick="toggleDropdown()" title="Filter content">☰</button>
-            <div id="dropdownMenu">
-                
-    <div class="filter-group">
-      <label for="filter-date">Date</label>
-      <input type="date" id="filter-date">
-    </div>
-
-      <div class="filter-group">
-        <label for="filter-type">Type of Complaint</label>
-        <select id="filter-type">
-          <option value="">All</option>
-          <option value="Noise">Noise</option>
-          <option value="Littering">Littering</option>
-          <option value="Sanitation">Sanitation</option>
-          <option value="Others">Others</option>
-        </select>
-      </div>
-
-      <div class="filter-group">
-        <label for="filter-status">Status</label>
-        <select id="filter-status">
-          <option value="">All</option>
-          <option value="Pending">Pending</option>
-          <option value="In Progress">In Progress</option>
-          <option value="Under Review">Under Review</option>
-          <option value="Resolved">Resolved</option>
-        </select>
-      </div>
-
-      <!-- Apply & Clear Buttons -->
-      <div class="filter-actions">
-        <button onclick="applyFilters()">Apply Filters</button>
-        <button onclick="clearFilters()" class="clear-btn">Clear Filters</button>
-      </div>
+    <div class="complaint-text">
+      <h2>My Complaints</h2>
     </div>
   </div>
-</div>
- 
-  <table class="complaints-table" id="complaintsTable">
+
+  <!-- Search and Filter Controls -->
+  <div class="controls">
+    
+    <!-- Filter Dropdown Button -->
+    <div class="dropdown" style="position: relative;">
+      <button class="filter-button" onclick="toggleDropdown()" title="Filter content">⏳</button>
+
+      <!-- Dropdown Menu -->
+      <div id="dropdownMenu">
+        <div class="filter-group">
+          <label for="filter-date">Date</label>
+          <input type="date" id="filter-date">
+        </div>
+
+        <div class="filter-group">
+          <label for="filter-type">Type of Complaint</label>
+          <select id="filter-type">
+            <option value="">All</option>
+            <option value="Noise">Noise</option>
+            <option value="Littering">Littering</option>
+            <option value="Sanitation">Sanitation</option>
+            <option value="Others">Others</option>
+          </select>
+        </div>
+
+        <div class="filter-group">
+          <label for="filter-status">Status</label>
+          <select id="filter-status">
+            <option value="">All</option>
+            <option value="Pending">Pending</option>
+            <option value="In Progress">In Progress</option>
+            <option value="Resolved">Resolved</option>
+          </select>
+        </div>
+
+        <!-- Filter Buttons -->
+        <div class="filter-actions">
+          <button onclick="applyFilters()">Apply Filters</button>
+          <button onclick="clearFilters()" class="clear-btn">Clear Filters</button>
+        </div>
+      </div>
+    </div>
+
+    <!-- Search Bar -->
+    <input type="text" placeholder="Search by keyword..." class="search-bar" id="search-input" oninput="applyFilters()">
+  </div>
+
+<table class="complaints-table" id="complaintsTable">
     <thead>
       <tr>
         <th>Date Filed</th>
@@ -166,7 +149,7 @@
         <td>03/03/25</td>
         <td>Juan De Luna</td>
         <td>Noise</td>
-        <td><span class="status">Under Review</span></td>
+        <td><span class="status">Resolved</span></td>
         <td><button class="details-btn">View</button></td>
       </tr>
       <!-- Add more rows here -->
@@ -189,7 +172,7 @@
   <td>06/03/25</td>
   <td>Juan De Luna</td>
   <td>Sanitation</td>
-  <td><span class="status">Under Review</span></td>
+  <td><span class="status">In Progress</span></td>
   <td><button class="details-btn">View</button></td>
 </tr>
 <tr>
@@ -224,7 +207,7 @@
   <td>06/08/25</td>
   <td>Juan De Luna</td>
   <td>Noise</td>
-  <td><span class="status">Under Review</span></td>
+  <td><span class="status">Pending</span></td>
   <td><button class="details-btn">View</button></td>
 </tr>
 <tr>
@@ -249,68 +232,130 @@
   <div class="pagination" id="pagination"></div>
 </div>
 
-<div id="complaintModal" class="modal-overlay">
-  <div class="modal-content">
-    
-    <!-- Modal Header -->
-    <div class="modal-header">
-      <h2>Complaint Details</h2>
-      <span class="close-modal">&times;</span>
+</div> <!-- end of .complaints-section -->
+
+<!-- Enhanced Modal -->
+    <div id="complaintModal" class="modal-overlay">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h2>Complaint Details</h2>
+                <span class="close-modal">&times;</span>
+            </div>
+
+            <div class="modal-body">
+                <!-- Status Section -->
+                <h3>📌 Current Status</h3>
+                <div class="info-card">
+                    <div class="info-grid">
+                        <div class="info-item">
+                            <span class="info-label">Status</span>
+                            <span id="modalStatus" class="status-badge"></span>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Personal Information -->
+                <h3>👤 Personal Information</h3>
+                <div class="info-card">
+                    <div class="info-grid">
+                        <div class="info-item">
+                            <span class="info-label">Full Name</span>
+                            <span id="modalName" class="info-value"></span>
+                        </div>
+                        <div class="info-item">
+                            <span class="info-label">Age</span>
+                            <span id="modalAge" class="info-value"></span>
+                        </div>
+                        <div class="info-item">
+                            <span class="info-label">Gender</span>
+                            <span id="modalGender" class="info-value"></span>
+                        </div>
+                        <div class="info-item">
+                            <span class="info-label">Contact Number</span>
+                            <span id="modalContact" class="info-value"></span>
+                        </div>
+                        <div class="info-item">
+                            <span class="info-label">Email Address</span>
+                            <span id="modalEmail" class="info-value"></span>
+                        </div>
+                    </div>
+                    <div class="info-item">
+                        <span class="info-label">Home Address</span>
+                        <span id="modalAddress" class="info-value"></span>
+                    </div>
+                </div>
+
+                <!-- Complaint Details -->
+                <h3>📄 Complaint Details</h3>
+                <div class="info-card">
+                    <div class="info-grid">
+                        <div class="info-item">
+                            <span class="info-label">Date Filed</span>
+                            <span id="modalDateFiled" class="info-value"></span>
+                        </div>
+                        <div class="info-item">
+                            <span class="info-label">Type of Complaint</span>
+                            <span id="modalType" class="info-value"></span>
+                        </div>
+                        <div class="info-item">
+                            <span class="info-label">Incident Date & Time</span>
+                            <span id="modalIncidentDate" class="info-value"></span>
+                        </div>
+                        <div class="info-item">
+                            <span class="info-label">Location of Incident</span>
+                            <span id="modalLocation" class="info-value"></span>
+                        </div>
+                    </div>
+                    <div class="info-grid">
+                        <div class="info-item">
+                            <span class="info-label">Respondent Name</span>
+                            <span id="modalRespondent" class="info-value"></span>
+                        </div>
+                    </div>
+                    <div class="info-item">
+                        <span class="info-label">Respondent Address</span>
+                        <span id="modalRespondentAddress" class="info-value"></span>
+                    </div>
+                    <div class="info-item">
+                        <span class="info-label">Description of Incident</span>
+                        <div class="description-box" id="modalDescription"></div>
+                    </div>
+                </div>
+
+                <!-- Witness Details -->
+                <h3>👥 Witness Details</h3>
+                <div class="info-card">
+                    <div class="witness-info">
+                        <div class="witness-item">
+                            <div class="info-item">
+                                <span class="info-label">Witness Name</span>
+                                <span id="modalWitnessName" class="info-value"></span>
+                            </div>
+                        </div>
+                        <div class="witness-item">
+                            <div class="info-item">
+                                <span class="info-label">Witness Contact</span>
+                                <span id="modalWitnessContact" class="info-value"></span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Supporting Evidence -->
+                <h3>📸 Supporting Evidence</h3>
+                <div class="info-card">
+                    <div class="evidence-grid" id="modalEvidence">
+                        <!-- Evidence images will be populated here -->
+                    </div>
+                </div>
+            </div>
+
+            <div class="modal-footer">
+                <button id="cancelComplaintBtn" class="btn cancel-complaint-btn">Cancel Complaint</button>
+                <button id="printBtn" class="btn print-btn">Print Details</button>
+            </div>
+        </div>
     </div>
-
-    <div class="modal-body">
-      
-      <!-- SECTION: Personal Information -->
-      <h3>👤 Personal Information</h3>
-      <p><strong>Name:</strong> <span id="modalName"></span></p>
-      <p><strong>Age:</strong> <span id="modalAge"></span></p>
-      <p><strong>Gender:</strong> <span id="modalGender"></span></p>
-      <p><strong>Address:</strong> <span id="modalAddress"></span></p>
-      <p><strong>Contact:</strong> <span id="modalContact"></span></p>
-      <p><strong>Email:</strong> <span id="modalEmail"></span></p>
-      <hr>
-
-      <!-- SECTION: Complaint Details -->
-      <h3>📄 Complaint Details</h3>
-      <p><strong>Date Filed:</strong> <span id="modalDateFiled"></span></p>
-      <p><strong>Type of Complaint:</strong> <span id="modalType"></span></p>
-      <p><strong>Date and Time of Incident:</strong> <span id="modalIncidentDate"></span></p>
-      <p><strong>Location of Incident:</strong> <span id="modalLocation"></span></p>
-      <p><strong>Respondent Full Name:</strong> <span id="modalRespondent"></span></p>
-      <p><strong>Respondent Address:</strong> <span id="modalRespondentAddress"></span></p>
-      <p><strong>Description:</strong></p>
-      <div class="description-box" id="modalDescription"></div>
-      <hr>
-
-      <!-- SECTION: Supporting Evidence -->
-      <h3>📸 Supporting Evidence</h3>
-      <div class="evidence-grid" id="modalEvidence">
-        <img src="placeholder1.jpg" alt="Evidence 1">
-        <img src="placeholder2.jpg" alt="Evidence 2">
-        <img src="placeholder3.jpg" alt="Evidence 3">
-      </div>
-      <hr>
-
-      <!-- SECTION: Witness Details -->
-      <h3>👥 Witness Details</h3>
-      <p><strong>Witness Name:</strong> <span id="modalWitnessName"></span></p>
-      <p><strong>Witness Contact:</strong> <span id="modalWitnessContact"></span></p>
-      <hr>
-
-      <!-- SECTION: Complaint Status -->
-      <h3>📌 Current Status</h3>
-      <p><strong>Status:</strong> <span id="modalStatus" class="status-badge"></span></p>
-    </div>
-
-    <div class="modal-footer">
-      <button id="cancelComplaintBtn" class="cancel-complaint-btn">Cancel Complaint</button>
-    </div>
-
-  </div>
-</div>
-
-
-
   </main>
 
    <!--FOOTER SECTION-->
@@ -327,7 +372,7 @@
               <h4 class="footer-heading">Quick Links</h4>
       				<p class="footer-link"><a href="my_complaints.html" id="footer-link">My Complaints</a></p>
               <p class="footer-link"><a href="contact.html" id="footer-link">Contacts</a></p>
-              <p class="footer-link"><a href="settings.html" id="footer-link">Settings</a></p>
+              <p class="footer-link"><a href="accounts_security.html" id="footer-link">Settings</a></p>
                 </div>
 
             <div class="footer-right">
@@ -339,15 +384,37 @@
             </div>
             </footer>
 
-<div id="logoutModal" class="custom-modal">
-  <div class="modal-content">
-    <p><strong>Are you sure you want to logout?</strong></p>
     <div class="modal-buttons">
       <button class="confirm-btn" onclick="confirmLogoutAction()">Yes, Logout</button>
       <button class="cancel-btn" onclick="closeLogoutModal()">Cancel</button>
     </div>
   </div>
 </div>
+
+<!-- Enhanced Logout Modal -->
+    <div id="logoutConfirmModal" class="out-custom-modal">
+        <div class="out-modal-content">
+            <button class="close-out-btn" onclick="hideLogoutModal()" aria-label="Close">&times;</button>
+            
+            <div class="out-modal-icon">
+                <span>🚪</span>
+            </div>
+            
+            <h2 class="out-modal-title">Confirm Logout</h2>
+            <p class="out-modal-message">
+                Are you sure you want to logout? You will need to sign in again to access your account.
+            </p>
+            
+            <div class="out-modal-buttons">
+                <button class="out-btn out-btn-cancel" onclick="hideLogoutModal()">
+                    Cancel
+                </button>
+                <button class="out-btn out-btn-confirm" onclick="proceedWithLogout()">
+                    Yes, Logout
+                </button>
+            </div>
+        </div>
+    </div>
 
 
  <script>
@@ -366,19 +433,111 @@ document.addEventListener('click', (e) => {
   }
 });
 
-// ==== LOGOUT CONFIRMATION ====
-function confirmLogout() {
-  document.getElementById('logoutModal').style.display = 'flex';
-  return false; // Prevent the <a> tag from redirecting
-}
+// ==== ENHANCED LOGOUT CONFIRMATION ====
+        
+        function showLogoutConfirmation() {
+            const logoutModal = document.getElementById('logoutConfirmModal');
+            logoutModal.style.display = 'flex';
+            
+            // Add show class after a brief delay for smooth animation
+            setTimeout(() => {
+                logoutModal.classList.add('show');
+            }, 10);
+            
+            // Prevent body scroll when modal is open
+            document.body.style.overflow = 'hidden';
+            
+            // Focus trap for accessibility
+            trapFocus(logoutModal);
+            
+            return false; // Prevent the <a> tag from redirecting
+        }
 
-function closeLogoutModal() {
-  document.getElementById('logoutModal').style.display = 'none';
-}
+        function hideLogoutModal() {
+            const logoutModal = document.getElementById('logoutConfirmModal');
+            logoutModal.classList.remove('show');
+            
+            // Hide modal after animation completes
+            setTimeout(() => {
+                logoutModal.style.display = 'none';
+                document.body.style.overflow = ''; // Restore body scroll
+            }, 300);
+        }
 
-function confirmLogoutAction() {
-  window.location.href = "residentLogin.html"; // ✅ your original destination
-};
+        function proceedWithLogout() {
+            // Show loading state
+            const confirmBtn = document.querySelector('.out-btn-confirm');
+            const originalText = confirmBtn.textContent;
+            confirmBtn.textContent = 'Logging out...';
+            confirmBtn.disabled = true;
+            
+            // Simulate logout process (replace with your actual logout logic)
+            setTimeout(() => {
+                // Redirect to login page
+                window.location.href = "residentLogin.html";
+            }, 1000);
+        }
+
+        // Enhanced Features
+        
+        // Close modal when clicking outside
+        document.getElementById('logoutConfirmModal').addEventListener('click', function(e) {
+            if (e.target === this) {
+                hideLogoutModal();
+            }
+        });
+
+        // Close modal with Escape key
+        document.addEventListener('keydown', function(e) {
+            if (e.key === 'Escape') {
+                hideLogoutModal();
+            }
+        });
+
+        // Focus trap for accessibility
+        function trapFocus(logoutModal) {
+            const focusableElements = logoutModal.querySelectorAll(
+                'button, [href], input, select, textarea, [tabindex]:not([tabindex="-1"])'
+            );
+            const firstElement = focusableElements[0];
+            const lastElement = focusableElements[focusableElements.length - 1];
+
+            logoutModal.addEventListener('keydown', function(e) {
+                if (e.key === 'Tab') {
+                    if (e.shiftKey) {
+                        if (document.activeElement === firstElement) {
+                            lastElement.focus();
+                            e.preventDefault();
+                        }
+                    } else {
+                        if (document.activeElement === lastElement) {
+                            firstElement.focus();
+                            e.preventDefault();
+                        }
+                    }
+                }
+            });
+
+            // Focus first element
+            firstElement.focus();
+        }
+
+        // Optional: Auto-close after inactivity
+        let logoutInactivityTimer;
+        
+        function resetLogoutInactivityTimer() {
+            clearTimeout(logoutInactivityTimer);
+            logoutInactivityTimer = setTimeout(() => {
+                if (document.getElementById('logoutConfirmModal').style.display === 'flex') {
+                    hideLogoutModal();
+                }
+            }, 30000); // Auto-close after 30 seconds of inactivity
+        }
+
+        // Reset timer on user interaction
+        ['mousedown', 'mousemove', 'keypress', 'scroll', 'touchstart'].forEach(event => {
+            document.addEventListener(event, resetLogoutInactivityTimer, true);
+        });
 
 // ==== DROPDOWN FILTER TOGGLE ====
 function toggleDropdown() {
@@ -478,9 +637,11 @@ document.querySelectorAll('.status').forEach(status => {
 });
 
 // ==== MODAL FUNCTIONALITY ====
-const modal = document.getElementById('complaintModal');
-const closeModalBtn = document.querySelector('.close-modal');
-const cancelBtn = document.getElementById('cancelComplaintBtn');
+ const modal = document.getElementById('complaintModal');
+        const closeModalBtn = document.querySelector('.close-modal');
+        const cancelBtn = document.getElementById('cancelComplaintBtn');
+        const printBtn = document.getElementById('printBtn');
+
 
 const modalFields = {
   dateFiled: document.getElementById('modalDateFiled'),
@@ -505,20 +666,25 @@ const modalFields = {
 // Example complaint data (replace with backend data later)
 const complaintDetails = [
   {
-    age: '31',
-    gender: 'Male',
-    address: 'blablabla',
-    contact: '09178920304',
-    email: 'juandeluna@gmail.com',
-    incidentDate: '03/02/25, 2:00 AM',
-    location: 'Rawr Street, ABC',
-    respondent: 'Jose De Luna',
-    respondentAddress: 'blablabla',
-    description: 'Loud noises every night from the neighbor\'s party until 3am.',
-    witnessName: 'Maria Luna',
-    witnessContact: '09123456789',
-    evidence: ['evidence1.jpg', 'evidence2.jpg', 'evidence3.jpg'],
-  },
+      age: '31',
+                gender: 'Male',
+                address: '123 Maple Street, Brgy. San Juan, Lipa City, Batangas',
+                contact: '09178920304',
+                email: 'juandeluna@gmail.com',
+                incidentDate: '03/02/25, 2:00 AM',
+                location: 'Rawr Street, ABC Village',
+                respondent: 'Jose De Luna',
+                respondentAddress: '456 Oak Avenue, Brgy. Poblacion, Lipa City',
+                description: 'Loud noises every night from the neighbor\'s party until 3am. The music is extremely loud and prevents my family from sleeping. This has been happening for over two weeks now, and attempts to talk to them have been unsuccessful.',
+                witnessName: 'Maria Luna',
+                witnessContact: '09123456789',
+                evidence: [
+                    { name: 'Audio Recording - Night Disturbance.mp3', type: 'audio', size: '2.5 MB', icon: '🎵' },
+                    { name: 'Photo Evidence - Loud Party.jpg', type: 'image', size: '1.8 MB', icon: '📷' },
+                    { name: 'Time Log Documentation.pdf', type: 'document', size: '245 KB', icon: '📄' },
+                    { name: 'Witness Statement.docx', type: 'document', size: '156 KB', icon: '📝' }
+                ]
+            },
   // Add more complaint detail objects for each row...
 ];
 
@@ -564,11 +730,22 @@ document.querySelectorAll('.details-btn').forEach((btn, index) => {
     cancelBtn.style.display = (statusText.toLowerCase() === 'resolved') ? 'none' : 'inline-block';
 
     modal.style.display = 'flex';
+    document.body.classList.add('modal-open'); // ⬅️ Prevent background scroll
+
   });
 });
 
-closeModalBtn.addEventListener('click', () => modal.style.display = 'none');
-window.addEventListener('click', (e) => { if (e.target === modal) modal.style.display = 'none'; });
+closeModalBtn.addEventListener('click', () => {
+  modal.style.display = 'none';
+  document.body.classList.remove('modal-open'); // ⬅️ REMOVE background scroll lock
+});
+
+window.addEventListener('click', (e) => {
+  if (e.target === modal) {
+    modal.style.display = 'none';
+    document.body.classList.remove('modal-open'); // ⬅️ REMOVE background scroll lock
+  }
+});
 
 cancelBtn.addEventListener('click', () => {
   if (confirm("Are you sure you want to cancel this complaint?")) {
@@ -628,11 +805,6 @@ document.addEventListener('click', (e) => {
 document.getElementById('clearNotificationsBtn').addEventListener('click', () => {
   notificationList.innerHTML = '';
   updateNotificationCount(0);
-});
-
-// ==== HIDE MODAL ON PAGE LOAD ====
-window.addEventListener('load', () => {
-  modal.style.display = 'none';
 });
 
 

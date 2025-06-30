@@ -3,173 +3,169 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-  <title>Accounts & Security | Barangay E-Blotter System</title>
-  <link rel="stylesheet" href="acc_sec.css"/>
+  <title>Change Email | Barangay E-Blotter System</title>
+  <link rel="stylesheet" href="change_email.css"/>
   <link rel="icon" type="image/png" href="logo.png">
+
 </head>
 <body>
 
+   <div class="page-container">
     <!-- HEADER SECTION -->
-		<header class="header_gradient">
-  			<div class="header-left">
-    			<img class="market-area-logo" src="logo.png" alt="Logo" />
-    			<div class="barangay-title">
-      			<p class="barangay-market-area">Barangay Market Area:<br>E-Blotter System</p>
-    			</div>
-  			</div>
-
-  			<div class="navbar">
-  				<div class="nav-links">
-    				<a href="residentHomepage.html">Home</a>
-    				<a href="my_complaints.html">My Complaints</a>
-    				<a href="contact.html">Contacts</a>
-  				</div>
-
-  			<!-- Profile + Sidebar Wrapper -->
-			<div class="profile-sidebar-wrapper">
-  			<!-- Profile Trigger -->
-  			<div class="profile-link" id="profileTrigger">
-    			<div class="profile"></div>
-  			</div>
-
-  			<!-- Collapsible Sidebar -->
-  			<div class="sidebar collapsed" id="profileSidebar">
-  				<a href="accounts_security.html" class="sidebar-item" data-tooltip="Adjust your settings">
-    				<i class="icon">⚙️</i>
-    				<span class="label">Settings</span>
-  				</a>
-  				<a href="residentLogin.html" class="sidebar-item" id="logout-btn" onclick="return showLogoutConfirmation()" data-tooltip="Log out from your account">
-          <i class="icon">🚪</i>
-          <span class="label">Logout</span>
-          </a>
-
-
-			</div>
-
-			<!-- Notification Popup -->
-			<div id="notificationPopup" class="notification-popup">
-  				<div class="popup-header">
-    				<strong>Notifications</strong>
-    				<button class="close-btn" onclick="hidePopup()">✖</button>
-  				</div>
-  				<ul class="notification-list" id="notificationList">
-   					<li>📝 New complaint submitted</li>
-    				<li>📢 Barangay update posted</li>
-    				<li>👤 Profile approved</li>
-  				</ul>
-				<button id="clearNotificationsBtn" class="clear-btn">Clear All</button>
-				</div>
-			</div>
-		</div>
-	</div>
-</header>
-
-  <div class="security-container">
-    <h2>Account & Security Settings</h2>
-
-    <div class="section">
-      <div class="profile-header">
-        <h3>Account Information</h3>
-        <div class="profile-acc-sec">
-          <a href="profile.html" title="View your profile">View Profile</a>
+    <header class="header_gradient">
+      <div class="header-left">
+        <img class="market-area-logo" src="logo.png" alt="Logo" />
+        <div class="barangay-title">
+          <p class="barangay-market-area">Barangay Market Area:<br>E-Blotter System</p>
         </div>
+      </div>
+
+      <div class="navbar">
+        <div class="nav-links">
+          <a href="residentHomepage.html">Home</a>
+          <a href="my_complaints.html">My Complaints</a>
+          <a href="contact.html">Contacts</a>
         </div>
-      <div class="info-group">
-        <label>Email Address</label>
-        <input type="email" value="juandelacruz@gmail.com" readonly />
-      </div>
-      <div class="info-group">
-        <label>Password</label>
-        <input type="password" id="readonly-password" value="mySecret123" readonly />
-        <label class="toggle-label">
-          <input type="checkbox" onclick="toggleReadonlyPassword()" /> Show Password
-        </label>
-      </div>
-    </div>
 
-    <div class="section">
-      <h3>Change Password</h3>
-      <form class="change-password-form">
-        <input type="password" placeholder="Current Password" id="current-pass" required />
-        <input type="password" placeholder="New Password" id="new-pass" required />
-        <input type="password" placeholder="Confirm New Password" id="confirm-pass" required />
-        <label class="toggle-label">
-          <input type="checkbox" onclick="toggleChangePasswords()" /> Show Passwords
-        </label>
-        <button type="submit">Update Password</button>
-      </form>
-    </div>
+        <!-- Profile + Sidebar Wrapper -->
+        <div class="profile-sidebar-wrapper">
+          <!-- Profile Trigger -->
+          <div class="profile-link" id="profileTrigger">
+            <div class="profile"></div>
+          </div>
 
-    <div class="section">
-      <h3>Auto Logout</h3>
-      <label for="timeout">Set inactivity logout time:</label>
-      <select id="timeout">
-        <option value="5">5 minutes</option>
-        <option value="10">10 minutes</option>
-        <option value="30" selected>30 minutes</option>
-        <option value="60">1 hour</option>
-      </select>
-    </div>
+          <!-- Collapsible Sidebar -->
+          <div class="sidebar collapsed" id="profileSidebar">
+            <a href="accounts_security.html" class="sidebar-item">
+              <i class="icon">⚙️</i>
+              <span class="label">Settings</span>
+            </a>
+            <a href="#" class="sidebar-item" id="logout-btn" onclick="return showLogoutConfirmation()">
+              <i class="icon">🚪</i>
+              <span class="label">Logout</span>
+            </a>
+          </div>
+        </div>
+      </div>
+    </header>
+
+    <!-- MAIN CONTENT -->
+    <main class="main-content">
+      <div class="security-container">
+        <h2>Email Settings</h2>
+        <p class="subtitle">Update your email address securely</p>
+
+        <div class="progress-container">
+          <div class="progress-bar">
+            <div class="progress-fill" id="progressFill"></div>
+          </div>
+        </div>
+
+        <div class="section">
+          <form class="change-email-form" id="changeEmailForm">
+            <div class="form-group">
+              <label for="current-email">Current Email</label>
+              <div class="input-wrapper">
+                <input 
+                  type="email" 
+                  class="form-control" 
+                  id="current-email" 
+                  value="juandelacruz@gmail.com" 
+                  readonly
+                />
+              </div>
+            </div>
+
+            <div class="form-group">
+              <label for="new-email">New Email Address</label>
+              <div class="input-wrapper">
+                <input 
+                  type="email" 
+                  class="form-control" 
+                  id="new-email" 
+                  placeholder="Enter your new email address"
+                  required 
+                />
+              </div>
+              <div class="error-message" id="emailError"></div>
+              <div class="success-message" id="emailSuccess"></div>
+            </div>
+
+            <div class="form-group">
+              <label for="confirm-email">Confirm New Email</label>
+              <div class="input-wrapper">
+                <input 
+                  type="email" 
+                  class="form-control" 
+                  id="confirm-email" 
+                  placeholder="Confirm your new email address"
+                  required 
+                />
+              </div>
+              <div class="error-message" id="confirmEmailError"></div>
+            </div>
+
+            <button type="submit" class="submit-btn" id="submitBtn">
+              Update Email Address
+            </button>
+          </form>
+        </div>
+      </div>
+    </main>
+
+    <!-- FOOTER SECTION -->
+    <footer class="footer">
+      <div class="footer-left">
+        <img class="market-area-logo2" src="logo.png" alt="Barangay Logo" />
+        <p class="a-barangay-that">
+          A Barangay that is God-centered, united, service-oriented, inclusive, and responsive — guided by faith, integrity, and accountable governance.
+        </p>
+      </div>
+
+      <div class="footer-right-group">
+        <div class="footer-middle">
+          <h4 class="footer-heading">Quick Links</h4>
+          <p class="footer-link"><a href="my_complaints.html">My Complaints</a></p>
+          <p class="footer-link"><a href="contact.html">Contacts</a></p>
+          <p class="footer-link"><a href="accounts_security.html">Settings</a></p>
+        </div>
+
+        <div class="footer-right">
+          <h4 class="footer-heading">Site Info</h4>
+          <p class="footer-link"><a href="privpolicy.html">Privacy Policy</a></p>
+          <p class="footer-link"><a href="term&con.html">Terms & Conditions</a></p>
+        </div>
+      </div>
+    </footer>
   </div>
 
-  <!--FOOTER SECTION-->
-			<footer class="footer">
-  				<div class="footer-left">
-    				<img class="market-area-logo2" src="logo.png" alt="Barangay Logo" />
-    				<p class="a-barangay-that">
-      					A Barangay that is God-centered, united, service-oriented, inclusive, and responsive — guided by faith, integrity, and accountable governance.
-    				</p>
-  				</div>
+  <!-- Toast Container -->
+  <div class="toast-container" id="toastContainer"></div>
 
-  				<div class="footer">
-  			<!-- Any left/center content here -->
-
-  			<div class="footer-right-group">
-    			<div class="footer-middle">
-      				<h4 class="footer-heading">Quick Links</h4>
-      				<p class="footer-link"><a href="my_complaints.html" id="footer-link">My Complaints</a></p>
-              <p class="footer-link"><a href="contact.html" id="footer-link">Contacts</a></p>
-              <p class="footer-link"><a href="accounts_security.html" id="footer-link">Settings</a></p>
-    			</div>
-
-    		<div class="footer-right">
-      			<h4 class="footer-heading">Site Info</h4>
-      			<p class="footer-link"><a href="privpolicy.html" id="footer-link"> Policy</a></p>
-      			<p class="footer-link"> <a href="term&con.html" id="footer-terms-link">Terms & Conditions</a></p>
-
-    			</div>
-  			</div>
-		</div>
-    </footer>
-
-<!-- Enhanced Logout Modal -->
-    <div id="logoutConfirmModal" class="out-custom-modal">
-        <div class="out-modal-content">
-            <button class="close-out-btn" onclick="hideLogoutModal()" aria-label="Close">&times;</button>
-            
-            <div class="out-modal-icon">
-                <span>🚪</span>
-            </div>
-            
-            <h2 class="out-modal-title">Confirm Logout</h2>
-            <p class="out-modal-message">
-                Are you sure you want to logout? You will need to sign in again to access your account.
-            </p>
-            
-            <div class="out-modal-buttons">
-                <button class="out-btn out-btn-cancel" onclick="hideLogoutModal()">
-                    Cancel
-                </button>
-                <button class="out-btn out-btn-confirm" onclick="proceedWithLogout()">
-                    Yes, Logout
-                </button>
-            </div>
-        </div>
+  <!-- Enhanced Logout Modal -->
+  <div id="logoutConfirmModal" class="out-custom-modal">
+    <div class="out-modal-content">
+      <button class="close-out-btn" onclick="hideLogoutModal()" aria-label="Close">&times;</button>
+      
+      <div class="out-modal-icon">
+        <span>🚪</span>
+      </div>
+      
+      <h2 class="out-modal-title">Confirm Logout</h2>
+      <p class="out-modal-message">
+        Are you sure you want to logout? You will need to sign in again to access your account.
+      </p>
+      
+      <div class="out-modal-buttons">
+        <button class="out-btn out-btn-cancel" onclick="hideLogoutModal()">
+          Cancel
+        </button>
+        <button class="out-btn out-btn-confirm" onclick="proceedWithLogout()">
+          Yes, Logout
+        </button>
+      </div>
     </div>
-
-
-
-
+  </div>
   <script>
 
     //profile sidebar

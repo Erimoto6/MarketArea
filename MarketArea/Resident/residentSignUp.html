@@ -16,8 +16,7 @@
         body {
             font-family: Arial, sans-serif;
             background-size: 400% 400%;
-            animation: gradientMove 15s ease infinite;
-            background: url('arch.png') no-repeat center center/cover;
+            background: url('arch.png') no-repeat center center/cover fixed;
             padding: 20px;
             line-height: 1.6;
             min-height: 100vh;
@@ -47,7 +46,9 @@
         .header {
             text-align: center;
             margin-bottom: 30px;
-            color: #235201;
+            color: #ffffff;
+            background-color: #235201;
+            padding: 20px;
         }
 
         .section {
@@ -449,44 +450,34 @@
                         <input type="text" id="lastName" name="lastName" required>
                     </div>
                 </div>
-                <div class="form-row">
-                    <div class="form-group">
-                        <label for="dateOfBirth">Date of Birth *</label>
-                        <input type="date" id="dateOfBirth" name="dateOfBirth" required>
-                    </div>
-                    <div class="form-group">
-                        <label for="sex">Sex *</label>
-                        <select id="sex" name="sex" required>
-                            <option value="">Select Sex</option>
-                            <option value="male">Male</option>
-                            <option value="female">Female</option>
-                            <option value="prefer-not">Prefer not to say</option>
-                        </select>
-                    </div>
-                </div>
-                <div class="form-row">
-                    <div class="form-group">
-                        <label>Civil Status *</label>
-                        <div class="checkbox-group">
-                            <div class="checkbox-item">
-                                <input type="radio" id="single" name="civilStatus" value="single" required>
-                                <label for="single">Single</label>
-                            </div>
-                            <div class="checkbox-item">
-                                <input type="radio" id="married" name="civilStatus" value="married" required>
-                                <label for="married">Married</label>
-                            </div>
-                            <div class="checkbox-item">
-                                <input type="radio" id="widowed" name="civilStatus" value="widowed" required>
-                                <label for="widowed">Widowed</label>
-                            </div>
-                            <div class="checkbox-item">
-                                <input type="radio" id="separated" name="civilStatus" value="separated" required>
-                                <label for="separated">Separated</label>
-                            </div>
-                        </div>
-                    </div>
-                </div>
+<div class="form-row">
+    <div class="form-group">
+        <label for="dateOfBirth">Date of Birth *</label>
+        <input type="date" id="dateOfBirth" name="dateOfBirth" required>
+    </div>
+    
+    <div class="form-group">
+        <label for="sex">Sex *</label>
+        <select id="sex" name="sex" required>
+            <option value="">Select Sex</option>
+            <option value="male">Male</option>
+            <option value="female">Female</option>
+            <option value="prefer-not">Prefer not to say</option>
+        </select>
+    </div>
+    
+    <div class="form-group">
+        <label for="civilStatus">Civil Status *</label>
+        <select id="civilStatus" name="civilStatus" required>
+            <option value="">Select Civil Status</option>
+            <option value="single">Single</option>
+            <option value="married">Married</option>
+            <option value="widowed">Widowed</option>
+            <option value="separated">Separated</option>
+        </select>
+    </div>
+</div>
+
             </div>
 
             <!-- Address & Barangay Verification -->
@@ -500,32 +491,6 @@
                     <div class="form-group">
                         <label for="purok">Purok/Subdivision</label>
                         <input type="text" id="purok" name="purok">
-                    </div>
-                </div>
-                <div class="form-row">
-                    <div class="form-group">
-                        <label for="barangay">Barangay *</label>
-                        <select id="barangay" name="barangay" required>
-                            <option value="">Select Barangay</option>
-                            <option value="market-area">Market Area</option>
-                        </select>
-                    </div>
-                    <div class="form-group">
-                        <label for="city">City/Municipality *</label>
-                        <input type="text" id="city" name="city" value="Santa Rosa" required>
-                    </div>
-                </div>
-                <div class="form-row">
-                    <div class="form-group">
-                        <label for="province">Province *</label>
-                        <input type="text" id="province" name="province" value="Laguna" required>
-                    </div>
-                </div>
-                <div class="form-group full-width">
-                    <label for="proofOfResidency">Upload Proof of Residency *</label>
-                    <div class="file-upload">
-                        <input type="file" id="proofOfResidency" name="proofOfResidency" accept=".pdf,.jpg,.jpeg,.png" required>
-                        <p>Barangay ID, Utility Bill, or Barangay Certificate (PDF, JPG, PNG only)</p>
                     </div>
                 </div>
             </div>
@@ -545,6 +510,16 @@
                 </div>
             </div>
 
+            <div class="section">
+                    <div class="form-group full-width">
+                    <label for="proofOfResidency">Upload Proof of Residency *</label>
+                    <div class="file-upload">
+                        <input type="file" id="proofOfResidency" name="proofOfResidency" accept=".pdf,.jpg,.jpeg,.png" required>
+                        <i><p>Barangay ID, Utility Bill, or Barangay Certificate (PDF, JPG, PNG only)</p></i>
+                    </div>
+                </div>
+            </div>
+
             <!-- Login Credentials -->
             <div class="section">
                 <div class="section-title">Login Credentials</div>
@@ -553,7 +528,7 @@
                     <div class="form-group">
                         <label for="password">Password *</label>
                         <input type="password" id="password" name="password" minlength="8" required>
-                        <small>Minimum 8 characters, with number and capital letter</small>
+                        <i><small>Minimum 8 characters, with number and capital letter</small></i>
                     </div>
                     <div class="form-group">
                         <label for="confirmPassword">Confirm Password *</label>

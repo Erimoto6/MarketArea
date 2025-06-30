@@ -34,7 +34,7 @@ body {
   background: linear-gradient(90deg, rgba(0, 0, 0, 0), rgba(0, 0, 0, 0.2)),
               linear-gradient(90deg, #4b5320, #2b3209);
   width: 100%;
-  height: 129px;
+  height: 100px;
   padding: 0 40px;
   box-sizing: border-box;
   z-index: 10;
@@ -48,8 +48,8 @@ body {
 }
 
 .market-area-logo {
-  width: 97px;
-  height: 93px;
+   width: 80px;
+  height: 80px;
   object-fit: cover;
   border-radius: 50%;
   margin-right: 20px;
@@ -57,6 +57,7 @@ body {
 
 .barangay-market-area {
     font-family: Trebuchet MS;
+    font-weight: 900;
 }
 
 .barangay-title {
@@ -82,6 +83,7 @@ body {
   letter-spacing: 0.1em;
   font-size: 18px;
   color: #fff;
+  font-family: Trebuchet MS;
 }
 
 .nav-links a {
@@ -123,8 +125,8 @@ body {
 }
 
 .profile {
-  width: 54px;
-  height: 54px;
+  width: 45px;
+  height: 45px;
   border-radius: 50%;
   background-color: #fff;
   border: 2px solid #4f0002;
@@ -727,6 +729,226 @@ html, body {
 }
 
 
+input[readonly] {
+  background-color: #f0f0f0;
+  color: #555;
+}
+
+button a {
+  text-decoration: none;
+  color: inherit;
+}
+
+/* LOGOUT MODAL */
+    .out-custom-modal {
+      display: none;
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background: rgba(0, 0, 0, 0.6);
+      backdrop-filter: blur(4px);
+      justify-content: center;
+      align-items: center;
+      z-index: 1000;
+      opacity: 0;
+      transition: opacity 0.3s ease;
+    }
+
+    .out-custom-modal.show {
+      opacity: 1;
+    }
+
+    .out-modal-content {
+      background: white;
+      border-radius: 16px;
+      padding: 32px;
+      box-shadow: 0 20px 60px rgba(0, 0, 0, 0.3);
+      text-align: center;
+      max-width: 400px;
+      width: 90%;
+      transform: scale(0.9);
+      transition: transform 0.3s ease;
+      position: relative;
+      font-family: sans-serif;
+    }
+
+    .out-custom-modal.show .out-modal-content {
+      transform: scale(1);
+    }
+
+    .out-modal-icon {
+      width: 64px;
+      height: 64px;
+      background: linear-gradient(135deg, #ff6b6b, #ff8e8e);
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      margin: 0 auto 20px;
+      color: white;
+      font-size: 24px;
+    }
+
+    .out-modal-title {
+      font-size: 24px;
+      font-weight: 600;
+      color: #2c3e50;
+      margin: 0 0 12px 0;
+    }
+
+    .out-modal-message {
+      color: #7f8c8d;
+      font-size: 16px;
+      line-height: 1.5;
+      margin: 0 0 32px 0;
+    }
+
+    .out-modal-buttons {
+      display: flex;
+      gap: 12px;
+      justify-content: center;
+      flex-wrap: wrap;
+    }
+
+    .out-btn {
+      padding: 12px 24px;
+      border: none;
+      border-radius: 8px;
+      font-size: 16px;
+      font-weight: 500;
+      cursor: pointer;
+      transition: all 0.3s ease;
+      min-width: 100px;
+    }
+
+    .out-btn-cancel {
+      background: #ecf0f1;
+      color: #7f8c8d;
+    }
+
+    .out-btn-cancel:hover {
+      background: #d5dbdb;
+      color: #5d6d7e;
+    }
+
+    .out-btn-confirm {
+      background: linear-gradient(135deg, #e74c3c, #c0392b);
+      color: white;
+    }
+
+    .out-btn-confirm:hover {
+      background: linear-gradient(135deg, #c0392b, #a93226);
+      transform: translateY(-2px);
+      box-shadow: 0 4px 12px rgba(231, 76, 60, 0.3);
+    }
+
+    .close-out-btn {
+      position: absolute;
+      top: 16px;
+      right: 16px;
+      background: none;
+      border: none;
+      font-size: 24px;
+      color: #bdc3c7;
+      cursor: pointer;
+      padding: 4px;
+      border-radius: 4px;
+      transition: color 0.3s ease;
+    }
+
+    .close-out-btn:hover {
+      color: #7f8c8d;
+    }
+
+    /* Toast Notifications */
+    .toast-container {
+      position: fixed;
+      top: 20px;
+      right: 20px;
+      z-index: 9999;
+      display: flex;
+      flex-direction: column;
+      gap: 12px;
+    }
+
+    .toast {
+      background-color: #4b5320;
+      color: #fff;
+      padding: 12px 18px;
+      border-radius: 8px;
+      min-width: 220px;
+      font-size: 14px;
+      box-shadow: 0 6px 20px rgba(0, 0, 0, 0.3);
+      animation: slideInToast 0.4s ease, fadeOutToast 0.5s ease 3.5s forwards;
+      position: relative;
+      opacity: 1;
+    }
+
+    .toast.success {
+      background-color: #28a745;
+    }
+
+    .toast.error {
+      background-color: #dc3545;
+    }
+
+    @keyframes slideInToast {
+      from {
+        transform: translateX(100%);
+        opacity: 0;
+      }
+      to {
+        transform: translateX(0);
+        opacity: 1;
+      }
+    }
+
+    @keyframes fadeOutToast {
+      to {
+        opacity: 0;
+        transform: translateX(100%);
+      }
+    }
+
+    /* Responsive Design */
+    @media (max-width: 768px) {
+      .header_gradient {
+        padding: 0 20px;
+        height: auto;
+        min-height: 129px;
+        flex-direction: column;
+        gap: 20px;
+      }
+
+      .navbar {
+        padding: 0;
+        width: 100%;
+        justify-content: center;
+      }
+
+      .nav-links {
+        padding-right: 0;
+        gap: 20px;
+        font-size: 16px;
+      }
+
+      .security-container {
+        margin: 20px;
+        padding: 30px 20px;
+      }
+
+      .footer {
+        flex-direction: column;
+        text-align: center;
+      }
+
+      .footer-right-group {
+        justify-content: center;
+      }
+    }
+
   </style>
 </head>
 <body>
@@ -756,25 +978,12 @@ html, body {
 
   		<!-- Collapsible Sidebar -->
   			<div class="sidebar collapsed" id="profileSidebar">
-  				<a href="profile.html" class="sidebar-item" data-tooltip="View your profile">
-    				<i class="icon">👤</i>
-    				<span class="label">Profile</span>
-  				</a>
-          <a href="resident_notifications.html" class="sidebar-item" id="notifItem" data-tooltip="View notifications">
-  					<i class="icon">🔔</i>
-  					<span class="label">Notifications</span>
-  					<span class="notif-badge" id="notifBadge">0</span>
-				  </a>
-  				<a href="settings.html" class="sidebar-item" data-tooltip="Adjust your settings">
+          <a href="accounts_security.html" class="sidebar-item" data-tooltip="Adjust your settings">
     				<i class="icon">⚙️</i>
     				<span class="label">Settings</span>
   				</a>
-  				<a href="accounts_security.html" class="sidebar-item" data-tooltip="Manage your account and privacy">
-    				<i class="icon">🔐</i>
-    				<span class="label">Account & Security</span>
-  				</a>
-  				<a href="#" class="sidebar-item" id="logout-btn" onclick="return confirmLogout()" data-tooltip="Log out from your account">
-             <i class="icon">⏻</i>
+  				<a href="residentLogin.html" class="sidebar-item" id="logout-btn" onclick="return showLogoutConfirmation()" data-tooltip="Log out from your account">
+             <i class="icon">🚪</i>
              <span class="label">Logout</span>
           </a>
 
@@ -805,7 +1014,7 @@ html, body {
       <div class="contact-info">
         <p><strong>Barangay Hall Address:</strong> Barangay Market Area, Sta. Rosa Laguna</p>
         <p><strong>Phone:</strong> (012) 345-6789</p>
-        <p><strong>Email:</strong> <a href="mailto:barangayeblotter@email.com">barangaymarketarea@gmail.com</a></p>
+        <p><strong>Email:</strong>barangaymarketarea@gmail.com</p>
         <p><strong>Office Hours:</strong> Monday - Friday, 8:00 AM - 5:00 PM</p>
       </div>
       <form class="contact-form" id="contactForm" autocomplete="off">
@@ -813,7 +1022,7 @@ html, body {
         <input type="text" id="name" name="name" required placeholder="Enter your name">
 
         <label for="email">Your Email</label>
-        <input type="email" id="email" name="email" required placeholder="Enter your email">
+        <input type="email" id="email" name="email" required value="juandelacruz@gmail.com" readonly>
 
         <label for="title">Title</label>
         <input type="title" id="title" name="title" required placeholder="Enter Title">
@@ -821,7 +1030,7 @@ html, body {
         <textarea id="message" name="message" required placeholder="Type your message here..."></textarea>
         <div id="messageWordCount" style="text-align: right; font-size: 0.9rem; color: #666;">0 / 150 words</div>
 
-        <button type="submit">Send Message</button>
+        <button type="button" onclick="sendEmail()">Send Message</button>
       </form>
     </div>
   </main>
@@ -848,7 +1057,7 @@ html, body {
               <h4 class="footer-heading">Quick Links</h4>
       				<p class="footer-link"><a href="my_complaints.html" id="footer-link">My Complaints</a></p>
               <p class="footer-link"><a href="contact.html" id="footer-link">Contacts</a></p>
-              <p class="footer-link"><a href="settings.html" id="footer-link">Settings</a></p>
+              <p class="footer-link"><a href="accounts_security.html" id="footer-link">Settings</a></p>
                 </div>
 
             <div class="footer-right">
@@ -863,15 +1072,31 @@ html, body {
             <!-- Toast Container -->
 	<div id="toastContainer" class="toast-container"></div>
 
-  <div id="logoutModal" class="custom-modal">
-  <div class="modal-content">
-    <p><strong>Are you sure you want to logout?</strong></p>
-    <div class="modal-buttons">
-      <button class="confirm-btn" onclick="confirmLogoutAction()">Yes, Logout</button>
-      <button class="cancel-btn" onclick="closeLogoutModal()">Cancel</button>
+  <!-- Enhanced Logout Modal -->
+    <div id="logoutConfirmModal" class="out-custom-modal">
+        <div class="out-modal-content">
+            <button class="close-out-btn" onclick="hideLogoutModal()" aria-label="Close">&times;</button>
+            
+            <div class="out-modal-icon">
+                <span>🚪</span>
+            </div>
+            
+            <h2 class="out-modal-title">Confirm Logout</h2>
+            <p class="out-modal-message">
+                Are you sure you want to logout? You will need to sign in again to access your account.
+            </p>
+            
+            <div class="out-modal-buttons">
+                <button class="out-btn out-btn-cancel" onclick="hideLogoutModal()">
+                    Cancel
+                </button>
+                <button class="out-btn out-btn-confirm" onclick="proceedWithLogout()">
+                    Yes, Logout
+                </button>
+            </div>
+        </div>
     </div>
-  </div>
-</div>
+
 
   <script>
 
@@ -952,6 +1177,13 @@ document.getElementById('closeThankYou').addEventListener('click', function () {
   document.getElementById('thankYouPopup').style.display = 'none';
 });
 
+//email pop-up notice
+  function sendEmail() {
+    alert("Email sent, please check soon your email for further notice.");
+    window.location.href = "mailto:barangayeblotter@email.com";
+  }
+
+
 // notifications
 
 //notifications
@@ -1029,6 +1261,113 @@ clearBtn.addEventListener("click", () => {
 });
 
 hidePopup(); // Add this inside the clearBtn click function
+
+// ==== ENHANCED LOGOUT CONFIRMATION ====
+        
+        function showLogoutConfirmation() {
+            const logoutModal = document.getElementById('logoutConfirmModal');
+            logoutModal.style.display = 'flex';
+            
+            // Add show class after a brief delay for smooth animation
+            setTimeout(() => {
+                logoutModal.classList.add('show');
+            }, 10);
+            
+            // Prevent body scroll when modal is open
+            document.body.style.overflow = 'hidden';
+            
+            // Focus trap for accessibility
+            trapFocus(logoutModal);
+            
+            return false; // Prevent the <a> tag from redirecting
+        }
+
+        function hideLogoutModal() {
+            const logoutModal = document.getElementById('logoutConfirmModal');
+            logoutModal.classList.remove('show');
+            
+            // Hide modal after animation completes
+            setTimeout(() => {
+                logoutModal.style.display = 'none';
+                document.body.style.overflow = ''; // Restore body scroll
+            }, 300);
+        }
+
+        function proceedWithLogout() {
+            // Show loading state
+            const confirmBtn = document.querySelector('.out-btn-confirm');
+            const originalText = confirmBtn.textContent;
+            confirmBtn.textContent = 'Logging out...';
+            confirmBtn.disabled = true;
+            
+            // Simulate logout process (replace with your actual logout logic)
+            setTimeout(() => {
+                // Redirect to login page
+                window.location.href = "residentLogin.html";
+            }, 1000);
+        }
+
+        // Enhanced Features
+        
+        // Close modal when clicking outside
+        document.getElementById('logoutConfirmModal').addEventListener('click', function(e) {
+            if (e.target === this) {
+                hideLogoutModal();
+            }
+        });
+
+        // Close modal with Escape key
+        document.addEventListener('keydown', function(e) {
+            if (e.key === 'Escape') {
+                hideLogoutModal();
+            }
+        });
+
+        // Focus trap for accessibility
+        function trapFocus(logoutModal) {
+            const focusableElements = logoutModal.querySelectorAll(
+                'button, [href], input, select, textarea, [tabindex]:not([tabindex="-1"])'
+            );
+            const firstElement = focusableElements[0];
+            const lastElement = focusableElements[focusableElements.length - 1];
+
+            logoutModal.addEventListener('keydown', function(e) {
+                if (e.key === 'Tab') {
+                    if (e.shiftKey) {
+                        if (document.activeElement === firstElement) {
+                            lastElement.focus();
+                            e.preventDefault();
+                        }
+                    } else {
+                        if (document.activeElement === lastElement) {
+                            firstElement.focus();
+                            e.preventDefault();
+                        }
+                    }
+                }
+            });
+
+            // Focus first element
+            firstElement.focus();
+        }
+
+        // Optional: Auto-close after inactivity
+        let logoutInactivityTimer;
+        
+        function resetLogoutInactivityTimer() {
+            clearTimeout(logoutInactivityTimer);
+            logoutInactivityTimer = setTimeout(() => {
+                if (document.getElementById('logoutConfirmModal').style.display === 'flex') {
+                    hideLogoutModal();
+                }
+            }, 30000); // Auto-close after 30 seconds of inactivity
+        }
+
+        // Reset timer on user interaction
+        ['mousedown', 'mousemove', 'keypress', 'scroll', 'touchstart'].forEach(event => {
+            document.addEventListener(event, resetLogoutInactivityTimer, true);
+        });
+
 
   </script>
 
