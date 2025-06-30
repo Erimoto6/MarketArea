@@ -78,27 +78,29 @@
   display: inline-block; 
 }
 
-nav a:hover {
-  background-color: #71873f; /* Darker green, adjust as needed */
+/* Hover Effect - Light Green + Scale */
+.nav-list li a:hover {
+  background-color: #71873f;
+  transform: scale(1.05);
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
+  color: white;
+}
+
+/* Active Page Link */
+.nav-list li a.active {
+  background: linear-gradient(90deg, #6a7337, #4b5320);
+  font-weight: bold;
+  color: white;
+  border-radius: 8px;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.25);
   transform: scale(1.05);
 }
 
-      /* Active Page Link */
-     .nav-list li a.active {
-      background: linear-gradient(90deg, #6a7337, #4b5320);
-      font-weight: bold;
-      color: white;
-      border-radius: 8px;
-      box-shadow: 0 4px 12px rgba(0, 0, 0, 0.25);
-      transform: scale(1.05);
-      }
-
-     .nav-list a.active {
-  background-color: #55621b;
-  color: white;
-  padding: 8px 16px;
-  border-radius: 8px;
-  transition: 0.3s;
+/* Active Page Link + Hover */
+.nav-list li a.active:hover {
+  background: linear-gradient(90deg, #7e8c4d, #5a642c);
+  transform: scale(1.08);
+  box-shadow: 0 6px 16px rgba(0, 0, 0, 0.3);
 }
 
 nav ul {
