@@ -48,6 +48,11 @@ body {
   line-height: 1.1;
 }
 
+.barangay-market-area {
+    font-family: Trebuchet MS;
+    font-weight: 700;
+}
+
 /* Navigation links */
 .navbar {
   display: flex;
