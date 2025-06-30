@@ -183,7 +183,11 @@
   
   <script>
     // Sample complaints data with detailed information
-    let complaints = [
+  let complaints = JSON.parse(localStorage.getItem('complaints') || '[]');
+
+  // Only set mock data if localStorage is empty (first visit)
+  if (complaints.length === 0) {
+    complaints = [
       {
         id: 1,
         dateFiled: '06/09/25',
@@ -211,7 +215,7 @@
         complainant: 'Ackermann, Mikasa',
         respondent: 'Vasquez, Ma. Elaine B.',
         type: 'Property disputes',
-        status: 'Resolved',
+        status: 'On going',
         age: 28,
         gender: 'Female',
         address: '456 Oak Avenue, Barangay Market Area',
@@ -228,89 +232,115 @@
       },
       {
         id: 3,
-        dateFiled: '05/28/25',
-        complainant: 'Santos, Juan Carlos',
-        respondent: 'Dela Cruz, Maria',
-        type: 'Garbage disposal',
-        status: 'Abandoned',
-        age: 45,
+        dateFiled: '06/15/25',
+        complainant: 'Reyes, Antonio',
+        respondent: 'Delos Santos, Carlo',
+        type: 'Noise complaint',
+        status: 'On going',
+        age: 35,
         gender: 'Male',
-        address: '789 Pine Street, Barangay Market Area',
-        contact: '09176543210',
-        email: 'juan.santos@gmail.com',
-        incidentDate: '05/27/25',
-        incidentTime: '6:00 AM',
-        location: 'Front of complainant\'s house',
-        description: 'Improper garbage disposal by neighbor, causing foul smell and attracting pests.',
-        witnessName: '',
-        witnessContact: '',
-        assignedTo: 'Case Closed',
-        appointmentDate: 'N/A'
+        address: '789 Pine Street, Barangay Malinis',
+        contact: '09181234567',
+        email: 'antonio.reyes@email.com',
+        incidentDate: '06/14/25',
+        incidentTime: '11:45 PM',
+        location: 'Neighbor’s residence',
+        description: 'Loud music and shouting past midnight disturbing the neighborhood. This has been recurring every weekend.',
+        witnessName: 'Luis Fernandez',
+        witnessContact: '09186543210',
+        assignedTo: 'Officer Santiago',
+        appointmentDate: '06/20/25'
       },
       {
         id: 4,
-        dateFiled: '05/25/25',
-        complainant: 'Rodriguez, Ana',
-        respondent: 'Garcia, Pedro',
-        type: 'Public safety',
+        dateFiled: '06/10/25',
+        complainant: 'Lopez, Maria Angelica',
+        respondent: 'Gomez, Ricardo',
+        type: 'Verbal abuse',
         status: 'On going',
-        age: 35,
+        age: 42,
         gender: 'Female',
-        address: '321 Elm Street, Barangay Market Area',
-        contact: '09165432109',
-        email: 'ana.rodriguez@gmail.com',
-        incidentDate: '05/24/25',
-        incidentTime: '8:00 PM',
-        location: 'Community playground',
-        description: 'Unsafe conditions at the community playground due to broken equipment and poor lighting.',
-        witnessName: 'Carlos Lopez',
-        witnessContact: '09154321098',
-        assignedTo: 'Officer Gonzales',
-        appointmentDate: '05/30/25, 2:00 PM'
+        address: '123 Mango Lane, Barangay San Vicente',
+        contact: '09223456789',
+        email: 'maria.lopez@gmail.com',
+        incidentDate: '06/08/25',
+        incidentTime: '2:30 PM',
+        location: 'Public market',
+        description: 'Respondent verbally assaulted the complainant in public using degrading language during a disagreement.',
+        witnessName: 'Jessa Villanueva',
+        witnessContact: '09177654321',
+        assignedTo: 'Officer Dela Cruz',
+        appointmentDate: '06/18/25'
       },
       {
         id: 5,
-        dateFiled: '05/20/25',
-        complainant: 'Lopez, Carmen',
-        respondent: 'Martinez, Jose',
-        type: 'Noise complaint',
-        status: 'Resolved',
-        age: 42,
-        gender: 'Female',
-        address: '654 Maple Drive, Barangay Market Area',
-        contact: '09143210987',
-        email: 'carmen.lopez@gmail.com',
-        incidentDate: '05/19/25',
-        incidentTime: '11:00 PM',
-        location: 'Residential area',
-        description: 'Loud construction work during prohibited hours causing disturbance to residents.',
-        witnessName: 'Roberto Silva',
-        witnessContact: '09132109876',
-        assignedTo: 'Officer Reyes',
-        appointmentDate: 'Resolved on 05/25/25'
+        dateFiled: '06/18/25',
+        complainant: 'Torres, Miguel',
+        respondent: 'Bautista, Elmer',
+        type: 'Vandalism',
+        status: 'On going',
+        age: 30,
+        gender: 'Male',
+        address: 'Lot 9 Block 5, Barangay Sta. Lucia',
+        contact: '09192345678',
+        email: 'miguel.torres@yahoo.com',
+        incidentDate: '06/16/25',
+        incidentTime: '6:00 PM',
+        location: 'Garage wall',
+        description: 'Graffiti and paint were found on the complainant’s garage wall. Security camera footage shows the respondent near the scene.',
+        witnessName: 'Joel Navarro',
+        witnessContact: '09234561234',
+        assignedTo: 'Officer Ramos',
+        appointmentDate: '06/25/25'
+
       },
       {
         id: 6,
-        dateFiled: '06/09/25',
-        complainant: 'Vasquez, Ma. Elaine B.',
-        respondent: 'Ackermann, Mikasa',
-        type: 'Noise complaint',
+        dateFiled: '06/05/25',
+        complainant: 'Santos, Clara',
+        respondent: 'Manalo, Erika',
+        type: 'Harassment',
         status: 'On going',
-        age: 31,
+        age: 26,
         gender: 'Female',
-        address: '123 Main Street, Barangay Market Area',
-        contact: '09178920304',
-        email: 'elaine.vasquez@gmail.com',
-        incidentDate: '06/08/25',
-        incidentTime: '2:00 AM',
-        location: 'Rawr Street, ABC',
-        description: 'Loud music and shouting from neighbor\'s house during late hours. This has been happening for several nights and is disturbing the peace of the neighborhood.',
-        witnessName: 'Juan Santos',
-        witnessContact: '09123456789',
-        assignedTo: 'Officer Rodriguez',
-        appointmentDate: '06/15/25, 10:00 AM'
+        address: '54 Acacia Drive, Barangay Luntian',
+        contact: '09217894561',
+        email: 'clara.santos@hotmail.com',
+        incidentDate: '06/02/25',
+        incidentTime: '10:15 AM',
+        location: 'Workplace',
+        description: 'Repeated unwanted comments and behavior from the respondent at the workplace despite warnings.',
+        witnessName: 'Nina Garcia',
+        witnessContact: '09187659876',
+        assignedTo: 'Officer Aquino',
+        appointmentDate: 'Resolved on 06/10/25'
+
+      },
+      {
+        id: 7,
+        dateFiled: '06/20/25',
+        complainant: 'Delacruz, Jerome',
+        respondent: 'Padilla, Nestor',
+        type: 'Physical assault',
+        status: 'On going',
+        age: 39,
+        gender: 'Male',
+        address: 'Unit 2B, Sunrise Apartments, Barangay Mabini',
+        contact: '09183456789',
+        email: 'jerome.dc@gmail.com',
+        incidentDate: '06/19/25',
+        incidentTime: '9:00 PM',
+        location: 'Basketball court',
+        description: 'Respondent punched the complainant during a heated argument after a basketball game.',
+        witnessName: 'Marco Tan',
+        witnessContact: '09324567890',
+        assignedTo: 'Officer Lim',
+        appointmentDate: '06/27/25'
       }
     ];
+    // Save to localStorage
+    localStorage.setItem('complaints', JSON.stringify(complaints));
+  }
 
     // Remove archived from visible complaints
     const archivedIds = JSON.parse(localStorage.getItem('archivedIds') || '[]');
@@ -351,6 +381,16 @@
       updateTable();
     });
 
+const allArchived = JSON.parse(localStorage.getItem('archivedComplaints') || '[]');
+const params = new URLSearchParams(window.location.search);
+const idString = params.get('ids');
+const idsToShow = idString ? idString.split(',').map(Number) : [];
+
+
+
+
+
+
     // Update table
     function updateTable() {
       const tbody = document.getElementById('complaintsTableBody');
@@ -366,7 +406,15 @@
         emptyState.style.display = 'none';
         tbody.innerHTML = currentComplaints.map(complaint => `
           <tr onclick="handleComplaintClick(${complaint.id})">
-            <td>${complaint.dateFiled}</td>
+            
+            <!-- ✅ Checkbox now before dateFiled and uses the correct ID -->
+            <td onclick="event.stopPropagation();">
+              <div style="display: flex; align-items: center; gap: 10px;">
+                <input type="checkbox" class="complaint-checkbox" data-id="${complaint.id}" />
+                ${complaint.dateFiled}
+              </div>
+            </td>
+
             <td>${complaint.complainant}</td>
             <td>${complaint.respondent}</td>
             <td>${complaint.type}</td>
@@ -376,19 +424,15 @@
                 ${complaint.status}
               </span>
             </td>
-            <td onclick="event.stopPropagation();">
-              <div style="display: flex; align-items: center; gap: 10px;">
+            <td>
+              <div style="display: flex; align-items: center; gap:">
                 <button class="action-btn" onclick="viewComplaint(${complaint.id})" title="View Details">
-                  <i class="fas fa-eye"></i> View
+                  <i class="fas fa-eye"></i>
                 </button>
-                <input type="checkbox" class="complaint-checkbox" data-id="${complaint.id}" title="Select for archive" />
               </div>
             </td>
-
         `).join('');
-
       }
-
       updatePagination();
     }
 
@@ -549,9 +593,7 @@
               <i class="fas fa-trash"></i> Abandoned Complaint
             </button>
 
-            <button class="status-btn btn-archive" onclick="updateStatus(${complaint.id}, 'Archive')">
-              <i class="fas fa-archive"></i> Archive Complaint
-            </button>
+
 
           </div>
         </div>
@@ -752,16 +794,6 @@
       }
     }
 
-    /*TERMS AND CONDITION*/
-    function openTerms(event) {
-      event.preventDefault();
-      document.getElementById('termsModal').style.display = 'flex';
-    }
-
-    function closeTerms() {
-      document.getElementById('termsModal').style.display = 'none';
-    }
-
 
     
     searchInput.addEventListener('input', () => {
@@ -925,39 +957,36 @@ function confirmLogoutAction() {
   });
 
   //ARCHIVE BUTTON
-  function archiveSelectedComplaints() {
-    const checkboxes = document.querySelectorAll('.complaint-checkbox:checked');
-    const selectedIds = Array.from(checkboxes).map(cb => cb.getAttribute('data-id'));
+function archiveSelectedComplaints() {
+  const checkboxes = document.querySelectorAll('.complaint-checkbox:checked');
+  const selectedIds = Array.from(checkboxes).map(cb => cb.getAttribute('data-id'));
 
-    if (selectedIds.length === 0) {
-      alert("Please select at least one complaint to archive.");
-      return;
-    }
-
-    // ✅ Store archived IDs in localStorage
-    const archived = JSON.parse(localStorage.getItem('archivedIds') || '[]');
-    selectedIds.forEach(id => {
-      if (!archived.includes(id)) archived.push(id);
-    });
-    localStorage.setItem('archivedIds', JSON.stringify(archived));
-
-    // ✅ Redirect to archive page with IDs in query string
-    const queryString = '?ids=' + selectedIds.join(',');
-    window.location.href = 'archive.html' + queryString;
+  if (selectedIds.length === 0) {
+    alert("Please select at least one complaint to archive.");
+    return;
   }
 
+  // Get current data from localStorage
+  let complaints = JSON.parse(localStorage.getItem('complaints') || '[]');
+  let archived = JSON.parse(localStorage.getItem('archivedComplaints') || '[]');
 
-  fetch('complaints.json')
-    .then(res => res.json())
-    .then(data => {
-      complaints = data;
-      filteredComplaints = [...complaints];
-      updateTable();
-      updateResultsInfo();
-    });
+  selectedIds.forEach(id => {
+    const complaint = complaints.find(c => String(c.id) === id);
+    if (complaint && !archived.some(ac => ac.id === complaint.id)) {
+      archived.push(complaint);
+    }
+  });
 
+  // Remove archived complaints from active
+  complaints = complaints.filter(c => !selectedIds.includes(String(c.id)));
 
+  // Save updated lists
+  localStorage.setItem('archivedComplaints', JSON.stringify(archived));
   localStorage.setItem('complaints', JSON.stringify(complaints));
+
+  alert("Selected complaints have been archived.");
+  location.reload();
+}
 
 
 
