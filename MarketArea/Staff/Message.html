@@ -39,7 +39,7 @@
       }
 
       .logo {
-        height: 35px;
+        height: 50px;
         width: auto;
       }
 
@@ -54,6 +54,7 @@
         flex: 1;
         display: flex;
         justify-content: flex-end;
+        margin: 40px;
       }
 
       .nav-list {
@@ -64,24 +65,23 @@
 
       .nav-list li {
         position: relative;
+        margin: 0 10px;
       }
 
-      .nav-list a {
-        color: rgba(255, 255, 255, 0.8);
-        text-decoration: none;
-        font-weight: 500;
-        padding: 18px 24px;
-        display: block;
-        transition: all 0.3s ease;
-        border-radius: 0;
-      }
+      nav a {
+  padding: 8px 12px;
+  text-decoration: none;
+  border-radius: 8px;
+  color: white;
+  border-radius: 4px;
+  transition: background-color 0.2s ease, transform 0.2s ease;
+  display: inline-block; 
+}
 
-      .nav-list a:hover {
-       background-color: #71873f;
-       transform: scale(1.05);
-       box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
-       color: white;
-      }
+nav a:hover {
+  background-color: #71873f; /* Darker green, adjust as needed */
+  transform: scale(1.05);
+}
 
       /* Active Page Link */
      .nav-list li a.active {
@@ -93,11 +93,39 @@
       transform: scale(1.05);
       }
 
-      .nav-list a.active {
-       background: linear-gradient(90deg, #7e8c4d, #5a642c);
-       transform: scale(1.08);
-       box-shadow: 0 6px 16px rgba(0, 0, 0, 0.3);
-      }
+     .nav-list a.active {
+  background-color: #55621b;
+  color: white;
+  padding: 8px 16px;
+  border-radius: 8px;
+  transition: 0.3s;
+}
+
+nav ul {
+  list-style: none;
+  display: flex;
+  align-items: center;
+  gap: 20px;
+  padding: 0;
+  margin: 0;
+}
+
+nav ul li a {
+  padding: 10px 15px;
+  text-decoration: none;
+  color: white;
+  font-weight: normal;
+  display: inline-block;
+  vertical-align: middle;
+  height: 100%;
+}
+
+nav ul li a.active {
+  background-color: #4d5c20; /* dark olive for active state */
+  border-radius: 5px;
+}
+
+
 
  .nav-list a.active:hover {
   background-color: #71873f; /* or any slightly different shade */
@@ -572,7 +600,7 @@
       <ul class="mobile-menu">
           <li><a href="staffHomepage.html">Home</a></li>
           <li><a href="manageComplaints.html">Manage Complaints</a></li>
-          <li><a href="Message.html">Message</a></li>
+          <li><a href="Message.html" class="active">Message</a></li>
           <li><a href="settings.html">Settings</a></li>
       </ul>
     </header>
