@@ -4,6 +4,7 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Staff Settings</title>
+    <link rel="icon" href="files/logo.png" type="image/png" />
     <link
       rel="stylesheet"
       href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css"
@@ -161,6 +162,18 @@
       .profile-email {
         font-size: 14px;
         color: #666;
+      }
+
+      .profile-header {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+      }
+
+      .employee-id {
+        font-size: 16px;
+        font-weight: 600;
+        color: #2c3e50;
       }
 
       .settings-section {
@@ -469,19 +482,25 @@
         <div class="profile-avatar-container">
           <div class="profile-avatar" id="profileAvatar">
             <i class="fas fa-user" id="profileIcon"></i>
-            <img id="profileImage" style="display: none;" alt="Profile Picture">
+            <img id="profileImage" style="display: none;" alt="Profile Picture" />
           </div>
           <div class="profile-picture-upload" onclick="document.getElementById('profilePictureInput').click()">
             <i class="fas fa-camera"></i>
           </div>
-          <input type="file" id="profilePictureInput" class="profile-picture-input" accept="image/*">
+          <input type="file" id="profilePictureInput" class="profile-picture-input" accept="image/*" />
         </div>
+
         <div class="profile-info">
-          <div class="profile-name">John Doe</div>
+          <div class="profile-header">
+            <div class="profile-name">John Doe</div>
+            <div class="employee-id">Employee ID: <strong>#001</strong></div>
+          </div>
           <div class="profile-role">Staff Manager</div>
           <div class="profile-email">john.doe@company.com</div>
         </div>
       </div>
+
+
 
       <!-- Account Settings Section -->
       <div class="settings-section">
