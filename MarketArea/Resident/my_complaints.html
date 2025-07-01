@@ -357,7 +357,7 @@
         </div>
     </div>
   </main>
-
+ 
    <!--FOOTER SECTION-->
 		<footer class="footer">
             <div class="footer-left">
@@ -429,110 +429,94 @@ document.addEventListener('click', (e) => {
 });
 
 // ==== ENHANCED LOGOUT CONFIRMATION ====
-        
-        function showLogoutConfirmation() {
-            const logoutModal = document.getElementById('logoutConfirmModal');
-            logoutModal.style.display = 'flex';
-            
-            // Add show class after a brief delay for smooth animation
-            setTimeout(() => {
-                logoutModal.classList.add('show');
-            }, 10);
-            
-            // Prevent body scroll when modal is open
-            document.body.style.overflow = 'hidden';
-            
-            // Focus trap for accessibility
-            trapFocus(logoutModal);
-            
-            return false; // Prevent the <a> tag from redirecting
-        }
 
-        function hideLogoutModal() {
-            const logoutModal = document.getElementById('logoutConfirmModal');
-            logoutModal.classList.remove('show');
-            
-            // Hide modal after animation completes
-            setTimeout(() => {
-                logoutModal.style.display = 'none';
-                document.body.style.overflow = ''; // Restore body scroll
-            }, 300);
-        }
+function showLogoutConfirmation() {
+    const logoutModal = document.getElementById('logoutConfirmModal');
+    logoutModal.style.display = 'flex';
 
-        function proceedWithLogout() {
-            // Show loading state
-            const confirmBtn = document.querySelector('.out-btn-confirm');
-            const originalText = confirmBtn.textContent;
-            confirmBtn.textContent = 'Logging out...';
-            confirmBtn.disabled = true;
-            
-            // Simulate logout process (replace with your actual logout logic)
-            setTimeout(() => {
-                // Redirect to login page
-                window.location.href = "residentLogin.html";
-            }, 1000);
-        }
+    setTimeout(() => {
+        logoutModal.classList.add('show');
+    }, 10);
 
-        // Enhanced Features
-        
-        // Close modal when clicking outside
-        document.getElementById('logoutConfirmModal').addEventListener('click', function(e) {
-            if (e.target === this) {
-                hideLogoutModal();
-            }
-        });
+    document.body.style.overflow = 'hidden';
+    trapFocus(logoutModal);
 
-        // Close modal with Escape key
-        document.addEventListener('keydown', function(e) {
-            if (e.key === 'Escape') {
-                hideLogoutModal();
-            }
-        });
+    return false;
+}
 
-        // Focus trap for accessibility
-        function trapFocus(logoutModal) {
-            const focusableElements = logoutModal.querySelectorAll(
-                'button, [href], input, select, textarea, [tabindex]:not([tabindex="-1"])'
-            );
-            const firstElement = focusableElements[0];
-            const lastElement = focusableElements[focusableElements.length - 1];
+function hideLogoutModal() {
+    const logoutModal = document.getElementById('logoutConfirmModal');
+    logoutModal.classList.remove('show');
 
-            logoutModal.addEventListener('keydown', function(e) {
-                if (e.key === 'Tab') {
-                    if (e.shiftKey) {
-                        if (document.activeElement === firstElement) {
-                            lastElement.focus();
-                            e.preventDefault();
-                        }
-                    } else {
-                        if (document.activeElement === lastElement) {
-                            firstElement.focus();
-                            e.preventDefault();
-                        }
-                    }
+    setTimeout(() => {
+        logoutModal.style.display = 'none';
+        document.body.style.overflow = '';
+    }, 300);
+}
+
+function proceedWithLogout() {
+    const confirmBtn = document.querySelector('.out-btn-confirm');
+    const originalText = confirmBtn.textContent;
+    confirmBtn.textContent = 'Logging out...';
+    confirmBtn.disabled = true;
+
+    setTimeout(() => {
+        window.location.href = "residentLogin.html";
+    }, 1000);
+}
+
+document.getElementById('logoutConfirmModal').addEventListener('click', function(e) {
+    if (e.target === this) {
+        hideLogoutModal();
+    }
+});
+
+document.addEventListener('keydown', function(e) {
+    if (e.key === 'Escape') {
+        hideLogoutModal();
+    }
+});
+
+function trapFocus(logoutModal) {
+    const focusableElements = logoutModal.querySelectorAll(
+        'button, [href], input, select, textarea, [tabindex]:not([tabindex="-1"])'
+    );
+    const firstElement = focusableElements[0];
+    const lastElement = focusableElements[focusableElements.length - 1];
+
+    logoutModal.addEventListener('keydown', function(e) {
+        if (e.key === 'Tab') {
+            if (e.shiftKey) {
+                if (document.activeElement === firstElement) {
+                    lastElement.focus();
+                    e.preventDefault();
                 }
-            });
-
-            // Focus first element
-            firstElement.focus();
-        }
-
-        // Optional: Auto-close after inactivity
-        let logoutInactivityTimer;
-        
-        function resetLogoutInactivityTimer() {
-            clearTimeout(logoutInactivityTimer);
-            logoutInactivityTimer = setTimeout(() => {
-                if (document.getElementById('logoutConfirmModal').style.display === 'flex') {
-                    hideLogoutModal();
+            } else {
+                if (document.activeElement === lastElement) {
+                    firstElement.focus();
+                    e.preventDefault();
                 }
-            }, 30000); // Auto-close after 30 seconds of inactivity
+            }
         }
+    });
 
-        // Reset timer on user interaction
-        ['mousedown', 'mousemove', 'keypress', 'scroll', 'touchstart'].forEach(event => {
-            document.addEventListener(event, resetLogoutInactivityTimer, true);
-        });
+    firstElement.focus();
+}
+
+let logoutInactivityTimer;
+
+function resetLogoutInactivityTimer() {
+    clearTimeout(logoutInactivityTimer);
+    logoutInactivityTimer = setTimeout(() => {
+        if (document.getElementById('logoutConfirmModal').style.display === 'flex') {
+            hideLogoutModal();
+        }
+    }, 30000);
+}
+
+['mousedown', 'mousemove', 'keypress', 'scroll', 'touchstart'].forEach(event => {
+    document.addEventListener(event, resetLogoutInactivityTimer, true);
+});
 
 // ==== DROPDOWN FILTER TOGGLE ====
 function toggleDropdown() {
@@ -632,11 +616,10 @@ document.querySelectorAll('.status').forEach(status => {
 });
 
 // ==== MODAL FUNCTIONALITY ====
- const modal = document.getElementById('complaintModal');
-        const closeModalBtn = document.querySelector('.close-modal');
-        const cancelBtn = document.getElementById('cancelComplaintBtn');
-        const printBtn = document.getElementById('printBtn');
-
+const modal = document.getElementById('complaintModal');
+const closeModalBtn = document.querySelector('.close-modal');
+const cancelBtn = document.getElementById('cancelComplaintBtn');
+const printBtn = document.getElementById('printBtn');
 
 const modalFields = {
   dateFiled: document.getElementById('modalDateFiled'),
@@ -724,21 +707,21 @@ document.querySelectorAll('.details-btn').forEach((btn, index) => {
     // Hide cancel button for resolved status
     cancelBtn.style.display = (statusText.toLowerCase() === 'resolved') ? 'none' : 'inline-block';
 
+    // Show modal using CSS classes instead of inline styles
     modal.style.display = 'flex';
-    document.body.classList.add('modal-open'); // ⬅️ Prevent background scroll
-
+    document.body.classList.add('modal-open'); // Prevent background scroll
   });
 });
 
 closeModalBtn.addEventListener('click', () => {
   modal.style.display = 'none';
-  document.body.classList.remove('modal-open'); // ⬅️ REMOVE background scroll lock
+  document.body.classList.remove('modal-open'); // Remove background scroll lock
 });
 
 window.addEventListener('click', (e) => {
   if (e.target === modal) {
     modal.style.display = 'none';
-    document.body.classList.remove('modal-open'); // ⬅️ REMOVE background scroll lock
+    document.body.classList.remove('modal-open'); // Remove background scroll lock
   }
 });
 
@@ -746,63 +729,9 @@ cancelBtn.addEventListener('click', () => {
   if (confirm("Are you sure you want to cancel this complaint?")) {
     alert("Complaint has been cancelled.");
     modal.style.display = 'none';
+    document.body.classList.remove('modal-open');
   }
 });
-
-// ==== NOTIFICATIONS SYSTEM ====
-let notifCount = 0;
-const badge = document.getElementById("notifBadge");
-const toastContainer = document.getElementById("toastContainer");
-const notifItem = document.getElementById("notifItem");
-const popup = document.getElementById("notificationPopup");
-const notificationList = document.getElementById("notificationList");
-
-function updateNotificationCount(count) {
-  notifCount = count;
-  badge.textContent = notifCount > 0 ? notifCount : '';
-  badge.style.display = notifCount > 0 ? 'inline-block' : 'none';
-}
-
-function showToast(message) {
-  const toast = document.createElement("div");
-  toast.className = "toast";
-  toast.textContent = message;
-  toastContainer.appendChild(toast);
-  setTimeout(() => toast.remove(), 4000);
-}
-
-function addNotificationToList(message) {
-  const li = document.createElement("li");
-  li.textContent = message;
-  notificationList.prepend(li);
-}
-
-setInterval(() => {
-  notifCount++;
-  const msg = `🔔 New notification #${notifCount}`;
-  updateNotificationCount(notifCount);
-  showToast(msg);
-  addNotificationToList(msg);
-}, 10000);
-
-notifItem.addEventListener('click', (e) => {
-  e.preventDefault();
-  popup.style.display = popup.style.display === 'block' ? 'none' : 'block';
-  updateNotificationCount(0);
-});
-
-document.addEventListener('click', (e) => {
-  if (!popup.contains(e.target) && !notifItem.contains(e.target)) {
-    popup.style.display = 'none';
-  }
-});
-
-document.getElementById('clearNotificationsBtn').addEventListener('click', () => {
-  notificationList.innerHTML = '';
-  updateNotificationCount(0);
-});
-
-
 </script>
 
 
