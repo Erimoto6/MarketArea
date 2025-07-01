@@ -944,7 +944,7 @@ main.content {
   z-index: 9999;
   justify-content: center;
   align-items: center;
-  padding: 20px;
+  padding: 40px;
   box-sizing: border-box;
   animation: overlayFadeIn 0.3s ease; /* ⬅️ ADD smooth fade in animation */
 }
@@ -953,11 +953,11 @@ main.content {
 .modal-content {
   background-color: #fff;
   border-radius: 10px;
-  max-width: 750px;
+  max-width: 900px;
   width: 100%;
   padding: 0; /* ⬅️ Remove padding to let header/body/footer handle their own */
   box-shadow: 0 20px 60px rgba(0, 0, 0, 0.3); /* ⬅️ Enhanced shadow */
-  max-height: 50vh;
+  max-height: 80vh;
   overflow: hidden; /* ⬅️ Prevent content overflow */
   transition: transform 0.2s ease;
   animation: modalSlideIn 0.3s ease; /* ⬅️ ADD smooth slide in animation */
@@ -1036,7 +1036,7 @@ main.content {
 
 /* === Enhanced Modal Body === */
 .modal-body {
-    padding: 20px;
+    padding: 40px;
     max-height: calc(50vh - 100px); /* subtract header/footer height */    overflow-y: auto;
     color: #2b3209;
     line-height: 1.6;
@@ -1412,8 +1412,8 @@ main.content {
     }
     
     .modal-content {
-      max-width: 600px !important;
-      max-height: 50vh !important;
+      max-width: 850px !important;
+      max-height: 90vh !important;
     }
     
     .modal-header {
@@ -1422,7 +1422,7 @@ main.content {
     
     .modal-body {
     overflow-y: auto;
-    max-height: calc(50vh - 100px); /* subtract header/footer height */
+    max-height: calc(70vh - 100px); /* subtract header/footer height */
   }
     
     .modal-footer {
