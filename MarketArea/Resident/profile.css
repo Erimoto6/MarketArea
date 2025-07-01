@@ -11,6 +11,9 @@ body {
   min-height: 100vh; /* ensures the background covers the whole screen */
 }
 
+body {
+      overflow-x: hidden;
+    }
 
 /* HEADER SECTION */
 .header_gradient {
