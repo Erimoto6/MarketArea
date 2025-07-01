@@ -202,12 +202,9 @@
 
   
   <script>
-// archive.html cleaned script
-
 // ===================
 // Initialization
 // ===================
-
 document.addEventListener('DOMContentLoaded', function () {
   highlightNav();
   updateTable();
@@ -219,7 +216,10 @@ const complaintsPerPage = 5;
 
 const archivedComplaints = JSON.parse(localStorage.getItem('archivedComplaints') || '[]');
 let deletedIds = new Set(JSON.parse(localStorage.getItem('deletedIds') || '[]'));
-let complaints = archivedComplaints.filter(c => !deletedIds.has(String(c.id)));
+let complaints = archivedComplaints
+  .filter(c => !deletedIds.has(String(c.id)))
+  .map(c => ({ ...c, status: 'Archive' }));
+
 let filteredComplaints = [...complaints];
 
 // ===================
@@ -608,8 +608,6 @@ function closeLogoutModal() {
 function confirmLogoutAction() {
   window.location.href = "staffLogin.html";
 }
-
-
   </script>
 </body>
 
