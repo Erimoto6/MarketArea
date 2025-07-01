@@ -1039,181 +1039,210 @@
         </div>
     </div>
 
+    <!-- Password Update Confirmation Modal -->
+<div id="confirmUpdateModal" class="out-custom-modal">
+  <div class="out-modal-content">
+    <button class="close-out-btn" onclick="hideUpdateModal()" aria-label="Close">&times;</button>
+
+    <div class="out-modal-icon" style="background: linear-gradient(135deg, #D0B564, #ad9448);">
+      <span>✔️</span>
+    </div>
+
+    <h2 class="out-modal-title">Confirm Password Change</h2>
+    <p class="out-modal-message">
+      Are you sure you want to update your password?
+    </p>
+
+    <div class="out-modal-buttons">
+      <button class="out-btn out-btn-cancel" onclick="hideUpdateModal()">Cancel</button>
+      <button class="out-btn out-btn-confirm" style="background: linear-gradient(135deg, #8A9A5B, #6A7337);" onclick="confirmPasswordUpdate()">
+        Yes, Update
+      </button>
+    </div>
+  </div>
+</div>
+
+
   <script>
-
-    //profile sidebar
-
-    const profileTrigger = document.getElementById('profileTrigger');
+  // ==== PROFILE SIDEBAR TOGGLE ====
+  const profileTrigger = document.getElementById('profileTrigger');
   const sidebar = document.getElementById('profileSidebar');
 
   profileTrigger.addEventListener('click', (e) => {
-    e.preventDefault(); // prevent anchor from navigating
+    e.preventDefault();
     sidebar.classList.toggle('show');
   });
 
-  document.addEventListener('click', function (e) {
+  document.addEventListener('click', (e) => {
     const wrapper = document.querySelector('.profile-sidebar-wrapper');
     if (!wrapper.contains(e.target)) {
       sidebar.classList.remove('show');
     }
   });
 
-  //password
+  // ==== TOGGLE SINGLE PASSWORD FIELD ====
   function togglePassword(fieldId, iconId) {
-  const field = document.getElementById(fieldId);
-  const icon = document.getElementById(iconId);
-
-  if (field.type === "password") {
-    field.type = "text";
-    icon.classList.remove("fa-eye");
-    icon.classList.add("fa-eye-slash");
-  } else {
-    field.type = "password";
-    icon.classList.remove("fa-eye-slash");
-    icon.classList.add("fa-eye");
-  }
-}
-
-function toggleAllChangePasswords() {
-  const fields = ['current-pass', 'new-pass', 'confirm-pass'];
-  const icons = ['toggle-icon-current-pass', 'toggle-icon-new-pass', 'toggle-icon-confirm-pass'];
-
-  fields.forEach((fieldId, i) => {
     const field = document.getElementById(fieldId);
-    const icon = document.getElementById(icons[i]);
-    const isPassword = field.type === 'password';
+    const icon = document.getElementById(iconId);
 
-    field.type = isPassword ? 'text' : 'password';
+    const isPassword = field.type === "password";
+    field.type = isPassword ? "text" : "password";
     icon.classList.toggle("fa-eye", !isPassword);
     icon.classList.toggle("fa-eye-slash", isPassword);
-  });
-}
-
-
-
-
-// ==== ENHANCED LOGOUT CONFIRMATION ====
-        
-        function showLogoutConfirmation() {
-            const logoutModal = document.getElementById('logoutConfirmModal');
-            logoutModal.style.display = 'flex';
-            
-            // Add show class after a brief delay for smooth animation
-            setTimeout(() => {
-                logoutModal.classList.add('show');
-            }, 10);
-            
-            // Prevent body scroll when modal is open
-            document.body.style.overflow = 'hidden';
-            
-            // Focus trap for accessibility
-            trapFocus(logoutModal);
-            
-            return false; // Prevent the <a> tag from redirecting
-        }
-
-        function hideLogoutModal() {
-            const logoutModal = document.getElementById('logoutConfirmModal');
-            logoutModal.classList.remove('show');
-            
-            // Hide modal after animation completes
-            setTimeout(() => {
-                logoutModal.style.display = 'none';
-                document.body.style.overflow = ''; // Restore body scroll
-            }, 300);
-        }
-
-        function proceedWithLogout() {
-            // Show loading state
-            const confirmBtn = document.querySelector('.out-btn-confirm');
-            const originalText = confirmBtn.textContent;
-            confirmBtn.textContent = 'Logging out...';
-            confirmBtn.disabled = true;
-            
-            // Simulate logout process (replace with your actual logout logic)
-            setTimeout(() => {
-                // Redirect to login page
-                window.location.href = "residentLogin.html";
-            }, 1000);
-        }
-
-        // Enhanced Features
-        
-        // Close modal when clicking outside
-        document.getElementById('logoutConfirmModal').addEventListener('click', function(e) {
-            if (e.target === this) {
-                hideLogoutModal();
-            }
-        });
-
-        // Close modal with Escape key
-        document.addEventListener('keydown', function(e) {
-            if (e.key === 'Escape') {
-                hideLogoutModal();
-            }
-        });
-
-        // Focus trap for accessibility
-        function trapFocus(logoutModal) {
-            const focusableElements = logoutModal.querySelectorAll(
-                'button, [href], input, select, textarea, [tabindex]:not([tabindex="-1"])'
-            );
-            const firstElement = focusableElements[0];
-            const lastElement = focusableElements[focusableElements.length - 1];
-
-            logoutModal.addEventListener('keydown', function(e) {
-                if (e.key === 'Tab') {
-                    if (e.shiftKey) {
-                        if (document.activeElement === firstElement) {
-                            lastElement.focus();
-                            e.preventDefault();
-                        }
-                    } else {
-                        if (document.activeElement === lastElement) {
-                            firstElement.focus();
-                            e.preventDefault();
-                        }
-                    }
-                }
-            });
-
-            // Focus first element
-            firstElement.focus();
-        }
-
-        // Optional: Auto-close after inactivity
-        let logoutInactivityTimer;
-        
-        function resetLogoutInactivityTimer() {
-            clearTimeout(logoutInactivityTimer);
-            logoutInactivityTimer = setTimeout(() => {
-                if (document.getElementById('logoutConfirmModal').style.display === 'flex') {
-                    hideLogoutModal();
-                }
-            }, 30000); // Auto-close after 30 seconds of inactivity
-        }
-
-        // Reset timer on user interaction
-        ['mousedown', 'mousemove', 'keypress', 'scroll', 'touchstart'].forEach(event => {
-            document.addEventListener(event, resetLogoutInactivityTimer, true);
-        });
-
-function toggleReadonlyPassword() {
-  const field = document.getElementById('readonly-password');
-  const icon = document.getElementById('toggle-icon-readonly-pass');
-
-  if (field.type === 'password') {
-    field.type = 'text';
-    icon.classList.remove('fa-eye');
-    icon.classList.add('fa-eye-slash');
-  } else {
-    field.type = 'password';
-    icon.classList.remove('fa-eye-slash');
-    icon.classList.add('fa-eye');
   }
+
+  // ==== TOGGLE ALL CHANGE PASSWORD FIELDS ====
+  function toggleAllChangePasswords() {
+    const fields = ['current-pass', 'new-pass', 'confirm-pass'];
+    const icons = ['toggle-icon-current-pass', 'toggle-icon-new-pass', 'toggle-icon-confirm-pass'];
+
+    fields.forEach((fieldId, i) => {
+      const field = document.getElementById(fieldId);
+      const icon = document.getElementById(icons[i]);
+      const isPassword = field.type === 'password';
+
+      field.type = isPassword ? 'text' : 'password';
+      icon.classList.toggle("fa-eye", !isPassword);
+      icon.classList.toggle("fa-eye-slash", isPassword);
+    });
+  }
+
+  // ==== TOGGLE READONLY PASSWORD ====
+  function toggleReadonlyPassword() {
+    togglePassword('readonly-password', 'toggle-icon-readonly-pass');
+  }
+
+  // ==== PASSWORD MATCH CONFIRMATION ====
+  function validatePasswordMatch() {
+    const newPassword = document.getElementById('new-pass');
+    const confirmPassword = document.getElementById('confirm-pass');
+
+    if (confirmPassword.value !== "" && newPassword.value !== confirmPassword.value) {
+      confirmPassword.setCustomValidity("Passwords do not match");
+    } else {
+      confirmPassword.setCustomValidity("");
+    }
+  }
+
+  document.getElementById('new-pass').addEventListener('input', validatePasswordMatch);
+  document.getElementById('confirm-pass').addEventListener('input', validatePasswordMatch);
+
+  // ==== ENHANCED LOGOUT MODAL ====
+  function showLogoutConfirmation() {
+    const logoutModal = document.getElementById('logoutConfirmModal');
+    logoutModal.style.display = 'flex';
+    setTimeout(() => logoutModal.classList.add('show'), 10);
+    document.body.style.overflow = 'hidden';
+    trapFocus(logoutModal);
+    return false;
+  }
+
+  function hideLogoutModal() {
+    const logoutModal = document.getElementById('logoutConfirmModal');
+    logoutModal.classList.remove('show');
+    setTimeout(() => {
+      logoutModal.style.display = 'none';
+      document.body.style.overflow = '';
+    }, 300);
+  }
+
+  function proceedWithLogout() {
+    const confirmBtn = document.querySelector('.out-btn-confirm');
+    confirmBtn.textContent = 'Logging out...';
+    confirmBtn.disabled = true;
+
+    setTimeout(() => {
+      window.location.href = "residentLogin.html";
+    }, 1000);
+  }
+
+  // Close logout modal when clicking outside
+  document.getElementById('logoutConfirmModal').addEventListener('click', function (e) {
+    if (e.target === this) hideLogoutModal();
+  });
+
+  // Close logout modal with ESC key
+  document.addEventListener('keydown', function (e) {
+    if (e.key === 'Escape') hideLogoutModal();
+  });
+
+  // Trap focus inside modal
+  function trapFocus(modal) {
+    const focusable = modal.querySelectorAll('button, [href], input, select, textarea, [tabindex]:not([tabindex="-1"])');
+    const first = focusable[0];
+    const last = focusable[focusable.length - 1];
+
+    modal.addEventListener('keydown', function (e) {
+      if (e.key === 'Tab') {
+        if (e.shiftKey && document.activeElement === first) {
+          last.focus();
+          e.preventDefault();
+        } else if (!e.shiftKey && document.activeElement === last) {
+          first.focus();
+          e.preventDefault();
+        }
+      }
+    });
+
+    first.focus();
+  }
+
+  // Auto-close modal after inactivity
+  let logoutInactivityTimer;
+  function resetLogoutInactivityTimer() {
+    clearTimeout(logoutInactivityTimer);
+    logoutInactivityTimer = setTimeout(() => {
+      if (document.getElementById('logoutConfirmModal').style.display === 'flex') {
+        hideLogoutModal();
+      }
+    }, 30000); // 30 seconds
+  }
+
+  ['mousedown', 'mousemove', 'keypress', 'scroll', 'touchstart'].forEach(event => {
+    document.addEventListener(event, resetLogoutInactivityTimer, true);
+  });
+
+  // ==== SHOW PASSWORD UPDATE CONFIRMATION MODAL ====
+function handlePasswordChange(event) {
+  event.preventDefault(); // prevent form submission
+  const modal = document.getElementById('confirmUpdateModal');
+  modal.style.display = 'flex';
+  setTimeout(() => modal.classList.add('show'), 10);
+  document.body.style.overflow = 'hidden';
+  trapFocus(modal); // reuse trapFocus function
 }
 
+// ==== HIDE UPDATE MODAL ====
+function hideUpdateModal() {
+  const modal = document.getElementById('confirmUpdateModal');
+  modal.classList.remove('show');
+  setTimeout(() => {
+    modal.style.display = 'none';
+    document.body.style.overflow = '';
+  }, 300);
+}
 
-  </script>
+// ==== CONFIRM PASSWORD UPDATE ====
+function confirmPasswordUpdate() {
+  const message = document.getElementById('passwordMessage');
+  hideUpdateModal();
+
+  // Show success message (you can enhance this to actually update password via server)
+  message.className = 'message success';
+  message.textContent = 'Your password has been updated successfully.';
+  message.style.display = 'block';
+
+  // Clear form inputs
+  document.getElementById('current-pass').value = '';
+  document.getElementById('new-pass').value = '';
+  document.getElementById('confirm-pass').value = '';
+
+  setTimeout(() => {
+    message.style.display = 'none';
+  }, 5000);
+}
+
+</script>
+
 </body>
 </html>

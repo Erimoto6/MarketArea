@@ -1064,13 +1064,22 @@ function showThankYouPopup() {
     });
 
     function sendEmail() {
-      // Simulate message sending (you can add validation or logging here)
-      console.log("Message sent (simulated)");
-      showThankYouPopup();
+  const form = document.getElementById("contactForm");
 
-      // Optional: Clear the form
-      document.getElementById("contactForm").reset();
-    }
+  if (!form.checkValidity()) {
+    form.reportValidity(); // shows browser's built-in validation messages
+    return;
+  }
+
+  // Simulate message sending (you can add validation or logging here)
+  console.log("Message sent (simulated)");
+  showThankYouPopup();
+
+  // Optional: Clear the form
+  form.reset();
+  wordCounter.textContent = `0 / 150 words`;
+}
+
   </script>
 
 </body>
