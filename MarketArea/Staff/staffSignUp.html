@@ -371,6 +371,12 @@
                 <div class="section-title">Personal Information</div>
                 <div class="form-row">
                     <div class="form-group">
+                        <label for="employeeId">Employee ID *</label>
+                        <input type="text" id="employeeId" name="employeeId" placeholder="EMP-XXXX" required>
+                    </div>
+                </div>
+                <div class="form-row">
+                    <div class="form-group">
                         <label for="firstName">First Name *</label>
                         <input type="text" id="firstName" name="firstName" required>
                     </div>
@@ -457,9 +463,9 @@
     <div id="successPopup" class="success-popup">
         <div class="success-content">
             <div class="success-icon">✅</div>
-            <h2 class="success-title">Registration Submitted Successfully!</h2>
-            <p class="success-message">Your registration has been submitted for approval. Please check your email for further instructions and wait for confirmation from our administrators.</p>
-            <p class="redirect-info">Returning to main page in <span id="countdown">5</span> seconds...</p>
+            <h2 class="success-title">Registration Completed Successfully!</h2>
+            <p class="success-message">Your account has been created successfully! You can now log in with your credentials.</p>
+            <p class="redirect-info">Redirecting to login page in <span id="countdown">5</span> seconds...</p>
         </div>
     </div>
 
@@ -570,16 +576,20 @@
         const acceptTermsConditions = document.getElementById('acceptTermsConditions');
 
         // Open Privacy Policy Modal
-        privacyPolicyLink.addEventListener('click', function(e) {
-            e.preventDefault();
-            privacyPolicyModal.style.display = 'block';
-        });
+        if (privacyPolicyLink) {
+            privacyPolicyLink.addEventListener('click', function(e) {
+                e.preventDefault();
+                privacyPolicyModal.style.display = 'block';
+            });
+        }
 
         // Open Terms & Conditions Modal
-        termsConditionsLink.addEventListener('click', function(e) {
-            e.preventDefault();
-            termsConditionsModal.style.display = 'block';
-        });
+        if (termsConditionsLink) {
+            termsConditionsLink.addEventListener('click', function(e) {
+                e.preventDefault();
+                termsConditionsModal.style.display = 'block';
+            });
+        }
 
         // Close Privacy Policy Modal
         closePrivacyModal.addEventListener('click', function() {
@@ -618,6 +628,13 @@
             // Basic validation
             const password = document.getElementById('password').value;
             const confirmPassword = document.getElementById('confirmPassword').value;
+            const employeeId = document.getElementById('employeeId').value;
+            
+            // Employee ID validation
+            if (!employeeId.trim()) {
+                alert('Employee ID is required!');
+                return;
+            }
             
             if (password !== confirmPassword) {
                 alert('Passwords do not match!');
@@ -636,8 +653,8 @@
             // Directly show success popup
             showSuccessPopup();
             
-            // Simulate email sending and registration submission
-            console.log('Registration submitted for approval!');
+            // Simulate account creation
+            console.log('Account created successfully with Employee ID:', employeeId);
         });
 
         function showSuccessPopup() {
@@ -653,8 +670,8 @@
                 
                 if (countdown <= 0) {
                     clearInterval(timer);
-                    // Simulate redirect to main page
-                    alert('Your registration is pending approval. You will be notified via email once approved.');
+                    // Redirect to login page
+                    alert('Account created successfully! You can now log in.');
                     window.location.href = 'staffLogin.html';
                 }
             }, 1000);
