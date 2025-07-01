@@ -21,6 +21,11 @@
       min-height: 100vh;
     }
 
+    body {
+      overflow-x: hidden;
+    }
+
+
     /* HEADER SECTION */
     .header_gradient {
       display: flex;
@@ -803,6 +808,142 @@
         width: 100%;
       }
     }
+
+    .activity-modal {
+  padding: 30px;
+  background: #fefefe;
+  border-radius: 20px;
+  box-shadow: 0 15px 40px rgba(0,0,0,0.15);
+  animation: slideUpFade 0.4s ease;
+}
+
+.activity-log-container {
+  max-height: 300px;
+  overflow-y: auto;
+  margin-top: 20px;
+  border-top: 1px solid #ddd;
+  padding-top: 15px;
+}
+
+.activity-log-list {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+
+.activity-log-list li {
+  background: #f9f9f9;
+  padding: 12px 18px;
+  border-radius: 12px;
+  margin-bottom: 12px;
+  box-shadow: 0 2px 5px rgba(0,0,0,0.06);
+  font-size: 14px;
+  line-height: 1.6;
+  color: #333;
+  transition: background 0.3s;
+}
+
+.activity-log-list li:hover {
+  background: #f0f0f0;
+}
+
+@keyframes slideUpFade {
+  from {
+    transform: translateY(30px);
+    opacity: 0;
+  }
+  to {
+    transform: translateY(0);
+    opacity: 1;
+  }
+}
+
+.twofa-footer {
+  margin-top: 20px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: 12px;
+}
+
+.twofa-status {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  font-size: 14px;
+  font-weight: 600;
+}
+
+.status-indicator {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  padding: 6px 12px;
+  border-radius: 20px;
+  font-size: 13px;
+  font-weight: 500;
+  letter-spacing: 0.3px;
+}
+
+.status-dot {
+  width: 10px;
+  height: 10px;
+  border-radius: 50%;
+  background-color: #ccc;
+}
+
+.status-inactive {
+  background-color: #ffebee;
+  color: #c62828;
+}
+
+.status-inactive .status-dot {
+  background-color: #c62828;
+}
+
+.status-active {
+  background-color: #e8f5e8;
+  color: #2e7d32;
+}
+
+.status-active .status-dot {
+  background-color: #2e7d32;
+}
+
+.twofa-toggle-btn {
+  padding: 10px 20px;
+  background: linear-gradient(135deg, #4b5320, #6b7539);
+  color: white;
+  border: none;
+  border-radius: 8px;
+  font-weight: 600;
+  font-size: 14px;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  box-shadow: 0 2px 6px rgba(75, 83, 32, 0.2);
+}
+
+.twofa-toggle-btn:hover {
+  background: linear-gradient(135deg, #3e451a, #5a6330);
+  transform: translateY(-2px);
+  box-shadow: 0 4px 12px rgba(75, 83, 32, 0.3);
+}
+
+.twofa-toggle-btn:active {
+  transform: translateY(0);
+}
+
+.twofa-toggle-btn.enabled {
+  background: linear-gradient(135deg, #c0392b, #e74c3c); /* Red for disable */
+}
+
+.twofa-toggle-btn.enabled:hover {
+  background: linear-gradient(135deg, #a93226, #c0392b);
+}
+
+
+
   </style>
 </head>
 <body>
@@ -965,25 +1106,36 @@
           </div>
 
           <!-- Security Features Cards -->
-          <div class="security-features">
-            <div class="feature-card">
-              <h4>🔐 Two-Factor Authentication</h4>
-              <p>Add an extra layer of security to your account with 2FA</p>
-              <div style="margin-top: 15px;">
-                <span class="status-indicator status-inactive">Disabled</span>
-              </div>
-            </div>
+        <div class="security-features">
+  <!-- Two-Factor Auth Card -->
+  <div class="feature-card twofa-card">
+    <h4>🔐 Two-Factor Authentication</h4>
+    <p class="feature-desc">Add an extra layer of security to your account with 2FA</p>
 
-            <div class="feature-card">
-              <h4>📊 Account Activity</h4>
-              <p>Monitor recent activities and login history</p>
-              <div style="margin-top: 15px;">
-                <button class="btn-primary" style="padding: 8px 16px; font-size: 14px;">
-                  View Activity
-                </button>
-              </div>
-            </div>
-          </div>
+    <div class="twofa-footer">
+      <div class="twofa-status">
+        <span id="twoFactorStatus" class="status-indicator status-inactive">
+          <span class="status-dot"></span> <span id="twoFactorText">Disabled</span>
+        </span>
+      </div>
+
+      <button id="twoFactorToggleBtn" class="twofa-toggle-btn">Enable</button>
+    </div>
+  </div>
+
+<!-- Account Activity Card -->
+<div class="feature-card">
+  <h4>📊 Account Activity</h4>
+  <p class="feature-desc">Monitor recent activities and login history</p>
+
+  <div class="twofa-footer">
+    <div class="twofa-status"></div> <!-- Empty div to match layout -->
+    <button class="twofa-toggle-btn" onclick="showActivityModal()">View Activity</button>
+  </div>
+</div>
+</div>
+
+
         </div>
       </div>
     </main>
@@ -1061,6 +1213,53 @@
     </div>
   </div>
 </div>
+
+<!-- Account Activity Modal -->
+<div id="accountActivityModal" class="out-custom-modal">
+  <div class="out-modal-content activity-modal" style="max-width: 640px;">
+    <button class="close-out-btn" onclick="hideActivityModal()" aria-label="Close">&times;</button>
+
+    <div class="out-modal-icon" style="background: linear-gradient(135deg, #4b5320, #6b7539); box-shadow: 0 4px 12px rgba(0,0,0,0.2);">
+      <span>📊</span>
+    </div>
+
+    <h2 class="out-modal-title" style="font-size: 22px;">Recent Account Activity</h2>
+    <p class="out-modal-message" style="margin-top: 5px; font-size: 14px; color: #666;">
+      Here’s a log of your recent login sessions and security events.
+    </p>
+
+    <div class="activity-log-container">
+      <ul id="activityList" class="activity-log-list">
+        <!-- Entries will be added here -->
+      </ul>
+    </div>
+  </div>
+</div>
+
+<!-- Two-Factor Authentication Modal -->
+<div id="twoFactorModal" class="out-custom-modal">
+  <div class="out-modal-content" style="max-width: 400px;">
+    <button class="close-out-btn" onclick="hideTwoFactorModal()" aria-label="Close">&times;</button>
+
+    <div class="out-modal-icon" style="background: linear-gradient(135deg, #d2691e, #8b4513);">
+      <span>🔐</span>
+    </div>
+
+    <h2 class="out-modal-title">Two-Factor Authentication</h2>
+    <p class="out-modal-message">Enter the 6-digit code sent to your registered device.</p>
+
+    <div style="text-align: center; margin-top: 15px;">
+      <p><strong>Your code:</strong> <span id="generated2FACode" style="letter-spacing: 2px; font-size: 18px;"></span></p>
+      <input type="text" id="input2FACode" maxlength="6" placeholder="Enter 6-digit code" style="padding: 8px; margin-top: 10px;" />
+    </div>
+
+    <div class="out-modal-buttons" style="margin-top: 15px;">
+      <button class="out-btn out-btn-cancel" onclick="hideTwoFactorModal()">Cancel</button>
+      <button class="out-btn out-btn-confirm" onclick="verify2FACode()">Verify</button>
+    </div>
+  </div>
+</div>
+
 
 
   <script>
@@ -1241,6 +1440,142 @@ function confirmPasswordUpdate() {
     message.style.display = 'none';
   }, 5000);
 }
+
+// === View Activity Logic ===
+const fakeActivityData = [
+  { date: 'July 1, 2025 - 09:15 AM', action: 'Logged in from Chrome on Windows' },
+  { date: 'June 30, 2025 - 03:42 PM', action: 'Changed password' },
+  { date: 'June 29, 2025 - 10:01 AM', action: 'Logged out from Firefox on Android' },
+  { date: 'June 28, 2025 - 06:25 PM', action: 'Viewed complaint status' }
+];
+
+document.querySelector('.feature-card .btn-primary').addEventListener('click', showActivityModal);
+
+function showActivityModal() {
+  const modal = document.getElementById('accountActivityModal');
+  const list = document.getElementById('activityList');
+  list.innerHTML = ''; // clear previous
+
+  fakeActivityData.forEach(entry => {
+    const li = document.createElement('li');
+    li.innerHTML = `<strong>${entry.date}:</strong> ${entry.action}`;
+    list.appendChild(li);
+  });
+
+  modal.style.display = 'flex';
+  setTimeout(() => modal.classList.add('show'), 10);
+  document.body.style.overflow = 'hidden';
+  trapFocus(modal);
+}
+
+function hideActivityModal() {
+  const modal = document.getElementById('accountActivityModal');
+  modal.classList.remove('show');
+  setTimeout(() => {
+    modal.style.display = 'none';
+    document.body.style.overflow = '';
+  }, 300);
+}
+
+// Close on ESC or outside click
+document.getElementById('accountActivityModal').addEventListener('click', function (e) {
+  if (e.target === this) hideActivityModal();
+});
+document.addEventListener('keydown', function (e) {
+  if (e.key === 'Escape') hideActivityModal();
+});
+
+// ==== TWO-FACTOR AUTHENTICATION FUNCTIONALITY ====
+let current2FACode = null;
+
+document.getElementById('twoFactorToggleBtn').addEventListener('click', function () {
+  if (localStorage.getItem('twoFactorEnabled') === 'true') {
+    // Disable 2FA
+    localStorage.setItem('twoFactorEnabled', 'false');
+    update2FAUI();
+  } else {
+    // Enable 2FA: Generate code & show modal
+    current2FACode = Math.floor(100000 + Math.random() * 900000).toString(); // 6-digit code
+    document.getElementById('generated2FACode').textContent = current2FACode;
+    document.getElementById('input2FACode').value = '';
+    showTwoFactorModal();
+  }
+});
+
+function showTwoFactorModal() {
+  const modal = document.getElementById('twoFactorModal');
+  modal.style.display = 'flex';
+  setTimeout(() => modal.classList.add('show'), 10);
+  document.body.style.overflow = 'hidden';
+  trapFocus(modal);
+}
+
+function hideTwoFactorModal() {
+  const modal = document.getElementById('twoFactorModal');
+  modal.classList.remove('show');
+  setTimeout(() => {
+    modal.style.display = 'none';
+    document.body.style.overflow = '';
+  }, 300);
+}
+
+function verify2FACode() {
+  const userInput = document.getElementById('input2FACode').value;
+  const message = document.getElementById('passwordMessage');
+
+  if (userInput === current2FACode) {
+    localStorage.setItem('twoFactorEnabled', 'true');
+    update2FAUI();
+    hideTwoFactorModal();
+    message.className = 'message success';
+    message.textContent = 'Two-Factor Authentication has been enabled.';
+    message.style.display = 'block';
+    setTimeout(() => (message.style.display = 'none'), 5000);
+  } else {
+    alert('Incorrect code. Please try again.');
+  }
+}
+
+function update2FAUI() {
+  const enabled = localStorage.getItem('twoFactorEnabled') === 'true';
+  const status = document.getElementById('twoFactorStatus');
+  const toggleBtn = document.getElementById('twoFactorToggleBtn');
+
+  if (enabled) {
+    status.textContent = 'Enabled';
+    status.classList.remove('status-inactive');
+    status.classList.add('status-active');
+    toggleBtn.textContent = 'Disable 2FA';
+  } else {
+    status.textContent = 'Disabled';
+    status.classList.remove('status-active');
+    status.classList.add('status-inactive');
+    toggleBtn.textContent = 'Enable 2FA';
+  }
+}
+
+// Initialize on page load
+update2FAUI();
+
+document.getElementById('twoFactorToggleBtn').addEventListener('click', function () {
+  const button = this;
+  const statusText = document.getElementById('twoFactorText');
+  const statusIndicator = document.getElementById('twoFactorStatus');
+
+  button.classList.toggle('enabled');
+
+  if (button.classList.contains('enabled')) {
+    button.textContent = 'Disable';
+    statusText.textContent = 'Enabled';
+    statusIndicator.classList.remove('status-inactive');
+    statusIndicator.classList.add('status-active');
+  } else {
+    button.textContent = 'Enable';
+    statusText.textContent = 'Disabled';
+    statusIndicator.classList.remove('status-active');
+    statusIndicator.classList.add('status-inactive');
+  }
+});
 
 </script>
 
