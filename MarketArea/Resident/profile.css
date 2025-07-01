@@ -904,3 +904,25 @@ html, body {
   background-color: #e0e0e0;
 }
 
+.info-value[contenteditable="true"] {
+  background-color: #fefefe;
+  outline: none;
+}
+
+.edit-mode-buttons {
+  gap: 10px;
+}
+
+.camera-wrapper {
+  transition: opacity 0.3s ease;
+}
+
+.camera-wrapper.fade-out {
+  opacity: 0.2;
+  pointer-events: none;
+}
+
+.camera-wrapper.disabled {
+  pointer-events: none;
+  opacity: 0;
+}

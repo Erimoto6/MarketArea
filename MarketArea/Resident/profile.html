@@ -63,6 +63,7 @@
           <div class="circle-img">JD</div>
           <div class="camera-wrapper">
             <div class="camera-icon">📷</div>
+              <input type="file" id="profileUpload" accept="image/*" style="display: none;">
           </div>
         </div>
         <div class="sidebar-links">
@@ -77,11 +78,11 @@
           <div class="info-row">
             <div class="info-field" data-field="firstName">
               <div class="info-label">First Name</div>
-              <div class="info-value">Juan</div>
+              <div class="info-value" contenteditable="false" id="firstName">Juan</div>
             </div>
             <div class="info-field" data-field="lastName">
               <div class="info-label">Last Name</div>
-              <div class="info-value">Dela Cruz</div>
+              <div class="info-value" contenteditable="false" id="lastName">Dela Cruz</div>
             </div>
           </div>
           
@@ -92,14 +93,15 @@
           
           <div class="info-field address" data-field="address">
             <div class="info-label">Address</div>
-            <div class="info-value">Brgy. Market Area, Lipa City, Batangas</div>
+            <div class="info-value" contenteditable="false" id="address">Brgy. Market Area, Lipa City, Batangas</div>
           </div>
         </div>
 
         <div class="action-buttons">
-          <a href="change_email.html" class="btn btn-secondary">
+          <a href="change_email.html" class="btn btn-secondary" id="changeEmailBtn">
             ✉️ Change Email
           </a>
+
           <button id="editProfileBtn" class="btn btn-primary">✏️ Edit Profile</button>
 
           <div class="action-buttons edit-mode-buttons" style="display: none;">
@@ -308,101 +310,95 @@ function confirmLogoutAction() {
         ['mousedown', 'mousemove', 'keypress', 'scroll', 'touchstart'].forEach(event => {
             document.addEventListener(event, resetLogoutInactivityTimer, true);
         });
+// ======================
+// PROFILE EDIT FUNCTIONALITY
+// ======================
 
-  //profile pic
+const editBtn = document.getElementById('editProfileBtn');
+const saveBtn = document.getElementById('saveProfileBtn');
+const cancelBtn = document.getElementById('cancelEditBtn');
+const editButtons = document.querySelector('.edit-mode-buttons');
 
-  const fileInput = document.getElementById('profileUpload');
-  const preview = document.getElementById('profilePreview');
+const firstName = document.getElementById('firstName');
+const lastName = document.getElementById('lastName');
+const address = document.getElementById('address');
+const cameraWrapper = document.querySelector('.camera-wrapper');
+const changeEmailBtn = document.getElementById('changeEmailBtn');
 
-  fileInput.addEventListener('change', function () {
-    const file = this.files[0];
-    if (file && file.type.startsWith('image/')) {
-      const reader = new FileReader();
-      reader.onload = function (e) {
-        preview.style.backgroundImage = `url('${e.target.result}')`;
-        preview.style.backgroundSize = 'cover';
-        preview.style.backgroundPosition = 'center';
-      };
-      reader.readAsDataURL(file);
-    }
+// Store original profile data
+let originalProfile = {};
+
+editBtn.addEventListener('click', () => {
+  [firstName, lastName, address].forEach(field => {
+    originalProfile[field.id] = field.textContent.trim();
+    field.contentEditable = true;
+    field.style.borderBottom = '1px dashed #aaa';
   });
 
-  //notifications
-  
-  let notifCount = 0;
-const badge = document.getElementById("notifBadge");
-const toastContainer = document.getElementById("toastContainer");
-const notifItem = document.getElementById("notifItem");
-const popup = document.getElementById("notificationPopup");
-const notificationList = document.getElementById("notificationList");
+  // Enable camera
+  cameraWrapper.classList.remove('disabled');
+  cameraWrapper.classList.remove('fade-out');
 
-// Update badge
-function updateNotificationCount(count) {
-  notifCount = count;
-  if (notifCount > 0) {
-    badge.textContent = notifCount;
-    badge.style.display = 'inline-block';
-  } else {
-    badge.textContent = '';
-    badge.style.display = 'none';
-  }
-}
-
-// Show toast
-function showToast(message) {
-  const toast = document.createElement("div");
-  toast.className = "toast";
-  toast.textContent = message;
-  toastContainer.appendChild(toast);
-
-  // Remove after 4s
-  setTimeout(() => toast.remove(), 4000);
-}
-
-// Add notification to popup list
-function addNotificationToList(message) {
-  const li = document.createElement("li");
-  li.textContent = message;
-  notificationList.prepend(li); // newest on top
-}
-
-// Simulate notifications every 5s
-setInterval(() => {
-  notifCount++;
-  const msg = `🔔 New notification #${notifCount}`;
-  updateNotificationCount(notifCount);
-  showToast(msg);
-  addNotificationToList(msg);
-}, 10000);
-
-// Toggle popup
-notifItem.addEventListener("click", function (e) {
-  e.preventDefault();
-  popup.style.display = popup.style.display === "block" ? "none" : "block";
-  updateNotificationCount(0); // optional: reset badge when opened
+  // Hide "Change Email" and Edit button, show Save/Cancel
+  changeEmailBtn.style.display = 'none';
+  editBtn.style.display = 'none';
+  editButtons.style.display = 'flex';
 });
 
-// Close popup button
-function hidePopup() {
-  popup.style.display = "none";
+cancelBtn.addEventListener('click', () => {
+  [firstName, lastName, address].forEach(field => {
+    field.textContent = originalProfile[field.id];
+  });
+  disableEditMode();
+});
+
+saveBtn.addEventListener('click', () => {
+  alert('Changes saved!');
+  disableEditMode();
+});
+
+function disableEditMode() {
+  [firstName, lastName, address].forEach(field => {
+    field.contentEditable = false;
+    field.style.borderBottom = 'none';
+  });
+
+  // Disable camera
+  cameraWrapper.classList.add('disabled');
+  cameraWrapper.classList.add('fade-out');
+
+  // Restore button visibility
+  changeEmailBtn.style.display = 'inline-block';
+  editBtn.style.display = 'inline-block';
+  editButtons.style.display = 'none';
 }
 
-// Hide popup when clicking outside
-document.addEventListener("click", function (e) {
-  if (!popup.contains(e.target) && !notifItem.contains(e.target)) {
-    popup.style.display = "none";
+// ======================
+// PROFILE IMAGE UPLOAD
+// ======================
+
+const profileUpload = document.getElementById('profileUpload');
+const profileCircle = document.querySelector('.circle-img');
+
+cameraWrapper.addEventListener('click', () => {
+  if (!cameraWrapper.classList.contains('disabled')) {
+    profileUpload.click();
   }
 });
 
-const clearBtn = document.getElementById("clearNotificationsBtn");
-
-clearBtn.addEventListener("click", () => {
-  notificationList.innerHTML = "";       // Clears the list
-  updateNotificationCount(0);            // Resets badge
+profileUpload.addEventListener('change', function () {
+  const file = this.files[0];
+  if (file && file.type.startsWith('image/')) {
+    const reader = new FileReader();
+    reader.onload = function (e) {
+      profileCircle.style.backgroundImage = `url('${e.target.result}')`;
+      profileCircle.style.backgroundSize = 'cover';
+      profileCircle.style.backgroundPosition = 'center';
+      profileCircle.textContent = ''; // Remove initials
+    };
+    reader.readAsDataURL(file);
+  }
 });
-
-hidePopup(); // Add this inside the clearBtn click function
-
 
 </script>
 
