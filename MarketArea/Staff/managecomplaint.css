@@ -1,14 +1,13 @@
-html, body {
-  overflow: hidden;
-
-}
-
-
 body {
   margin: 0;
   font-family: "Trebuchet MS", sans-serif;
   background: url('files/marketareabg1.jpg') no-repeat center center fixed;
   background-size: cover;
+  overflow: hidden;
+}
+    
+html {
+  scroll-behavior: smooth;
 }
 
 /* Sticky Header Styling */
@@ -478,12 +477,11 @@ border-collapse: collapse;
 }
 
 .complaints-table th {
-background: linear-gradient(135deg, #6A7337, #4B5320);
+background-color: #4B5320;
 color: white;
 padding: 15px;
 text-align: left;
 font-weight: 600;
-border: none;
 }
 
 .complaints-table th:first-child {
