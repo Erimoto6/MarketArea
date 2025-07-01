@@ -285,44 +285,84 @@
       }
 
       /* Message Modal */
-      .message-modal {
-        display: none;
-        position: fixed;
-        top: 0;
-        left: 0;
-        width: 100%;
-        height: 100%;
-        background-color: rgba(0, 0, 0, 0.7);
-        z-index: 2000;
-        animation: fadeIn 0.3s ease;
-      }
+.message-modal {
+  display: none;
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(0, 0, 0, 0.7);
+  z-index: 2000;
+  overflow: hidden;
+  margin-top: 50px;
+  animation: fadeIn 0.3s ease;
+}
 
-      .modal-content {
-        position: relative;
-        background: white;
-        max-width: 800px;
-        margin: 3% auto;
-        border-radius: 15px;
-        box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
-        animation: slideIn 0.3s ease;
-        max-height: 90vh;
-        overflow-y: auto;
-      }
+.modal-title {
+  font-size: 1.5rem;
+  font-weight: 600;
+}
 
-      .modal-header {
-        background: linear-gradient(90deg, #6a7337, #4b5320);
-        color: white;
-        padding: 2rem;
-        border-radius: 15px 15px 0 0;
-        display: flex;
-        justify-content: space-between;
-        align-items: center;
-      }
+/* Modal box */
+.modal-content {
+  background: white;
+  width: 70%;
+  max-width: 860px;
+  max-height: 85vh;
+  margin: 5vh auto;
+  border-radius: 25px;
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
+  display: flex;
+  flex-direction: column;
+  overflow: hidden; /* Keeps scroll inside rounded box */
+  animation: slideIn 0.3s ease;
+}
 
-      .modal-title {
-        font-size: 1.5rem;
-        font-weight: 600;
-      }
+/* Header */
+.modal-header {
+  background: linear-gradient(90deg, #6a7337, #4b5320);
+  color: white;
+  padding: 2rem;
+  border-radius: 25px 25px 0 0;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  flex-shrink: 0;
+}
+
+/* Scrollable body */
+.modal-body {
+  padding: 1.5rem;
+  overflow-y: auto;
+  flex-grow: 1;
+}
+
+/* Optional: message metadata */
+.message-meta {
+  margin-bottom: 1rem;
+}
+.meta-row {
+  display: flex;
+  margin-bottom: 0.5rem;
+}
+.meta-label {
+  font-weight: bold;
+  margin-right: 0.5rem;
+}
+.meta-value {
+  flex: 1;
+}
+
+/* Footer actions inside modal */
+.modal-actions {
+  margin-top: 1.5rem;
+  display: flex;
+  justify-content: flex-end;
+  gap: 1rem;
+  flex-wrap: wrap;
+}
+
 
       .close-modal {
         background: none;

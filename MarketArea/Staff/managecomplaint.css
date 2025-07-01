@@ -633,14 +633,13 @@ padding: 0 20px;
   align-items: center;
   justify-content: center;
   padding: 20px;
-
 }
 
 .view-modal-content {
   background-color: #fff;
   border: 2px solid #2B3209;
   border-radius: 25px;
-  width: 60%;
+  width: 80%;
   max-width: 900px;
   max-height: 85vh;
   display: flex;
