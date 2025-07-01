@@ -89,7 +89,7 @@
       </label>
     </div>
   </div>
-
+ 
   <div class="form-row">
     <div class="form-col">
       <label>
@@ -111,14 +111,17 @@
     </div>
 
    <div class="form-col">
-      <label>
-        <span class="label-title">Age <span class="required">*</span></span>
-          <select id="ageSelect" name="age" required>
-            <option value="" disabled selected>Select Age</option>
-            <!-- JavaScript will append options here -->
-          </select>
-      </label>
+    <label>
+      <span class="label-title">Age <span class="required">*</span></span>
+        <div class="custom-age-wrapper">
+          <input type="text" id="ageSelect" name="age" placeholder="Select or type age" autocomplete="off" required />
+          <ul id="customAgeList" class="custom-age-list"></ul>
+        </div>
+     </label>
     </div>
+
+
+
     </div>
   </div>
 
@@ -460,81 +463,7 @@
         updateFormSteps();
       }
 
-    //notifications
-  
-  let notifCount = 0;
-const badge = document.getElementById("notifBadge");
-const toastContainer = document.getElementById("toastContainer");
-const notifItem = document.getElementById("notifItem");
-const popup = document.getElementById("notificationPopup");
-const notificationList = document.getElementById("notificationList");
 
-// Update badge
-function updateNotificationCount(count) {
-  notifCount = count;
-  if (notifCount > 0) {
-    badge.textContent = notifCount;
-    badge.style.display = 'inline-block';
-  } else {
-    badge.textContent = '';
-    badge.style.display = 'none';
-  }
-}
-
-// Show toast
-function showToast(message) {
-  const toast = document.createElement("div");
-  toast.className = "toast";
-  toast.textContent = message;
-  toastContainer.appendChild(toast);
-
-  // Remove after 4s
-  setTimeout(() => toast.remove(), 4000);
-}
-
-// Add notification to popup list
-function addNotificationToList(message) {
-  const li = document.createElement("li");
-  li.textContent = message;
-  notificationList.prepend(li); // newest on top
-}
-
-// Simulate notifications every 5s
-setInterval(() => {
-  notifCount++;
-  const msg = `🔔 New notification #${notifCount}`;
-  updateNotificationCount(notifCount);
-  showToast(msg);
-  addNotificationToList(msg);
-}, 10000);
-
-// Toggle popup
-notifItem.addEventListener("click", function (e) {
-  e.preventDefault();
-  popup.style.display = popup.style.display === "block" ? "none" : "block";
-  updateNotificationCount(0); // optional: reset badge when opened
-});
-
-// Close popup button
-function hidePopup() {
-  popup.style.display = "none";
-}
-
-// Hide popup when clicking outside
-document.addEventListener("click", function (e) {
-  if (!popup.contains(e.target) && !notifItem.contains(e.target)) {
-    popup.style.display = "none";
-  }
-});
-
-const clearBtn = document.getElementById("clearNotificationsBtn");
-
-clearBtn.addEventListener("click", () => {
-  notificationList.innerHTML = "";       // Clears the list
-  updateNotificationCount(0);            // Resets badge
-});
-
-hidePopup(); // Add this inside the clearBtn click function
 
 // SPECIFY COMPLAINT TYPE
 
@@ -569,16 +498,64 @@ function limitWords(textarea, maxWords) {
 
   // age dropdown
 
-  document.addEventListener("DOMContentLoaded", function () {
-    const ageSelect = document.getElementById("ageSelect");
+const ageInput = document.getElementById('ageSelect');
+const ageList = document.getElementById('customAgeList');
 
-    for (let i = 1; i <= 100; i++) {
-      const option = document.createElement("option");
-      option.value = i;
-      option.textContent = i;
-      ageSelect.appendChild(option);
+// Populate the list
+for (let i = 1; i <= 100; i++) {
+  const li = document.createElement('li');
+  li.textContent = i;
+  li.addEventListener('click', () => {
+    ageInput.value = i;
+    ageList.style.display = 'none';
+  });
+  ageList.appendChild(li);
+}
+
+// Show all on focus
+ageInput.addEventListener('focus', () => {
+  const items = ageList.querySelectorAll('li');
+  items.forEach(item => item.style.display = 'block');
+  ageList.style.display = 'block';
+});
+
+// Filter list while typing
+ageInput.addEventListener('input', () => {
+  const query = ageInput.value.trim();
+  const items = ageList.querySelectorAll('li');
+  let hasMatch = false;
+
+  items.forEach(item => {
+    if (item.textContent.startsWith(query)) {
+      item.style.display = 'block';
+      hasMatch = true;
+    } else {
+      item.style.display = 'none';
     }
   });
+
+  ageList.style.display = hasMatch ? 'block' : 'none';
+});
+
+// Prevent blur when clicking list items
+let blurTimeout;
+
+ageInput.addEventListener('blur', () => {
+  blurTimeout = setTimeout(() => {
+    ageList.style.display = 'none';
+  }, 100);
+});
+
+ageList.addEventListener('mousedown', () => {
+  clearTimeout(blurTimeout); // Prevent dropdown from closing during click
+});
+
+// Hide dropdown when clicking outside
+document.addEventListener('click', (e) => {
+  if (!document.querySelector('.custom-age-wrapper').contains(e.target)) {
+    ageList.style.display = 'none';
+  }
+});
 
    // File upload preview and removal
 const evidenceInput = document.getElementById('evidenceFiles');
@@ -624,19 +601,13 @@ function renderFileList() {
 
 document.querySelectorAll('.form-step input[required], .form-step textarea[required], .form-step select[required]').forEach(input => {
   input.addEventListener('input', function () {
-    const label = this.closest('label');
-    if (!label) return;
-
-    const asterisk = label.querySelector('.required');
-    if (asterisk) {
-      if (this.value.trim() !== '') {
-        asterisk.style.visibility = 'hidden';
-      } else {
-        asterisk.style.visibility = 'visible';
-      }
+    const requiredSpan = this.closest('label')?.querySelector('.required');
+    if (requiredSpan) {
+      requiredSpan.style.visibility = this.value.trim() ? 'hidden' : 'visible';
     }
   });
 });
+
 
 // ==== ENHANCED LOGOUT CONFIRMATION ====
         
