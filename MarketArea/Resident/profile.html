@@ -174,6 +174,35 @@
         </div>
     </div>
 
+    <!-- Edit Profile Confirmation Modal -->
+<div id="confirmEditModal" class="out-custom-modal">
+  <div class="out-modal-content">
+    <button class="close-out-btn" onclick="hideEditModal()" aria-label="Close">&times;</button>
+
+    <div class="out-modal-icon" style="background: linear-gradient(135deg, #D0B564, #ad9448);">
+      <span>✔️</span>
+    </div>
+
+    <h2 class="out-modal-title">Confirm Profile Update</h2>
+    <p class="out-modal-message">
+      Are you sure you want to save your profile changes?
+    </p>
+
+    <div class="out-modal-buttons">
+      <button class="out-btn out-btn-cancel" onclick="hideEditModal()">Cancel</button>
+      <button class="out-btn out-btn-confirm" style="background: linear-gradient(135deg, #8A9A5B, #6A7337);" onclick="confirmProfileUpdate()">
+        Yes, Save
+      </button>
+    </div>
+  </div>
+</div>
+
+
+<!-- Profile Saved Toast Notification -->
+<div id="profileSavedToast" class="toast-notification">
+  <div class="toast-icon" style="background: linear-gradient(135deg, #8A9A5B, #6A7337);">✔️</div>
+  <div class="toast-message">Profile changes saved successfully!</div>
+</div>
 
 <script>
     //settings
@@ -258,7 +287,7 @@ function confirmLogoutAction() {
                 hideLogoutModal();
             }
         });
-
+ 
         // Close modal with Escape key
         document.addEventListener('keydown', function(e) {
             if (e.key === 'Escape') {
@@ -353,9 +382,33 @@ cancelBtn.addEventListener('click', () => {
 });
 
 saveBtn.addEventListener('click', () => {
-  alert('Changes saved!');
-  disableEditMode();
+  showEditModal();
 });
+
+function showEditModal() {
+  const modal = document.getElementById('confirmEditModal');
+  modal.style.display = 'flex';
+  setTimeout(() => {
+    modal.classList.add('show');
+  }, 10);
+  document.body.style.overflow = 'hidden';
+}
+
+function hideEditModal() {
+  const modal = document.getElementById('confirmEditModal');
+  modal.classList.remove('show');
+  setTimeout(() => {
+    modal.style.display = 'none';
+    document.body.style.overflow = '';
+  }, 300);
+}
+
+function confirmProfileUpdate() {
+  disableEditMode();
+  hideEditModal();
+  showProfileSavedToast();
+}
+
 
 function disableEditMode() {
   [firstName, lastName, address].forEach(field => {
@@ -372,6 +425,28 @@ function disableEditMode() {
   editBtn.style.display = 'inline-block';
   editButtons.style.display = 'none';
 }
+
+document.getElementById('confirmEditModal').addEventListener('click', function (e) {
+  if (e.target === this) {
+    hideEditModal();
+  }
+});
+
+document.addEventListener('keydown', function (e) {
+  if (e.key === 'Escape') {
+    hideEditModal();
+  }
+});
+
+function showProfileSavedToast() {
+  const toast = document.getElementById('profileSavedToast');
+  toast.classList.add('show');
+
+  setTimeout(() => {
+    toast.classList.remove('show');
+  }, 3000); // Visible for 3 seconds
+}
+
 
 // ======================
 // PROFILE IMAGE UPLOAD
