@@ -900,50 +900,60 @@ input[type="file"] {
 
 /* Confirmation Popup */
 .confirmation-popup {
-  display: none;
   position: fixed;
-  top: 0; left: 0;
-  width: 100%; height: 100%;
-  background: rgba(0,0,0,0.5);
-  backdrop-filter: blur(2px);
-  z-index: 9999;
+  top: 0;
+  left: 0;
+  width: 100vw;
+  height: 100vh;
+  display: none; /* Hidden by default */
   justify-content: center;
   align-items: center;
+  background: rgba(0, 0, 0, 0.6);
+  backdrop-filter: blur(5px);
+  z-index: 9999;
 }
 
-.confirmation-popup.active {
-  display: flex;
+.confirmation-popup.show {
+  display: flex; /* 👈 This activates centering */
 }
 
 .popup-content {
   background: #fff;
-  padding: 30px;
-  border-radius: 12px;
+  padding: 30px 40px;
+  border-radius: 16px;
   text-align: center;
-  box-shadow: 0 10px 30px rgba(0,0,0,0.25);
+  max-width: 400px;
+  width: 90%;
+  box-shadow: 0 8px 20px rgba(0, 0, 0, 0.25);
+  animation: fadeInZoom 0.4s ease-out;
 }
 
-.popup-content p {
-  font-size: 18px;
-  margin-bottom: 20px;
+.popup-icon {
+  font-size: 48px;
+  color: #4CAF50;
+  margin-bottom: 15px;
 }
 
-.popup-content button {
-  padding: 10px 20px;
-  font-size: 15px;
-  background-color: #145320;
-  color: white;
+.popup-close-btn {
+  background: linear-gradient(135deg, #5CB85C, #4CAF50);
+  color: #fff;
   border: none;
-  border-radius: 6px;
+  padding: 10px 25px;
+  font-size: 16px;
+  border-radius: 8px;
   cursor: pointer;
+  margin-top: 15px;
 }
 
-.popup-content button:hover {
-  background-color: #0f401b;
+/* Animations */
+@keyframes fadeInZoom {
+  0% { transform: scale(0.85); opacity: 0; }
+  100% { transform: scale(1); opacity: 1; }
 }
 
     </style>
 </head>
+
 <body>
     <div class="container">
         <div class="header">
@@ -1258,16 +1268,20 @@ input[type="file"] {
   </div>
 </div>
 
-<!-- CONFIRMATION POPUP -->
+<!-- ENHANCED CONFIRMATION POPUP -->
 <div id="confirmationPopup" class="confirmation-popup">
   <div class="popup-content">
-    <p>✅ Registration successful!</p>
-    <button onclick="closePopup()">Close</button>
+    <div class="popup-icon">✅</div>
+    <h2>Registration Successful</h2>
+    <p>Thank you for registering! Your information has been securely submitted.</p>
+    <button class="popup-close-btn" onclick="closePopup()">Close</button>
   </div>
 </div>
-</body>
+
+</div>
 
 <script>
+  // Open and close modal
   function openModal(id) {
     document.getElementById(id).style.display = 'block';
   }
@@ -1276,10 +1290,12 @@ input[type="file"] {
     document.getElementById(id).style.display = 'none';
   }
 
+  // Close confirmation popup
   function closePopup() {
-    document.getElementById('confirmationPopup').style.display = 'none';
+    document.getElementById('confirmationPopup').classList.remove('show');
   }
 
+  // Close modals when clicking outside
   window.onclick = function(event) {
     if (event.target.classList.contains('modal')) {
       closeModal('privacyModal');
@@ -1287,27 +1303,7 @@ input[type="file"] {
     }
   };
 
-  // validations
-
-  function openModal(id) {
-    document.getElementById(id).style.display = 'block';
-  }
-
-  function closeModal(id) {
-    document.getElementById(id).style.display = 'none';
-  }
-
-  function closePopup() {
-    document.getElementById('confirmationPopup').style.display = 'none';
-  }
-
-  window.onclick = function(event) {
-    if (event.target.classList.contains('modal')) {
-      closeModal('privacyModal');
-      closeModal('termsModal');
-    }
-  };
-
+  // Toggle password visibility
   function togglePasswordVisibility(fieldId, iconElement) {
     const field = document.getElementById(fieldId);
     const icon = iconElement.querySelector('i');
@@ -1322,12 +1318,16 @@ input[type="file"] {
     }
   }
 
+  // Handle file preview + filename
   function updateFileName(input, displayId) {
     const display = document.getElementById(displayId);
+    display.innerHTML = ''; // Clear old content
     const file = input.files[0];
-    display.innerHTML = ''; // Clear previous content
+
     if (file) {
       display.textContent = file.name;
+
+      // Preview image if image file
       if (file.type.startsWith("image/")) {
         const reader = new FileReader();
         reader.onload = function (e) {
@@ -1345,11 +1345,13 @@ input[type="file"] {
     }
   }
 
+  // Form submission handling
   document.getElementById('signupForm').addEventListener('submit', function (e) {
     e.preventDefault();
     let isValid = true;
     const form = this;
 
+    // Validate text/select fields
     function validateField(id) {
       const field = document.getElementById(id);
       const error = document.getElementById(id + 'Error');
@@ -1367,9 +1369,9 @@ input[type="file"] {
       'firstName', 'lastName', 'dateOfBirth', 'sex', 'civilStatus',
       'houseNumber', 'mobileNumber', 'email', 'password', 'confirmPassword'
     ];
-
     requiredFields.forEach(validateField);
 
+    // Validate file inputs
     const fileFields = [
       { id: 'residencyProof', errorId: 'residencyProofError' },
       { id: 'validID', errorId: 'validIDError' }
@@ -1387,6 +1389,7 @@ input[type="file"] {
       }
     });
 
+    // Email format validation
     const email = document.getElementById('email');
     const emailError = document.getElementById('emailError');
     const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
@@ -1397,6 +1400,7 @@ input[type="file"] {
       emailError.style.display = 'none';
     }
 
+    // Mobile number format validation
     const mobileNumber = document.getElementById('mobileNumber');
     const mobileError = document.getElementById('mobileNumberError');
     if (!/^09\d{9}$/.test(mobileNumber.value)) {
@@ -1406,6 +1410,7 @@ input[type="file"] {
       mobileError.style.display = 'none';
     }
 
+    // Password match check
     const password = document.getElementById('password');
     const confirmPassword = document.getElementById('confirmPassword');
     const confirmPasswordError = document.getElementById('confirmPasswordError');
@@ -1416,22 +1421,39 @@ input[type="file"] {
       confirmPasswordError.style.display = 'none';
     }
 
-    const checkboxes = [
-      'consentDeclaration', 'consentLegal', 'consentAgreement'
-    ];
+    // Check checkboxes
+    const checkboxes = ['consentDeclaration', 'consentLegal', 'consentAgreement'];
     checkboxes.forEach(id => {
       const checkbox = document.getElementById(id);
       if (!checkbox.checked) isValid = false;
     });
 
+        // Final actions if valid
     if (isValid) {
-      document.getElementById("confirmationPopup").style.display = "block";
-      form.reset();
+      const popup = document.getElementById("confirmationPopup");
+      popup.classList.add("show");
+
+      form.reset(); // Clear form inputs
+
+      setTimeout(() => {
+        // Reset file fields and previews
+        document.getElementById('residencyProofName').textContent = 'No file selected';
+        document.getElementById('residencyProofPreview').innerHTML = '';
+        document.getElementById('validIDName').textContent = 'No file selected';
+        document.getElementById('validIDPreview').innerHTML = '';
+      }, 100);
+
       window.scrollTo({ top: 0, behavior: 'smooth' });
+
+      // Redirect to login page after 3 seconds
+      setTimeout(() => {
+        window.location.href = 'residentLogin.html';
+      }, 3000);
     } else {
       window.scrollTo({ top: 0, behavior: 'smooth' });
     }
   });
+  
 </script>
-
+</body>
 </html>
