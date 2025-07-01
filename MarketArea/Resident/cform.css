@@ -13,6 +13,7 @@ body {
 
 /* HEADER SECTION */
 .header_gradient {
+  position: fixed;
   display: flex;
   justify-content: space-between;
   align-items: center;
@@ -933,6 +934,7 @@ html, body {
 
 .page-container {
   flex: 1; /* Main area takes the rest of the space */
+  padding: 15vh 15vh;
 }
 
 .footer {

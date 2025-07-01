@@ -3,8 +3,9 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Market Area E-Blotter Portal</title>
+    <title>Market Area E-Blotter Portal - Resident Registration</title>
     <link rel="icon" type="image/png" href="logo.png">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
 
     <style>
         * {
@@ -13,68 +14,135 @@
             box-sizing: border-box;
         }
 
-        body {
-            font-family: Arial, sans-serif;
-            background-size: 400% 400%;
-            background: url('arch.png') no-repeat center center/cover fixed;
-            padding: 20px;
-            line-height: 1.6;
-            min-height: 100vh;
+       body {
+        font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        background-image: linear-gradient(rgba(255, 255, 255, 0.8), rgba(255, 255, 255, 0.8)), url('marketarea2.jpg');
+        background-size: cover;
+        background-position: center center;
+        background-repeat: no-repeat;
+        background-attachment: fixed;
+        padding: 20px;
+        line-height: 1.6;
+        min-height: 100vh;
+        color: #000;
         }
 
-        @keyframes gradientMove {
-            0% {
-                background-position: 0% 50%;
-            }
-            50% {
-                background-position: 100% 50%;
-            }
-            100% {
-                background-position: 0% 50%;
-            }
+
+        @keyframes gradientShift {
+            0% { background-position: 0% 50%; }
+            50% { background-position: 100% 50%; }
+            100% { background-position: 0% 50%; }
         }
 
         .container {
-            max-width: 800px;
+            max-width: 900px;
             margin: 0 auto;
-            background-color: white;
-            padding: 30px;
-            border-radius: 10px;
-            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+            background: rgba(255, 255, 255, 0.95);
+            backdrop-filter: blur(10px);
+            padding: 40px;
+            border-radius: 20px;
+            box-shadow: 0 20px 40px rgba(0,0,0,0.1);
+            border: 1px solid rgba(255, 255, 255, 0.2);
         }
 
         .header {
             text-align: center;
-            margin-bottom: 30px;
-            color: #ffffff;
-            background-color: #235201;
-            padding: 20px;
+            margin-bottom: 40px;
+            padding: 30px;
+            background: linear-gradient(135deg, #145320, #235201);
+            color: white;
+            border-radius: 15px;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .header::before {
+            content: '';
+            position: absolute;
+            top: -50%;
+            left: -50%;
+            width: 200%;
+            height: 200%;
+            background: linear-gradient(45deg, transparent, rgba(255,255,255,0.1), transparent);
+            transform: rotate(45deg);
+            animation: shine 3s infinite;
+        }
+
+        @keyframes shine {
+            0% { transform: translateX(-100%) translateY(-100%) rotate(45deg); }
+            50% { transform: translateX(100%) translateY(100%) rotate(45deg); }
+            100% { transform: translateX(-100%) translateY(-100%) rotate(45deg); }
+        }
+
+        .header h1 {
+            font-size: 2.2rem;
+            margin-bottom: 10px;
+            position: relative;
+            z-index: 1;
+        }
+
+        .header p {
+            font-size: 1.1rem;
+            opacity: 0.9;
+            position: relative;
+            z-index: 1;
+        }
+
+        .progress-bar {
+            width: 100%;
+            height: 6px;
+            background-color: #e0e0e0;
+            border-radius: 3px;
+            margin: 20px 0;
+            overflow: hidden;
+        }
+
+        .progress-fill {
+            height: 100%;
+            background: linear-gradient(90deg, #145320, #235201);
+            border-radius: 3px;
+            width: 0%;
+            transition: width 0.3s ease;
         }
 
         .section {
-            margin-bottom: 25px;
-            padding: 20px;
+            margin-bottom: 30px;
+            padding: 25px;
             border-left: 4px solid #145320;
-            background-color: #f9f9f9;
+            background: linear-gradient(135deg, #f9f9f9, #ffffff);
+            border-radius: 10px;
+            box-shadow: 0 4px 10px rgba(0,0,0,0.05);
+            transition: transform 0.2s ease, box-shadow 0.2s ease;
+        }
+
+        .section:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 8px 20px rgba(0,0,0,0.1);
         }
 
         .section-title {
-            font-size: 18px;
+            font-size: 1.3rem;
             font-weight: bold;
-            color: #235201;
-            margin-bottom: 15px;
+            color: #145320;
+            margin-bottom: 20px;
             display: flex;
             align-items: center;
+            gap: 10px;
+        }
+
+        .section-icon {
+            font-size: 1.5rem;
         }
 
         .form-row {
             display: flex;
-            gap: 15px;
-            margin-bottom: 15px;
+            gap: 20px;
+            margin-bottom: 20px;
         }
 
         .form-group {
             flex: 1;
+            position: relative;
         }
 
         .form-group.full-width {
@@ -83,9 +151,14 @@
 
         label {
             display: block;
-            margin-bottom: 5px;
-            color: #235201;
-            font-weight: bold;
+            margin-bottom: 8px;
+            color: #145320;
+            font-weight: 600;
+            font-size: 0.95rem;
+        }
+
+        .required {
+            color: #e74c3c;
         }
 
         input[type="text"],
@@ -93,13 +166,14 @@
         input[type="password"],
         input[type="tel"],
         input[type="date"],
-        select,
-        input[type="file"] {
+        select {
             width: 100%;
-            padding: 10px;
-            border: 2px solid #8A9A5B;
-            border-radius: 5px;
-            font-size: 14px;
+            padding: 12px 15px;
+            border: 2px solid #e0e0e0;
+            border-radius: 8px;
+            font-size: 15px;
+            transition: all 0.3s ease;
+            background: white;
         }
 
         input[type="text"]:focus,
@@ -110,141 +184,259 @@
         select:focus {
             outline: none;
             border-color: #145320;
+            box-shadow: 0 0 0 3px rgba(20, 83, 32, 0.1);
+            transform: translateY(-1px);
+        }
+
+        .input-group {
+            position: relative;
+        }
+
+        .input-icon {
+            position: absolute;
+            right: 12px;
+            top: 50%;
+            transform: translateY(-50%);
+            color: #8A9A5B;
+            pointer-events: none;
+        }
+
+        .password-strength {
+            margin-top: 8px;
+            padding: 8px;
+            border-radius: 5px;
+            font-size: 0.85rem;
+            display: none;
+        }
+
+        .strength-weak {
+            background-color: #ffebee;
+            color: #c62828;
+        }
+
+        .strength-medium {
+            background-color: #fff3e0;
+            color: #ef6c00;
+        }
+
+        .strength-strong {
+            background-color: #e8f5e8;
+            color: #2e7d32;
         }
 
         .checkbox-group {
             display: flex;
             gap: 20px;
             margin-bottom: 15px;
+            flex-wrap: wrap;
         }
 
         .checkbox-item {
             display: flex;
             align-items: center;
-            gap: 5px;
+            gap: 8px;
+            cursor: pointer;
+            padding: 8px 12px;
+            border-radius: 6px;
+            transition: background-color 0.2s ease;
+        }
+
+        .checkbox-item:hover {
+            background-color: rgba(20, 83, 32, 0.05);
         }
 
         input[type="checkbox"],
         input[type="radio"] {
-            width: auto;
-            margin-right: 5px;
+            width: 18px;
+            height: 18px;
+            margin-right: 8px;
+            cursor: pointer;
         }
 
         .consent-section {
-            background-color: #fff;
-            border: 2px solid #8A9A5B;
-            padding: 15px;
-            border-radius: 5px;
+            background: linear-gradient(135deg, #ffffff, #f8f9fa);
+            border: 2px solid #e0e0e0;
+            padding: 20px;
+            border-radius: 10px;
         }
 
         .consent-item {
-            margin-bottom: 10px;
+            margin-bottom: 15px;
             display: flex;
             align-items: flex-start;
-            gap: 10px;
+            gap: 12px;
+            padding: 10px;
+            border-radius: 6px;
+            transition: background-color 0.2s ease;
+        }
+
+        .consent-item:hover {
+            background-color: rgba(20, 83, 32, 0.02);
+        }
+
+        .file-upload-section {
+            background: linear-gradient(135deg, #f8f9fa, #ffffff);
+            border: 2px dashed #8A9A5B;
+            padding: 30px;
+            text-align: center;
+            border-radius: 12px;
+            transition: all 0.3s ease;
+            cursor: pointer;
+        }
+
+        .file-upload-section:hover {
+            border-color: #145320;
+            background: linear-gradient(135deg, #f0f8f0, #ffffff);
+            transform: translateY(-2px);
+        }
+
+        .file-upload-section.dragover {
+            border-color: #145320;
+            background: linear-gradient(135deg, #e8f5e8, #f0f8f0);
+            transform: scale(1.02);
+        }
+
+        .upload-icon {
+            font-size: 3rem;
+            color: #8A9A5B;
+            margin-bottom: 15px;
+        }
+
+        .file-info {
+            margin-top: 15px;
+            padding: 10px;
+            background-color: #e8f5e8;
+            border-radius: 6px;
+            display: none;
         }
 
         .button-container {
             text-align: center;
-            margin-top: 30px;
+            margin-top: 40px;
             gap: 20px;
             display: flex;
             justify-content: center;
+            flex-wrap: wrap;
         }
 
         .btn {
-            padding: 12px 30px;
+            padding: 15px 35px;
             border: none;
-            border-radius: 5px;
+            border-radius: 10px;
             font-size: 16px;
-            font-weight: bold;
+            font-weight: 600;
             cursor: pointer;
-            transition: background-color 0.3s;
+            transition: all 0.3s ease;
+            position: relative;
+            overflow: hidden;
+            min-width: 140px;
+        }
+
+        .btn::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(90deg, transparent, rgba(255,255,255,0.2), transparent);
+            transition: left 0.5s;
+        }
+
+        .btn:hover::before {
+            left: 100%;
         }
 
         .btn-primary {
-            background-color: #145320;
+            background: linear-gradient(135deg, #145320, #235201);
             color: white;
+            box-shadow: 0 4px 15px rgba(20, 83, 32, 0.3);
         }
 
         .btn-primary:hover {
-            background-color: #235201;
+            background: linear-gradient(135deg, #235201, #145320);
+            transform: translateY(-2px);
+            box-shadow: 0 8px 25px rgba(20, 83, 32, 0.4);
         }
 
         .btn-secondary {
-            background-color: #8A9A5B;
+            background: linear-gradient(135deg, #8A9A5B, #75833C);
             color: white;
+            box-shadow: 0 4px 15px rgba(138, 154, 91, 0.3);
         }
 
         .btn-secondary:hover {
-            background-color: #75833C;
-        }
-
-        .file-upload {
-            border: 2px dashed #8A9A5B;
-            padding: 20px;
-            text-align: center;
-            border-radius: 5px;
-            background-color: #f9f9f9;
+            background: linear-gradient(135deg, #75833C, #8A9A5B);
+            transform: translateY(-2px);
+            box-shadow: 0 8px 25px rgba(138, 154, 91, 0.4);
         }
 
         .verification-message {
             display: none;
-            background-color: #e8f5e8;
+            background: linear-gradient(135deg, #e8f5e8, #f0f8f0);
             border: 2px solid #145320;
-            padding: 15px;
-            border-radius: 5px;
-            margin-top: 20px;
+            padding: 30px;
+            border-radius: 15px;
+            margin-top: 30px;
             text-align: center;
             color: #145320;
+            box-shadow: 0 10px 30px rgba(20, 83, 32, 0.1);
         }
 
         .otp-container {
-            margin: 20px 0;
+            margin: 30px 0;
         }
 
         .otp-inputs {
             display: flex;
             justify-content: center;
-            gap: 10px;
-            margin: 20px 0;
+            gap: 15px;
+            margin: 25px 0;
         }
 
         .otp-input {
-            width: 50px;
-            height: 50px;
+            width: 60px;
+            height: 60px;
             text-align: center;
-            font-size: 20px;
+            font-size: 24px;
             font-weight: bold;
-            border: 2px solid #8A9A5B;
-            border-radius: 5px;
+            border: 2px solid #e0e0e0;
+            border-radius: 10px;
             background-color: white;
+            transition: all 0.3s ease;
         }
 
         .otp-input:focus {
             outline: none;
             border-color: #145320;
-            box-shadow: 0 0 5px rgba(20, 83, 32, 0.3);
+            box-shadow: 0 0 0 3px rgba(20, 83, 32, 0.1);
+            transform: scale(1.05);
         }
 
         .verify-btn {
-            background-color: #145320;
+            background: linear-gradient(135deg, #145320, #235201);
             color: white;
-            padding: 10px 25px;
+            padding: 12px 30px;
             border: none;
-            border-radius: 5px;
-            font-size: 14px;
+            border-radius: 8px;
+            font-size: 16px;
+            font-weight: 600;
             cursor: pointer;
-            margin-top: 10px;
+            margin-top: 15px;
+            transition: all 0.3s ease;
         }
 
-        .verify-btn:hover {
-            background-color: #235201;
+        .verify-btn:hover:not(:disabled) {
+            background: linear-gradient(135deg, #235201, #145320);
+            transform: translateY(-2px);
+            box-shadow: 0 8px 20px rgba(20, 83, 32, 0.3);
         }
 
         .verify-btn:disabled {
-            background-color: #ccc;
+            background: #ccc;
             cursor: not-allowed;
+            transform: none;
+            box-shadow: none;
         }
 
         .success-popup {
@@ -254,37 +446,66 @@
             left: 0;
             width: 100%;
             height: 100%;
-            background-color: rgba(0, 0, 0, 0.5);
+            background-color: rgba(0, 0, 0, 0.6);
+            backdrop-filter: blur(5px);
             z-index: 1000;
             justify-content: center;
             align-items: center;
         }
 
         .success-content {
-            background-color: white;
-            padding: 40px;
-            border-radius: 10px;
+            background: linear-gradient(135deg, #ffffff, #f8f9fa);
+            padding: 50px;
+            border-radius: 20px;
             text-align: center;
-            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.3);
-            max-width: 400px;
+            box-shadow: 0 20px 60px rgba(0, 0, 0, 0.3);
+            max-width: 450px;
             width: 90%;
+            animation: successSlideIn 0.5s ease;
+        }
+
+        @keyframes successSlideIn {
+            from {
+                opacity: 0;
+                transform: translateY(-50px) scale(0.8);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0) scale(1);
+            }
         }
 
         .success-icon {
-            font-size: 60px;
+            font-size: 80px;
             color: #145320;
-            margin-bottom: 20px;
+            margin-bottom: 25px;
+            animation: bounce 1s infinite;
+        }
+
+        @keyframes bounce {
+            0%, 20%, 50%, 80%, 100% {
+                transform: translateY(0);
+            }
+            40% {
+                transform: translateY(-10px);
+            }
+            60% {
+                transform: translateY(-5px);
+            }
         }
 
         .success-title {
             color: #145320;
-            font-size: 24px;
-            margin-bottom: 15px;
+            font-size: 28px;
+            font-weight: bold;
+            margin-bottom: 20px;
         }
 
         .success-message {
             color: #666;
-            margin-bottom: 25px;
+            font-size: 16px;
+            margin-bottom: 30px;
+            line-height: 1.6;
         }
 
         .redirect-info {
@@ -302,27 +523,46 @@
             width: 100%;
             height: 100%;
             overflow: auto;
-            background-color: rgba(0, 0, 0, 0.5);
+            background-color: rgba(0, 0, 0, 0.6);
+            backdrop-filter: blur(3px);
         }
 
-        .modal-content {
-            background-color: #fefefe;
-            margin: 5% auto;
-            padding: 0;
-            border: none;
-            border-radius: 10px;
-            width: 90%;
-            max-width: 700px;
-            max-height: 80vh;
-            overflow: hidden;
-            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.3);
-        }
+      .modal-content {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  margin: 0;
+  padding: 0;
+  border: none;
+  border-radius: 15px;
+  width: 90%;
+  max-width: 800px;
+  max-height: 85vh;
+  overflow: hidden;
+  background: linear-gradient(135deg, #ffffff, #f8f9fa);
+  box-shadow: 0 20px 60px rgba(0, 0, 0, 0.3);
+  animation: modalSlideIn 0.3s ease;
+    will-change: transform, opacity;
+}
+
+
+        @keyframes modalSlideIn {
+    from {
+        opacity: 0;
+        transform: translate(-50%, -60%);
+    }
+    to {
+        opacity: 1;
+        transform: translate(-50%, -50%);
+    }
+}
 
         .modal-header {
-            background-color: #145320;
+            background: linear-gradient(135deg, #145320, #235201);
             color: white;
-            padding: 20px;
-            border-radius: 10px 10px 0 0;
+            padding: 25px;
+            border-radius: 15px 15px 0 0;
             display: flex;
             justify-content: space-between;
             align-items: center;
@@ -330,68 +570,143 @@
 
         .modal-title {
             margin: 0;
-            font-size: 20px;
+            font-size: 22px;
             font-weight: bold;
-            align-items: center;
         }
 
         .close {
             color: white;
-            font-size: 28px;
+            font-size: 32px;
             font-weight: bold;
             cursor: pointer;
             line-height: 1;
-            padding: 0;
+            padding: 5px;
             background: none;
             border: none;
+            border-radius: 50%;
+            width: 45px;
+            height: 45px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            transition: all 0.3s ease;
         }
 
         .close:hover,
         .close:focus {
-            color: #ccc;
-            text-decoration: none;
+            background-color: rgba(255, 255, 255, 0.2);
+            transform: rotate(90deg);
         }
 
         .modal-body {
             padding: 30px;
             overflow-y: auto;
             max-height: 60vh;
-            line-height: 1.6;
+            line-height: 1.7;
             color: #333;
+        }
+
+        .modal-body h3 {
+            color: #145320;
+            margin-top: 25px;
+            margin-bottom: 15px;
+            font-size: 18px;
+        }
+
+        .modal-body ul {
+            margin-left: 20px;
+            margin-bottom: 15px;
+        }
+
+        .modal-body li {
+            margin-bottom: 8px;
         }
 
         .modal-footer {
             background-color: #f8f9fa;
-            padding: 15px 30px;
-            border-radius: 0 0 10px 10px;
+            padding: 20px 30px;
+            border-radius: 0 0 15px 15px;
             text-align: right;
         }
 
         .modal-btn {
-            background-color: #145320;
+            background: linear-gradient(135deg, #145320, #235201);
             color: white;
-            padding: 10px 20px;
+            padding: 12px 25px;
             border: none;
-            border-radius: 5px;
+            border-radius: 8px;
             cursor: pointer;
-            font-size: 14px;
+            font-size: 16px;
+            font-weight: 600;
+            transition: all 0.3s ease;
         }
 
         .modal-btn:hover {
-            background-color: #235201;
+            background: linear-gradient(135deg, #235201, #145320);
+            transform: translateY(-2px);
+            box-shadow: 0 8px 20px rgba(20, 83, 32, 0.3);
         }
 
         .policy-link {
             color: #145320;
             text-decoration: underline;
             cursor: pointer;
+            font-weight: 600;
+            transition: color 0.3s ease;
         }
 
         .policy-link:hover {
             color: #235201;
         }
 
-        @media (max-width: 600px) {
+        .error-message {
+            color: #e74c3c;
+            font-size: 0.85rem;
+            margin-top: 5px;
+            display: none;
+        }
+
+        .form-group.error input,
+        .form-group.error select {
+            border-color: #e74c3c;
+            box-shadow: 0 0 0 3px rgba(231, 76, 60, 0.1);
+        }
+
+        .tooltip {
+            position: relative;
+            display: inline-block;
+            cursor: help;
+        }
+
+        .tooltip .tooltiptext {
+            visibility: hidden;
+            width: 250px;
+            background-color: #555;
+            color: #fff;
+            text-align: center;
+            border-radius: 6px;
+            padding: 8px;
+            position: absolute;
+            z-index: 1;
+            bottom: 125%;
+            left: 50%;
+            margin-left: -125px;
+            opacity: 0;
+            transition: opacity 0.3s;
+            font-size: 12px;
+        }
+
+        .tooltip:hover .tooltiptext {
+            visibility: visible;
+            opacity: 1;
+        }
+
+        @media (max-width: 768px) {
+            .container {
+                padding: 20px;
+                margin: 10px;
+            }
+            
             .form-row {
                 flex-direction: column;
             }
@@ -402,17 +717,17 @@
             }
             
             .otp-inputs {
-                gap: 5px;
+                gap: 8px;
             }
             
             .otp-input {
-                width: 40px;
-                height: 40px;
-                font-size: 16px;
+                width: 45px;
+                height: 45px;
+                font-size: 18px;
             }
 
             .modal-content {
-                margin: 10% auto;
+                margin: 5% auto;
                 width: 95%;
             }
 
@@ -421,450 +736,702 @@
             }
 
             .modal-header {
-                padding: 15px;
+                padding: 20px;
+            }
+
+            .header h1 {
+                font-size: 1.8rem;
+            }
+
+            .section {
+                padding: 20px;
             }
         }
+
+        @media (max-width: 480px) {
+            .checkbox-group {
+                flex-direction: column;
+                gap: 10px;
+            }
+
+            .btn {
+                width: 100%;
+                margin-bottom: 10px;
+            }
+        }
+
+        .custom-file-upload {
+  position: relative;
+  display: flex;
+  align-items: center;
+  gap: 15px;
+  margin-top: 8px;
+}
+
+.upload-label {
+  background: linear-gradient(135deg, #145320, #235201);
+  color: white;
+  padding: 10px 18px;
+  border-radius: 6px;
+  font-weight: 600;
+  cursor: pointer;
+  transition: background 0.3s ease;
+  font-size: 14px;
+}
+
+.upload-label:hover {
+  background: linear-gradient(135deg, #235201, #145320);
+}
+
+input[type="file"] {
+  display: none;
+}
+
+.file-name {
+  font-size: 14px;
+  color: #444;
+  font-style: italic;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  max-width: 60%;
+}
+
+.upload-label {
+  background: linear-gradient(135deg, #145320, #235201);
+  color: white;
+  padding: 10px 18px;
+  border-radius: 6px;
+  font-weight: 600;
+  cursor: pointer;
+  font-size: 14px;
+  transition: transform 0.2s ease, background 0.3s ease, box-shadow 0.3s ease;
+  display: inline-block;
+  animation: fadeInUp 0.4s ease-out;
+  box-shadow: 0 4px 10px rgba(20, 83, 32, 0.2);
+}
+
+.upload-label:hover {
+  background: linear-gradient(135deg, #235201, #145320);
+  transform: translateY(-2px) scale(1.02);
+  box-shadow: 0 6px 15px rgba(20, 83, 32, 0.4);
+}
+
+.upload-label:active {
+  transform: scale(0.96);
+}
+
+@keyframes fadeInUp {
+  0% {
+    opacity: 0;
+    transform: translateY(15px);
+  }
+  100% {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.password-wrapper {
+  position: relative;
+  width: 100%;
+}
+
+.password-wrapper input[type="password"],
+.password-wrapper input[type="text"] {
+  width: 100%;
+  padding: 10px 40px 10px 12px;
+  border: 1px solid #ccc;
+  border-radius: 6px;
+  font-size: 15px;
+}
+
+.toggle-eye {
+  position: absolute;
+  top: 50%;
+  right: 12px;
+  transform: translateY(-50%);
+  cursor: pointer;
+  color: #888;
+  font-size: 16px;
+  transition: color 0.3s ease;
+}
+
+.toggle-eye:hover {
+  color: #235201;
+}
+
+.form-actions {
+  margin-top: 30px;
+  display: flex;
+  justify-content: flex-end;
+  gap: 15px;
+}
+
+.reset-btn,
+.submit-btn {
+  padding: 12px 25px;
+  font-size: 16px;
+  font-weight: 600;
+  border: none;
+  border-radius: 8px;
+  cursor: pointer;
+  transition: all 0.3s ease;
+}
+
+.reset-btn {
+  background-color: #e0e0e0;
+  color: #333;
+}
+
+.reset-btn:hover {
+  background-color: #c2c2c2;
+}
+
+.submit-btn {
+  background: linear-gradient(135deg, #145320, #235201);
+  color: white;
+}
+
+.submit-btn:hover {
+  background: linear-gradient(135deg, #235201, #145320);
+  box-shadow: 0 8px 20px rgba(20, 83, 32, 0.3);
+}
+
+/* Confirmation Popup */
+.confirmation-popup {
+  display: none;
+  position: fixed;
+  top: 0; left: 0;
+  width: 100%; height: 100%;
+  background: rgba(0,0,0,0.5);
+  backdrop-filter: blur(2px);
+  z-index: 9999;
+  justify-content: center;
+  align-items: center;
+}
+
+.confirmation-popup.active {
+  display: flex;
+}
+
+.popup-content {
+  background: #fff;
+  padding: 30px;
+  border-radius: 12px;
+  text-align: center;
+  box-shadow: 0 10px 30px rgba(0,0,0,0.25);
+}
+
+.popup-content p {
+  font-size: 18px;
+  margin-bottom: 20px;
+}
+
+.popup-content button {
+  padding: 10px 20px;
+  font-size: 15px;
+  background-color: #145320;
+  color: white;
+  border: none;
+  border-radius: 6px;
+  cursor: pointer;
+}
+
+.popup-content button:hover {
+  background-color: #0f401b;
+}
+
     </style>
 </head>
 <body>
     <div class="container">
         <div class="header">
-            <h1>Sign-Up Form</h1>
-            <p>Please fill out all required fields to create your account</p>
+            <h1>🏛️ Resident Registration</h1>
+            <p>Take the First Step Toward Safer Streets — Register Now</p>
+        </div>
+
+        <div class="progress-bar">
+            <div class="progress-fill" id="progressFill"></div>
         </div>
 
         <form id="signupForm">
             <!-- Personal Information -->
             <div class="section">
-                <div class="section-title">Personal Information</div>
+                <div class="section-title">
+                    <span class="section-icon">👤</span>
+                    Personal Information
+                </div>
                 <div class="form-row">
                     <div class="form-group">
-                        <label for="firstName">First Name *</label>
+                        <label for="firstName">First Name <span class="required">*</span></label>
                         <input type="text" id="firstName" name="firstName" required>
+                        <div class="error-message" id="firstNameError">Please enter your first name</div>
                     </div>
                     <div class="form-group">
                         <label for="middleName">Middle Name</label>
                         <input type="text" id="middleName" name="middleName">
                     </div>
                     <div class="form-group">
-                        <label for="lastName">Last Name *</label>
+                        <label for="lastName">Last Name <span class="required">*</span></label>
                         <input type="text" id="lastName" name="lastName" required>
+                        <div class="error-message" id="lastNameError">Please enter your last name</div>
                     </div>
                 </div>
-<div class="form-row">
-    <div class="form-group">
-        <label for="dateOfBirth">Date of Birth *</label>
-        <input type="date" id="dateOfBirth" name="dateOfBirth" required>
-    </div>
-    
-    <div class="form-group">
-        <label for="sex">Sex *</label>
-        <select id="sex" name="sex" required>
-            <option value="">Select Sex</option>
-            <option value="male">Male</option>
-            <option value="female">Female</option>
-            
-        </select>
-    </div>
-    
-    <div class="form-group">
-        <label for="civilStatus">Civil Status *</label>
-        <select id="civilStatus" name="civilStatus" required>
-            <option value="">Select Civil Status</option>
-            <option value="single">Single</option>
-            <option value="married">Married</option>
-            <option value="widowed">Widowed</option>
-            <option value="separated">Separated</option>
-        </select>
-    </div>
-</div>
-
+                <div class="form-row">
+                    <div class="form-group">
+                        <label for="dateOfBirth">Date of Birth <span class="required">*</span></label>
+                        <input type="date" id="dateOfBirth" name="dateOfBirth" required>
+                        <div class="error-message" id="dateOfBirthError">Please enter your date of birth</div>
+                    </div>
+                    
+                    <div class="form-group">
+                        <label for="sex">Sex <span class="required">*</span></label>
+                        <select id="sex" name="sex" required>
+                            <option value="">Select Sex</option>
+                            <option value="male">Male</option>
+                            <option value="female">Female</option>
+                        </select>
+                        <div class="error-message" id="sexError">Please select your sex</div>
+                    </div>
+                    
+                    <div class="form-group">
+                        <label for="civilStatus">Civil Status <span class="required">*</span></label>
+                        <select id="civilStatus" name="civilStatus" required>
+                            <option value="">Select Civil Status</option>
+                            <option value="single">Single</option>
+                            <option value="married">Married</option>
+                            <option value="widowed">Widowed</option>
+                            <option value="separated">Separated</option>
+                        </select>
+                        <div class="error-message" id="civilStatusError">Please select your civil status</div>
+                    </div>
+                </div>
             </div>
 
             <!-- Address & Barangay Verification -->
             <div class="section">
-                <div class="section-title">Address & Barangay Verification</div>
+                <div class="section-title">
+                    <span class="section-icon">🏠</span>
+                    Address & Location
+                </div>
                 <div class="form-row">
                     <div class="form-group">
-                        <label for="houseNumber">House No. & Street Name *</label>
-                        <input type="text" id="houseNumber" name="houseNumber" required>
+                        <label for="houseNumber">House No. & Street Name <span class="required">*</span></label>
+                        <input type="text" id="houseNumber" name="houseNumber" required placeholder="e.g. 123 Main Street">
+                        <div class="error-message" id="houseNumberError">Please enter your house number and street</div>
                     </div>
                     <div class="form-group">
                         <label for="purok">Purok/Subdivision</label>
-                        <input type="text" id="purok" name="purok">
+                        <input type="text" id="purok" name="purok" placeholder="e.g. Purok 1, Sunset Village">
                     </div>
                 </div>
             </div>
-
             <!-- Contact Details -->
             <div class="section">
-                <div class="section-title">Contact Details</div>
+                <div class="section-title">
+                    <span class="section-icon">📞</span>
+                    Contact Information
+                </div>
                 <div class="form-row">
                     <div class="form-group">
-                        <label for="mobileNumber">Mobile Number *</label>
-                        <input type="tel" id="mobileNumber" name="mobileNumber" placeholder="09xxxxxxxxx" required>
+                        <label for="mobileNumber">Mobile Number <span class="required">*</span></label>
+                        <div class="input-group">
+                            <input type="tel" id="mobileNumber" name="mobileNumber" placeholder="09xxxxxxxxx" required pattern="^09[0-9]{9}$">
+                            <span class="input-icon">📱</span>
+                        </div>
+                        <div class="error-message" id="mobileNumberError">Please enter a valid mobile number (09xxxxxxxxx)</div>
                     </div>
                     <div class="form-group">
                         <label for="email">Email Address</label>
-                        <input type="email" id="email" name="email" placeholder="example@email.com">
+                        <div class="input-group">
+                            <input type="email" id="email" name="email" placeholder="example@email.com">
+                            <span class="input-icon">📧</span>
+                        </div>
+                        <div class="error-message" id="emailError">Please enter a valid email address</div>
                     </div>
                 </div>
             </div>
 
-            <div class="section">
-                    <div class="form-group full-width">
-                    <label for="proofOfResidency">Upload Proof of Residency *</label>
-                    <div class="file-upload">
-                        <input type="file" id="proofOfResidency" name="proofOfResidency" accept=".pdf,.jpg,.jpeg,.png" required>
-                        <i><p>Barangay ID, Utility Bill, or Barangay Certificate (PDF, JPG, PNG only)</p></i>
-                    </div>
-                </div>
-            </div>
-
-            <!-- Login Credentials -->
-            <div class="section">
-                <div class="section-title">Login Credentials</div>
-
-                <div class="form-row">
-                    <div class="form-group">
-                        <label for="password">Password *</label>
-                        <input type="password" id="password" name="password" minlength="8" required>
-                        <i><small>Minimum 8 characters, with number and capital letter</small></i>
-                    </div>
-                    <div class="form-group">
-                        <label for="confirmPassword">Confirm Password *</label>
-                        <input type="password" id="confirmPassword" name="confirmPassword" required>
-                    </div>
-                </div>
-            </div>
-
-            <!-- Consent & Declaration -->
-            <div class="section">
-                <div class="section-title">Consent & Declaration</div>
-                <div class="consent-section">
-                    <div class="consent-item">
-                        <input type="checkbox" id="truthDeclaration" name="truthDeclaration" required>
-                        <label for="truthDeclaration">I hereby declare that the information provided is true and correct to the best of my knowledge.</label>
-                    </div>
-                    <div class="consent-item">
-                        <input type="checkbox" id="legalConsequences" name="legalConsequences" required>
-                        <label for="legalConsequences">I understand that filing false reports may have legal consequences.</label>
-                    </div>
-                    <div class="consent-item">
-                        <input type="checkbox" id="termsAgreement" name="termsAgreement" required>
-                        <label for="termsAgreement">I agree to the <span class="policy-link" id="privacyPolicyLink">Privacy Policy</span> and <span class="policy-link" id="termsConditionsLink">Terms & Conditions</span>.</label>
-                    </div>
-                </div>
-            </div>
-
-            <!-- Buttons -->
-            <div class="button-container">
-                <button type="submit" class="btn btn-primary">Sign Up</button>
-                <button type="reset" class="btn btn-secondary">Reset Form</button>
-            </div>
-        </form>
-
-        <!-- Verification Message -->
-        <div id="verificationMessage" class="verification-message">
-            <h3>Verification Required</h3>
-            <p>Please verify your phone number to complete your registration. Check your SMS inbox for the OTP code.</p>
-            
-            <div class="otp-container">
-                <p><strong>Enter 6-digit OTP:</strong></p>
-                <div class="otp-inputs">
-                    <input type="text" class="otp-input" maxlength="1" id="otp1">
-                    <input type="text" class="otp-input" maxlength="1" id="otp2">
-                    <input type="text" class="otp-input" maxlength="1" id="otp3">
-                    <input type="text" class="otp-input" maxlength="1" id="otp4">
-                    <input type="text" class="otp-input" maxlength="1" id="otp5">
-                    <input type="text" class="otp-input" maxlength="1" id="otp6">
-                </div>
-                <button type="button" class="verify-btn" id="verifyOtpBtn" disabled>Verify OTP</button>
-                <br>
-                <small style="color: #666;">Didn't receive the code? <a href="#" style="color: #145320;">Resend OTP</a></small>
-            </div>
-        </div>
-    </div>
-
-    <!-- Success Popup -->
-    <div id="successPopup" class="success-popup">
-        <div class="success-content">
-            <div class="success-icon">✅</div>
-            <h2 class="success-title">Sign Up Successful!</h2>
-            <p class="success-message">Your account has been created successfully. Welcome to the Market Area E-Blotter Portal!</p>
-            <p class="redirect-info">Redirecting to login page in <span id="countdown">3</span> seconds...</p>
-        </div>
-    </div>
-
-    <!-- Privacy Policy Modal -->
-    <div id="privacyPolicyModal" class="modal">
-        <div class="modal-content">
-            <div class="modal-header">
-                <h2 class="modal-title">Privacy Policy</h2>
-                <button class="close" id="closePrivacyModal">&times;</button>
-            </div>
-            <div class="modal-body">
-                <!-- ADD YOUR PRIVACY POLICY CONTENT HERE -->
-    <p>
-      The Barangay E-Blotter System is committed to protecting your privacy. This Privacy Policy explains how we collect, use, and safeguard your personal information when you use our system.
-    </p>
-    <br>
-    <h3>Information We Collect</h3>
-    <ul>
-      <li>Personal details you provide when filing a complaint (e.g., name, address, contact number, etc.).</li>
-      <li>Details of your complaint and any supporting evidence you upload.</li>
-      <li>Technical information such as your IP address, browser type, and access times.</li>
-    </ul>
-    <br>
-    <h3>How We Use Your Information</h3>
-    <ul>
-      <li>To process and resolve complaints submitted through the system.</li>
-      <li>To communicate with you regarding your complaint or inquiry.</li>
-      <li>To improve our services and ensure system security.</li>
-      <li>To comply with legal obligations and government regulations.</li>
-    </ul>
-    <br>
-    <h3>Information Sharing</h3>
-    <p>
-      We do not share your personal information with third parties except as required by law or with your explicit consent. Your information is kept confidential and is only accessible to authorized barangay personnel.
-    </p>
-    <br>
-    <h3>Data Security</h3>
-    <p>
-      We implement appropriate security measures to protect your data from unauthorized access, alteration, or disclosure.
-    </p>
-    <br>
-    <h3>Your Rights</h3>
-    <ul>
-      <li>You may request access to your personal information.</li>
-      <li>You may request correction or deletion of your data, subject to legal requirements.</li>
-      <li>You may contact us for any privacy-related concerns.</li>
-    </ul>
-    <br
-
-                
-                <!-- END OF PRIVACY POLICY CONTENT AREA -->
-            </div>
-            <div class="modal-footer">
-                <button class="modal-btn" id="acceptPrivacyPolicy">I Understand</button>
-            </div>
-        </div>
-    </div>
-
-    <!-- Terms & Conditions Modal -->
-    <div id="termsConditionsModal" class="modal">
-        <div class="modal-content">
-            <div class="modal-header">
-                <h2 class="modal-title">Terms & Conditions</h2>
-                <button class="close" id="closeTermsModal">&times;</button>
-            </div>
-            <div class="modal-body">
-                <!-- ADD YOUR TERMS & CONDITIONS CONTENT HERE -->
-    <p>
-      Welcome to the Barangay E-Blotter System. By accessing or using this system, you agree to comply with and be bound by the following terms and conditions. Please read them carefully.
-    </p>
-    <br>
-    <h3>Use of the System</h3>
-    <hr>
-      <p>The E-Blotter System is intended for residents to file and track complaints within the barangay. You must provide accurate and complete information when submitting a complaint. Misuse of the system, including submitting false or malicious complaints, is strictly prohibited.</p>
-    <BR>
-    <h3>Data Privacy</h3>
-     <hr>
-    <p>All personal information submitted will be kept confidential and used only for resolving complaints.
-    Only authorized barangay personnel have access to complaint details.</p>
-    <br>
-
-    <h3>User Responsibilities</h3>
-     <hr>
-      <p>You are responsible for the accuracy of the information you provide. You must not use the system for unlawful purposes or to harass others.</p>
-    <br>
-
-    <h3>System Availability</h3>
-     <hr>
-    <p>The barangay strives to keep the system available at all times but does not guarantee uninterrupted access. Maintenance or technical issues may cause temporary downtime.</p>
-    <br>
-    <h3>Changes to Terms</h3>
-     <hr>
-    <p>The barangay reserves the right to update these terms at any time. Changes will be posted on this page.</p>
-    <br>
+            <!-- Account Security & Proof -->
+<div class="section">
+  <div class="section-title">
+    <span class="section-icon">🔒</span>
+    Account Security & Verification
   </div>
-                </ul>
-                
-                <!-- END OF TERMS & CONDITIONS CONTENT AREA -->
-            </div>
-            <div class="modal-footer">
-                <button class="modal-btn" id="acceptTermsConditions">I Agree</button>
-            </div>
-        </div>
+
+  <div class="form-row">
+  <!-- Create Password -->
+  <div class="form-group full-width password-group">
+    <label for="password">Create Password <span class="required">*</span></label>
+    <div class="password-wrapper">
+      <input type="password" id="password" name="password" required placeholder="Enter a secure password">
+      <span class="toggle-eye" onclick="togglePasswordVisibility('password', this)">
+        <i class="fa-solid fa-eye"></i>
+      </span>
+    </div>
+    <div class="error-message" id="passwordError">Please enter a password</div>
+  </div>
+</div>
+
+<div class="form-row">
+  <!-- Confirm Password -->
+  <div class="form-group full-width password-group">
+    <label for="confirmPassword">Confirm Password <span class="required">*</span></label>
+    <div class="password-wrapper">
+      <input type="password" id="confirmPassword" name="confirmPassword" required placeholder="Re-enter your password">
+      <span class="toggle-eye" onclick="togglePasswordVisibility('confirmPassword', this)">
+        <i class="fa-solid fa-eye"></i>
+      </span>
+    </div>
+    <div class="error-message" id="confirmPasswordError">Passwords do not match</div>
+  </div>
+</div>
+
+
+ <div class="form-row">
+  <div class="form-group full-width">
+    <label for="residencyProof">Proof of Residency <span class="required">*</span></label>
+    
+    <div class="custom-file-upload">
+      <label for="residencyProof" class="upload-label">📎 Choose File</label>
+      <span id="residencyProofName" class="file-name">No file selected</span>
+      <input type="file" id="residencyProof" name="residencyProof" required accept=".pdf,.jpg,.jpeg,.png" onchange="updateFileName(this, 'residencyProofName')">
     </div>
 
-    <script>
-        // Modal functionality
-        const privacyPolicyModal = document.getElementById('privacyPolicyModal');
-        const termsConditionsModal = document.getElementById('termsConditionsModal');
-        const privacyPolicyLink = document.getElementById('privacyPolicyLink');
-        const termsConditionsLink = document.getElementById('termsConditionsLink');
-        const closePrivacyModal = document.getElementById('closePrivacyModal');
-        const closeTermsModal = document.getElementById('closeTermsModal');
-        const acceptPrivacyPolicy = document.getElementById('acceptPrivacyPolicy');
-        const acceptTermsConditions = document.getElementById('acceptTermsConditions');
+    <div class="error-message" id="residencyProofError">Please upload your proof of residency</div>
+  </div>
+</div>
 
-        // Open Privacy Policy Modal
-        privacyPolicyLink.addEventListener('click', function(e) {
-            e.preventDefault();
-            privacyPolicyModal.style.display = 'block';
-        });
+<div class="form-row">
+  <div class="form-group full-width">
+    <label for="validID">Valid Government ID <span class="required">*</span></label>
+    
+    <div class="custom-file-upload">
+      <label for="validID" class="upload-label">📎 Choose File</label>
+      <span id="validIDName" class="file-name">No file selected</span>
+      <input type="file" id="validID" name="validID" required accept=".pdf,.jpg,.jpeg,.png" onchange="updateFileName(this, 'validIDName')">
+    </div>
 
-        // Open Terms & Conditions Modal
-        termsConditionsLink.addEventListener('click', function(e) {
-            e.preventDefault();
-            termsConditionsModal.style.display = 'block';
-        });
+    <div class="error-message" id="validIDError">Please upload your valid ID</div>
+  </div>
+</div>
+</div>
 
-        // Close Privacy Policy Modal
-        closePrivacyModal.addEventListener('click', function() {
-            privacyPolicyModal.style.display = 'none';
-        });
+<!-- Consent & Declaration -->
+<div class="section consent-section">
+  <div class="section-title">
+    <span class="section-icon">✅</span>
+    Consent & Declaration
+  </div>
 
-        // Close Terms & Conditions Modal
-        closeTermsModal.addEventListener('click', function() {
-            termsConditionsModal.style.display = 'none';
-        });
+  <div class="consent-item">
+    <input type="checkbox" id="consentDeclaration" name="consentDeclaration" required checked>
+    <label for="consentDeclaration"><strong>I hereby declare</strong> that the information provided is true and correct to the best of my knowledge.</label>
+  </div>
 
-        // Accept Privacy Policy
-        acceptPrivacyPolicy.addEventListener('click', function() {
-            privacyPolicyModal.style.display = 'none';
-        });
+  <div class="consent-item">
+    <input type="checkbox" id="consentLegal" name="consentLegal" required checked>
+    <label for="consentLegal">I understand that filing false reports may have legal consequences.</label>
+  </div>
 
-        // Accept Terms & Conditions
-        acceptTermsConditions.addEventListener('click', function() {
-            termsConditionsModal.style.display = 'none';
-        });
+  <div class="consent-item">
+    <input type="checkbox" id="consentAgreement" name="consentAgreement" required checked>
+    <label for="consentAgreement">
+      I agree to the 
+      <span class="policy-link" onclick="openModal('privacyModal')">Privacy Policy</span> and 
+      <span class="policy-link" onclick="openModal('termsModal')">Terms & Conditions</span>.
+    </label>
+  </div>
+</div>
 
-        // Close modal when clicking outside of it
-        window.addEventListener('click', function(event) {
-            if (event.target === privacyPolicyModal) {
-                privacyPolicyModal.style.display = 'none';
-            }
-            if (event.target === termsConditionsModal) {
-                termsConditionsModal.style.display = 'none';
-            }
-        });
+<!-- FORM FOOTER BUTTONS -->
+<div class="form-actions">
+  <button type="reset" class="reset-btn">Reset</button>
+  <button type="submit" class="submit-btn">Sign Up</button>
+</div>
+        </form>
+    </div>
 
-        // Form submission handler
-        document.getElementById('signupForm').addEventListener('submit', function(e) {
-            e.preventDefault();
-            
-            // Basic validation
-            const password = document.getElementById('password').value;
-            const confirmPassword = document.getElementById('confirmPassword').value;
-            
-            if (password !== confirmPassword) {
-                alert('Passwords do not match!');
-                return;
-            }
-            
-            // Password strength check
-            const hasNumber = /\d/.test(password);
-            const hasCapital = /[A-Z]/.test(password);
-            
-            if (!hasNumber || !hasCapital) {
-                alert('Password must contain at least one number and one capital letter!');
-                return;
-            }
-            
-            // Hide form and show verification message
-            document.getElementById('signupForm').style.display = 'none';
-            document.getElementById('verificationMessage').style.display = 'block';
-            
-            // Focus on first OTP input
-            document.getElementById('otp1').focus();
-            
-            // Simulate OTP sending
-            console.log('Form submitted successfully! OTP sent to mobile number.');
-        });
+<!-- Privacy Policy Modal -->
+<div id="privacyModal" class="modal">
+  <div class="modal-content">
+    <div class="modal-header">
+      <h2 class="modal-title">Privacy Policy</h2>
+      <button class="close" onclick="closeModal('privacyModal')">&times;</button>
+    </div>
+    <div class="modal-body">
+      <h2>Privacy Policy</h2>
+      <p>
+        The Barangay E-Blotter System is committed to protecting your privacy. This Privacy Policy explains how we collect, use, and safeguard your personal information when you use our system.
+      </p>
 
-        // OTP input handling
-        const otpInputs = document.querySelectorAll('.otp-input');
-        const verifyBtn = document.getElementById('verifyOtpBtn');
+      <h3>Information We Collect</h3>
+      <ul>
+        <li>Personal details you provide when filing a complaint (e.g., name, address, contact number, etc.).</li>
+        <li>Details of your complaint and any supporting evidence you upload.</li>
+        <li>Technical information such as your IP address, browser type, and access times.</li>
+      </ul>
 
-        otpInputs.forEach((input, index) => {
-            input.addEventListener('input', function(e) {
-                const value = e.target.value;
-                
-                // Only allow numbers
-                if (!/^\d$/.test(value)) {
-                    e.target.value = '';
-                    return;
-                }
-                
-                // Auto-focus next input
-                if (value && index < otpInputs.length - 1) {
-                    otpInputs[index + 1].focus();
-                }
-                
-                // Check if all inputs are filled
-                checkOtpComplete();
-            });
+      <h3>How We Use Your Information</h3>
+      <ul>
+        <li>To process and resolve complaints submitted through the system.</li>
+        <li>To communicate with you regarding your complaint or inquiry.</li>
+        <li>To improve our services and ensure system security.</li>
+        <li>To comply with legal obligations and government regulations.</li>
+      </ul>
 
-            input.addEventListener('keydown', function(e) {
-                // Handle backspace
-                if (e.key === 'Backspace' && !e.target.value && index > 0) {
-                    otpInputs[index - 1].focus();
-                }
-            });
+      <h3>Information Sharing</h3>
+      <p>
+        We do not share your personal information with third parties except as required by law or with your explicit consent. Your information is kept confidential and is only accessible to authorized barangay personnel.
+      </p>
 
-            input.addEventListener('paste', function(e) {
-                e.preventDefault();
-                const pastedData = e.clipboardData.getData('text');
-                
-                // If 6 digits are pasted, distribute them
-                if (/^\d{6}$/.test(pastedData)) {
-                    for (let i = 0; i < 6; i++) {
-                        otpInputs[i].value = pastedData[i];
-                    }
-                    checkOtpComplete();
-                }
-            });
-        });
+      <h3>Data Security</h3>
+      <p>
+        We implement appropriate security measures to protect your data from unauthorized access, alteration, or disclosure.
+      </p>
 
-        function checkOtpComplete() {
-            const allFilled = Array.from(otpInputs).every(input => input.value !== '');
-            verifyBtn.disabled = !allFilled;
-        }
+      <h3>Your Rights</h3>
+      <ul>
+        <li>You may request access to your personal information.</li>
+        <li>You may request correction or deletion of your data, subject to legal requirements.</li>
+        <li>You may contact us for any privacy-related concerns.</li>
+      </ul>
+    </div>
+    <div class="modal-footer">
+      <button class="modal-btn" onclick="closeModal('privacyModal')">Close</button>
+    </div>
+  </div>
+</div>
 
-        // Verify OTP button handler
-        verifyBtn.addEventListener('click', function() {
-            const otpValue = Array.from(otpInputs).map(input => input.value).join('');
-            
-            // For demo purposes, any 6-digit number works
-            if (otpValue.length === 6) {
-                showSuccessPopup();
-            } else {
-                alert('Please enter the complete 6-digit OTP code.');
-            }
-        });
 
-        function showSuccessPopup() {
-            document.getElementById('successPopup').style.display = 'flex';
-            
-            // Countdown timer
-            let countdown = 3;
-            const countdownElement = document.getElementById('countdown');
-            
-            const timer = setInterval(() => {
-                countdown--;
-                countdownElement.textContent = countdown;
-                
-                if (countdown <= 0) {
-                    clearInterval(timer);
-                    // Simulate redirect to login page
-                    alert('Redirecting to login page...');
-                    // redirect to the login page
-                    window.location.href = 'residentLogin.html';
-                }
-            }, 1000);
-        }
-    </script>
+<!-- Terms & Conditions Modal -->
+<div id="termsModal" class="modal">
+  <div class="modal-content">
+    <div class="modal-header">
+      <h2 class="modal-title">Terms & Conditions</h2>
+      <button class="close" onclick="closeModal('termsModal')">&times;</button>
+    </div>
+    <div class="modal-body">
+      <h2>Terms and Conditions</h2>
+      <p>
+        Welcome to the Barangay E-Blotter System. By accessing or using this system, you agree to comply with and be bound by the following terms and conditions. Please read them carefully.
+      </p>
+
+      <h3>1. Use of the System</h3>
+      <hr>
+      <ul>
+        <li>The E-Blotter System is intended for residents to file and track complaints within the barangay.</li>
+        <li>You must provide accurate and complete information when submitting a complaint.</li>
+        <li>Misuse of the system, including submitting false or malicious complaints, is strictly prohibited.</li>
+      </ul>
+
+      <h3>2. Privacy and Confidentiality</h3>
+      <hr>
+      <ul>
+        <li>All personal information submitted will be kept confidential and used only for resolving complaints.</li>
+        <li>Only authorized barangay personnel have access to complaint details.</li>
+      </ul>
+
+      <h3>3. User Responsibilities</h3>
+      <hr>
+      <ul>
+        <li>You are responsible for the accuracy of the information you provide.</li>
+        <li>You must not use the system for unlawful purposes or to harass others.</li>
+      </ul>
+
+      <h3>4. System Availability</h3>
+      <hr>
+      <ul>
+        <li>System availability may vary depending on maintenance and updates.</li>
+      </ul>
+
+      <h3>5. Changes to Terms</h3>
+      <hr>
+      <p>
+        The barangay reserves the right to update these terms at any time. Changes will be posted on this page.
+      </p>
+    </div>
+    <div class="modal-footer">
+      <button class="modal-btn" onclick="closeModal('termsModal')">Close</button>
+    </div>
+  </div>
+</div>
+
+<!-- CONFIRMATION POPUP -->
+<div id="confirmationPopup" class="confirmation-popup">
+  <div class="popup-content">
+    <p>✅ Registration successful!</p>
+    <button onclick="closePopup()">Close</button>
+  </div>
+</div>
 </body>
+
+<script>
+  function openModal(id) {
+    document.getElementById(id).style.display = 'block';
+  }
+
+  function closeModal(id) {
+    document.getElementById(id).style.display = 'none';
+  }
+
+  function closePopup() {
+    document.getElementById('confirmationPopup').style.display = 'none';
+  }
+
+  window.onclick = function(event) {
+    if (event.target.classList.contains('modal')) {
+      closeModal('privacyModal');
+      closeModal('termsModal');
+    }
+  };
+
+  // validations
+
+  function openModal(id) {
+    document.getElementById(id).style.display = 'block';
+  }
+
+  function closeModal(id) {
+    document.getElementById(id).style.display = 'none';
+  }
+
+  function closePopup() {
+    document.getElementById('confirmationPopup').style.display = 'none';
+  }
+
+  window.onclick = function(event) {
+    if (event.target.classList.contains('modal')) {
+      closeModal('privacyModal');
+      closeModal('termsModal');
+    }
+  };
+
+  function togglePasswordVisibility(fieldId, iconElement) {
+    const field = document.getElementById(fieldId);
+    const icon = iconElement.querySelector('i');
+    if (field.type === 'password') {
+      field.type = 'text';
+      icon.classList.remove('fa-eye');
+      icon.classList.add('fa-eye-slash');
+    } else {
+      field.type = 'password';
+      icon.classList.remove('fa-eye-slash');
+      icon.classList.add('fa-eye');
+    }
+  }
+
+  function updateFileName(input, displayId) {
+    const display = document.getElementById(displayId);
+    const file = input.files[0];
+    display.innerHTML = ''; // Clear previous content
+    if (file) {
+      display.textContent = file.name;
+      if (file.type.startsWith("image/")) {
+        const reader = new FileReader();
+        reader.onload = function (e) {
+          const img = document.createElement('img');
+          img.src = e.target.result;
+          img.alt = "Preview";
+          img.style.maxWidth = "100px";
+          img.style.marginTop = "10px";
+          display.appendChild(img);
+        };
+        reader.readAsDataURL(file);
+      }
+    } else {
+      display.textContent = 'No file selected';
+    }
+  }
+
+  document.getElementById('signupForm').addEventListener('submit', function (e) {
+    e.preventDefault();
+    let isValid = true;
+    const form = this;
+
+    function validateField(id) {
+      const field = document.getElementById(id);
+      const error = document.getElementById(id + 'Error');
+      if (!field.value.trim()) {
+        error.style.display = 'block';
+        field.setCustomValidity("Please fill out this field.");
+        isValid = false;
+      } else {
+        error.style.display = 'none';
+        field.setCustomValidity("");
+      }
+    }
+
+    const requiredFields = [
+      'firstName', 'lastName', 'dateOfBirth', 'sex', 'civilStatus',
+      'houseNumber', 'mobileNumber', 'email', 'password', 'confirmPassword'
+    ];
+
+    requiredFields.forEach(validateField);
+
+    const fileFields = [
+      { id: 'residencyProof', errorId: 'residencyProofError' },
+      { id: 'validID', errorId: 'validIDError' }
+    ];
+    fileFields.forEach(file => {
+      const field = document.getElementById(file.id);
+      const error = document.getElementById(file.errorId);
+      if (!field.files || field.files.length === 0) {
+        error.style.display = 'block';
+        field.setCustomValidity("Please upload a file.");
+        isValid = false;
+      } else {
+        error.style.display = 'none';
+        field.setCustomValidity("");
+      }
+    });
+
+    const email = document.getElementById('email');
+    const emailError = document.getElementById('emailError');
+    const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+    if (!emailRegex.test(email.value)) {
+      emailError.style.display = 'block';
+      isValid = false;
+    } else {
+      emailError.style.display = 'none';
+    }
+
+    const mobileNumber = document.getElementById('mobileNumber');
+    const mobileError = document.getElementById('mobileNumberError');
+    if (!/^09\d{9}$/.test(mobileNumber.value)) {
+      mobileError.style.display = 'block';
+      isValid = false;
+    } else {
+      mobileError.style.display = 'none';
+    }
+
+    const password = document.getElementById('password');
+    const confirmPassword = document.getElementById('confirmPassword');
+    const confirmPasswordError = document.getElementById('confirmPasswordError');
+    if (password.value !== confirmPassword.value) {
+      confirmPasswordError.style.display = 'block';
+      isValid = false;
+    } else {
+      confirmPasswordError.style.display = 'none';
+    }
+
+    const checkboxes = [
+      'consentDeclaration', 'consentLegal', 'consentAgreement'
+    ];
+    checkboxes.forEach(id => {
+      const checkbox = document.getElementById(id);
+      if (!checkbox.checked) isValid = false;
+    });
+
+    if (isValid) {
+      document.getElementById("confirmationPopup").style.display = "block";
+      form.reset();
+      window.scrollTo({ top: 0, behavior: 'smooth' });
+    } else {
+      window.scrollTo({ top: 0, behavior: 'smooth' });
+    }
+  });
+</script>
+
 </html>

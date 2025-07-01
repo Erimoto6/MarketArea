@@ -22,6 +22,7 @@ body.modal-open::-webkit-scrollbar {
 
 /* HEADER SECTION */
 .header_gradient {
+  position: fixed;
   display: flex;
   justify-content: space-between;
   align-items: center;
@@ -298,6 +299,8 @@ body.modal-open::-webkit-scrollbar {
 }
 
 /* Main Content */
+
+
 .content {
   position: relative;
   min-height: 100vh;
@@ -316,7 +319,7 @@ body.modal-open::-webkit-scrollbar {
 }
 
 .content-inner {
-  padding: 20px 0;   /* ✅ Gives nice top and bottom spacing but keeps layout flowing */
+  padding: 13vh 20vh;   /* ✅ Gives nice top and bottom spacing but keeps layout flowing */
 }
 
 /* Complaint Header */
@@ -944,7 +947,7 @@ main.content {
   z-index: 9999;
   justify-content: center;
   align-items: center;
-  padding: 40px;
+  padding: 10px;
   box-sizing: border-box;
   animation: overlayFadeIn 0.3s ease; /* ⬅️ ADD smooth fade in animation */
 }
@@ -957,7 +960,7 @@ main.content {
   width: 100%;
   padding: 0; /* ⬅️ Remove padding to let header/body/footer handle their own */
   box-shadow: 0 20px 60px rgba(0, 0, 0, 0.3); /* ⬅️ Enhanced shadow */
-  max-height: 80vh;
+  max-height: 85vh;
   overflow: hidden; /* ⬅️ Prevent content overflow */
   transition: transform 0.2s ease;
   animation: modalSlideIn 0.3s ease; /* ⬅️ ADD smooth slide in animation */
@@ -1037,7 +1040,7 @@ main.content {
 /* === Enhanced Modal Body === */
 .modal-body {
     padding: 40px;
-    max-height: calc(50vh - 100px); /* subtract header/footer height */    overflow-y: auto;
+    max-height: calc(60vh - 100px); /*ADJUST ANG HEIGHT NG MODAL*/    overflow-y: auto;
     color: #2b3209;
     line-height: 1.6;
      overflow-y: auto;
