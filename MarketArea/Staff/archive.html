@@ -96,6 +96,7 @@
       <table class="complaints-table">
         <thead>
             <tr>
+                <th>Complaint ID</th>
                 <th>Date Filed</th>
                 <th>Complainant</th>
                 <th>Respondent</th>
@@ -240,12 +241,15 @@ function updateTable() {
     emptyState.style.display = 'none';
     tbody.innerHTML = currentComplaints.map(complaint => `
       <tr onclick="handleComplaintClick(${complaint.id})">
+
         <td onclick="event.stopPropagation();">
           <div style="display: flex; align-items: center; gap: 10px;">
             <input type="checkbox" class="complaint-checkbox" data-id="${complaint.id}">
-            ${complaint.dateFiled}
+            2025-${complaint.id.toString().padStart(3, '0')}
           </div>
         </td>
+
+        <td>${complaint.dateFiled}</td>        
         <td>${complaint.complainant}</td>
         <td>${complaint.respondent}</td>
         <td>${complaint.type}</td>
