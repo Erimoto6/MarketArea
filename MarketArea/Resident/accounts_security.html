@@ -660,7 +660,7 @@
     .out-modal-title {
       font-size: 24px;
       font-weight: 600;
-      color: #2c3e50;
+      color: #4B5320;
       margin: 0 0 12px 0;
     }
 
@@ -942,6 +942,38 @@
   background: linear-gradient(135deg, #a93226, #c0392b);
 }
 
+/* Status Dot + Text Wrapper */
+.status-indicator {
+  display: flex;
+  align-items: center;
+  font-weight: 600;
+  font-size: 14px;
+  gap: 8px;
+}
+
+/* Status Dot */
+.status-dot {
+  width: 10px;
+  height: 10px;
+  border-radius: 50%;
+  display: inline-block;
+}
+
+/* Inactive (Gray) */
+.status-inactive .status-dot {
+  background-color: #aaa;
+}
+.status-inactive {
+  color: #888;
+}
+
+/* Active (Green) */
+.status-active .status-dot {
+  background-color: #4CAF50;
+}
+.status-active {
+  color: #388e3c;
+}
 
 
   </style>
@@ -994,6 +1026,7 @@
           <h1>Account & Security Settings</h1>
           <p>Manage your account information and security preferences</p>
         </div>
+
 <!-- Account Information Section -->
 <div class="section">
   <div class="section-header">
@@ -1135,7 +1168,6 @@
 </div>
 </div>
 
-
         </div>
       </div>
     </main>
@@ -1241,12 +1273,12 @@
   <div class="out-modal-content" style="max-width: 400px;">
     <button class="close-out-btn" onclick="hideTwoFactorModal()" aria-label="Close">&times;</button>
 
-    <div class="out-modal-icon" style="background: linear-gradient(135deg, #d2691e, #8b4513);">
+    <div class="out-modal-icon" style="background: linear-gradient(135deg, #D0B564, #534518);">
       <span>🔐</span>
     </div>
 
     <h2 class="out-modal-title">Two-Factor Authentication</h2>
-    <p class="out-modal-message">Enter the 6-digit code sent to your registered device.</p>
+    <p class="out-modal-message">Enter the 6-digit code sent to your email</p>
 
     <div style="text-align: center; margin-top: 15px;">
       <p><strong>Your code:</strong> <span id="generated2FACode" style="letter-spacing: 2px; font-size: 18px;"></span></p>
@@ -1264,154 +1296,148 @@
 
   <script>
   // ==== PROFILE SIDEBAR TOGGLE ====
-  const profileTrigger = document.getElementById('profileTrigger');
-  const sidebar = document.getElementById('profileSidebar');
+const profileTrigger = document.getElementById('profileTrigger');
+const sidebar = document.getElementById('profileSidebar');
 
-  profileTrigger.addEventListener('click', (e) => {
-    e.preventDefault();
-    sidebar.classList.toggle('show');
-  });
+profileTrigger.addEventListener('click', (e) => {
+  e.preventDefault();
+  sidebar.classList.toggle('show');
+});
 
-  document.addEventListener('click', (e) => {
-    const wrapper = document.querySelector('.profile-sidebar-wrapper');
-    if (!wrapper.contains(e.target)) {
-      sidebar.classList.remove('show');
-    }
-  });
+document.addEventListener('click', (e) => {
+  const wrapper = document.querySelector('.profile-sidebar-wrapper');
+  if (!wrapper.contains(e.target)) {
+    sidebar.classList.remove('show');
+  }
+});
 
-  // ==== TOGGLE SINGLE PASSWORD FIELD ====
-  function togglePassword(fieldId, iconId) {
+// ==== TOGGLE SINGLE PASSWORD FIELD ====
+function togglePassword(fieldId, iconId) {
+  const field = document.getElementById(fieldId);
+  const icon = document.getElementById(iconId);
+
+  const isPassword = field.type === "password";
+  field.type = isPassword ? "text" : "password";
+  icon.classList.toggle("fa-eye", !isPassword);
+  icon.classList.toggle("fa-eye-slash", isPassword);
+}
+
+// ==== TOGGLE ALL CHANGE PASSWORD FIELDS ====
+function toggleAllChangePasswords() {
+  const fields = ['current-pass', 'new-pass', 'confirm-pass'];
+  const icons = ['toggle-icon-current-pass', 'toggle-icon-new-pass', 'toggle-icon-confirm-pass'];
+
+  fields.forEach((fieldId, i) => {
     const field = document.getElementById(fieldId);
-    const icon = document.getElementById(iconId);
+    const icon = document.getElementById(icons[i]);
+    const isPassword = field.type === 'password';
 
-    const isPassword = field.type === "password";
-    field.type = isPassword ? "text" : "password";
+    field.type = isPassword ? 'text' : 'password';
     icon.classList.toggle("fa-eye", !isPassword);
     icon.classList.toggle("fa-eye-slash", isPassword);
+  });
+}
+
+// ==== TOGGLE READONLY PASSWORD ====
+function toggleReadonlyPassword() {
+  togglePassword('readonly-password', 'toggle-icon-readonly-pass');
+}
+
+// ==== PASSWORD MATCH CONFIRMATION ====
+function validatePasswordMatch() {
+  const newPassword = document.getElementById('new-pass');
+  const confirmPassword = document.getElementById('confirm-pass');
+
+  if (confirmPassword.value !== "" && newPassword.value !== confirmPassword.value) {
+    confirmPassword.setCustomValidity("Passwords do not match");
+  } else {
+    confirmPassword.setCustomValidity("");
   }
+}
 
-  // ==== TOGGLE ALL CHANGE PASSWORD FIELDS ====
-  function toggleAllChangePasswords() {
-    const fields = ['current-pass', 'new-pass', 'confirm-pass'];
-    const icons = ['toggle-icon-current-pass', 'toggle-icon-new-pass', 'toggle-icon-confirm-pass'];
+document.getElementById('new-pass').addEventListener('input', validatePasswordMatch);
+document.getElementById('confirm-pass').addEventListener('input', validatePasswordMatch);
 
-    fields.forEach((fieldId, i) => {
-      const field = document.getElementById(fieldId);
-      const icon = document.getElementById(icons[i]);
-      const isPassword = field.type === 'password';
+// ==== ENHANCED LOGOUT MODAL ====
+function showLogoutConfirmation() {
+  const logoutModal = document.getElementById('logoutConfirmModal');
+  logoutModal.style.display = 'flex';
+  setTimeout(() => logoutModal.classList.add('show'), 10);
+  document.body.style.overflow = 'hidden';
+  trapFocus(logoutModal);
+  return false;
+}
 
-      field.type = isPassword ? 'text' : 'password';
-      icon.classList.toggle("fa-eye", !isPassword);
-      icon.classList.toggle("fa-eye-slash", isPassword);
-    });
-  }
+function hideLogoutModal() {
+  const logoutModal = document.getElementById('logoutConfirmModal');
+  logoutModal.classList.remove('show');
+  setTimeout(() => {
+    logoutModal.style.display = 'none';
+    document.body.style.overflow = '';
+  }, 300);
+}
 
-  // ==== TOGGLE READONLY PASSWORD ====
-  function toggleReadonlyPassword() {
-    togglePassword('readonly-password', 'toggle-icon-readonly-pass');
-  }
+function proceedWithLogout() {
+  const confirmBtn = document.querySelector('.out-btn-confirm');
+  confirmBtn.textContent = 'Logging out...';
+  confirmBtn.disabled = true;
 
-  // ==== PASSWORD MATCH CONFIRMATION ====
-  function validatePasswordMatch() {
-    const newPassword = document.getElementById('new-pass');
-    const confirmPassword = document.getElementById('confirm-pass');
+  setTimeout(() => {
+    window.location.href = "residentLogin.html";
+  }, 1000);
+}
 
-    if (confirmPassword.value !== "" && newPassword.value !== confirmPassword.value) {
-      confirmPassword.setCustomValidity("Passwords do not match");
-    } else {
-      confirmPassword.setCustomValidity("");
+document.getElementById('logoutConfirmModal').addEventListener('click', function (e) {
+  if (e.target === this) hideLogoutModal();
+});
+document.addEventListener('keydown', function (e) {
+  if (e.key === 'Escape') hideLogoutModal();
+});
+
+function trapFocus(modal) {
+  const focusable = modal.querySelectorAll('button, [href], input, select, textarea, [tabindex]:not([tabindex="-1"])');
+  const first = focusable[0];
+  const last = focusable[focusable.length - 1];
+
+  modal.addEventListener('keydown', function (e) {
+    if (e.key === 'Tab') {
+      if (e.shiftKey && document.activeElement === first) {
+        last.focus();
+        e.preventDefault();
+      } else if (!e.shiftKey && document.activeElement === last) {
+        first.focus();
+        e.preventDefault();
+      }
     }
-  }
-
-  document.getElementById('new-pass').addEventListener('input', validatePasswordMatch);
-  document.getElementById('confirm-pass').addEventListener('input', validatePasswordMatch);
-
-  // ==== ENHANCED LOGOUT MODAL ====
-  function showLogoutConfirmation() {
-    const logoutModal = document.getElementById('logoutConfirmModal');
-    logoutModal.style.display = 'flex';
-    setTimeout(() => logoutModal.classList.add('show'), 10);
-    document.body.style.overflow = 'hidden';
-    trapFocus(logoutModal);
-    return false;
-  }
-
-  function hideLogoutModal() {
-    const logoutModal = document.getElementById('logoutConfirmModal');
-    logoutModal.classList.remove('show');
-    setTimeout(() => {
-      logoutModal.style.display = 'none';
-      document.body.style.overflow = '';
-    }, 300);
-  }
-
-  function proceedWithLogout() {
-    const confirmBtn = document.querySelector('.out-btn-confirm');
-    confirmBtn.textContent = 'Logging out...';
-    confirmBtn.disabled = true;
-
-    setTimeout(() => {
-      window.location.href = "residentLogin.html";
-    }, 1000);
-  }
-
-  // Close logout modal when clicking outside
-  document.getElementById('logoutConfirmModal').addEventListener('click', function (e) {
-    if (e.target === this) hideLogoutModal();
   });
 
-  // Close logout modal with ESC key
-  document.addEventListener('keydown', function (e) {
-    if (e.key === 'Escape') hideLogoutModal();
-  });
+  first.focus();
+}
 
-  // Trap focus inside modal
-  function trapFocus(modal) {
-    const focusable = modal.querySelectorAll('button, [href], input, select, textarea, [tabindex]:not([tabindex="-1"])');
-    const first = focusable[0];
-    const last = focusable[focusable.length - 1];
+let logoutInactivityTimer;
+function resetLogoutInactivityTimer() {
+  clearTimeout(logoutInactivityTimer);
+  logoutInactivityTimer = setTimeout(() => {
+    if (document.getElementById('logoutConfirmModal').style.display === 'flex') {
+      hideLogoutModal();
+    }
+  }, 30000);
+}
 
-    modal.addEventListener('keydown', function (e) {
-      if (e.key === 'Tab') {
-        if (e.shiftKey && document.activeElement === first) {
-          last.focus();
-          e.preventDefault();
-        } else if (!e.shiftKey && document.activeElement === last) {
-          first.focus();
-          e.preventDefault();
-        }
-      }
-    });
+['mousedown', 'mousemove', 'keypress', 'scroll', 'touchstart'].forEach(event => {
+  document.addEventListener(event, resetLogoutInactivityTimer, true);
+});
 
-    first.focus();
-  }
-
-  // Auto-close modal after inactivity
-  let logoutInactivityTimer;
-  function resetLogoutInactivityTimer() {
-    clearTimeout(logoutInactivityTimer);
-    logoutInactivityTimer = setTimeout(() => {
-      if (document.getElementById('logoutConfirmModal').style.display === 'flex') {
-        hideLogoutModal();
-      }
-    }, 30000); // 30 seconds
-  }
-
-  ['mousedown', 'mousemove', 'keypress', 'scroll', 'touchstart'].forEach(event => {
-    document.addEventListener(event, resetLogoutInactivityTimer, true);
-  });
-
-  // ==== SHOW PASSWORD UPDATE CONFIRMATION MODAL ====
+// ==== PASSWORD UPDATE CONFIRMATION ====
 function handlePasswordChange(event) {
-  event.preventDefault(); // prevent form submission
+  event.preventDefault();
   const modal = document.getElementById('confirmUpdateModal');
   modal.style.display = 'flex';
   setTimeout(() => modal.classList.add('show'), 10);
   document.body.style.overflow = 'hidden';
-  trapFocus(modal); // reuse trapFocus function
+  trapFocus(modal);
 }
 
-// ==== HIDE UPDATE MODAL ====
 function hideUpdateModal() {
   const modal = document.getElementById('confirmUpdateModal');
   modal.classList.remove('show');
@@ -1421,17 +1447,14 @@ function hideUpdateModal() {
   }, 300);
 }
 
-// ==== CONFIRM PASSWORD UPDATE ====
 function confirmPasswordUpdate() {
   const message = document.getElementById('passwordMessage');
   hideUpdateModal();
 
-  // Show success message (you can enhance this to actually update password via server)
   message.className = 'message success';
   message.textContent = 'Your password has been updated successfully.';
   message.style.display = 'block';
 
-  // Clear form inputs
   document.getElementById('current-pass').value = '';
   document.getElementById('new-pass').value = '';
   document.getElementById('confirm-pass').value = '';
@@ -1441,7 +1464,7 @@ function confirmPasswordUpdate() {
   }, 5000);
 }
 
-// === View Activity Logic ===
+// === ACCOUNT ACTIVITY MODAL ===
 const fakeActivityData = [
   { date: 'July 1, 2025 - 09:15 AM', action: 'Logged in from Chrome on Windows' },
   { date: 'June 30, 2025 - 03:42 PM', action: 'Changed password' },
@@ -1449,12 +1472,12 @@ const fakeActivityData = [
   { date: 'June 28, 2025 - 06:25 PM', action: 'Viewed complaint status' }
 ];
 
-document.querySelector('.feature-card .btn-primary').addEventListener('click', showActivityModal);
+document.querySelector('.feature-card .btn-primary')?.addEventListener('click', showActivityModal);
 
 function showActivityModal() {
   const modal = document.getElementById('accountActivityModal');
   const list = document.getElementById('activityList');
-  list.innerHTML = ''; // clear previous
+  list.innerHTML = '';
 
   fakeActivityData.forEach(entry => {
     const li = document.createElement('li');
@@ -1477,7 +1500,6 @@ function hideActivityModal() {
   }, 300);
 }
 
-// Close on ESC or outside click
 document.getElementById('accountActivityModal').addEventListener('click', function (e) {
   if (e.target === this) hideActivityModal();
 });
@@ -1485,17 +1507,15 @@ document.addEventListener('keydown', function (e) {
   if (e.key === 'Escape') hideActivityModal();
 });
 
-// ==== TWO-FACTOR AUTHENTICATION FUNCTIONALITY ====
+// ==== TWO-FACTOR AUTH ====
 let current2FACode = null;
 
 document.getElementById('twoFactorToggleBtn').addEventListener('click', function () {
   if (localStorage.getItem('twoFactorEnabled') === 'true') {
-    // Disable 2FA
     localStorage.setItem('twoFactorEnabled', 'false');
     update2FAUI();
   } else {
-    // Enable 2FA: Generate code & show modal
-    current2FACode = Math.floor(100000 + Math.random() * 900000).toString(); // 6-digit code
+    current2FACode = Math.floor(100000 + Math.random() * 900000).toString();
     document.getElementById('generated2FACode').textContent = current2FACode;
     document.getElementById('input2FACode').value = '';
     showTwoFactorModal();
@@ -1537,45 +1557,31 @@ function verify2FACode() {
 }
 
 function update2FAUI() {
-  const enabled = localStorage.getItem('twoFactorEnabled') === 'true';
-  const status = document.getElementById('twoFactorStatus');
-  const toggleBtn = document.getElementById('twoFactorToggleBtn');
-
-  if (enabled) {
-    status.textContent = 'Enabled';
-    status.classList.remove('status-inactive');
-    status.classList.add('status-active');
-    toggleBtn.textContent = 'Disable 2FA';
-  } else {
-    status.textContent = 'Disabled';
-    status.classList.remove('status-active');
-    status.classList.add('status-inactive');
-    toggleBtn.textContent = 'Enable 2FA';
-  }
-}
-
-// Initialize on page load
-update2FAUI();
-
-document.getElementById('twoFactorToggleBtn').addEventListener('click', function () {
-  const button = this;
-  const statusText = document.getElementById('twoFactorText');
+  const isEnabled = localStorage.getItem('twoFactorEnabled') === 'true';
+  const button = document.getElementById('twoFactorToggleBtn');
   const statusIndicator = document.getElementById('twoFactorStatus');
+  const statusText = document.getElementById('twoFactorText');
 
-  button.classList.toggle('enabled');
-
-  if (button.classList.contains('enabled')) {
+  if (isEnabled) {
+    // Button
     button.textContent = 'Disable';
-    statusText.textContent = 'Enabled';
+    button.classList.add('enabled');
+
+    // Status Indicator (Enabled - Green)
     statusIndicator.classList.remove('status-inactive');
     statusIndicator.classList.add('status-active');
+    statusText.textContent = 'Enabled';
   } else {
+    // Button
     button.textContent = 'Enable';
-    statusText.textContent = 'Disabled';
+    button.classList.remove('enabled');
+
+    // Status Indicator (Disabled - Gray)
     statusIndicator.classList.remove('status-active');
     statusIndicator.classList.add('status-inactive');
+    statusText.textContent = 'Disabled';
   }
-});
+}
 
 </script>
 
