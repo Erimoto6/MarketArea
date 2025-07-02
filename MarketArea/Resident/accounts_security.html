@@ -508,45 +508,29 @@
       background: #ffebee;
       color: #c62828;
     }
-
-    /*FOOTER SECTION*/
+    
+/* Footer Container */
 .footer {
   display: flex;
-  flex-wrap: wrap;
   justify-content: space-between;
-  align-items: flex-start; /* align to top for clean column layout */
-  padding: 20px;
+  align-items: center;
+  flex-wrap: wrap;
+  padding: 10px 20px;
   background-color: #4d4d4d;
-  color: #fff;
-  font-family: Inter, sans-serif;
-  font-size: 13px;
-  width: 100%;
-}
-
-
-.footer-link {
-  color: #ffffff;
+  font-family: 'Inter', sans-serif;
   font-size: 11px;
-  line-height: 1.3;
-  cursor: pointer;
-  transition: opacity 0.2s ease;
-}
-
-/* Make footer links white and remove underline */
-.footer-link,
-.footer-link a,
-.footer-link a:visited,
-.footer-link a:active {
-  color: #fff !important;
-  text-decoration: none !important;
+  color: #fff;
+  gap: 20px;
+  height: auto;
+  margin-top: auto;
 }
 
 /* Left Section */
 .footer-left {
-  display: flex;
-  align-items: flex-start;
   flex: 1;
   min-width: 250px;
+  display: flex;
+  align-items: center;
   gap: 15px;
 }
 
@@ -561,27 +545,16 @@
   font-size: 11px;
   letter-spacing: 0.05em;
   line-height: 1.3;
-  max-width: 400px;
-  margin-top: 5px;
+  max-width: 411px;
 }
 
-/* Middle and Right Sections Grouped */
-.footer-right-group {
-  display: flex;
-  flex-wrap: wrap;
-  gap: 40px;
-  justify-content: flex-end;
-  align-items: flex-start;
-  min-width: 300px;
-}
-
-/* Columns */
-.footer-middle,
+/* Right Section */
 .footer-right {
+  min-width: 160px;
   display: flex;
   flex-direction: column;
-  gap: 8px;
-  min-width: 140px;
+  gap: 3px;
+  text-align: left;
 }
 
 /* Headings and Links */
@@ -592,7 +565,6 @@
 }
 
 .footer-link {
-  color: #fff;
   font-size: 11px;
   line-height: 1.3;
   cursor: pointer;
@@ -600,7 +572,30 @@
 }
 
 .footer-link:hover {
-  opacity: 0.5;
+  opacity: 0.7;
+}
+
+/* Make footer links white and remove underline */
+.footer-link,
+.footer-link a,
+.footer-link a:visited,
+.footer-link a:active {
+  color: #fff !important;
+  text-decoration: none !important;
+}
+
+/* Make body take full height */
+html,
+body {
+  height: 100%;
+  margin: 0;
+}
+
+/* Page container uses column layout */
+.page-container {
+  display: flex;
+  flex-direction: column;
+  min-height: 100vh;
 }
 
     /* Logout Modal */
@@ -1200,30 +1195,22 @@
       </div>
     </main>
 
-  <!--FOOTER SECTION-->
-			<footer class="footer">
-  <div class="footer-left">
-    <img class="market-area-logo2" src="logo.png" alt="Barangay Logo" />
-    <p class="a-barangay-that">
-      A Barangay that is God-centered, united, service-oriented, inclusive, and responsive — guided by faith, integrity, and accountable governance.
-    </p>
-  </div>
+			<!-- FOOTER SECTION -->
+		<footer class="footer">
+  			<div class="footer-left">
+    			<img class="market-area-logo2" src="logo.png" alt="Barangay Logo" />
+    			<p class="a-barangay-that">
+      				A Barangay that is God-centered, united, service-oriented, inclusive, and responsive — guided by faith, integrity, and accountable governance.
+    			</p>
+  			</div>
 
-  <div class="footer-right-group">
-    <div class="footer-middle">
-      <h4 class="footer-heading">Quick Links</h4>
-      <p class="footer-link"><a href="my_complaints.html">My Complaints</a></p>
-      <p class="footer-link"><a href="contact.html">Contacts</a></p>
-      <p class="footer-link"><a href="accounts_security.html">Settings</a></p>
-    </div>
+  			<div class="footer-right">
+    			<h4 class="footer-heading">Site Info</h4>
+    			<p class="footer-link"><a href="privpolicy.html" id="footer-link">Privacy Policy</a></p>
+    			<p class="footer-link"><a href="term&con.html" id="footer-link">Terms & Conditions</a></p>
+  			</div>
+		</footer>
 
-    <div class="footer-right">
-      <h4 class="footer-heading">Site Info</h4>
-      <p class="footer-link"><a href="privpolicy.html">Policy</a></p>
-      <p class="footer-link"><a href="term&con.html">Terms & Conditions</a></p>
-    </div>
-  </div>
-</footer>
 
 
 <!-- Enhanced Logout Modal -->

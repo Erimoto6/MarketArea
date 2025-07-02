@@ -49,6 +49,121 @@
     <a href="javascript:window.history.back();" class="back-link">← Back</a>
   </div>
 
+            <div id="logoutModal" class="custom-modal">
+  <div class="modal-content">
+    <p><strong>Are you sure you want to logout?</strong></p>
+    <div class="modal-buttons">
+      <button class="confirm-btn" onclick="confirmLogoutAction()">Yes, Logout</button>
+      <button class="cancel-btn" onclick="closeLogoutModal()">Cancel</button>
+    </div>
+  </div>
+</div>
+
+<script>
+  const profileTrigger = document.getElementById('profileTrigger');
+  const sidebar = document.getElementById('profileSidebar');
+
+  profileTrigger.addEventListener('click', (e) => {
+    e.preventDefault(); // prevent anchor from navigating
+    sidebar.classList.toggle('show');
+  });
+
+  document.addEventListener('click', function (e) {
+    const wrapper = document.querySelector('.profile-sidebar-wrapper');
+    if (!wrapper.contains(e.target)) {
+      sidebar.classList.remove('show');
+    }
+  });
+
+ function confirmLogout() {
+  document.getElementById('logoutModal').style.display = 'flex';
+  return false; // Prevent the <a> tag from redirecting
+}
+
+function closeLogoutModal() {
+  document.getElementById('logoutModal').style.display = 'none';
+}
+
+function confirmLogoutAction() {
+  window.location.href = "residentLogin.html"; // ✅ your original destination
+};
+
+  //notifications
+  
+  let notifCount = 0;
+const badge = document.getElementById("notifBadge");
+const toastContainer = document.getElementById("toastContainer");
+const notifItem = document.getElementById("notifItem");
+const popup = document.getElementById("notificationPopup");
+const notificationList = document.getElementById("notificationList");
+
+// Update badge
+function updateNotificationCount(count) {
+  notifCount = count;
+  if (notifCount > 0) {
+    badge.textContent = notifCount;
+    badge.style.display = 'inline-block';
+  } else {
+    badge.textContent = '';
+    badge.style.display = 'none';
+  }
+}
+
+// Show toast
+function showToast(message) {
+  const toast = document.createElement("div");
+  toast.className = "toast";
+  toast.textContent = message;
+  toastContainer.appendChild(toast);
+
+  // Remove after 4s
+  setTimeout(() => toast.remove(), 4000);
+}
+
+// Add notification to popup list
+function addNotificationToList(message) {
+  const li = document.createElement("li");
+  li.textContent = message;
+  notificationList.prepend(li); // newest on top
+}
+
+// Simulate notifications every 5s
+setInterval(() => {
+  notifCount++;
+  const msg = `🔔 New notification #${notifCount}`;
+  updateNotificationCount(notifCount);
+  showToast(msg);
+  addNotificationToList(msg);
+}, 10000);
+
+// Toggle popup
+notifItem.addEventListener("click", function (e) {
+  e.preventDefault();
+  popup.style.display = popup.style.display === "block" ? "none" : "block";
+  updateNotificationCount(0); // optional: reset badge when opened
+});
+
+// Close popup button
+function hidePopup() {
+  popup.style.display = "none";
+}
+
+// Hide popup when clicking outside
+document.addEventListener("click", function (e) {
+  if (!popup.contains(e.target) && !notifItem.contains(e.target)) {
+    popup.style.display = "none";
+  }
+});
+
+const clearBtn = document.getElementById("clearNotificationsBtn");
+
+clearBtn.addEventListener("click", () => {
+  notificationList.innerHTML = "";       // Clears the list
+  updateNotificationCount(0);            // Resets badge
+});
+
+hidePopup(); // Add this inside the clearBtn click function
+</script>
 
 </body>
 </html>
