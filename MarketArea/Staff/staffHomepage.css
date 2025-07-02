@@ -243,7 +243,7 @@ nav .nav-list {
 /* Quick Metrics Container - wider and slightly taller */
 .quick-metrics-container {
   background: rgba(255, 255, 255, 0.95);
-  backdrop-filter: blur(20px);
+  backdrop-filter: blur(9px);
   border-radius: 10px;
   padding: 0px 25px 65px; /* Slightly more padding */
   box-shadow: 0 8px 25px rgba(0, 0, 0, 0.15);
