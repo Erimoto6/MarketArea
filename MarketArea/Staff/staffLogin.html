@@ -67,6 +67,8 @@
     .right-side h1 {
       font-size: 20px;
       margin-bottom: 30px;
+      align-items: center;
+      text-align: center;
     }
 
     .right-side h3 {
@@ -260,7 +262,7 @@
 
     <div class="right-side">
       <img src="files/logo.png" alt="Barangay Logo">
-      <h1>Welcome To Barangay Market Area: E-Complaint System</h1>
+      <h1>Welcome To Barangay Market Area: <br>E-Blotter System</h1>
       <h3>Log In to your employee account</h3>
 
       <input type="text" class="email-input-box" placeholder="Enter your ID Number">
@@ -273,24 +275,7 @@
 
       </div>
 
-      <p class="below">
-        By using this service, you understood and agree to the
-        <a href="#" onclick="openModal()">Terms and Conditions</a>.
-      </p>
-    </div>
-
-  </div>
-
-  <!-- Modal Popup -->
-  <div class="modal-overlay" id="modalOverlay">
-    <div class="modal-box">
-      <div class="modal-header">
-        <span class="modal-close" onclick="closeModal()">X</span>
-      </div>
-      <iframe src="TAC.html"></iframe>
-    </div>
-  </div>
-
+     
   <div id="loginPopup" class="login-popup"></div>
 
   <script>
