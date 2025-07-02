@@ -13,12 +13,12 @@
       width: 100%;
       height: 100%;
       overflow: hidden;
-      font-family: Arial, Helvetica, sans-serif;
+      font-family: "Trebuchet MS", sans-serif;
       background-image: url('bg.png');
-    background-size: cover;
-    background-position: center;
-    background-repeat: no-repeat;
-    max-height: 100vh;
+      background-size: cover;
+      background-position: center;
+      background-repeat: no-repeat;
+      max-height: 100vh;
     }
 
     .main-container {
@@ -34,17 +34,17 @@
     }
 
     .right-side {
-    width: 27%;
-    max-width: 600px;      /* Limits the width on desktop */
-    height: auto;           /* Allows height to shrink to content */
-    min-height: 450px;      /* Optional: Prevent too small height */
-    margin: auto;           /* Center vertically if there's space */
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    justify-content: center;
-    padding: 30px 20px;
-    animation: fadeIn 1s ease-in;
+      width: 27%;
+      max-width: 600px;      /* Limits the width on desktop */
+      height: auto;           /* Allows height to shrink to content */
+      min-height: 450px;      /* Optional: Prevent too small height */
+      margin: auto;           /* Center vertically if there's space */
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      padding: 30px 20px;
+      animation: fadeIn 1s ease-in;
     }
 
 
@@ -142,40 +142,145 @@
     }
 
     .auth-links {
-  text-align: center;
-  margin-top: 20px;
-}
+      text-align: center;
+      margin-top: 20px;
+    }
 
-.auth-links .forgot-password-link {
-  display: block;
-  margin-bottom: 10px;
-  color: #4B5320;
-  font-size: 14px;
-  text-decoration: none;
-}
+    .auth-links .forgot-password-link {
+      display: block;
+      margin-bottom: 10px;
+      color: #4B5320;
+      font-size: 14px;
+      text-decoration: none;
+    }
 
-.auth-links .forgot-password-link:hover {
-  text-decoration: underline;
-}
+    .auth-links .forgot-password-link:hover {
+      text-decoration: underline;
+    }
 
-.auth-links .regis {
-  font-size: 14px;
-  color: #333;
-}
+    .auth-links .regis {
+      font-size: 14px;
+      color: #333;
+    }
 
-.auth-links .regis1 {
-  margin-left: 5px;
-  color: #4B5320;
-  text-decoration: none;
-  font-weight: bold;
-}
+    .auth-links .regis1 {
+      margin-left: 5px;
+      color: #4B5320;
+      text-decoration: none;
+      font-weight: bold;
+    }
 
-.auth-links .regis1:hover {
-  text-decoration: underline;
-}
+    .auth-links .regis1:hover {
+      text-decoration: underline;
+    }
 
 
-    /* Modal Popup */
+    .termscondi {
+      text-decoration: none;
+
+    }
+
+
+    /*CSS FOR MODAL POPUP */
+    .terms-container {
+      max-width: 600px;
+      margin: 0 auto;
+      background: #ffffff;
+      border-radius: 12px;
+      box-shadow: 0 8px 32px rgba(0, 0, 0, 0.1);
+      overflow: hidden;
+      backdrop-filter: blur(10px);
+
+    }
+
+    .header {
+      background: linear-gradient(135deg, #4B5320 0%, #6a7337 100%);
+      color: white;
+      padding: 24px;
+      text-align: center;
+    }
+
+    .header h2 {
+      margin: 0;
+      font-size: 1.5rem;
+      font-weight: 600;
+      text-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
+    }
+
+    .content {
+      padding: 24px;
+      max-height: 60vh;
+      overflow-y: auto;
+      scrollbar-width: thin;
+      scrollbar-color: #4B5320 #f1f1f1;
+    }
+
+    .content::-webkit-scrollbar {
+      width: 6px;
+    }
+
+    .content::-webkit-scrollbar-track {
+      background: #f1f1f1;
+      border-radius: 3px;
+    }
+
+    .content::-webkit-scrollbar-thumb {
+      background: #4B5320;
+      border-radius: 3px;
+    }
+
+    .content::-webkit-scrollbar-thumb:hover {
+      background: #6a7337;
+    }
+
+    .footer {
+      background: #f8f9fa;
+      padding: 16px 24px;
+      border-top: 1px solid #e9ecef;
+      text-align: center;
+    }
+
+    .accept-btn {
+      background: linear-gradient(135deg, #4B5320 0%, #6a7337 100%);
+      color: white;
+      border: none;
+      padding: 12px 32px;
+      border-radius: 25px;
+      font-size: 0.9rem;
+      font-weight: 600;
+      cursor: pointer;
+      transition: all 0.3s ease;
+      box-shadow: 0 4px 12px rgba(75, 83, 32, 0.3);
+    }
+
+    .accept-btn:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 6px 16px rgba(75, 83, 32, 0.4);
+    }
+
+    .close-btn {
+      position: absolute;
+      top: 12px;
+      right: 16px;
+      background: rgba(255, 255, 255, 0.2);
+      border: none;
+      color: white;
+      font-size: 20px;
+      width: 32px;
+      height: 32px;
+      border-radius: 50%;
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      transition: all 0.2s ease;
+    }
+
+    .close-btn:hover {
+      background: rgba(255, 255, 255, 0.3);
+      transform: rotate(90deg);
+    }
+
     .modal-overlay {
       display: none;
       position: fixed;
@@ -187,35 +292,7 @@
       z-index: 1000;
     }
 
-    .modal-box {
-      background: #fff;
-      padding: 20px;
-      border-radius: 10px;
-      width: 90%;
-      max-width: 500px;
-      box-shadow: 0 5px 15px rgba(0,0,0,0.3);
-      position: relative;
-    }
 
-    .modal-header {
-      font-weight: bold;
-      margin-bottom: 10px;
-    }
-
-    .modal-close {
-      position: absolute;
-      top: 10px;
-      right: 15px;
-      cursor: pointer;
-      font-size: 18px;
-      color: #555;
-    }
-
-    iframe {
-      width: 100%;
-      height: 700px;
-      border: none;
-    }
 
     /* Animations */
     @keyframes slideDown {
@@ -314,25 +391,55 @@
             </p>
     </div>
 
-      <p class="below">
+        <p class="below">
         By using this service, you understood and agree to the
-        <a href="#" onclick="openModal()">Terms and Conditions</a>.
+        <a href="#" onclick="openModal()" class="termscondi">Terms and Conditions</a>.
+        </p>
+
+    </div>
+
+  </div>
+
+
+  <!--MODAL TERMS & CONDITION-->
+<!-- MODAL TERMS & CONDITIONS -->
+<div id="modalOverlay" class="modal-overlay">
+  <div class="terms-container">
+    <div class="header">
+      <button class="close-btn" onclick="closeModal()" title="Close">&times;</button>
+      <h2>Terms and Conditions</h2>
+    </div>
+
+    <div class="content">
+      <p>
+        Welcome to the Barangay E-Blotter System. By accessing or using this system, you agree to comply with and be bound by the following terms and conditions. Please read them carefully.
       </p>
+      <br>
+
+      <h3>Use of the System</h3>
+      <p>The E-Blotter System is intended for residents to file and track complaints within the barangay. You must provide accurate and complete information when submitting a complaint. Misuse of the system, including submitting false or malicious complaints, is strictly prohibited.</p>
+
+      <h3>Data Privacy</h3>
+      <p>All personal information submitted will be kept confidential and used only for resolving complaints. Only authorized barangay personnel have access to complaint details.</p>
+
+      <h3>User Responsibilities</h3>
+      <p>You are responsible for the accuracy of the information you provide. You must not use the system for unlawful purposes or to harass others.</p>
+
+      <h3>System Availability</h3>
+      <p>The barangay strives to keep the system available at all times but does not guarantee uninterrupted access. Maintenance or technical issues may cause temporary downtime.</p>
+
+      <h3>Changes to Terms</h3>
+      <p>The barangay reserves the right to update these terms at any time. Changes will be posted on this page.</p>
+      <br>
     </div>
 
-  </div>
-
-  <!-- Modal Popup -->
-  <div class="modal-overlay" id="modalOverlay">
-    <div class="modal-box">
-      <div class="modal-header">
-        <span class="modal-close" onclick="closeModal()">×</span>
-      </div>
-      <iframe src="TAC.html"></iframe>
+    <div class="footer">
+      <button class="accept-btn" onclick="closeModal()">
+        I Agree
+      </button>
     </div>
   </div>
-
-  <div id="loginPopup" class="login-popup"></div>
+</div>
 
 
  <script>
@@ -343,6 +450,8 @@ function openModal() {
 function closeModal() {
   document.getElementById('modalOverlay').style.display = 'none';
 }
+
+
 
 function showLoginPopup(message) {
   const popup = document.getElementById('loginPopup');
