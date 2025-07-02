@@ -11,7 +11,7 @@
 
 </head>
 <body>
-
+ 
   <!-- HEADER SECTION -->
 	<header class="header_gradient">
   		<div class="header-left">
@@ -74,44 +74,57 @@
     
     <!-- Filter Dropdown Button -->
     <div class="dropdown" style="position: relative;">
-      <button class="filter-button" onclick="toggleDropdown()" title="Filter content">⏳</button>
+      <button class="filter-button" onclick="toggleDropdown(event)" title="Filter content">⏳</button>
 
       <!-- Dropdown Menu -->
-      <div id="dropdownMenu">
-        <div class="filter-group">
-          <label for="filter-date">Date</label>
-          <input type="date" id="filter-date">
-        </div>
+<div id="dropdownMenu">
+  <!-- Date Filter -->
+  <div class="filter-group">
+    <label for="filter-date">Date</label>
+    <input type="date" id="filter-date">
+  </div>
 
-        <div class="filter-group">
-          <label for="filter-type">Type of Complaint</label>
-          <select id="filter-type">
-            <option value="">All</option>
-            <option value="Noise">Noise</option>
-            <option value="Littering">Littering</option>
-            <option value="Sanitation">Sanitation</option>
-            <option value="Others">Others</option>
-          </select>
-        </div>
+  <!-- Complaint Category -->
+ <div class="filter-group dropdown-parent">
+  <label for="filter-category">Type of Complaint</label>
+  <div class="nested-dropdown">
+    <select id="filter-category" onchange="updateComplaintTypes()">
+      <option value="">Select Category</option>
+      <option value="Environmental">Environmental</option>
+      <option value="Community Safety">Community Safety</option>
+      <option value="Domestic / Personal Disputes">Domestic / Personal Disputes</option>
+      <option value="Property / Construction">Property / Construction</option>
+      <option value="Business-Related">Business-Related</option>
+      <option value="Miscellaneous">Miscellaneous</option>
+    </select>
 
-        <div class="filter-group">
-          <label for="filter-status">Status</label>
-          <select id="filter-status">
-            <option value="">All</option>
-            <option value="Pending">Pending</option>
-            <option value="In Progress">In Progress</option>
-            <option value="Resolved">Resolved</option>
-          </select>
-        </div>
-
-        <!-- Filter Buttons -->
-        <div class="filter-actions">
-          <button onclick="applyFilters()">Apply Filters</button>
-          <button onclick="clearFilters()" class="clear-btn">Clear Filters</button>
-        </div>
-      </div>
+    <!-- This is the sub-dropdown (initially hidden) -->
+    <div id="subDropdown" class="sub-dropdown hidden">
+      <select id="filter-type" onchange="applyFilters()">
+        <option value="">Select Type</option>
+      </select>
     </div>
+  </div>
+</div>
 
+
+  <!-- Status -->
+  <div class="filter-group">
+    <label for="filter-status">Status</label>
+    <select id="filter-status">
+      <option value="">All</option>
+      <option value="Pending">Pending</option>
+      <option value="In Progress">In Progress</option>
+      <option value="Resolved">Resolved</option>
+    </select>
+  </div>
+
+  <!-- Filter Actions -->
+  <div class="filter-actions">
+    <button onclick="clearFilters()" class="clear-btn">Clear Filters</button>
+  </div>
+</div>
+    </div>
     <!-- Search Bar -->
     <input type="text" placeholder="Search by keyword..." class="search-bar" id="search-input" oninput="applyFilters()">
   </div>
@@ -119,6 +132,7 @@
 <table class="complaints-table" id="complaintsTable">
     <thead>
       <tr>
+        <th>Complaint ID</th>
         <th>Date Filed</th>
         <th>Name</th>
         <th>Type of Complaint</th>
@@ -241,6 +255,12 @@
                 <h3>👤 Personal Information</h3>
                 <div class="info-card">
                     <div class="info-grid">
+
+                        <div class="info-item">
+                            <span class="info-label">Complaint ID</span>
+                              <span id="modalComplaintID" class="info-value"></span>
+                          </div>
+
                         <div class="info-item">
                             <span class="info-label">Full Name</span>
                             <span id="modalName" class="info-value"></span>
@@ -396,7 +416,10 @@
 
 
  <script>
-// ==== PROFILE SIDEBAR TOGGLE ====
+
+  let selectedComplaintType = "";
+
+/* ==== PROFILE SIDEBAR TOGGLE ==== */
 const profileTrigger = document.getElementById('profileTrigger');
 const sidebar = document.getElementById('profileSidebar');
 
@@ -404,116 +427,95 @@ profileTrigger.addEventListener('click', (e) => {
   e.preventDefault();
   sidebar.classList.toggle('show');
 });
-
 document.addEventListener('click', (e) => {
   if (!document.querySelector('.profile-sidebar-wrapper').contains(e.target)) {
     sidebar.classList.remove('show');
   }
 });
 
-// ==== ENHANCED LOGOUT CONFIRMATION ====
-
+/* ==== LOGOUT MODAL ==== */
 function showLogoutConfirmation() {
-    const logoutModal = document.getElementById('logoutConfirmModal');
-    logoutModal.style.display = 'flex';
-
-    setTimeout(() => {
-        logoutModal.classList.add('show');
-    }, 10);
-
-    document.body.style.overflow = 'hidden';
-    trapFocus(logoutModal);
-
-    return false;
+  const logoutModal = document.getElementById('logoutConfirmModal');
+  logoutModal.style.display = 'flex';
+  setTimeout(() => logoutModal.classList.add('show'), 10);
+  document.body.style.overflow = 'hidden';
+  trapFocus(logoutModal);
+  return false;
 }
-
 function hideLogoutModal() {
-    const logoutModal = document.getElementById('logoutConfirmModal');
-    logoutModal.classList.remove('show');
-
-    setTimeout(() => {
-        logoutModal.style.display = 'none';
-        document.body.style.overflow = '';
-    }, 300);
+  const logoutModal = document.getElementById('logoutConfirmModal');
+  logoutModal.classList.remove('show');
+  setTimeout(() => {
+    logoutModal.style.display = 'none';
+    document.body.style.overflow = '';
+  }, 300);
 }
-
 function proceedWithLogout() {
-    const confirmBtn = document.querySelector('.out-btn-confirm');
-    const originalText = confirmBtn.textContent;
-    confirmBtn.textContent = 'Logging out...';
-    confirmBtn.disabled = true;
-
-    setTimeout(() => {
-        window.location.href = "residentLogin.html";
-    }, 1000);
+  const confirmBtn = document.querySelector('.out-btn-confirm');
+  confirmBtn.textContent = 'Logging out...';
+  confirmBtn.disabled = true;
+  setTimeout(() => {
+    window.location.href = "residentLogin.html";
+  }, 1000);
 }
-
-document.getElementById('logoutConfirmModal').addEventListener('click', function(e) {
-    if (e.target === this) {
-        hideLogoutModal();
-    }
+document.getElementById('logoutConfirmModal').addEventListener('click', function (e) {
+  if (e.target === this) hideLogoutModal();
 });
-
-document.addEventListener('keydown', function(e) {
-    if (e.key === 'Escape') {
-        hideLogoutModal();
-    }
+document.addEventListener('keydown', function (e) {
+  if (e.key === 'Escape') hideLogoutModal();
 });
-
-function trapFocus(logoutModal) {
-    const focusableElements = logoutModal.querySelectorAll(
-        'button, [href], input, select, textarea, [tabindex]:not([tabindex="-1"])'
-    );
-    const firstElement = focusableElements[0];
-    const lastElement = focusableElements[focusableElements.length - 1];
-
-    logoutModal.addEventListener('keydown', function(e) {
-        if (e.key === 'Tab') {
-            if (e.shiftKey) {
-                if (document.activeElement === firstElement) {
-                    lastElement.focus();
-                    e.preventDefault();
-                }
-            } else {
-                if (document.activeElement === lastElement) {
-                    firstElement.focus();
-                    e.preventDefault();
-                }
-            }
-        }
-    });
-
-    firstElement.focus();
+function trapFocus(modal) {
+  const focusable = modal.querySelectorAll('button, [href], input, select, textarea, [tabindex]:not([tabindex="-1"])');
+  const first = focusable[0], last = focusable[focusable.length - 1];
+  modal.addEventListener('keydown', function (e) {
+    if (e.key === 'Tab') {
+      if (e.shiftKey && document.activeElement === first) {
+        last.focus();
+        e.preventDefault();
+      } else if (document.activeElement === last) {
+        first.focus();
+        e.preventDefault();
+      }
+    }
+  });
+  first.focus();
 }
-
 let logoutInactivityTimer;
-
 function resetLogoutInactivityTimer() {
-    clearTimeout(logoutInactivityTimer);
-    logoutInactivityTimer = setTimeout(() => {
-        if (document.getElementById('logoutConfirmModal').style.display === 'flex') {
-            hideLogoutModal();
-        }
-    }, 30000);
+  clearTimeout(logoutInactivityTimer);
+  logoutInactivityTimer = setTimeout(() => {
+    if (document.getElementById('logoutConfirmModal').style.display === 'flex') hideLogoutModal();
+  }, 30000);
 }
-
 ['mousedown', 'mousemove', 'keypress', 'scroll', 'touchstart'].forEach(event => {
-    document.addEventListener(event, resetLogoutInactivityTimer, true);
+  document.addEventListener(event, resetLogoutInactivityTimer, true);
 });
 
-// ==== DROPDOWN FILTER TOGGLE ====
-function toggleDropdown() {
+/* ==== FILTER DROPDOWN TOGGLE ==== */
+function toggleDropdown(event) {
+  event.stopPropagation(); // Prevents it from triggering the window click listener
   const dropdownMenu = document.getElementById('dropdownMenu');
   dropdownMenu.style.display = (dropdownMenu.style.display === 'block') ? 'none' : 'block';
 }
 
+const dropdownMenu = document.getElementById('dropdownMenu');
+const dropdownWrapper = document.querySelector('.dropdown');
+
 window.addEventListener('click', (e) => {
-  if (!document.querySelector('.dropdown').contains(e.target)) {
-    document.getElementById('dropdownMenu').style.display = 'none';
-  }
+  setTimeout(() => {
+    if (!dropdownWrapper.contains(document.activeElement)) {
+      dropdownMenu.style.display = 'none';
+    }
+  }, 0);
 });
 
-// ==== TABLE FILTER + PAGINATION ====
+// Prevent closing when clicking inside the dropdown
+dropdownMenu.addEventListener('click', (e) => {
+  e.stopPropagation();
+});
+
+
+/* ==== PAGINATION & FILTER ==== */
 const rowsPerPage = 5;
 let currentPage = 1;
 const table = document.getElementById("complaintsTable");
@@ -528,12 +530,13 @@ function getFilteredRows() {
   const statusVal = document.getElementById('filter-status').value.toLowerCase();
 
   return Array.from(tbody.querySelectorAll("tr")).filter(row => {
-    const [date, name, type, status] = Array.from(row.cells).map(cell => cell.textContent.trim().toLowerCase());
+    const cells = Array.from(row.cells);
+    const [complaintID, date, name, type, status] = cells.map(cell => cell.textContent.trim().toLowerCase());
     return (
       (!dateVal || date.includes(dateVal)) &&
       (!typeVal || type.includes(typeVal)) &&
       (!statusVal || status.includes(statusVal)) &&
-      (!searchVal || name.includes(searchVal) || type.includes(searchVal) || status.includes(searchVal))
+      (!searchVal || complaintID.includes(searchVal) || name.includes(searchVal) || type.includes(searchVal) || status.includes(searchVal))
     );
   });
 }
@@ -546,6 +549,7 @@ function renderTable() {
 
   rows.forEach(row => row.style.display = "none");
   filteredRows.slice(start, end).forEach(row => row.style.display = "table-row");
+
   renderPagination(filteredRows.length);
 }
 
@@ -585,26 +589,43 @@ function clearFilters() {
   applyFilters();
 }
 
-searchInput.addEventListener("input", () => {
-  currentPage = 1;
-  renderTable();
-});
+// Add filter change listeners
+document.getElementById('filter-date').addEventListener('change', applyFilters);
+document.getElementById('filter-type').addEventListener('change', applyFilters);
+document.getElementById('filter-status').addEventListener('change', applyFilters);
+searchInput.addEventListener('input', applyFilters);
 
-renderTable();
-
-// ==== STATUS BADGE STYLING FOR TABLE ====
+/* ==== STATUS BADGE STYLING ==== */
 document.querySelectorAll('.status').forEach(status => {
   const text = status.textContent.trim().toLowerCase();
   status.classList.add(`status-${text.replace(/\s+/g, '-')}`);
 });
 
-// ==== MODAL FUNCTIONALITY ====
+/* ==== COMPLAINT ID AUTO-GENERATION ==== */
+document.addEventListener("DOMContentLoaded", () => {
+  const tableBody = document.getElementById("complaintsTable").getElementsByTagName("tbody")[0];
+  const currentYear = new Date().getFullYear();
+
+  [...tableBody.rows].forEach((row, index) => {
+    const idNumber = String(index + 1).padStart(3, '0');
+    const complaintID = `${currentYear}-${idNumber}`;
+    const idCell = document.createElement("td");
+    idCell.textContent = complaintID;
+    row.insertBefore(idCell, row.firstChild);
+    row.dataset.complaintId = complaintID;
+  });
+
+  renderTable();
+});
+
+/* ==== MODAL LOGIC ==== */
 const modal = document.getElementById('complaintModal');
 const closeModalBtn = document.querySelector('.close-modal');
 const cancelBtn = document.getElementById('cancelComplaintBtn');
 const printBtn = document.getElementById('printBtn');
 
 const modalFields = {
+  complaintID: document.getElementById('modalComplaintID'),
   dateFiled: document.getElementById('modalDateFiled'),
   name: document.getElementById('modalName'),
   age: document.getElementById('modalAge'),
@@ -624,30 +645,8 @@ const modalFields = {
   evidenceContainer: document.getElementById('modalEvidence')
 };
 
-// Example complaint data (replace with backend data later)
-const complaintDetails = [
-  {
-      age: '31',
-                gender: 'Male',
-                address: '123 Maple Street, Brgy. San Juan, Lipa City, Batangas',
-                contact: '09178920304',
-                email: 'juandeluna@gmail.com',
-                incidentDate: '03/02/25, 2:00 AM',
-                location: 'Rawr Street, ABC Village',
-                respondent: 'Jose De Luna',
-                respondentAddress: '456 Oak Avenue, Brgy. Poblacion, Lipa City',
-                description: 'Loud noises every night from the neighbor\'s party until 3am. The music is extremely loud and prevents my family from sleeping. This has been happening for over two weeks now, and attempts to talk to them have been unsuccessful.',
-                witnessName: 'Maria Luna',
-                witnessContact: '09123456789',
-                evidence: [
-                    { name: 'Audio Recording - Night Disturbance.mp3', type: 'audio', size: '2.5 MB', icon: '🎵' },
-                    { name: 'Photo Evidence - Loud Party.jpg', type: 'image', size: '1.8 MB', icon: '📷' },
-                    { name: 'Time Log Documentation.pdf', type: 'document', size: '245 KB', icon: '📄' },
-                    { name: 'Witness Statement.docx', type: 'document', size: '156 KB', icon: '📝' }
-                ]
-            },
-  // Add more complaint detail objects for each row...
-];
+// Example structure for mock data (optional enhancement)
+const complaintDetails = []; // Your detailed objects can go here.
 
 document.querySelectorAll('.details-btn').forEach((btn, index) => {
   btn.addEventListener('click', () => {
@@ -655,11 +654,12 @@ document.querySelectorAll('.details-btn').forEach((btn, index) => {
     const cells = row.querySelectorAll('td');
     const details = complaintDetails[index] || {};
 
-    modalFields.dateFiled.textContent = cells[0].textContent.trim();
-    modalFields.name.textContent = cells[1].textContent.trim();
-    modalFields.type.textContent = cells[2].textContent.trim();
+    modalFields.complaintID.textContent = row.dataset.complaintId || 'N/A';
+    modalFields.dateFiled.textContent = cells[1].textContent.trim();
+    modalFields.name.textContent = cells[2].textContent.trim();
+    modalFields.type.textContent = cells[3].textContent.trim();
 
-    const statusText = cells[3].textContent.trim();
+    const statusText = cells[4].textContent.trim();
     modalFields.status.textContent = statusText;
     modalFields.status.className = 'status-badge';
     modalFields.status.classList.add(`status-${statusText.toLowerCase().replace(/\s+/g, '-')}`);
@@ -677,37 +677,29 @@ document.querySelectorAll('.details-btn').forEach((btn, index) => {
     modalFields.witnessName.textContent = details.witnessName || 'N/A';
     modalFields.witnessContact.textContent = details.witnessContact || 'N/A';
 
-    // Evidence Images
     modalFields.evidenceContainer.innerHTML = '';
-    (details.evidence || []).forEach(src => {
-      const img = document.createElement('img');
-      img.src = src;
-      img.alt = "Evidence";
-      img.className = 'evidence-image';
-      modalFields.evidenceContainer.appendChild(img);
+    (details.evidence || []).forEach(file => {
+      const span = document.createElement('div');
+      span.textContent = `${file.icon} ${file.name} (${file.size})`;
+      modalFields.evidenceContainer.appendChild(span);
     });
 
-    // Hide cancel button for resolved status
     cancelBtn.style.display = (statusText.toLowerCase() === 'resolved') ? 'none' : 'inline-block';
-
-    // Show modal using CSS classes instead of inline styles
     modal.style.display = 'flex';
-    document.body.classList.add('modal-open'); // Prevent background scroll
+    document.body.classList.add('modal-open');
   });
 });
 
 closeModalBtn.addEventListener('click', () => {
   modal.style.display = 'none';
-  document.body.classList.remove('modal-open'); // Remove background scroll lock
+  document.body.classList.remove('modal-open');
 });
-
 window.addEventListener('click', (e) => {
   if (e.target === modal) {
     modal.style.display = 'none';
-    document.body.classList.remove('modal-open'); // Remove background scroll lock
+    document.body.classList.remove('modal-open');
   }
 });
-
 cancelBtn.addEventListener('click', () => {
   if (confirm("Are you sure you want to cancel this complaint?")) {
     alert("Complaint has been cancelled.");
@@ -715,8 +707,74 @@ cancelBtn.addEventListener('click', () => {
     document.body.classList.remove('modal-open');
   }
 });
-</script>
 
+// type of complaint  
+const complaintTypes = {
+  "Environmental": [
+    "Noise Disturbance",
+    "Littering",
+    "Improper Waste Disposal",
+    "Water Pollution",
+    "Air Pollution",
+    "Unsanitary Surroundings"
+  ],
+  "Community Safety": [
+    "Curfew Violation",
+    "Illegal Parking",
+    "Loitering",
+    "Vandalism"
+  ],
+  "Domestic / Personal Disputes": [
+    "Domestic Violence",
+    "Verbal Abuse",
+    "Physical Assault",
+    "Threats or Harassment"
+  ],
+  "Property / Construction": [
+    "Unauthorized Construction",
+    "Fence or Boundary Disputes",
+    "Property Damage"
+  ],
+  "Business-Related": [
+    "Unlicensed Business",
+    "Noise from Business",
+    "Obstruction of Sidewalks"
+  ],
+  "Miscellaneous": [
+    "Missing Person Report",
+    "Lost Item",
+    "Others"
+  ]
+};
+
+function updateComplaintTypes() {
+  const category = document.getElementById('filter-category').value;
+  const typeDropdown = document.getElementById('filter-type');
+  const subDropdown = document.getElementById('subDropdown');
+
+  // Reset type dropdown
+  typeDropdown.innerHTML = '<option value="">Select Type</option>';
+
+  if (category && complaintTypes[category]) {
+    // Populate sub-types
+    complaintTypes[category].forEach(type => {
+      const option = document.createElement('option');
+      option.value = type;
+      option.textContent = type;
+      typeDropdown.appendChild(option);
+    });
+
+    // Show sub-dropdown
+    subDropdown.classList.remove('hidden');
+  } else {
+    // Hide sub-dropdown
+    subDropdown.classList.add('hidden');
+  }
+
+  applyFilters(); // Optional filter trigger
+}
+
+</script>
 
 </body>
 </html>
