@@ -724,15 +724,14 @@ cancelBtn.addEventListener('click', () => {
 /* ==== ENHANCED COMPLAINT TYPE FILTER ==== */
 const complaintTypes = {
   "Environmental": [
-    "Noise Disturbance",
+    "Noise",
     "Littering",
     "Improper Waste Disposal",
     "Water Pollution",
     "Air Pollution",
-    "Unsanitary Surroundings"
   ],
   "Community Safety": [
-    "Curfew Violation",
+    "Curfew",
     "Illegal Parking",
     "Loitering",
     "Vandalism"
@@ -741,7 +740,8 @@ const complaintTypes = {
     "Domestic Violence",
     "Verbal Abuse",
     "Physical Assault",
-    "Threats or Harassment"
+    "Threats or Harassment",
+    "Neighborhood Disputes",
   ],
   "Property / Construction": [
     "Unauthorized Construction",
@@ -750,14 +750,8 @@ const complaintTypes = {
   ],
   "Business-Related": [
     "Unlicensed Business",
-    "Noise from Business",
     "Obstruction of Sidewalks"
   ],
-  "Miscellaneous": [
-    "Missing Person Report",
-    "Lost Item",
-    "Others"
-  ]
 };
 
 function updateComplaintTypes() {
