@@ -649,15 +649,16 @@
 .footer {
   display: flex;
   justify-content: space-between;
-  align-items: center;        /* vertically center all sections */
+  align-items: center;
   flex-wrap: wrap;
-  padding: 10px 20px;         /* reduced vertical padding */
+  padding: 10px 20px;
   background-color: #4d4d4d;
-  font-family: Inter, sans-serif;
+  font-family: 'Inter', sans-serif;
   font-size: 11px;
   color: #fff;
   gap: 20px;
   height: auto;
+  margin-top: auto;
 }
 
 /* Left Section */
@@ -665,7 +666,7 @@
   flex: 1;
   min-width: 250px;
   display: flex;
-  align-items: center;        /* vertically center logo & text */
+  align-items: center;
   gap: 15px;
 }
 
@@ -683,22 +684,14 @@
   max-width: 411px;
 }
 
-/* Middle and Right Sections Grouped */
-.footer-right-group {
-  display: flex;
-  gap: 40px;
-  align-items: flex-start; /* align them both from the top */
-}
-
-/* Columns */
-.footer-middle,
+/* Right Section */
 .footer-right {
   min-width: 160px;
   display: flex;
   flex-direction: column;
   gap: 3px;
   text-align: left;
-} 
+}
 
 /* Headings and Links */
 .footer-heading {
@@ -715,8 +708,9 @@
 }
 
 .footer-link:hover {
-  opacity: 0.5;
+  opacity: 0.7;
 }
+
 /* Make footer links white and remove underline */
 .footer-link,
 .footer-link a,
@@ -727,7 +721,8 @@
 }
 
 /* Make body take full height */
-html, body {
+html,
+body {
   height: 100%;
   margin: 0;
 }
@@ -737,11 +732,6 @@ html, body {
   display: flex;
   flex-direction: column;
   min-height: 100vh;
-}
-
-/* Push footer to bottom if content is short */
-.footer {
-  margin-top: auto;
 }
 
 .custom-modal {
