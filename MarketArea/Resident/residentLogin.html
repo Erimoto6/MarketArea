@@ -35,16 +35,18 @@
 
     .right-side {
       width: 27%;
-      max-width: 600px;      /* Limits the width on desktop */
-      height: auto;           /* Allows height to shrink to content */
-      min-height: 450px;      /* Optional: Prevent too small height */
-      margin: auto;           /* Center vertically if there's space */
+      max-width: 600px;
+      height: 100vh;
+      margin: 0;
       display: flex;
       flex-direction: column;
       align-items: center;
       justify-content: center;
       padding: 30px 20px;
       animation: fadeIn 1s ease-in;
+      box-sizing: border-box;    
+      max-height: 100vh;
+      overflow: hidden;
     }
 
 

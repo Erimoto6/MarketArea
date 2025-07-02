@@ -42,7 +42,6 @@
       display: flex;
       align-items: center;
       flex-direction: column;
-      justify-content: center;
       background-image: url(MarketArea/LogInSignUpFiles/bg.png);
       background-size: cover;
       background-position: center;
@@ -53,24 +52,19 @@
     }
 
     .right-side img {
-      width: 190px;
-      padding-bottom: 0%;
-      padding-top: 10%;
+      width: 220px;
+      margin-top: 20px;
     }
 
     .right-side h1 {
-      font-size: 30px;
+      font-size: 20px;
       text-align: center;
       font-family: 'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif;
-      padding-bottom: 0%;
-    }
-
-    .right-side h3 {
-      font-size: 15px;
+      margin-top: 35px;
     }
 
     .button1, .button2{
-      margin-top: 20px;
+      margin-top: 40px;
       width: 80%;
       max-width: 250px;
       min-width: 150px;
@@ -249,68 +243,16 @@
       <img src="MarketArea/Staff/files/marketareabg1.jpg" alt="Arch Image">
     </div>
 
-    <div class="right-side">
+  <div class="right-side">
       <img src="MarketArea/LogInSignUpFiles/logo.png" alt="Logo">
 
-      <h1>Welcome To Barangay Market Area: E-Complaint System</h1>
+      <h1>Welcome To Barangay Market Area: E-Blotter System</h1>
 
       <a href="MarketArea/Resident/residentLogin.html" class="button1" title="Resident LogIn">RESIDENT</a>
 
-      <p class="below">
-        By using this service, you understood and <br> agree to the 
-        <span class="termsCondi" onclick="openModal()">Terms and Conditions.</span> 
-      </p>
     </div>
   </div>
 
-  <!-- ========================= -->
-  <!-- TERMS MODAL HTML START -->
-  <!-- ========================= -->
-  <div id="termsModal" class="modal">
-    <div class="modal-content">
-    <span class="close" onclick="closeModal()">&times;</span>
-      <div class="modal-scrollable">
-        <h2>Terms and Conditions</h2>
-        <p>Welcome to the Barangay E-Blotter System. By accessing or using this system, you agree to comply with and be bound by the following terms and conditions. Please read them carefully.</p>
-
-        <h3>1. Use of the System</h3>
-        <ul>
-          <li>The E-Blotter System is intended for residents to file and track complaints within the barangay.</li>
-          <li>You must provide accurate and complete information when submitting a complaint.</li>
-          <li>Misuse of the system, including submitting false or malicious complaints, is strictly prohibited.</li>
-        </ul>
-
-        <h3>2. Privacy and Confidentiality</h3>
-        <ul>
-          <li>All personal information submitted will be kept confidential and used only for resolving complaints.</li>
-          <li>Only authorized barangay personnel have access to complaint details.</li>
-        </ul>
-
-        <h3>3. User Responsibilities</h3>
-        <ul>
-          <li>You are responsible for the accuracy of the information you provide.</li>
-          <li>You must not use the system for unlawful purposes or to harass others.</li>
-        </ul>
-
-        <h3>4. System Availability</h3>
-        <ul>
-          <li>The barangay strives to keep the system available at all times but does not guarantee uninterrupted access.</li>
-          <li>Maintenance or technical issues may cause temporary downtime.</li>
-        </ul>
-
-        <h3>5. Changes to Terms</h3>
-        <ul>
-          <li>The barangay reserves the right to update these terms at any time. Changes will be posted on this page.</li>
-        </ul>
-
-        <h3>6. Contact</h3>
-        <p>For questions or concerns, contact the Barangay Office at (012) 345-6789 or email <a href="mailto:barangayeblotter@email.com">barangayeblotter@email.com</a>.</p>
-      </div>
-    </div>
-  </div>
-  <!-- ======================= -->
-  <!-- TERMS MODAL HTML END -->
-  <!-- ======================= -->
 
   <script>
     // Open modal
