@@ -3,7 +3,6 @@ body {
   font-family: "Trebuchet MS", sans-serif;
   background: url('files/marketareabg1.jpg') no-repeat center center fixed;
   background-size: cover;
-  opacity: 0.95;
 }
   
 body::before {
